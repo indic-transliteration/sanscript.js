@@ -79,5 +79,26 @@ var Sanscript = new function() {
             consonants: 'k kh g gh "n c ch j jh ~n .t .th .d .d .n t th d dh n p ph b bh m y r l v ~s .s s h L k.s j~n'.split(' '),
             other: "0 1 2 3 4 5 6 7 8 9 o.m ' | || ".split(' '),
         },
-    }
+    };
+    
+    var romanSchemes = ['iast', 'hk', 'kolkata', 'slp1', 'velthuis'];
+    
+    /**
+     * Check whether the given scheme encodes romanized Sanskrit.
+     * O(n) is fast enough.
+     *
+     * @param name -- the scheme name
+     */
+    this.isRomanScheme = function(name) {
+        for (var i = 0, x; x = romanSchemes[i]; i++) {
+            if (name === x) {
+                return true;
+            }
+        }
+        return false;
+    };
+    
+    this.t = function(data, from, to, options) {
+        
+    }  
 };
