@@ -38,3 +38,7 @@ test("Roman schemes", function() {
         ok(!Sanscript.isRomanScheme(other[i]), other[i]);
     }
 });
+
+test("Roman transliteration", function() {
+    Sanscript.t('संस्कृतम्', 'devanagari', 'iast');
+});

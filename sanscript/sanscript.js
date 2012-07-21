@@ -10,7 +10,8 @@
  */
  
 var Sanscript = new function() {
-    this.schemes = {
+    var Sanscript = this;
+    Sanscript.schemes = {
         /* Devanagari (full ITRANS) */
         devanagari: {
             vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ'.split(' '),
@@ -83,13 +84,19 @@ var Sanscript = new function() {
     
     var romanSchemes = ['iast', 'hk', 'kolkata', 'slp1', 'velthuis'];
     
+    // Add a "marks" field for each roman scheme
+    for (var i = 0, name; name = romanSchemes[i]; i++) {
+        var scheme = Sanscript.schemes[name];
+        scheme.marks = scheme.vowels.slice(1);
+    }
+    
     /**
      * Check whether the given scheme encodes romanized Sanskrit.
      * O(n) is fast enough.
      *
-     * @param name -- the scheme name
+     * @param name  the scheme name
      */
-    this.isRomanScheme = function(name) {
+    Sanscript.isRomanScheme = function(name) {
         for (var i = 0, x; x = romanSchemes[i]; i++) {
             if (name === x) {
                 return true;
@@ -97,8 +104,49 @@ var Sanscript = new function() {
         }
         return false;
     };
+  
+    /**
+     * Create a map from every character in `from` to its partner in `to`.
+     * Also, store any "marks" that `from` might have.
+     * 
+     * @param from     input scheme
+     * @param to       output scheme
+     * @param options  scheme options
+     */
+    var makeMap = function(from, to, options) {
+        var marks = {},
+            other = {},
+            fromScheme = Sanscript.schemes[from],
+            toScheme = Sanscript.schemes[to];
+        for (var group in fromScheme) {
+            var fromGroup = fromScheme[group],
+                toGroup = toScheme[group];
+            for (var i in fromGroup) {
+                if (group === 'marks') {
+                    marks[fromGroup[i]] = toGroup[i];
+                } else {
+                    other[fromGroup[i]] = toGroup[i];
+                }
+            }
+        }
+        return {marks: marks, other: other};
+    };
+  
+    var transliterateRoman = function(data, map, options) {
     
-    this.t = function(data, from, to, options) {
+    };
+    
+    var transliterateBrahmi = function(data, map, options) {
         
-    }  
+    };
+    
+    Sanscript.t = function(data, from, to, options) {
+        var transMap = makeMap(from, to, options);
+        
+        if (Sanscript.isRomanScheme(from)) {
+            return transliterateRoman(data, transMap, options);
+        } else {
+            return transliterateBrahmi(data, transMap, options);
+        }
+    };
 };
