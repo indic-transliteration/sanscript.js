@@ -104,6 +104,40 @@ var Sanscript = new function() {
         }
         return false;
     };
+   
+    var unicodeOffsets = {
+		bengali   : 0x0080,
+		gurmukhi  : 0x0100,
+		gujarati  : 0x0180,
+		oriya     : 0x0200,
+		tamil     : 0x0280,
+		telugu    : 0x0300,
+		kannada   : 0x0380,
+		malayalam : 0x0400,
+	};
+	
+	// Using the Unicode offsets above, create schemes for the other Brahmi scripts.
+	for (var script in unicodeOffsets) {
+	    var scheme = {},
+	        offset = unicodeOffsets[script],
+	        dev = this.schemes.devanagari;
+	    
+	    for (groupName in dev) {
+	        var data = [],
+	            group = dev[groupName];
+	        for (var i = 0, cluster; cluster = group[i]; i++) {
+	            var buf = [];
+	            // We can't assume that each cluster has just one letter.
+	            for (var j = 0, L; L = cluster.charAt(j); j++) {
+	                buf.push(String.fromCharCode(L.charCodeAt(0) + offset));
+	            };
+	            data.push(buf.join(''));
+	        }
+	        scheme[groupName] = data;
+	    }
+	    this.schemes[script] = scheme;
+	    console.log(scheme);
+	}
   
     /**
      * Create a map from every character in `from` to its partner in `to`.
@@ -123,7 +157,7 @@ var Sanscript = new function() {
             var fromGroup = fromScheme[group],
                 toGroup = toScheme[group];
             for (var i in fromGroup) {
-                if (group === 'vowel_marks' || group === 'other_marks') {
+                if (group === 'vowel_marks') {
                     marks[fromGroup[i]] = toGroup[i];
                 } else if (group === 'virama') {
                     marks[fromGroup] = toGroup;
@@ -164,6 +198,7 @@ var Sanscript = new function() {
             hadConsonant = false,
             temp,
             consonants = map.consonants,
+            toRoman = map.toRoman,
             letters = map.letters,
             marks = map.marks;
         console.log(letters);
@@ -172,7 +207,7 @@ var Sanscript = new function() {
 				buf.push(temp);
 				hadConsonant = false;
 			} else {
-				if (hadConsonant) {
+				if (toRoman && hadConsonant) {
 				    // Consecutive consonants -> implicit 'a'
 					buf.push('a');
 					hadConsonant = false;
@@ -189,7 +224,7 @@ var Sanscript = new function() {
 			}
         }
         // Ends in bare consonant -> implicit 'a'
-        if (hadConsonant) {
+        if (toRoman && hadConsonant) {
             buf.push('a');
         }
         return buf.join('');
