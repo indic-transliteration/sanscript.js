@@ -15,7 +15,7 @@ var Sanscript = new function() {
         /* Devanagari (full ITRANS) */
         devanagari: {
             vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ'.split(' '),
-            marks: 'ा ि ी ु ू ृ ॄ ॢ ॣ े ै ो ौ'.split(' '), // 
+            vowel_marks: 'ा ि ी ु ू ृ ॄ ॢ ॣ े ै ो ौ'.split(' '), // 
             other_marks: 'ं ः ँ'.split(' '),
             virama: '्',
             consonants: 'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह ळ क्ष ज्ञ'.split(' '),
@@ -70,7 +70,7 @@ var Sanscript = new function() {
             other: "0 1 2 3 4 5 6 7 8 9 oM ' . .. ".split(' ')
         },
         /* Velthuis
-         * -------------
+         * --------
          * 
          */
         velthuis: {
@@ -84,10 +84,10 @@ var Sanscript = new function() {
     
     var romanSchemes = ['iast', 'hk', 'kolkata', 'slp1', 'velthuis'];
     
-    // Add a "marks" field for each roman scheme
+    // Add a "vowel_marks" field for each roman scheme
     for (var i = 0, name; name = romanSchemes[i]; i++) {
         var scheme = Sanscript.schemes[name];
-        scheme.marks = scheme.vowels.slice(1);
+        scheme.vowel_marks = scheme.vowels.slice(1);
     }
     
     /**
@@ -114,36 +114,91 @@ var Sanscript = new function() {
      * @param options  scheme options
      */
     var makeMap = function(from, to, options) {
-        var marks = {},
-            other = {},
+        var letters = {},
+            consonants = {},
+            marks = {},
             fromScheme = Sanscript.schemes[from],
             toScheme = Sanscript.schemes[to];
         for (var group in fromScheme) {
             var fromGroup = fromScheme[group],
                 toGroup = toScheme[group];
             for (var i in fromGroup) {
-                if (group === 'marks') {
+                if (group === 'vowel_marks' || group === 'other_marks') {
                     marks[fromGroup[i]] = toGroup[i];
+                } else if (group === 'virama') {
+                    marks[fromGroup] = toGroup;
                 } else {
-                    other[fromGroup[i]] = toGroup[i];
+                    letters[fromGroup[i]] = toGroup[i];
+                    if (group == 'consonants') {
+                        consonants[fromGroup[i]] = toGroup[i];
+                    }
                 }
             }
         }
-        return {marks: marks, other: other};
+        return {consonants: consonants,
+            fromRoman: Sanscript.isRomanScheme(from),
+            letters: letters,
+            marks: marks,
+            toRoman: Sanscript.isRomanScheme(to)};
     };
   
     var transliterateRoman = function(data, map, options) {
-    
+		var buf = [],
+			token = '',
+			maxTokenLength;
+		
+		for (var i = 0, L; L = data.charAt(i); i++) {
+		    // Build up a token
+		    var difference = maxTokenLength - token.length;
+		    if (difference > 0) {
+		        token += L;
+		        if (difference > 1) {
+		            continue;
+		        }
+		    }
+		}    
     };
     
     var transliterateBrahmi = function(data, map, options) {
-        
+        var buf = [],
+            hadConsonant = false,
+            temp,
+            consonants = map.consonants,
+            letters = map.letters,
+            marks = map.marks;
+        console.log(letters);
+        for (var i = 0, L; L = data.charAt(i); i++) {
+			if ((temp = marks[L]) !== undefined) {
+				buf.push(temp);
+				hadConsonant = false;
+			} else {
+				if (hadConsonant) {
+				    // Consecutive consonants -> implicit 'a'
+					buf.push('a');
+					hadConsonant = false;
+				}
+				
+				// Push transliterated letter if possible. Otherwise, push
+				// the letter itself.
+				if (temp = letters[L]) {
+					buf.push(temp);
+					hadConsonant = (L in consonants);
+				} else {
+					buf.push(L);
+				}
+			}
+        }
+        // Ends in bare consonant -> implicit 'a'
+        if (hadConsonant) {
+            buf.push('a');
+        }
+        return buf.join('');
     };
     
     Sanscript.t = function(data, from, to, options) {
         var transMap = makeMap(from, to, options);
         
-        if (Sanscript.isRomanScheme(from)) {
+        if (transMap.fromRoman) {
             return transliterateRoman(data, transMap, options);
         } else {
             return transliterateBrahmi(data, transMap, options);
