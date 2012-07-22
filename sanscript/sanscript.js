@@ -43,7 +43,7 @@ var Sanscript = new function() {
             other_marks: 'M H ~'.split(' '),
             virama: '',
             consonants: 'k kh g gh G c ch j jh J T Th D Dh N t th d dh n p ph b bh m y r l v z S s h L kS jJ'.split(' '),
-            other: "0 1 2 3 4 5 6 7 8 9 oM ' . .. ".split(' ')
+            other: "0 1 2 3 4 5 6 7 8 9 OM ' | || ".split(' ')
         },
         /* National Library at Kolkata
          * ---------------------------
@@ -116,22 +116,32 @@ var Sanscript = new function() {
 		malayalam : 0x0400,
 	};
 	
+	var scriptOverrides = {
+	    kannada: {'ॐ': 'ಓಂ', '।': '।', '॥': '॥'}
+	}
+	
 	// Using the Unicode offsets above, create schemes for the other Brahmi scripts.
 	for (var script in unicodeOffsets) {
 	    var scheme = {},
 	        offset = unicodeOffsets[script],
-	        dev = this.schemes.devanagari;
+	        dev = this.schemes.devanagari,
+	        overrides = scriptOverrides[script];
 	    
 	    for (groupName in dev) {
 	        var data = [],
-	            group = dev[groupName];
+	            group = dev[groupName],
+	            temp;
 	        for (var i = 0, cluster; cluster = group[i]; i++) {
-	            var buf = [];
-	            // We can't assume that each cluster has just one letter.
-	            for (var j = 0, L; L = cluster.charAt(j); j++) {
-	                buf.push(String.fromCharCode(L.charCodeAt(0) + offset));
-	            };
-	            data.push(buf.join(''));
+	            if (overrides && (temp = overrides[cluster]) !== undefined) {
+	                data.push(temp);
+	            } else {
+	                var buf = [];
+	                // We can't assume that each cluster has just one letter.
+	                for (var j = 0, L; L = cluster.charAt(j); j++) {
+	                    buf.push(String.fromCharCode(L.charCodeAt(0) + offset));
+	                };
+	                data.push(buf.join(''));
+	            }
 	        }
 	        scheme[groupName] = data;
 	    }
@@ -179,7 +189,9 @@ var Sanscript = new function() {
     var transliterateRoman = function(data, map, options) {
 		var buf = [],
 			token = '',
-			maxTokenLength;
+			consonants = map.consonants,
+			toRoman = map.toRoman,
+			maxTokenLength = 3;
 		
 		for (var i = 0, L; L = data.charAt(i); i++) {
 		    // Build up a token
@@ -190,7 +202,12 @@ var Sanscript = new function() {
 		            continue;
 		        }
 		    }
-		}    
+		    // Match all token substrings to our map.
+		    for (var j = 0; j < maxTokenLength; j++) {
+		        var subToken = token.substr(0,maxTokenLength-j);
+		    }
+		}
+		return buf.join('');
     };
     
     var transliterateBrahmi = function(data, map, options) {

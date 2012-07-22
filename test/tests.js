@@ -65,7 +65,7 @@ test("Transliteration (Devanagari to Harvard-Kyoto)", function() {
     dev2hk('wwकww', 'wwkaww', 'Consonant among other letters');
 });
 
-test("Transliteration (Devanagari round-trip)", function() {
+test("Transliteration (Devanagari to Kannada)", function() {
     var dev2kan = function(from, to, description) {
         equal(Sanscript.t(from, 'devanagari', 'kannada'), to, description);
     };
@@ -77,7 +77,7 @@ test("Transliteration (Devanagari round-trip)", function() {
     dev2kan('क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म',
         'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ', 'Stops and nasals');
     dev2kan('य र ल व श ष स ह ळ', 'ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ', 'Other consonants');
-    dev2hk('ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९', 'ಓಂ । ॥ ೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯',
+    dev2kan('ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९', 'ಓಂ । ॥ ೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯',
         'Symbols and punctuation');
     
     // Words and sentences
@@ -85,3 +85,19 @@ test("Transliteration (Devanagari round-trip)", function() {
     dev2kan('नर इति', 'ನರ ಇತಿ', 'Two words, one with explicit vowel');
 });
 
+test('Transliteration (Harvard-Kyoto to Devanagari)', function() {
+    var hk2dev = function(from, to, description) {
+        equal(Sanscript.t(from, 'hk', 'devanagari'), to, description);
+    };
+    
+    hk2dev('a A i I u U R RR lR lRR e ai o au',
+        'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ', 'Vowels');
+    hk2dev('ka khA gi ghI Gu cU chR jRR jhlR JlRR Te Thai Do Dhau NaM taH th',
+        'क खा गि घी ङु चू छृ जॄ झॢ ञॣ टे ठै डो ढौ णं तः थ्', 'Marks');
+    hk2dev('ka kha ga gha Ga ca cha ja jha Ja Ta Tha Da Dha Na ta tha da dha na pa pha ba bha ma', 
+        'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म', 'Stops and nasals');
+    hk2dev('ya ra la va za Sa sa ha La', 
+        'य र ल व श ष स ह ळ', 'Other consonants');
+    hk2dev('OM | || 0 1 2 3 4 5 6 7 8 9',
+        'ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९', 'Symbols and punctuation');
+});
