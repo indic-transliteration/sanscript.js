@@ -183,29 +183,63 @@ var Sanscript = new function() {
             fromRoman: Sanscript.isRomanScheme(from),
             letters: letters,
             marks: marks,
-            toRoman: Sanscript.isRomanScheme(to)};
+            toRoman: Sanscript.isRomanScheme(to),
+            virama: toScheme.virama};
     };
   
     var transliterateRoman = function(data, map, options) {
 		var buf = [],
-			token = '',
+			tokenBuffer = '',
+			temp,
+			maxTokenLength = 3,
+			hadConsonant = false,
+			dataLength = data.length,
 			consonants = map.consonants,
-			toRoman = map.toRoman,
-			maxTokenLength = 3;
-		
-		for (var i = 0, L; L = data.charAt(i); i++) {
-		    // Build up a token
-		    var difference = maxTokenLength - token.length;
-		    if (difference > 0) {
-		        token += L;
+			letters = map.letters,
+			marks = map.marks,
+			virama = map.virama,
+			toRoman = map.toRoman;
+        // Iterate while there's more left.
+		for (var i = 0, L; L = data.charAt(i) || tokenBuffer; i++) {
+		    // Build up a token provided it's still possible.
+		    var difference = maxTokenLength - tokenBuffer.length;
+		    if (difference > 0 && i < dataLength) {
+		        tokenBuffer += L;
 		        if (difference > 1) {
 		            continue;
 		        }
 		    }
 		    // Match all token substrings to our map.
 		    for (var j = 0; j < maxTokenLength; j++) {
-		        var subToken = token.substr(0,maxTokenLength-j);
+		        var token = tokenBuffer.substr(0,maxTokenLength-j),
+		            haveConsonant = (temp in consonants);
+		        // Vowel marks
+		        if (hadConsonant && (temp = marks[token]) !== undefined) {
+		            buf.push(temp);
+		            hadConsonant = false;
+		            tokenBuffer = tokenBuffer.substr(maxTokenLength-j);
+		            break;
+		        }
+		        // Letters
+		        else if ((temp = letters[token]) !== undefined) {
+		            // Ignore 'a' since the letter implies it by default.
+		            if (hadConsonant && token == 'a') {
+		                tokenBuffer = tokenBuffer.substr(1);
+		                continue;
+		            }
+		            buf.push(temp);
+		            hadConsonant = (token in consonants);
+		            tokenBuffer = tokenBuffer.substr(maxTokenLength-j);
+		            break;
+		        } else if (j == maxTokenLength - 1) {
+		            buf.push(token);
+		            hadConsonant = false;
+		            tokenBuffer = tokenBuffer.substr(1);
+		        }
 		    }
+		}
+		if (hadConsonant) {
+		    buf.push(virama);
 		}
 		return buf.join('');
     };
@@ -215,9 +249,9 @@ var Sanscript = new function() {
             hadConsonant = false,
             temp,
             consonants = map.consonants,
-            toRoman = map.toRoman,
             letters = map.letters,
             marks = map.marks;
+            toRoman = map.toRoman,
         console.log(letters);
         for (var i = 0, L; L = data.charAt(i); i++) {
 			if ((temp = marks[L]) !== undefined) {
