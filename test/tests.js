@@ -5,11 +5,17 @@ var dev2hk = function(from, to, description) {
     dev2kan = function(from, to, description) { 
         equal(Sanscript.t(from, 'devanagari', 'kannada'), to, description);
     },
+    dev2mal = function(from, to, description) { 
+        equal(Sanscript.t(from, 'devanagari', 'malayalam'), to, description);
+    },
     hk2dev = function(from, to, description) {
         equal(Sanscript.t(from, 'hk', 'devanagari'), to, description);
     },
     hk2iast = function(from, to, description) {
         equal(Sanscript.t(from, 'hk', 'iast'), to, description);
+    },
+    itrans2dev = function(from, to, description) {
+        equal(Sanscript.t(from, 'itrans', 'devanagari'), to, description);
     };
 
 /* Scheme basics
@@ -93,6 +99,22 @@ test('Transliteration (Devanagari to Kannada)', function() {
     dev2kan('नर इति', 'ನರ ಇತಿ', 'Two words, one with explicit vowel');
 });
 
+test('Transliteration (Devanagari to Malayalam)', function() {
+    // Letters
+    dev2mal('अ आ इ ई उ ऊ ऋ ॠ ए ऐ ओ औ', 'അ ആ ഇ ഈ ഉ ഊ ഋ ൠ ഏ ഐ ഓ ഔ', 'Vowels');
+    dev2mal('क खा गि घी ङु चू छृ जॄ टे ठै डो ढौ णं तः थ्',
+        'ക ഖാ ഗി ഘീ ങു ചൂ ഛൃ ജൄ ടേ ഠൈ ഡോ ഢൌ ണം തഃ ഥ്', 'Marks');
+    dev2mal('क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म',
+        'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ', 'Stops and nasals');
+    dev2mal('य र ल व श ष स ह ळ', 'യ ര ല വ ശ ഷ സ ഹ ള', 'Other consonants');
+    dev2mal('ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९', 'ഓം । ॥ ൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯',
+        'Symbols and punctuation');
+    
+    // Words and sentences
+    dev2mal('पुत्र', 'പുത്ര', 'Single word');
+    dev2mal('नर इति', 'നര ഇതി', 'Two words, one with explicit vowel');
+});
+
 test('Transliteration (Harvard-Kyoto to Devanagari)', function() {
     // Letters
     hk2dev('a A i I u U R RR lR lRR e ai o au',
@@ -136,4 +158,8 @@ test('Disabling transliteration', function() {
     hk2dev('akSa##kSa##ra', 'अक्षkSaर', 'Basic disable');
     hk2dev('##akSa##kSa##ra', 'akSaक्षra', 'Initial disable');
     hk2dev('akSa##kSa##ra####', 'अक्षkSaर', 'Redundant disable');
+});
+
+test('ITRANS special features', function() {
+    itrans2dev('bara_u', 'बरउ', 'Separated vowels');
 });

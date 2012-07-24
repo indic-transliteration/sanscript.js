@@ -29,7 +29,7 @@ var Sanscript = new function() {
          */
         iast: {
             vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ e ai o au'.split(' '),
-            other_marks: 'ṃ ḥ ~'.split(' '),
+            other_marks: ['ṃ','ḥ','~'],
             virama: '',
             consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
             other: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥ ".split(' ')
@@ -43,11 +43,10 @@ var Sanscript = new function() {
          */
         itrans: {
             vowels: 'a A i I u U RRi RRI LLi LLI e ai o au'.split(' '),
-            other_marks: 'M H .N'.split(' '),
+            other_marks: ['M','H','.N'],
             virama: '',
-            consonants: 'ka kha ga gha ~Na cha Cha ja jha ~na Ta Tha Da Dha Na ta tha da dha na pa pha ba bha ma ya ra la va sha Sha sa ha La kSha j~na'.split(' '),
-            other: '0 1 2 3 4 5 6 7 8 9 OM .a | || {}'.split(' '),
-        
+            consonants: 'k kh g gh ~N ch Ch j jh ~n T Th D Dh N t th d dh n p ph b bh m y r l v sh Sh s h L kSh j~n'.split(' '),
+            other: '0 1 2 3 4 5 6 7 8 9 OM .a | || _'.split(' '),
         },
         
         /* Harvard-Kyoto
@@ -69,7 +68,7 @@ var Sanscript = new function() {
          */
         kolkata: {
             vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ ē ai ō au'.split(' '),
-            other_marks: 'ṃ ḥ ~'.split(' '),
+            other_marks: ['ṃ','ḥ','~'],
             virama: '',
             consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
             other: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥ ".split(' ')
@@ -101,7 +100,7 @@ var Sanscript = new function() {
         },
     };
     
-    var romanSchemes = ['iast', 'hk', 'kolkata', 'slp1', 'velthuis'];
+    var romanSchemes = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'];
     
     // Add a "vowel_marks" field for each roman scheme
     for (var i = 0, name; name = romanSchemes[i]; i++) {
@@ -168,7 +167,9 @@ var Sanscript = new function() {
 	};
 	
 	var scriptOverrides = {
-	    kannada: {'ॐ': 'ಓಂ', '।': '।', '॥': '॥'}
+	    bengali: {'व': 'ব', 'ळ': null},
+	    kannada: {'ॐ': 'ಓಂ', '।': '।', '॥': '॥', 'ऌ': null, 'ॡ': null},
+	    malayalam: {'ँ': null, 'ॐ': 'ഓം', '।': '।', '॥': '॥'},
 	};
 	
 	// Using the Unicode offsets above, create schemes for the other Brahmi scripts.
