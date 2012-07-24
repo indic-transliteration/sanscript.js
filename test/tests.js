@@ -1,3 +1,17 @@
+/* Helper functions */
+var dev2hk = function(from, to, description) {
+        equal(Sanscript.t(from, 'devanagari', 'hk'), to, description);
+    },
+    dev2kan = function(from, to, description) { 
+        equal(Sanscript.t(from, 'devanagari', 'kannada'), to, description);
+    },
+    hk2dev = function(from, to, description) {
+        equal(Sanscript.t(from, 'hk', 'devanagari'), to, description);
+    },
+    hk2iast = function(from, to, description) {
+        equal(Sanscript.t(from, 'hk', 'iast'), to, description);
+    };
+
 /* Scheme basics
  * -------------
  * Test that all schemes have the same number of elements for each category,
@@ -40,10 +54,6 @@ test('Roman scheme membership', function() {
 });
 
 test('Transliteration (Devanagari to Harvard-Kyoto)', function() {
-    var dev2hk = function(from, to, description) {
-        equal(Sanscript.t(from, 'devanagari', 'hk'), to, description);
-    };
-
     // Letters
     dev2hk('अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ',
         'a A i I u U R RR lR lRR e ai o au', 'Vowels');
@@ -68,10 +78,6 @@ test('Transliteration (Devanagari to Harvard-Kyoto)', function() {
 });
 
 test('Transliteration (Devanagari to Kannada)', function() {
-    var dev2kan = function(from, to, description) { 
-        equal(Sanscript.t(from, 'devanagari', 'kannada'), to, description);
-    };
-    
     // Letters
     dev2kan('अ आ इ ई उ ऊ ऋ ॠ ए ऐ ओ औ', 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಏ ಐ ಓ ಔ', 'Vowels');
     dev2kan('क खा गि घी ङु चू छृ जॄ टे ठै डो ढौ णं तः थ्',
@@ -88,10 +94,7 @@ test('Transliteration (Devanagari to Kannada)', function() {
 });
 
 test('Transliteration (Harvard-Kyoto to Devanagari)', function() {
-    var hk2dev = function(from, to, description) {
-        equal(Sanscript.t(from, 'hk', 'devanagari'), to, description);
-    };
-    
+    // Letters
     hk2dev('a A i I u U R RR lR lRR e ai o au',
         'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ', 'Vowels');
     hk2dev('ka khA gi ghI Gu cU chR jRR jhlR JlRR Te Thai Do Dhau NaM taH th',
@@ -111,10 +114,6 @@ test('Transliteration (Harvard-Kyoto to Devanagari)', function() {
 });
 
 test('Transliteration (Harvard-Kyoto to IAST)', function() {
-    var hk2iast = function(from, to, description) {
-        equal(Sanscript.t(from, 'hk', 'iast'), to, description);
-    }
-    
     hk2iast('a A i I u U R RR lR lRR e ai o au',
         'a ā i ī u ū ṛ ṝ ḷ ḹ e ai o au', 'Vowels');
     hk2iast('ka khA gi ghI Gu cU chR jRR jhlR JlRR Te Thai Do Dhau NaM taH th',
@@ -131,4 +130,10 @@ test('Transliteration (Harvard-Kyoto to IAST)', function() {
     hk2iast('nara iti', 'nara iti', 'Two words, one with explicit vowel');
     hk2iast('dharmakSetre kurukSetre samavetA yuyutsavaH |',
         'dharmakṣetre kurukṣetre samavetā yuyutsavaḥ ।', 'Simple sentence');
+});
+
+test('Disabling transliteration', function() {
+    hk2dev('akSa##kSa##ra', 'अक्षkSaर', 'Basic disable');
+    hk2dev('##akSa##kSa##ra', 'akSaक्षra', 'Initial disable');
+    hk2dev('akSa##kSa##ra####', 'अक्षkSaर', 'Redundant disable');
 });
