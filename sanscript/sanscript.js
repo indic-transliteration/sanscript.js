@@ -190,7 +190,8 @@ var Sanscript = new function() {
     var transliterateRoman = function(data, map, options) {
 		var buf = [],
 			tokenBuffer = '',
-			temp,
+			tempLetter,
+			tempMark,
 			maxTokenLength = 3,
 			hadConsonant = false,
 			dataLength = data.length,
@@ -213,27 +214,34 @@ var Sanscript = new function() {
 		    for (var j = 0; j < maxTokenLength; j++) {
 		        var token = tokenBuffer.substr(0,maxTokenLength-j),
 		            haveConsonant = (temp in consonants);
-		        // Vowel marks
-		        if (hadConsonant && (temp = marks[token]) !== undefined) {
-		            buf.push(temp);
-		            hadConsonant = false;
-		            tokenBuffer = tokenBuffer.substr(maxTokenLength-j);
-		            break;
-		        }
-		        // Letters
-		        else if ((temp = letters[token]) !== undefined) {
-		            // Ignore 'a' since the letter implies it by default.
-		            if (hadConsonant && token == 'a') {
-		                tokenBuffer = tokenBuffer.substr(1);
-		                continue;
+		            
+		        if (tempLetter = letters[token]) {
+		            if (toRoman) {
+		                buf.push(tempLetter);
+		            } else {
+		                // Handle the implicit vowel. Ignore 'a' and force
+		                // vowels to appear as marks if we've just seen a
+		                // consonant.
+		                if (hadConsonant) {
+		                    if (tempMark = marks[token]) {
+		                        buf.push(tempMark)
+		                    } else if (token != 'a') {
+		                        buf.push(virama);
+		                        buf.push(tempLetter);
+		                    }
+		                } else {
+		                    buf.push(tempLetter);
+		                }
+		                hadConsonant = token in consonants;
 		            }
-		            buf.push(temp);
-		            hadConsonant = (token in consonants);
-		            tokenBuffer = tokenBuffer.substr(maxTokenLength-j);
-		            break;
+					tokenBuffer = tokenBuffer.substr(maxTokenLength-j);
+					break;
 		        } else if (j == maxTokenLength - 1) {
+		            if (hadConsonant) {	            
+    		            hadConsonant = false;
+    		            buf.push(virama)
+    		        }
 		            buf.push(token);
-		            hadConsonant = false;
 		            tokenBuffer = tokenBuffer.substr(1);
 		        }
 		    }

@@ -59,6 +59,8 @@ test("Transliteration (Devanagari to Harvard-Kyoto)", function() {
     // Words and sentences
     dev2hk('पुत्र', 'putra', 'Single word');
     dev2hk('नर इति', 'nara iti', 'Two words, one with explicit vowel');
+    dev2hk('धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।',
+        'dharmakSetre kurukSetre samavetA yuyutsavaH |', 'Simple sentence');
     
     // Other
     dev2hk('wwॠww', 'wwRRww', 'Vowel among other letters');
@@ -66,7 +68,7 @@ test("Transliteration (Devanagari to Harvard-Kyoto)", function() {
 });
 
 test("Transliteration (Devanagari to Kannada)", function() {
-    var dev2kan = function(from, to, description) {
+    var dev2kan = function(from, to, description) { 
         equal(Sanscript.t(from, 'devanagari', 'kannada'), to, description);
     };
     
@@ -87,7 +89,8 @@ test("Transliteration (Devanagari to Kannada)", function() {
 
 test('Transliteration (Harvard-Kyoto to Devanagari)', function() {
     var hk2dev = function(from, to, description) {
-        equal(Sanscript.t(from, 'hk', 'devanagari'), to, description);
+        var result = Sanscript.t(from, 'hk', 'devanagari');
+        equal(result, to, description);
     };
     
     hk2dev('a A i I u U R RR lR lRR e ai o au',
@@ -100,4 +103,10 @@ test('Transliteration (Harvard-Kyoto to Devanagari)', function() {
         'य र ल व श ष स ह ळ', 'Other consonants');
     hk2dev('OM | || 0 1 2 3 4 5 6 7 8 9',
         'ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९', 'Symbols and punctuation');
+        
+    // Words and sentences
+    hk2dev('putra', 'पुत्र', 'Single word');
+    hk2dev('nara iti', 'नर इति', 'Two words, one with explicit vowel');
+    hk2dev('dharmakSetre kurukSetre samavetA yuyutsavaH |',
+        'धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।', 'Simple sentence');
 });
