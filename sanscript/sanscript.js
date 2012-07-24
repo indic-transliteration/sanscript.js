@@ -146,7 +146,6 @@ var Sanscript = new function() {
 	        scheme[groupName] = data;
 	    }
 	    this.schemes[script] = scheme;
-	    console.log(scheme);
 	}
   
     /**
@@ -158,10 +157,10 @@ var Sanscript = new function() {
      * @param options  scheme options
      */
     var makeMap = function(from, to, options) {
-        var letters = {},
-            consonants = {},
-            marks = {},
+        var consonants = {},
             fromScheme = Sanscript.schemes[from],
+            letters = {},
+            marks = {},
             toScheme = Sanscript.schemes[to];
         for (var group in fromScheme) {
             var fromGroup = fromScheme[group],
@@ -187,19 +186,27 @@ var Sanscript = new function() {
             virama: toScheme.virama};
     };
   
+    /**
+     * Transliterate from a romanized script.
+     *
+     * @param data     the string to transliterate
+     * @param map      map data generated from makeMap()
+     * @param options  transliteration options (TODO)
+     * @return         the finished string 
+     */
     var transliterateRoman = function(data, map, options) {
 		var buf = [],
-			tokenBuffer = '',
-			tempLetter,
-			tempMark,
-			maxTokenLength = 3,
-			hadConsonant = false,
-			dataLength = data.length,
 			consonants = map.consonants,
+			dataLength = data.length,
+			hadConsonant = false,
 			letters = map.letters,
 			marks = map.marks,
-			virama = map.virama,
-			toRoman = map.toRoman;
+			maxTokenLength = 3,
+			tempLetter,
+			tempMark,
+			tokenBuffer = '',
+			toRoman = map.toRoman,
+			virama = map.virama;
         // Iterate while there's more left.
 		for (var i = 0, L; L = data.charAt(i) || tokenBuffer; i++) {
 		    // Build up a token provided it's still possible.
@@ -212,8 +219,7 @@ var Sanscript = new function() {
 		    }
 		    // Match all token substrings to our map.
 		    for (var j = 0; j < maxTokenLength; j++) {
-		        var token = tokenBuffer.substr(0,maxTokenLength-j),
-		            haveConsonant = (temp in consonants);
+		        var token = tokenBuffer.substr(0,maxTokenLength-j);
 		            
 		        if (tempLetter = letters[token]) {
 		            if (toRoman) {
@@ -252,15 +258,22 @@ var Sanscript = new function() {
 		return buf.join('');
     };
     
+    /**
+     * Transliterate from a Brahmi script.
+     *
+     * @param data     the string to transliterate
+     * @param map      map data generated from makeMap()
+     * @param options  transliteration options (TODO)
+     * @return         the finished string 
+     */
     var transliterateBrahmi = function(data, map, options) {
         var buf = [],
-            hadConsonant = false,
-            temp,
             consonants = map.consonants,
+            hadConsonant = false,
             letters = map.letters,
-            marks = map.marks;
-            toRoman = map.toRoman,
-        console.log(letters);
+            marks = map.marks,
+            temp,
+            toRoman = map.toRoman;
         for (var i = 0, L; L = data.charAt(i); i++) {
 			if ((temp = marks[L]) !== undefined) {
 				buf.push(temp);
@@ -289,6 +302,15 @@ var Sanscript = new function() {
         return buf.join('');
     };
     
+    /**
+     * Transliterate from one script to another.
+     *
+     * @param data     the string to transliterate
+     * @param from     the source script
+     * @param to       the the destination script
+     * @param options  transliteration options (TODO)
+     * @return         the finished string 
+     */
     Sanscript.t = function(data, from, to, options) {
         var transMap = makeMap(from, to, options);
         
