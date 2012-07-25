@@ -170,6 +170,7 @@ var Sanscript = new function() {
 	    bengali: {'व': 'ব', 'ळ': null, 'ॐ': 'ॐ', '।': '।', '॥': '॥'},
 	    kannada: {'ॐ': 'ಓಂ', '।': '।', '॥': '॥', 'ऌ': null, 'ॡ': null},
 	    malayalam: {'ँ': null, 'ॐ': 'ഓം', '।': '।', '॥': '॥'},
+	    telugu: {'ॐ': 'ఓం', '।': '।', '॥': '॥'},
 	};
 	
 	// Using the Unicode offsets above, create schemes for the other Brahmi scripts.

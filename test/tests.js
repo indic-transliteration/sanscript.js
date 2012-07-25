@@ -59,6 +59,16 @@ var data = {
         naraIti: 'നര ഇതി',
         sentence: 'ധര്മക്ഷേത്രേ കുരുക്ഷേത്രേ സമവേതാ യുയുത്സവഃ ।'
     },
+    telugu: {
+        vowels: 'అ ఆ ఇ ఈ ఉ ఊ ఋ ౠ ఌ ౡ ఏ ఐ ఓ ఔ',
+        marks: 'క ఖా గి ఘీ ఙు చూ ఛృ జౄ ఝౢ ఞౣ టే ఠై డో ఢౌ ణం తః థ్',
+        consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ',
+        other: 'య ర ల వ శ ష స హ ళ',
+        symbols: 'ఓం । ॥ ౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯',
+        putra: 'పుత్ర',
+        naraIti: 'నర ఇతి',
+        sentence: 'ధర్మక్షేత్రే కురుక్షేత్రే సమవేతా యుయుత్సవః ।'
+    },
 };
 
 /**
@@ -172,6 +182,10 @@ test('Transliteration (Devanagari to Kannada)', function() {
 test('Transliteration (Devanagari to Malayalam)', function() {
     var f = transHelper('devanagari', 'malayalam');
     standardTests(data.devanagari, data.malayalam, f);
+});
+test('Transliteration (Devanagari to Telugu)', function() {
+    var f = transHelper('devanagari', 'telugu');
+    standardTests(data.devanagari, data.telugu, f);
 });
 
 test('Transliteration (Harvard-Kyoto to Devanagari)', function() {
