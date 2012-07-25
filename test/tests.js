@@ -19,6 +19,16 @@ var data = {
         naraIti: 'नर इति',
         sentence: 'धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।',
     },
+    gujarati: {
+        vowels: 'અ આ ઇ ઈ ઉ ઊ ઋ ૠ ઌ ૡ એ ઐ ઓ ઔ',
+        marks: 'ક ખા ગિ ઘી ઙુ ચૂ છૃ જૄ ઝૢ ઞૣ ટે ઠૈ ડો ઢૌ ણં તઃ થ્',
+        consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ',
+        other: 'ય ર લ વ શ ષ સ હ ળ',
+        symbols: 'ૐ ૤ ૥ ૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯',
+        putra: 'પુત્ર',
+        naraIti: 'નર ઇતિ',
+        sentence: 'ધર્મક્ષેત્રે કુરુક્ષેત્રે સમવેતા યુયુત્સવઃ ૤',
+    },
     hk: {
         vowels: 'a A i I u U R RR lR lRR e ai o au',
         marks: 'ka khA gi ghI Gu cU chR jRR jhlR JlRR Te Thai Do Dhau NaM taH th',
@@ -69,6 +79,7 @@ var data = {
         naraIti: 'నర ఇతి',
         sentence: 'ధర్మక్షేత్రే కురుక్షేత్రే సమవేతా యుయుత్సవః ।'
     },
+
 };
 
 /**
@@ -146,6 +157,13 @@ function standardTests(from, to, f) {
     f(from.sentence, to.sentence, 'Basic sentence');
 }
 
+test('Transliteration (Devanagari to Bengali)', function() {
+    var f = transHelper('devanagari', 'bengali');
+    standardTests(data.devanagari, data.bengali, f);
+    f('व', 'ব', 'व transliteration');
+    f('ब', 'ব', 'ब transliteration');
+});
+
 test('Transliteration (Devanagari to Harvard-Kyoto)', function() {
     var from = data.devanagari,
         to = data.hk,
@@ -157,11 +175,6 @@ test('Transliteration (Devanagari to Harvard-Kyoto)', function() {
     // Other
     f('wwॠww', 'wwRRww', 'Vowel among other letters');
     f('wwकww', 'wwkaww', 'Consonant among other letters');
-});
-
-test('Transliteration (Devanagari to Bengali)', function() {
-    var f = transHelper('devanagari', 'bengali');
-    standardTests(data.devanagari, data.bengali, f);
 });
 
 test('Transliteration (Devanagari to Kannada)', function() {
@@ -179,10 +192,16 @@ test('Transliteration (Devanagari to Kannada)', function() {
     dev2kan(dev.naraIti, kan.naraIti, 'Two words, one with explicit vowel');
 });
 
+test('Transliteration (Devanagari to Gujarati)', function() {
+    var f = transHelper('devanagari', 'gujarati');
+    standardTests(data.devanagari, data.gujarati, f);
+});
+
 test('Transliteration (Devanagari to Malayalam)', function() {
     var f = transHelper('devanagari', 'malayalam');
     standardTests(data.devanagari, data.malayalam, f);
 });
+
 test('Transliteration (Devanagari to Telugu)', function() {
     var f = transHelper('devanagari', 'telugu');
     standardTests(data.devanagari, data.telugu, f);
