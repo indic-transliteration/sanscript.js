@@ -167,7 +167,7 @@ var Sanscript = new function() {
 	};
 	
 	var scriptOverrides = {
-	    bengali: {'व': 'ব', 'ळ': null},
+	    bengali: {'व': 'ব', 'ळ': null, 'ॐ': 'ॐ', '।': '।', '॥': '॥'},
 	    kannada: {'ॐ': 'ಓಂ', '।': '।', '॥': '॥', 'ऌ': null, 'ॡ': null},
 	    malayalam: {'ँ': null, 'ॐ': 'ഓം', '।': '।', '॥': '॥'},
 	};

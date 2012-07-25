@@ -1,22 +1,80 @@
-/* Helper functions */
-var dev2hk = function(from, to, description) {
-        equal(Sanscript.t(from, 'devanagari', 'hk'), to, description);
+var data = {
+    bengali: {
+        vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ এ ঐ ও ঔ',
+        marks: 'ক খা গি ঘী ঙু চূ ছৃ জৄ ঝৢ ঞৣ টে ঠৈ ডো ঢৌ ণং তঃ থ্',
+        consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম',
+        other: 'য র ল ব শ ষ স হ ळ',
+        symbols: 'ॐ । ॥ ০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯',
+        putra: 'পুত্র',
+        naraIti: 'নর ইতি',
+        sentence: 'ধর্মক্ষেত্রে কুরুক্ষেত্রে সমবেতা যুযুত্সবঃ ।',
     },
-    dev2kan = function(from, to, description) { 
-        equal(Sanscript.t(from, 'devanagari', 'kannada'), to, description);
+    devanagari: {
+        vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ',
+        marks: 'क खा गि घी ङु चू छृ जॄ झॢ ञॣ टे ठै डो ढौ णं तः थ्',
+        consonants: 'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म',
+        other: 'य र ल व श ष स ह ळ',
+        symbols: 'ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९',
+        putra: 'पुत्र',
+        naraIti: 'नर इति',
+        sentence: 'धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।',
     },
-    dev2mal = function(from, to, description) { 
-        equal(Sanscript.t(from, 'devanagari', 'malayalam'), to, description);
+    hk: {
+        vowels: 'a A i I u U R RR lR lRR e ai o au',
+        marks: 'ka khA gi ghI Gu cU chR jRR jhlR JlRR Te Thai Do Dhau NaM taH th',
+        consonants: 'ka kha ga gha Ga ca cha ja jha Ja Ta Tha Da Dha Na ta tha da dha na pa pha ba bha ma',
+        other: 'ya ra la va za Sa sa ha La',
+        symbols: 'OM | || 0 1 2 3 4 5 6 7 8 9',
+        putra: 'putra',
+        naraIti: 'nara iti',
+        sentence: 'dharmakSetre kurukSetre samavetA yuyutsavaH |',
     },
-    hk2dev = function(from, to, description) {
-        equal(Sanscript.t(from, 'hk', 'devanagari'), to, description);
+    iast: {
+        vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ e ai o au',
+        marks: 'ka khā gi ghī ṅu cū chṛ jṝ jhḷ ñḹ ṭe ṭhai ḍo ḍhau ṇaṃ taḥ th',
+        consonants: 'ka kha ga gha ṅa ca cha ja jha ña ṭa ṭha ḍa ḍha ṇa ta tha da dha na pa pha ba bha ma',
+        other: 'ya ra la va śa ṣa sa ha ḻa',
+        symbols: 'oṃ । ॥ 0 1 2 3 4 5 6 7 8 9',
+        putra: 'putra',
+        naraIti: 'nara iti',
+        sentence: 'dharmakṣetre kurukṣetre samavetā yuyutsavaḥ ।',
     },
-    hk2iast = function(from, to, description) {
-        equal(Sanscript.t(from, 'hk', 'iast'), to, description);
+    kannada: {
+        vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಏ ಐ ಓ ಔ',
+        marks: 'ಕ ಖಾ ಗಿ ಘೀ ಙು ಚೂ ಛೃ ಜೄ ಟೇ ಠೈ ಡೋ ಢೌ ಣಂ ತಃ ಥ್',
+        consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ',
+        other: 'ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ',
+        symbols: 'ಓಂ । ॥ ೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯',
+        putra: 'ಪುತ್ರ',
+        naraIti: 'ನರ ಇತಿ',
+        sentence: 'ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ ಸಮವೇತಾ ಯುಯುತ್ಸವಃ ।',
     },
-    itrans2dev = function(from, to, description) {
-        equal(Sanscript.t(from, 'itrans', 'devanagari'), to, description);
-    };
+    malayalam: {
+        vowels: 'അ ആ ഇ ഈ ഉ ഊ ഋ ൠ ഌ ൡ ഏ ഐ ഓ ഔ',
+        marks: 'ക ഖാ ഗി ഘീ ങു ചൂ ഛൃ ജൄ ഝൢ ഞൣ ടേ ഠൈ ഡോ ഢൌ ണം തഃ ഥ്',
+        consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ',
+        other: 'യ ര ല വ ശ ഷ സ ഹ ള',
+        symbols: 'ഓം । ॥ ൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯',
+        putra: 'പുത്ര',
+        naraIti: 'നര ഇതി',
+        sentence: 'ധര്മക്ഷേത്രേ കുരുക്ഷേത്രേ സമവേതാ യുയുത്സവഃ ।'
+    },
+};
+
+/**
+ * For a script pair (f, t), return a function that takes two strings s1 and
+ * s2 and asserts that s1, when transliterated from f to t, equals s2. The
+ * returned function takes an optional 'description' parameter for QUnit.
+ *
+ * @param fromScript  the source script
+ * @param toScript    the destination script
+ * @return            the function described above.
+ */
+var transHelper = function(fromScript, toScript) {
+    return function(from, to, description) {
+        equal(Sanscript.t(from, fromScript, toScript), to, description);
+    }
+}
 
 /* Scheme basics
  * -------------
@@ -48,7 +106,7 @@ test('Scheme definitions', function() {
  * Test that Sanscript.isRomanScheme returns true for all Roman schemes.
  */
 test('Roman scheme membership', function() {
-    var roman = ['iast', 'hk', 'kolkata', 'slp1', 'velthuis'],
+    var roman = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'],
         other = ['devanagari'];
     
     for (var i in roman) {
@@ -59,107 +117,82 @@ test('Roman scheme membership', function() {
     }
 });
 
-test('Transliteration (Devanagari to Harvard-Kyoto)', function() {
+/* Standard transliteration tests
+ * ------------------------------
+ * This group of tests examines every common Sanskrit symbol and ensuret that
+ * it is transliterated as expected.
+ */
+function standardTests(from, to, f) {
     // Letters
-    dev2hk('अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ',
-        'a A i I u U R RR lR lRR e ai o au', 'Vowels');
-    dev2hk('क खा गि घी ङु चू छृ जॄ झॢ ञॣ टे ठै डो ढौ णं तः थ्',
-        'ka khA gi ghI Gu cU chR jRR jhlR JlRR Te Thai Do Dhau NaM taH th', 'Marks');
-    dev2hk('क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म',
-        'ka kha ga gha Ga ca cha ja jha Ja Ta Tha Da Dha Na ta tha da dha na pa pha ba bha ma', 'Stops and nasals');
-    dev2hk('य र ल व श ष स ह ळ',
-        'ya ra la va za Sa sa ha La', 'Other consonants');
-    dev2hk('ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९', 'OM | || 0 1 2 3 4 5 6 7 8 9',
-        'Symbols and punctuation');
+    f(from.vowels, to.vowels, 'Vowels');
+    f(from.marks, to.marks, 'Marks');
+    f(from.consonants, to.consonants, 'Stops and nasals');
+    f(from.other, to.other, 'Other consonants');
+    f(from.symbols, to.symbols, 'Symbols and punctuation');
     
     // Words and sentences
-    dev2hk('पुत्र', 'putra', 'Single word');
-    dev2hk('नर इति', 'nara iti', 'Two words, one with explicit vowel');
-    dev2hk('धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।',
-        'dharmakSetre kurukSetre samavetA yuyutsavaH |', 'Simple sentence');
+    f(from.putra, to.putra, 'Single word');
+    f(from.naraIti, to.naraIti, 'Two words, one with explicit vowel');
+    f(from.sentence, to.sentence, 'Basic sentence');
+}
+
+test('Transliteration (Devanagari to Harvard-Kyoto)', function() {
+    var from = data.devanagari,
+        to = data.hk,
+        f = transHelper('devanagari', 'hk');
+    standardTests(from, to, f);
+    
+    f('', '', 'Simple sentence');
     
     // Other
-    dev2hk('wwॠww', 'wwRRww', 'Vowel among other letters');
-    dev2hk('wwकww', 'wwkaww', 'Consonant among other letters');
+    f('wwॠww', 'wwRRww', 'Vowel among other letters');
+    f('wwकww', 'wwkaww', 'Consonant among other letters');
+});
+
+test('Transliteration (Devanagari to Bengali)', function() {
+    var f = transHelper('devanagari', 'bengali');
+    standardTests(data.devanagari, data.bengali, f);
 });
 
 test('Transliteration (Devanagari to Kannada)', function() {
     // Letters
-    dev2kan('अ आ इ ई उ ऊ ऋ ॠ ए ऐ ओ औ', 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಏ ಐ ಓ ಔ', 'Vowels');
-    dev2kan('क खा गि घी ङु चू छृ जॄ टे ठै डो ढौ णं तः थ्',
-        'ಕ ಖಾ ಗಿ ಘೀ ಙು ಚೂ ಛೃ ಜೄ ಟೇ ಠೈ ಡೋ ಢೌ ಣಂ ತಃ ಥ್', 'Marks');
-    dev2kan('क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म',
-        'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ', 'Stops and nasals');
-    dev2kan('य र ल व श ष स ह ळ', 'ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ', 'Other consonants');
-    dev2kan('ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९', 'ಓಂ । ॥ ೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯',
-        'Symbols and punctuation');
+    var dev = data.devanagari, kan = data.kannada,
+        dev2kan = transHelper('devanagari', 'kannada');
+    dev2kan('अ आ इ ई उ ऊ ऋ ॠ ए ऐ ओ औ', kan.vowels, 'Vowels'); // no ऌ or ॡ
+    dev2kan('क खा गि घी ङु चू छृ जॄ टे ठै डो ढौ णं तः थ्', kan.marks, 'Marks'); // no ऌ or ॡ
+    dev2kan(dev.consonants, kan.consonants, 'Stops and nasals');
+    dev2kan(dev.other, kan.other, 'Other consonants');
+    dev2kan(dev.symbols, kan.symbols, 'Symbols and punctuation');
     
     // Words and sentences
-    dev2kan('पुत्र', 'ಪುತ್ರ', 'Single word');
-    dev2kan('नर इति', 'ನರ ಇತಿ', 'Two words, one with explicit vowel');
+    dev2kan(dev.putra, kan.putra, 'Single word');
+    dev2kan(dev.naraIti, kan.naraIti, 'Two words, one with explicit vowel');
 });
 
 test('Transliteration (Devanagari to Malayalam)', function() {
-    // Letters
-    dev2mal('अ आ इ ई उ ऊ ऋ ॠ ए ऐ ओ औ', 'അ ആ ഇ ഈ ഉ ഊ ഋ ൠ ഏ ഐ ഓ ഔ', 'Vowels');
-    dev2mal('क खा गि घी ङु चू छृ जॄ टे ठै डो ढौ णं तः थ्',
-        'ക ഖാ ഗി ഘീ ങു ചൂ ഛൃ ജൄ ടേ ഠൈ ഡോ ഢൌ ണം തഃ ഥ്', 'Marks');
-    dev2mal('क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म',
-        'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ', 'Stops and nasals');
-    dev2mal('य र ल व श ष स ह ळ', 'യ ര ല വ ശ ഷ സ ഹ ള', 'Other consonants');
-    dev2mal('ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९', 'ഓം । ॥ ൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯',
-        'Symbols and punctuation');
-    
-    // Words and sentences
-    dev2mal('पुत्र', 'പുത്ര', 'Single word');
-    dev2mal('नर इति', 'നര ഇതി', 'Two words, one with explicit vowel');
+    var f = transHelper('devanagari', 'malayalam');
+    standardTests(data.devanagari, data.malayalam, f);
 });
 
 test('Transliteration (Harvard-Kyoto to Devanagari)', function() {
-    // Letters
-    hk2dev('a A i I u U R RR lR lRR e ai o au',
-        'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ', 'Vowels');
-    hk2dev('ka khA gi ghI Gu cU chR jRR jhlR JlRR Te Thai Do Dhau NaM taH th',
-        'क खा गि घी ङु चू छृ जॄ झॢ ञॣ टे ठै डो ढौ णं तः थ्', 'Marks');
-    hk2dev('ka kha ga gha Ga ca cha ja jha Ja Ta Tha Da Dha Na ta tha da dha na pa pha ba bha ma', 
-        'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म', 'Stops and nasals');
-    hk2dev('ya ra la va za Sa sa ha La', 
-        'य र ल व श ष स ह ळ', 'Other consonants');
-    hk2dev('OM | || 0 1 2 3 4 5 6 7 8 9',
-        'ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९', 'Symbols and punctuation');
-        
-    // Words and sentences
-    hk2dev('putra', 'पुत्र', 'Single word');
-    hk2dev('nara iti', 'नर इति', 'Two words, one with explicit vowel');
-    hk2dev('dharmakSetre kurukSetre samavetA yuyutsavaH |',
-        'धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।', 'Simple sentence');
+    var f = transHelper('hk', 'devanagari');
+    standardTests(data.hk, data.devanagari, f);
 });
 
 test('Transliteration (Harvard-Kyoto to IAST)', function() {
-    hk2iast('a A i I u U R RR lR lRR e ai o au',
-        'a ā i ī u ū ṛ ṝ ḷ ḹ e ai o au', 'Vowels');
-    hk2iast('ka khA gi ghI Gu cU chR jRR jhlR JlRR Te Thai Do Dhau NaM taH th',
-        'ka khā gi ghī ṅu cū chṛ jṝ jhḷ ñḹ ṭe ṭhai ḍo ḍhau ṇaṃ taḥ th', 'Marks');
-    hk2iast('ka kha ga gha Ga ca cha ja jha Ja Ta Tha Da Dha Na ta tha da dha na pa pha ba bha ma', 
-        'ka kha ga gha ṅa ca cha ja jha ña ṭa ṭha ḍa ḍha ṇa ta tha da dha na pa pha ba bha ma', 'Stops and nasals');
-    hk2iast('ya ra la va za Sa sa ha La', 
-        'ya ra la va śa ṣa sa ha ḻa', 'Other consonants');
-    hk2iast('OM | || 0 1 2 3 4 5 6 7 8 9',
-        'oṃ । ॥ 0 1 2 3 4 5 6 7 8 9', 'Symbols and punctuation');
-        
-    // Words and sentences
-    hk2iast('putra', 'putra', 'Single word');
-    hk2iast('nara iti', 'nara iti', 'Two words, one with explicit vowel');
-    hk2iast('dharmakSetre kurukSetre samavetA yuyutsavaH |',
-        'dharmakṣetre kurukṣetre samavetā yuyutsavaḥ ।', 'Simple sentence');
+    var f = transHelper('hk', 'iast');
+    standardTests(data.hk, data.iast, f);
 });
 
 test('Disabling transliteration', function() {
-    hk2dev('akSa##kSa##ra', 'अक्षkSaर', 'Basic disable');
-    hk2dev('##akSa##kSa##ra', 'akSaक्षra', 'Initial disable');
-    hk2dev('akSa##kSa##ra####', 'अक्षkSaर', 'Redundant disable');
+    var f = transHelper('hk', 'devanagari');
+    f('akSa##kSa##ra', 'अक्षkSaर', 'Basic disable');
+    f('##akSa##kSa##ra', 'akSaक्षra', 'Initial disable');
+    f('akSa##kSa##ra####', 'अक्षkSaर', 'Redundant disable');
 });
 
 test('ITRANS special features', function() {
-    itrans2dev('bara_u', 'बरउ', 'Separated vowels');
+    var f = transHelper('itrans', 'devanagari');
+    f('bara_u', 'बरउ', 'Separated vowels');
+    f('k_Shetra', 'क्‍षेत्र', 'Separated consonants');
 });
