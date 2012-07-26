@@ -104,6 +104,20 @@ var Sanscript = new function() {
             other: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥ ‍'.split(' '), // Last element is ZWJ
         },
         
+        /* Tamil
+         * -----
+         * Missing R/RR/lR/lRR vowel marks and voice/aspiration distinctions.
+         * The most imcomplete of the Sanskrit schemes here.
+         */
+        tamil: {
+            vowels: 'அ ஆ இ ஈ உ ஊ     ஏ ஐ ஓ ஔ'.split(' '),
+            vowel_marks: 'ா ி ீ ு ூ     ே ை ோ ௌ'.split(' '),
+            other_marks: 'ஂ ஃ '.split(' '),
+            virama: '்',
+            consonants: 'க க க க ங ச ச ஜ ச ஞ ட ட ட ட ண த த த த ந ப ப ப ப ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
+            other: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௐ ऽ । ॥ ‍'.split(' '),
+        },
+        
         /* Telugu
          * ------
          * 
