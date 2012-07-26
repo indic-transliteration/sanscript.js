@@ -79,6 +79,16 @@ var data = {
         naraIti: 'നര ഇതി',
         sentence: 'ധര്മക്ഷേത്രേ കുരുക്ഷേത്രേ സമവേതാ യുയുത്സവഃ ।'
     },
+    oriya: {
+        vowels: 'ଅ ଆ ଇ ଈ ଉ ଊ ଋ ୠ ଌ ୡ ଏ ଐ ଓ ଔ',
+        marks: 'କ ଖା ଗି ଘୀ ଙୁ ଚୂ ଛୃ ଜୄ ଟେ ଠୈ ଡୋ ଢୌ ଣଂ ତଃ ଥ୍',
+        consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ',
+        other: 'ଯ ର ଲ ଵ ଶ ଷ ସ ହ ଳ',
+        symbols: 'ଓଂ । ॥ ୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯',
+        putra: 'ପୁତ୍ର',
+        naraIti: 'ନର ଇତି',
+        sentence: 'ଧର୍ମକ୍ଷେତ୍ରେ କୁରୁକ୍ଷେତ୍ରେ ସମଵେତା ଯୁଯୁତ୍ସଵଃ ।'
+    },
     telugu: {
         vowels: 'అ ఆ ఇ ఈ ఉ ఊ ఋ ౠ ఌ ౡ ఏ ఐ ఓ ఔ',
         marks: 'క ఖా గి ఘీ ఙు చూ ఛృ జౄ ఝౢ ఞౣ టే ఠై డో ఢౌ ణం తః థ్',
@@ -92,21 +102,7 @@ var data = {
 
 };
 
-/**
- * For a script pair (f, t), return a function that takes two strings s1 and
- * s2 and asserts that s1, when transliterated from f to t, equals s2. The
- * returned function takes an optional 'description' parameter for QUnit.
- *
- * @param fromScript  the source script
- * @param toScript    the destination script
- * @return            the function described above.
- */
-var transHelper = function(fromScript, toScript) {
-    return function(from, to, description) {
-        equal(Sanscript.t(from, fromScript, toScript), to, description);
-    }
-}
-
+// -----------------------------------------------------------------------
 
 module('Setup');
 
@@ -152,32 +148,53 @@ test('Roman scheme membership', function() {
     }
 });
 
+// -----------------------------------------------------------------------
 
 module('Transliteration');
 
 
-/* Standard transliteration tests
- * ------------------------------
- * This group of tests examines every common Sanskrit symbol and ensuret that
- * it is transliterated as expected.
+/**
+ * For a script pair (f, t), return a function that takes two strings s1 and
+ * s2 and asserts that s1, when transliterated from f to t, equals s2. The
+ * returned function takes an optional 'description' parameter for QUnit.
+ *
+ * @param fromScript  the source script
+ * @param toScript    the destination script
+ * @return            the function described above.
  */
-function standardTests(from, to, f) {
-    // Letters
+var transHelper = function(fromScript, toScript) {
+    return function(from, to, description) {
+        equal(Sanscript.t(from, fromScript, toScript), to, description);
+    }
+}
+
+/* Letters transliteration tests
+ * -----------------------------
+ * Basic checks on letters and symbols.
+ */
+function letterTests(from, to, f) {
     f(from.vowels, to.vowels, 'Vowels');
     f(from.marks, to.marks, 'Marks');
     f(from.consonants, to.consonants, 'Stops and nasals');
     f(from.other, to.other, 'Other consonants');
     f(from.symbols, to.symbols, 'Symbols and punctuation');
-    
-    // Words and sentences
+}
+
+/* Text transliteration tests
+ * --------------------------
+ * Basic checks on words and sentences.
+ */
+function textTests(from, to, f) {
     f(from.putra, to.putra, 'Single word');
     f(from.naraIti, to.naraIti, 'Two words, one with explicit vowel');
     f(from.sentence, to.sentence, 'Basic sentence');
 }
 
 test('Devanagari to Bengali', function() {
-    var f = transHelper('devanagari', 'bengali');
-    standardTests(data.devanagari, data.bengali, f);
+    var from = data.devanagari, to = data.bengali,
+        f = transHelper('devanagari', 'bengali');
+    letterTests(from, to, f);
+    textTests(from, to, f);
     f('व', 'ব', 'व transliteration');
     f('ब', 'ব', 'ब transliteration');
 });
@@ -186,13 +203,30 @@ test('Devanagari to Harvard-Kyoto', function() {
     var from = data.devanagari,
         to = data.hk,
         f = transHelper('devanagari', 'hk');
-    standardTests(from, to, f);
-    
-    f('', '', 'Simple sentence');
+    letterTests(from, to, f);
+    textTests(from, to, f);
     
     // Other
     f('wwॠww', 'wwRRww', 'Vowel among other letters');
     f('wwकww', 'wwkaww', 'Consonant among other letters');
+});
+
+test('Devanagari to Gujarati', function() {
+    var from = data.devanagari, to = data.gujarati,
+        f = transHelper('devanagari', 'gujarati');
+    letterTests(from, to, f);
+    textTests(from, to, f);
+});
+
+test('Devanagari to Gurmukhi', function() {
+    var from = data.devanagari, to = data.gurmukhi,
+        f = transHelper('devanagari', 'gurmukhi');
+    f('अ आ इ ई उ ऊ ए ऐ ओ औ', to.vowels, 'Vowels'); // no ऋ/ॠ/ऌ/ॡ
+    f('क खा गि घी ङु चू टे ठै डो ढौ णं तः थ्', to.marks, 'Marks'); // no ऋ/ॠ/ऌ/ॡ
+    f(from.consonants, to.consonants, 'Stops and nasals');
+    f(from.other, to.other, 'Other consonants');
+    f(from.symbols, to.symbols, 'Symbols and punctuation');
+    textTests(from, to, f);
 });
 
 test('Devanagari to Kannada', function() {
@@ -204,51 +238,43 @@ test('Devanagari to Kannada', function() {
     f(from.consonants, to.consonants, 'Stops and nasals');
     f(from.other, to.other, 'Other consonants');
     f(from.symbols, to.symbols, 'Symbols and punctuation');
-    
-    // Words and sentences
-    f(from.putra, to.putra, 'Single word');
-    f(from.naraIti, to.naraIti, 'Two words, one with explicit vowel');
+    textTests(from, to, f);
 });
 
-test('Devanagari to Gujarati', function() {
-    var f = transHelper('devanagari', 'gujarati');
-    standardTests(data.devanagari, data.gujarati, f);
-});
-
-test('Devanagari to Gurmukhi', function() {
-    var from = data.devanagari, to = data.gurmukhi,
-        f = transHelper('devanagari', 'gurmukhi');
-    f('अ आ इ ई उ ऊ ए ऐ ओ औ', to.vowels, 'Vowels'); // no ऋ/ॠ/ऌ/ॡ
-    f('क खा गि घी ङु चू टे ठै डो ढौ णं तः थ्', to.marks, 'Marks'); // no ऋ/ॠ/ऌ/ॡ
+test('Devanagari to Oriya', function() {
+    var from = data.devanagari, to = data.oriya,
+        f = transHelper('devanagari', 'oriya');
+    f(from.vowels, to.vowels, 'Vowels');
+    f('क खा गि घी ङु चू छृ जॄ टे ठै डो ढौ णं तः थ्', to.marks, 'Marks'); // no ऌ or ॡ
     f(from.consonants, to.consonants, 'Stops and nasals');
     f(from.other, to.other, 'Other consonants');
     f(from.symbols, to.symbols, 'Symbols and punctuation');
-    
-    // Words and sentences
-    f(from.putra, to.putra, 'Single word');
-    f(from.naraIti, to.naraIti, 'Two words, one with explicit vowel');
-});
-
-test('Devanagari to Malayalam', function() {
-    var f = transHelper('devanagari', 'malayalam');
-    standardTests(data.devanagari, data.malayalam, f);
+    textTests(from, to, f);
+    textTests(from, to, f);
 });
 
 test('Devanagari to Telugu', function() {
-    var f = transHelper('devanagari', 'telugu');
-    standardTests(data.devanagari, data.telugu, f);
+    var from = data.devanagari, to = data.telugu,
+        f = transHelper('devanagari', 'telugu');
+    letterTests(from, to, f);
+    textTests(from, to, f);
 });
 
 test('Harvard-Kyoto to Devanagari', function() {
-    var f = transHelper('hk', 'devanagari');
-    standardTests(data.hk, data.devanagari, f);
+    var from = data.hk, to = data.devanagari,
+        f = transHelper('hk', 'devanagari');
+    letterTests(from, to, f);
+    textTests(from, to, f);
 });
 
 test('Harvard-Kyoto to IAST', function() {
-    var f = transHelper('hk', 'iast');
-    standardTests(data.hk, data.iast, f);
+    var from = data.hk, to = data.iast,
+        f = transHelper('hk', 'iast');
+    letterTests(from, to, f);
+    textTests(from, to, f);
 });
 
+// -----------------------------------------------------------------------
 
 module('Special features');
 

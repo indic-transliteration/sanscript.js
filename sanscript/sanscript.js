@@ -91,6 +91,19 @@ var Sanscript = new function() {
             other: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥ ‍'.split(' '),
         },
         
+        /* Oriya
+         * -----
+         * Missing lR/lRR vowel marks
+         */
+        oriya: {
+            vowels: 'ଅ ଆ ଇ ଈ ଉ ଊ ଋ ୠ ଌ ୡ ଏ ଐ ଓ ଔ'.split(' '),
+            vowel_marks: 'ା ି ୀ ୁ ୂ ୃ ୄ   େ ୈ ୋ ୌ'.split(' '),
+            other_marks: 'ଂ ଃ ଁ'.split(' '),
+            virama: '୍',
+            consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ଯ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
+            other: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥ ‍'.split(' '), // Last element is ZWJ
+        },
+        
         /* Telugu
          * ------
          * 
