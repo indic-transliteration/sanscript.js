@@ -29,6 +29,16 @@ var data = {
         naraIti: 'નર ઇતિ',
         sentence: 'ધર્મક્ષેત્રે કુરુક્ષેત્રે સમવેતા યુયુત્સવઃ ૤',
     },
+    gurmukhi: {
+        vowels: 'ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ',
+        marks: 'ਕ ਖਾ ਗਿ ਘੀ ਙੁ ਚੂ ਟੇ ਠੈ ਡੋ ਢੌ ਣਂ ਤਃ ਥ੍',
+        consonants: 'ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ',
+        other: 'ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼',
+        symbols: 'ॐ । ॥ ੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯',
+        putra: 'ਪੁਤ੍ਰ',
+        naraIti: 'ਨਰ ਇਤਿ',
+        sentence: 'ਧਰ੍ਮਕ੍ਸ਼ੇਤ੍ਰੇ ਕੁਰੁਕ੍ਸ਼ੇਤ੍ਰੇ ਸਮਵੇਤਾ ਯੁਯੁਤ੍ਸਵਃ ।',
+    },
     hk: {
         vowels: 'a A i I u U R RR lR lRR e ai o au',
         marks: 'ka khA gi ghI Gu cU chR jRR jhlR JlRR Te Thai Do Dhau NaM taH th',
@@ -97,6 +107,10 @@ var transHelper = function(fromScript, toScript) {
     }
 }
 
+
+module('Setup');
+
+
 /* Scheme basics
  * -------------
  * Test that all schemes have the same number of elements for each category,
@@ -138,6 +152,10 @@ test('Roman scheme membership', function() {
     }
 });
 
+
+module('Transliteration');
+
+
 /* Standard transliteration tests
  * ------------------------------
  * This group of tests examines every common Sanskrit symbol and ensuret that
@@ -157,14 +175,14 @@ function standardTests(from, to, f) {
     f(from.sentence, to.sentence, 'Basic sentence');
 }
 
-test('Transliteration (Devanagari to Bengali)', function() {
+test('Devanagari to Bengali', function() {
     var f = transHelper('devanagari', 'bengali');
     standardTests(data.devanagari, data.bengali, f);
     f('व', 'ব', 'व transliteration');
     f('ब', 'ব', 'ब transliteration');
 });
 
-test('Transliteration (Devanagari to Harvard-Kyoto)', function() {
+test('Devanagari to Harvard-Kyoto', function() {
     var from = data.devanagari,
         to = data.hk,
         f = transHelper('devanagari', 'hk');
@@ -177,54 +195,81 @@ test('Transliteration (Devanagari to Harvard-Kyoto)', function() {
     f('wwकww', 'wwkaww', 'Consonant among other letters');
 });
 
-test('Transliteration (Devanagari to Kannada)', function() {
+test('Devanagari to Kannada', function() {
     // Letters
-    var dev = data.devanagari, kan = data.kannada,
-        dev2kan = transHelper('devanagari', 'kannada');
-    dev2kan('अ आ इ ई उ ऊ ऋ ॠ ए ऐ ओ औ', kan.vowels, 'Vowels'); // no ऌ or ॡ
-    dev2kan('क खा गि घी ङु चू छृ जॄ टे ठै डो ढौ णं तः थ्', kan.marks, 'Marks'); // no ऌ or ॡ
-    dev2kan(dev.consonants, kan.consonants, 'Stops and nasals');
-    dev2kan(dev.other, kan.other, 'Other consonants');
-    dev2kan(dev.symbols, kan.symbols, 'Symbols and punctuation');
+    var from = data.devanagari, to = data.kannada,
+        f = transHelper('devanagari', 'kannada');
+    f('अ आ इ ई उ ऊ ऋ ॠ ए ऐ ओ औ', to.vowels, 'Vowels'); // no ऌ or ॡ
+    f('क खा गि घी ङु चू छृ जॄ टे ठै डो ढौ णं तः थ्', to.marks, 'Marks'); // no ऌ or ॡ
+    f(from.consonants, to.consonants, 'Stops and nasals');
+    f(from.other, to.other, 'Other consonants');
+    f(from.symbols, to.symbols, 'Symbols and punctuation');
     
     // Words and sentences
-    dev2kan(dev.putra, kan.putra, 'Single word');
-    dev2kan(dev.naraIti, kan.naraIti, 'Two words, one with explicit vowel');
+    f(from.putra, to.putra, 'Single word');
+    f(from.naraIti, to.naraIti, 'Two words, one with explicit vowel');
 });
 
-test('Transliteration (Devanagari to Gujarati)', function() {
+test('Devanagari to Gujarati', function() {
     var f = transHelper('devanagari', 'gujarati');
     standardTests(data.devanagari, data.gujarati, f);
 });
 
-test('Transliteration (Devanagari to Malayalam)', function() {
+test('Devanagari to Gurmukhi', function() {
+    var from = data.devanagari, to = data.gurmukhi,
+        f = transHelper('devanagari', 'gurmukhi');
+    f('अ आ इ ई उ ऊ ए ऐ ओ औ', to.vowels, 'Vowels'); // no ऋ/ॠ/ऌ/ॡ
+    f('क खा गि घी ङु चू टे ठै डो ढौ णं तः थ्', to.marks, 'Marks'); // no ऋ/ॠ/ऌ/ॡ
+    f(from.consonants, to.consonants, 'Stops and nasals');
+    f(from.other, to.other, 'Other consonants');
+    f(from.symbols, to.symbols, 'Symbols and punctuation');
+    
+    // Words and sentences
+    f(from.putra, to.putra, 'Single word');
+    f(from.naraIti, to.naraIti, 'Two words, one with explicit vowel');
+});
+
+test('Devanagari to Malayalam', function() {
     var f = transHelper('devanagari', 'malayalam');
     standardTests(data.devanagari, data.malayalam, f);
 });
 
-test('Transliteration (Devanagari to Telugu)', function() {
+test('Devanagari to Telugu', function() {
     var f = transHelper('devanagari', 'telugu');
     standardTests(data.devanagari, data.telugu, f);
 });
 
-test('Transliteration (Harvard-Kyoto to Devanagari)', function() {
+test('Harvard-Kyoto to Devanagari', function() {
     var f = transHelper('hk', 'devanagari');
     standardTests(data.hk, data.devanagari, f);
 });
 
-test('Transliteration (Harvard-Kyoto to IAST)', function() {
+test('Harvard-Kyoto to IAST', function() {
     var f = transHelper('hk', 'iast');
     standardTests(data.hk, data.iast, f);
 });
 
-test('Disabling transliteration', function() {
+
+module('Special features');
+
+
+test('Disabling Harvard-Kyoto', function() {
     var f = transHelper('hk', 'devanagari');
     f('akSa##kSa##ra', 'अक्षkSaर', 'Basic disable');
     f('##akSa##kSa##ra', 'akSaक्षra', 'Initial disable');
     f('akSa##kSa##ra####', 'अक्षkSaर', 'Redundant disable');
+    f('akSa#ra', 'अक्ष#र', 'Redundant disable');
 });
 
-test('ITRANS special features', function() {
+test('Disabling Devanagari', function() {
+    var f = transHelper('devanagari', 'hk');
+    f('अ##क्ष##र', 'aक्षra', 'Basic disable');
+    f('##अ##क्षर', 'अkSara', 'Initial disable');
+    f('अक्ष##र####', 'akSaर', 'Redundant disable');
+    f('अक्ष#र', 'akSa#ra', 'Misleading disable');
+});
+
+test('ITRANS ZWJ', function() {
     var f = transHelper('itrans', 'devanagari');
     f('bara_u', 'बरउ', 'Separated vowels');
     f('k_Shetra', 'क्‍षेत्र', 'Separated consonants');

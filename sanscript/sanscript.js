@@ -8,11 +8,28 @@
  *
  * Released under the MIT and GPL Licenses.
  */
- 
+
 var Sanscript = new function() {
     var Sanscript = this;
     Sanscript.schemes = {
-        /* Devanagari (full ITRANS) */
+    
+        /* Bengali
+         * -------
+         * 'va' and 'ba' are both rendered as ব.
+         */
+        bengali: {
+            vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ এ ঐ ও ঔ'.split(' '),
+            vowel_marks: 'া ি ী ু ূ ৃ ৄ ৢ ৣ ে ৈ ো ৌ'.split(' '),
+            other_marks: 'ং ঃ ঁ'.split(' '),
+            virama: '্',
+            consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ব শ ষ স হ ळ ক্ষ জ্ঞ'.split(' '),
+            other: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥ ‍'.split(' '),
+        },
+        
+        /* Devanagari
+         * ----------
+         * The most comprehensive and unambiguous Brahmi script listed.
+         */
         devanagari: {
             vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ'.split(' '),
             vowel_marks: 'ा ि ी ु ू ृ ॄ ॢ ॣ े ै ो ौ'.split(' '),
@@ -22,10 +39,74 @@ var Sanscript = new function() {
             other: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥ ‍'.split(' '), // Last element is ZWJ
         },
         
+        /* Gujarati
+         * --------
+         * 
+         */
+        gujarati: {
+            vowels: 'અ આ ઇ ઈ ઉ ઊ ઋ ૠ ઌ ૡ એ ઐ ઓ ઔ'.split(' '),
+            vowel_marks: 'ા િ ી ુ ૂ ૃ ૄ ૢ ૣ ે ૈ ો ૌ'.split(' '),
+            other_marks: 'ં ઃ ઁ'.split(' '),
+            virama: '્',
+            consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
+            other: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥ ‍'.split(' '),
+        },
+        
+        /* Gurmukhi
+         * --------
+         * Missing R/RR/lR/lRR
+         */
+        gurmukhi: {
+            vowels: 'ਅ ਆ ਇ ਈ ਉ ਊ     ਏ ਐ ਓ ਔ'.split(' '),
+            vowel_marks: 'ਾ ਿ ੀ ੁ ੂ     ੇ ੈ ੋ ੌ'.split(' '),
+            other_marks: 'ਂ ਃ ਁ'.split(' '),
+            virama: '੍',
+            consonants: 'ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼ ਕ੍ਸ਼ ਜ੍ਞ'.split(' '),
+            other: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥ ‍'.split(' '),
+        },
+        
+        /* Kannada
+         * -------
+         * Missing lR/lRR
+         */
+        kannada: {
+            vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ   ಏ ಐ ಓ ಔ'.split(' '),
+            vowel_marks: 'ಾ ಿ ೀ ು ೂ ೃ ೄ   ೇ ೈ ೋ ೌ'.split(' '),
+            other_marks: 'ಂ ಃ ँ'.split(' '),
+            virama: '್',
+            consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ ಕ್ಷ ಜ್ಞ'.split(' '),
+            other: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥ ‍'.split(' '),
+        },
+        
+        /* Malayalam
+         * ---------
+         * 
+         */
+        malayalam: {
+            vowels: 'അ ആ ഇ ഈ ഉ ഊ ഋ ൠ ഌ ൡ ഏ ഐ ഓ ഔ'.split(' '),
+            vowel_marks: 'ാ ി ീ ു ൂ ൃ ൄ ൢ ൣ േ ൈ ോ ൌ'.split(' '),
+            other_marks: 'ം ഃ ँ'.split(' '),
+            virama: '്',
+            consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ യ ര ല വ ശ ഷ സ ഹ ള ക്ഷ ജ്ഞ'.split(' '),
+            other: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥ ‍'.split(' '),
+        },
+        
+        /* Telugu
+         * ------
+         * 
+         */
+        telugu: {
+            vowels: 'అ ఆ ఇ ఈ ఉ ఊ ఋ ౠ ఌ ౡ ఏ ఐ ఓ ఔ'.split(' '),
+            vowel_marks: 'ా ి ీ ు ూ ృ ౄ ౢ ౣ ే ై ో ౌ'.split(' '),
+            other_marks: 'ం ః ఁ'.split(' '),
+            virama: '్',
+            consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ య ర ల వ శ ష స హ ళ క్ష జ్ఞ'.split(' '),
+            other: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥ ‍'.split(' '),
+        },
+        
         /* International Alphabet of Sanskrit Transliteration
          * --------------------------------------------------
          * The most "professional" Sanskrit romanization scheme.
-         * 
          */
         iast: {
             vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ e ai o au'.split(' '),
@@ -37,9 +118,9 @@ var Sanscript = new function() {
         
         /* ITRANS
          * ------
-         * ITRANS is a complicated scheme. Several letters have alternate
-         * representations. These alternates are included as a helper
-         * function in makeMap().
+         * One of the first romanization schemes -- and one of the most
+         * complicated. For alternate forms, see the "schemeAlternates"
+         * variable below.
          */
         itrans: {
             vowels: 'a A i I u U RRi RRI LLi LLI e ai o au'.split(' '),
@@ -51,7 +132,7 @@ var Sanscript = new function() {
         
         /* Harvard-Kyoto
          * -------------
-         * 
+         * A simple 1:1 mapping.
          */
         hk: {
             vowels: 'a A i I u U R RR lR lRR e ai o au'.split(' '),
@@ -89,7 +170,7 @@ var Sanscript = new function() {
         
         /* Velthuis
          * --------
-         * 
+         * A case-insensitive Sanskrit encoding.
          */
         velthuis: {
             vowels: 'a aa i ii u uu .r .rr .li .ll e ai o au'.split(' '),
@@ -98,49 +179,10 @@ var Sanscript = new function() {
             consonants: 'k kh g gh "n c ch j jh ~n .t .th .d .d .n t th d dh n p ph b bh m y r l v ~s .s s h L k.s j~n'.split(' '),
             other: "0 1 2 3 4 5 6 7 8 9 o.m ' | || ".split(' '),
         },
-    };
-    
-    var romanSchemes = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'];
-    
-    // Add a "vowel_marks" field for each roman scheme
-    for (var i = 0, name; name = romanSchemes[i]; i++) {
-        var scheme = Sanscript.schemes[name];
-        scheme.vowel_marks = scheme.vowels.slice(1);
-    }
-    
-    /**
-     * Check whether the given scheme encodes romanized Sanskrit.
-     * O(n) is fast enough.
-     *
-     * @param name  the scheme name
-     */
-    Sanscript.isRomanScheme = function(name) {
-        for (var i = 0, x; x = romanSchemes[i]; i++) {
-            if (name === x) {
-                return true;
-            }
-        }
-        return false;
-    };
-   
-    /* ----------------------------------------------------------------
-     *  Script setup
-     * ----------------------------------------------------------------
-     */
-    
-    var unicodeOffsets = {
-		bengali   : 0x0080,
-		gurmukhi  : 0x0100,
-		gujarati  : 0x0180,
-		oriya     : 0x0200,
-		tamil     : 0x0280,
-		telugu    : 0x0300,
-		kannada   : 0x0380,
-		malayalam : 0x0400,
-	};
+    },
     
     // Maps primary representations to a list of alternates.
-	var scriptAlternates = {
+	schemeAlternates = {
 	    itrans: {
 	        A: ['aa'],
 	        I: ['ii', 'ee'],
@@ -149,7 +191,7 @@ var Sanscript = new function() {
 	        RRI: ['R^I'],
 	        LLi: ['L^i'],
 	        LLI: ['L^I'],
-	        '': ['.h'],
+	        '': ['.h'], // map '.h' to nothing
 	        M: ['.m', '.n'],
 	        ch: ['c'],
 	        Ch: ['C', 'chh'],
@@ -164,43 +206,31 @@ var Sanscript = new function() {
 	        '||': ['..'],
 	        '{}': ['_'],
 	    },
-	};
-	
-	var scriptOverrides = {
-	    bengali: {'व': 'ব', 'ळ': null, 'ॐ': 'ॐ', '।': '।', '॥': '॥'},
-	    kannada: {'ॐ': 'ಓಂ', '।': '।', '॥': '॥', 'ऌ': null, 'ॡ': null},
-	    malayalam: {'ँ': null, 'ॐ': 'ഓം', '।': '।', '॥': '॥'},
-	    telugu: {'ॐ': 'ఓం', '।': '।', '॥': '॥'},
-	};
-	
-	// Using the Unicode offsets above, create schemes for the other Brahmi scripts.
-	for (var script in unicodeOffsets) {
-	    var scheme = {},
-	        offset = unicodeOffsets[script],
-	        dev = this.schemes.devanagari,
-	        overrides = scriptOverrides[script];
-	    
-	    for (groupName in dev) {
-	        var data = [],
-	            group = dev[groupName],
-	            temp;
-	        for (var i = 0, cluster; cluster = group[i]; i++) {
-	            // Use overrides if they are defined.
-	            if (overrides && (temp = overrides[cluster]) !== undefined) {
-	                data.push(temp);
-	            } else {
-	                var buf = [];
-	                // We can't assume that each cluster has just one letter.
-	                for (var j = 0, L; L = cluster.charAt(j); j++) {
-	                    buf.push(String.fromCharCode(L.charCodeAt(0) + offset));
-	                };
-	                data.push(buf.join(''));
-	            }
-	        }
-	        scheme[groupName] = data;
-	    }
-	    this.schemes[script] = scheme;
-	}
+	},
+    
+    romanSchemes = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'];
+    
+    // Add a "vowel_marks" field for each roman scheme
+    for (var i = 0, name; name = romanSchemes[i]; i++) {
+        var scheme = Sanscript.schemes[name];
+        scheme.vowel_marks = scheme.vowels.slice(1);
+    }
+    
+    /**
+     * Check whether the given scheme encodes romanized Sanskrit.
+     * O(n) is fast enough.
+     *
+     * @param name  the scheme name
+     * @return      boolean
+     */
+    Sanscript.isRomanScheme = function(name) {
+        for (var i = 0, x; x = romanSchemes[i]; i++) {
+            if (name === x) {
+                return true;
+            }
+        }
+        return false;
+    };
   
     /**
      * Create a map from every character in `from` to its partner in `to`.
@@ -331,12 +361,28 @@ var Sanscript = new function() {
     var transliterateBrahmi = function(data, map, options) {
         var buf = [],
             consonants = map.consonants,
+            danglingHash = false,
             hadConsonant = false,
             letters = map.letters,
             marks = map.marks,
             temp,
-            toRoman = map.toRoman;
+            toRoman = map.toRoman,
+			transliterationEnabled = true;
         for (var i = 0, L; L = data.charAt(i); i++) {
+            // Toggle transliteration state
+            if (L == '#') {
+                if (danglingHash) {
+                    transliterationEnabled = !transliterationEnabled;
+                    danglingHash = false;
+                } else {
+                    danglingHash = true;
+                }
+                continue;
+            } else if (!transliterationEnabled) {
+                buf.push(L);
+                continue;
+            }
+            
 			if ((temp = marks[L]) !== undefined) {
 				buf.push(temp);
 				hadConsonant = false;
