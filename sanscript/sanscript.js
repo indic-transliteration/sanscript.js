@@ -148,8 +148,8 @@ var Sanscript = new function() {
         /* ITRANS
          * ------
          * One of the first romanization schemes -- and one of the most
-         * complicated. For alternate forms, see the "schemeAlternates"
-         * variable below.
+         * complicated. For alternate forms, see the "allAlternates" variable
+         * below.
          */
         itrans: {
             vowels: 'a A i I u U RRi RRI LLi LLI e ai o au'.split(' '),
@@ -213,7 +213,7 @@ var Sanscript = new function() {
     };
     
     // Maps primary representations to a list of alternates.
-	var schemeAlternates = {
+	var allAlternates = {
 	    itrans: {
 	        A: ['aa'],
 	        I: ['ii', 'ee'],
@@ -232,14 +232,14 @@ var Sanscript = new function() {
 	        kSh: ['kS', 'x'],
 	        'j~n': ['GY', 'dny'],
 	        OM: ['AUM'],
-	        "'": ['~'],
+	        ".a": ['~'],
 	        '|': ['.'],
 	        '||': ['..'],
-	        '{}': ['_'],
+	        '_': ['{}'],
 	        z: ['J'],
 	    },
 	},
-    
+	
     romanSchemes = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'];
     
     // Add a "vowel_marks" field for each roman scheme
@@ -273,7 +273,7 @@ var Sanscript = new function() {
      * @param options  scheme options
      */
     var makeMap = function(from, to, options) {
-        var alternates = schemeAlternates[from] || {},
+        var alternates = allAlternates[from] || {},
             consonants = {},
             fromScheme = Sanscript.schemes[from],
             letters = {},
@@ -286,12 +286,25 @@ var Sanscript = new function() {
                 continue;
             }
             for (var i in fromGroup) {
-                if (group === 'vowel_marks') {
-                    marks[fromGroup[i]] = toGroup[i];
+                var F = fromGroup[i],
+                    T = toGroup[i],
+                    alts = alternates[F];
+                if (group === 'vowel_marks' || group === 'virama') {
+                    marks[F] = T;
+                    for (var j in alts) {
+                        marks[alts[j]] = T;
+                    }
                 } else {
-                    letters[fromGroup[i]] = toGroup[i];
+                    letters[F] = T;
+                    for (var j in alts) {
+                        letters[alts[j]] = T;
+                    }
                     if (group == 'consonants' || group == 'other') {
-                        consonants[fromGroup[i]] = toGroup[i];
+                        consonants[F] = T;
+                        
+                        for (var j in alts) {
+                            consonants[alts[j]] = T;
+                        }
                     }
                 }
             }
@@ -303,7 +316,7 @@ var Sanscript = new function() {
             toRoman: Sanscript.isRomanScheme(to),
             virama: toScheme.virama};
     };
-  
+    
     /**
      * Transliterate from a romanized script.
      *
@@ -455,6 +468,9 @@ var Sanscript = new function() {
      */
     Sanscript.t = function(data, from, to, options) {
         var transMap = makeMap(from, to, options);
+        if (from == 'itrans') {
+            console.log(transMap);
+           }
         
         if (transMap.fromRoman) {
             return transliterateRoman(data, transMap, options);

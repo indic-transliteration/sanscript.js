@@ -89,16 +89,6 @@ var data = {
         naraIti: 'ନର ଇତି',
         sentence: 'ଧର୍ମକ୍ଷେତ୍ରେ କୁରୁକ୍ଷେତ୍ରେ ସମଵେତା ଯୁଯୁତ୍ସଵଃ ।'
     },
-    tamil: {
-        vowels: 'அ ஆ இ ஈ உ ஊ ஏ ஐ ஓ ஔ',
-        marks: 'க கா கி கீ ஙு சூ டே டை டோ டௌ ணஂ தஃ த்',
-        consonants: 'க க க க ங ச ச ஜ ச ஞ ட ட ட ட ண த த த த ந ப ப ப ப ம',
-        other: 'ய ர ல வ ஶ ஷ ஸ ஹ ள',
-        symbols: 'ௐ । ॥ ௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯',
-        putra: 'புத்ர',
-        naraIti: 'நர இதி',
-        sentence: 'தர்மக்ஷேத்ரே குருக்ஷேத்ரே ஸமவேதா யுயுத்ஸவஃ ।'
-    },
     telugu: {
         vowels: 'అ ఆ ఇ ఈ ఉ ఊ ఋ ౠ ఌ ౡ ఏ ఐ ఓ ఔ',
         marks: 'క ఖా గి ఘీ ఙు చూ ఛృ జౄ ఝౢ ఞౣ టే ఠై డో ఢౌ ణం తః థ్',
@@ -109,11 +99,13 @@ var data = {
         naraIti: 'నర ఇతి',
         sentence: 'ధర్మక్షేత్రే కురుక్షేత్రే సమవేతా యుయుత్సవః ।'
     },
+
 };
 
 // -----------------------------------------------------------------------
 
 module('Setup');
+
 
 /* Scheme basics
  * -------------
@@ -261,17 +253,6 @@ test('Devanagari to Oriya', function() {
     textTests(from, to, f);
 });
 
-test('Devanagari to Tamil', function() {
-    var from = data.devanagari, to = data.tamil,
-        f = transHelper('devanagari', 'tamil');
-    f('अ आ इ ई उ ऊ ए ऐ ओ औ', to.vowels, 'Vowels'); // no ऋ/ॠ/ऌ/ॡ
-    f('क खा गि घी ङु चू टे ठै डो ढौ णं तः थ्', to.marks, 'Marks'); // no ऋ/ॠ/ऌ/ॡ
-    f(from.consonants, to.consonants, 'Stops and nasals');
-    f(from.other, to.other, 'Other consonants');
-    f(from.symbols, to.symbols, 'Symbols and punctuation');
-    textTests(from, to, f);
-});
-
 test('Devanagari to Telugu', function() {
     var from = data.devanagari, to = data.telugu,
         f = transHelper('devanagari', 'telugu');
@@ -325,7 +306,7 @@ test('Zero-width joiner', function() {
     f('k_Shetra', 'क्‍षेत्र', 'Separated consonants');
 });
 
-test('Redundancies', function() {
+test('Alternates', function() {
     var f = function(itrans1, itrans2, description) {
         dev1 = Sanscript.t(itrans1, 'itrans', 'devanagari'),
             dev2 = Sanscript.t(itrans2, 'itrans', 'devanagari')
@@ -342,7 +323,7 @@ test('Redundancies', function() {
     f('kSha kSha kSha', 'kSa kshha xa');
     f('j~na j~na', 'GYa dnya');
     f('OM', 'AUM');
-    f("' | || {}", '~ . .. _');
+    f(".a | || {}", '~ . .. _');
     f('za', 'Ja');
 });
 
