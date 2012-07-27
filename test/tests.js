@@ -338,6 +338,7 @@ test('Alternates', function() {
     f('I U', 'ee oo');
     f('kI kU', 'kee koo');
     f('aM aM', 'a.m a.n');
+    f('~Na', 'N^a');
     f('ca', 'cha');
     f('Cha Cha', 'Ca chha');
     f('va', 'wa');
@@ -347,6 +348,14 @@ test('Alternates', function() {
     f('OM', 'AUM');
     f(".a | ||", '~ . ..');
     f('za', 'Ja');
+    f('a{\\m+}', 'a.h.N');
+});
+
+test('Backslash escape', function() {
+    var f = transHelper('itrans', 'devanagari');
+    f('\\nara', 'nअर');
+    f('na\\ra', 'नrअ');
+    f('nara\\', 'नर');
 });
 
 test('Non-Sanskrit letters', function() {

@@ -245,6 +245,7 @@ var Sanscript = new function() {
 	        LLI: ['L^I'],
 	        '': ['.h'], // map '.h' to nothing
 	        M: ['.m', '.n'],
+	        '~N': ['N^'],
 	        ch: ['c'],
 	        Ch: ['C', 'chh'],
 	        '~n': ['JN'],
@@ -480,9 +481,13 @@ var Sanscript = new function() {
      */
     Sanscript.t = function(data, from, to, options) {
         var transMap = makeMap(from, to, options);
-        if (from == 'itrans') {
-            console.log(transMap);
-           }
+        
+        if (from === 'itrans') {
+            // Easy way out for "{\m+}".
+            data = data.replace(/\{\\m\+\}/g,".h.N");
+            // Easy way out for "\".
+            data = data.replace(/\\(.?)/g, "##$1##");
+        }
         
         if (transMap.fromRoman) {
             return transliterateRoman(data, transMap, options);
