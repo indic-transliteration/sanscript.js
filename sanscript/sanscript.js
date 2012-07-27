@@ -37,6 +37,7 @@ var Sanscript = new function() {
             virama: ['्'],
             consonants: 'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह ळ क्ष ज्ञ'.split(' '),
             symbols: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥ ‍'.split(' '), // Last element is ZWJ
+            skip: [''],
             candra: ['ॅ'],
             other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ'.split(' ')
         },
@@ -150,14 +151,17 @@ var Sanscript = new function() {
          * One of the first romanization schemes -- and one of the most
          * complicated. For alternate forms, see the "allAlternates" variable
          * below.
+         *
+         * '_' is a "null" letter, which allows adjacent vowels.
          */
         itrans: {
             vowels: 'a A i I u U RRi RRI LLi LLI e ai o au'.split(' '),
             other_marks: ['M','H','.N'],
             virama: [''],
             consonants: 'k kh g gh ~N ch Ch j jh ~n T Th D Dh N t th d dh n p ph b bh m y r l v sh Sh s h L kSh j~n'.split(' '),
-            symbols: '0 1 2 3 4 5 6 7 8 9 OM .a | || _'.split(' '),
+            symbols: '0 1 2 3 4 5 6 7 8 9 OM .a | || {}'.split(' '),
             candra: ['.c'],
+            skip: '_',
             other: 'q K G z .D .Dh f Y R'.split(' ') 
         },
         
@@ -235,7 +239,6 @@ var Sanscript = new function() {
 	        ".a": ['~'],
 	        '|': ['.'],
 	        '||': ['..'],
-	        '_': ['{}'],
 	        z: ['J'],
 	    },
 	},
@@ -358,7 +361,7 @@ var Sanscript = new function() {
 		            tokenBuffer = tokenBuffer.substr(2);
 		            break;
 		        }
-		        if ((tempLetter = letters[token]) && transliterationEnabled) {
+		        if ((tempLetter = letters[token]) !== undefined && transliterationEnabled) {
 		            if (toRoman) {
 		                buf.push(tempLetter);
 		            } else {

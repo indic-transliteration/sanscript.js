@@ -303,7 +303,7 @@ module('ITRANS');
 test('Zero-width joiner', function() {
     var f = transHelper('itrans', 'devanagari');
     f('bara_u', 'बरउ', 'Separated vowels');
-    f('k_Shetra', 'क्‍षेत्र', 'Separated consonants');
+    f('k{}Shetra', 'क्‍षेत्र', 'Separated consonants');
 });
 
 test('Alternates', function() {
@@ -323,7 +323,7 @@ test('Alternates', function() {
     f('kSha kSha kSha', 'kSa kshha xa');
     f('j~na j~na', 'GYa dnya');
     f('OM', 'AUM');
-    f(".a | || {}", '~ . .. _');
+    f(".a | ||", '~ . ..');
     f('za', 'Ja');
 });
 
