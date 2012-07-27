@@ -295,10 +295,10 @@ test('Harvard-Kyoto to IAST', function() {
 
 // -----------------------------------------------------------------------
 
-module('Special features');
+module('Toggle');
 
 
-test('Disabling Harvard-Kyoto', function() {
+test('Harvard-Kyoto', function() {
     var f = transHelper('hk', 'devanagari');
     f('akSa##kSa##ra', 'अक्षkSaर', 'Basic disable');
     f('##akSa##kSa##ra', 'akSaक्षra', 'Initial disable');
@@ -306,7 +306,7 @@ test('Disabling Harvard-Kyoto', function() {
     f('akSa#ra', 'अक्ष#र', 'Redundant disable');
 });
 
-test('Disabling Devanagari', function() {
+test('Devanagari', function() {
     var f = transHelper('devanagari', 'hk');
     f('अ##क्ष##र', 'aक्षra', 'Basic disable');
     f('##अ##क्षर', 'अkSara', 'Initial disable');
@@ -314,8 +314,40 @@ test('Disabling Devanagari', function() {
     f('अक्ष#र', 'akSa#ra', 'Misleading disable');
 });
 
-test('ITRANS ZWJ', function() {
+// -----------------------------------------------------------------------
+
+module('ITRANS');
+
+
+test('Zero-width joiner', function() {
     var f = transHelper('itrans', 'devanagari');
     f('bara_u', 'बरउ', 'Separated vowels');
     f('k_Shetra', 'क्‍षेत्र', 'Separated consonants');
+});
+
+test('Redundancies', function() {
+    var f = function(itrans1, itrans2, description) {
+        dev1 = Sanscript.t(itrans1, 'itrans', 'devanagari'),
+            dev2 = Sanscript.t(itrans2, 'itrans', 'devanagari')
+        equal(dev2, dev1, description);
+    };
+    
+    f('A I U RRi RRI LLi LLI', 'aa ii uu R^i R^I L^i L^I');
+    f('I U', 'ee oo');
+    f('aM aM', 'a.m a.n');
+    f('ca', 'cha');
+    f('Cha Cha', 'Ca chha');
+    f('va', 'wa');
+    f('Sha Sha', 'Sa shha');
+    f('kSha kSha kSha', 'kSa kshha xa');
+    f('j~na j~na', 'GYa dnya');
+    f('OM', 'AUM');
+    f("' | || {}", '~ . .. _');
+    f('za', 'Ja');
+});
+
+test('Non-Sanskrit letters', function() {
+    var f = transHelper('itrans', 'devanagari');
+    f('qa KA Gi zI .Du .DU fRRi YRRI RLLi', 'क़ ख़ा ग़ि ज़ी ड़ु ड़ू फ़ृ य़ॄ ऱॢ');
+    f('ka.cna', 'कॅन');
 });

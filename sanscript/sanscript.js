@@ -21,9 +21,9 @@ var Sanscript = new function() {
             vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ এ ঐ ও ঔ'.split(' '),
             vowel_marks: 'া ি ী ু ূ ৃ ৄ ৢ ৣ ে ৈ ো ৌ'.split(' '),
             other_marks: 'ং ঃ ঁ'.split(' '),
-            virama: '্',
+            virama: ['্'],
             consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ব শ ষ স হ ळ ক্ষ জ্ঞ'.split(' '),
-            other: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥ ‍'.split(' '),
+            symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥ ‍'.split(' '),
         },
         
         /* Devanagari
@@ -34,22 +34,24 @@ var Sanscript = new function() {
             vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ'.split(' '),
             vowel_marks: 'ा ि ी ु ू ृ ॄ ॢ ॣ े ै ो ौ'.split(' '),
             other_marks: 'ं ः ँ'.split(' '),
-            virama: '्',
+            virama: ['्'],
             consonants: 'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह ळ क्ष ज्ञ'.split(' '),
-            other: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥ ‍'.split(' '), // Last element is ZWJ
+            symbols: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥ ‍'.split(' '), // Last element is ZWJ
+            candra: ['ॅ'],
+            other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ'.split(' ')
         },
         
         /* Gujarati
          * --------
-         * 
+         * Sanskrit-complete.
          */
         gujarati: {
             vowels: 'અ આ ઇ ઈ ઉ ઊ ઋ ૠ ઌ ૡ એ ઐ ઓ ઔ'.split(' '),
             vowel_marks: 'ા િ ી ુ ૂ ૃ ૄ ૢ ૣ ે ૈ ો ૌ'.split(' '),
             other_marks: 'ં ઃ ઁ'.split(' '),
-            virama: '્',
+            virama: ['્'],
             consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
-            other: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥ ‍'.split(' '),
+            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥ ‍'.split(' '),
         },
         
         /* Gurmukhi
@@ -60,9 +62,9 @@ var Sanscript = new function() {
             vowels: 'ਅ ਆ ਇ ਈ ਉ ਊ     ਏ ਐ ਓ ਔ'.split(' '),
             vowel_marks: 'ਾ ਿ ੀ ੁ ੂ     ੇ ੈ ੋ ੌ'.split(' '),
             other_marks: 'ਂ ਃ ਁ'.split(' '),
-            virama: '੍',
+            virama: ['੍'],
             consonants: 'ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼ ਕ੍ਸ਼ ਜ੍ਞ'.split(' '),
-            other: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥ ‍'.split(' '),
+            symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥ ‍'.split(' '),
         },
         
         /* Kannada
@@ -73,22 +75,22 @@ var Sanscript = new function() {
             vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ   ಏ ಐ ಓ ಔ'.split(' '),
             vowel_marks: 'ಾ ಿ ೀ ು ೂ ೃ ೄ   ೇ ೈ ೋ ೌ'.split(' '),
             other_marks: 'ಂ ಃ ँ'.split(' '),
-            virama: '್',
+            virama: ['್'],
             consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ ಕ್ಷ ಜ್ಞ'.split(' '),
-            other: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥ ‍'.split(' '),
+            symbols: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥ ‍'.split(' '),
         },
         
         /* Malayalam
          * ---------
-         * 
+         * Sanskrit-complete.
          */
         malayalam: {
             vowels: 'അ ആ ഇ ഈ ഉ ഊ ഋ ൠ ഌ ൡ ഏ ഐ ഓ ഔ'.split(' '),
             vowel_marks: 'ാ ി ീ ു ൂ ൃ ൄ ൢ ൣ േ ൈ ോ ൌ'.split(' '),
             other_marks: 'ം ഃ ँ'.split(' '),
-            virama: '്',
+            virama: ['്'],
             consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ യ ര ല വ ശ ഷ സ ഹ ള ക്ഷ ജ്ഞ'.split(' '),
-            other: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥ ‍'.split(' '),
+            symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥ ‍'.split(' '),
         },
         
         /* Oriya
@@ -99,9 +101,9 @@ var Sanscript = new function() {
             vowels: 'ଅ ଆ ଇ ଈ ଉ ଊ ଋ ୠ ଌ ୡ ଏ ଐ ଓ ଔ'.split(' '),
             vowel_marks: 'ା ି ୀ ୁ ୂ ୃ ୄ   େ ୈ ୋ ୌ'.split(' '),
             other_marks: 'ଂ ଃ ଁ'.split(' '),
-            virama: '୍',
+            virama: ['୍'],
             consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ଯ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
-            other: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥ ‍'.split(' '), // Last element is ZWJ
+            symbols: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥ ‍'.split(' '), // Last element is ZWJ
         },
         
         /* Tamil
@@ -113,22 +115,22 @@ var Sanscript = new function() {
             vowels: 'அ ஆ இ ஈ உ ஊ     ஏ ஐ ஓ ஔ'.split(' '),
             vowel_marks: 'ா ி ீ ு ூ     ே ை ோ ௌ'.split(' '),
             other_marks: 'ஂ ஃ '.split(' '),
-            virama: '்',
+            virama: ['்'],
             consonants: 'க க க க ங ச ச ஜ ச ஞ ட ட ட ட ண த த த த ந ப ப ப ப ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
-            other: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௐ ऽ । ॥ ‍'.split(' '),
+            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௐ ऽ । ॥ ‍'.split(' '),
         },
         
         /* Telugu
          * ------
-         * 
+         * Sanskrit-complete.
          */
         telugu: {
             vowels: 'అ ఆ ఇ ఈ ఉ ఊ ఋ ౠ ఌ ౡ ఏ ఐ ఓ ఔ'.split(' '),
             vowel_marks: 'ా ి ీ ు ూ ృ ౄ ౢ ౣ ే ై ో ౌ'.split(' '),
             other_marks: 'ం ః ఁ'.split(' '),
-            virama: '్',
+            virama: ['్'],
             consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ య ర ల వ శ ష స హ ళ క్ష జ్ఞ'.split(' '),
-            other: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥ ‍'.split(' '),
+            symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥ ‍'.split(' '),
         },
         
         /* International Alphabet of Sanskrit Transliteration
@@ -138,9 +140,9 @@ var Sanscript = new function() {
         iast: {
             vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ e ai o au'.split(' '),
             other_marks: ['ṃ','ḥ','~'],
-            virama: '',
+            virama: [''],
             consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
-            other: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥ ".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥ ".split(' ')
         },
         
         /* ITRANS
@@ -152,9 +154,11 @@ var Sanscript = new function() {
         itrans: {
             vowels: 'a A i I u U RRi RRI LLi LLI e ai o au'.split(' '),
             other_marks: ['M','H','.N'],
-            virama: '',
+            virama: [''],
             consonants: 'k kh g gh ~N ch Ch j jh ~n T Th D Dh N t th d dh n p ph b bh m y r l v sh Sh s h L kSh j~n'.split(' '),
-            other: '0 1 2 3 4 5 6 7 8 9 OM .a | || _'.split(' '),
+            symbols: '0 1 2 3 4 5 6 7 8 9 OM .a | || _'.split(' '),
+            candra: ['.c'],
+            other: 'q K G z .D .Dh f Y R'.split(' ') 
         },
         
         /* Harvard-Kyoto
@@ -164,9 +168,9 @@ var Sanscript = new function() {
         hk: {
             vowels: 'a A i I u U R RR lR lRR e ai o au'.split(' '),
             other_marks: 'M H ~'.split(' '),
-            virama: '',
+            virama: [''],
             consonants: 'k kh g gh G c ch j jh J T Th D Dh N t th d dh n p ph b bh m y r l v z S s h L kS jJ'.split(' '),
-            other: "0 1 2 3 4 5 6 7 8 9 OM ' | || ".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 OM ' | || ".split(' ')
         },
         
         /* National Library at Kolkata
@@ -177,9 +181,9 @@ var Sanscript = new function() {
         kolkata: {
             vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ ē ai ō au'.split(' '),
             other_marks: ['ṃ','ḥ','~'],
-            virama: '',
+            virama: [''],
             consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
-            other: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥ ".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥ ".split(' ')
         },
         
         /* Sanskrit Library Phonetic Basic encoding
@@ -190,9 +194,9 @@ var Sanscript = new function() {
         slp1: {
             vowels: 'a A i I u U f F x X e E o O'.split(' '),
             other_marks: 'M H ~'.split(' '),
-            virama: '',
+            virama: [''],
             consonants: 'k K g G N c C j J Y w W q Q R t T d D n p P b B m y r l v S z s h L kz jY'.split(' '),
-            other: "0 1 2 3 4 5 6 7 8 9 oM ' . .. ".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' . .. ".split(' ')
         },
         
         /* Velthuis
@@ -202,14 +206,14 @@ var Sanscript = new function() {
         velthuis: {
             vowels: 'a aa i ii u uu .r .rr .li .ll e ai o au'.split(' '),
             other_marks: '.m .h '.split(' '), // TODO
-            virama: '',
+            virama: [''],
             consonants: 'k kh g gh "n c ch j jh ~n .t .th .d .d .n t th d dh n p ph b bh m y r l v ~s .s s h L k.s j~n'.split(' '),
-            other: "0 1 2 3 4 5 6 7 8 9 o.m ' | || ".split(' '),
+            symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | || ".split(' '),
         },
-    },
+    };
     
     // Maps primary representations to a list of alternates.
-	schemeAlternates = {
+	var schemeAlternates = {
 	    itrans: {
 	        A: ['aa'],
 	        I: ['ii', 'ee'],
@@ -232,6 +236,7 @@ var Sanscript = new function() {
 	        '|': ['.'],
 	        '||': ['..'],
 	        '{}': ['_'],
+	        z: ['J'],
 	    },
 	},
     
@@ -268,7 +273,8 @@ var Sanscript = new function() {
      * @param options  scheme options
      */
     var makeMap = function(from, to, options) {
-        var consonants = {},
+        var alternates = schemeAlternates[from] || {},
+            consonants = {},
             fromScheme = Sanscript.schemes[from],
             letters = {},
             marks = {},
@@ -276,14 +282,15 @@ var Sanscript = new function() {
         for (var group in fromScheme) {
             var fromGroup = fromScheme[group],
                 toGroup = toScheme[group];
+            if (toGroup === undefined) {
+                continue;
+            }
             for (var i in fromGroup) {
                 if (group === 'vowel_marks') {
                     marks[fromGroup[i]] = toGroup[i];
-                } else if (group === 'virama') {
-                    marks[fromGroup] = toGroup;
                 } else {
                     letters[fromGroup[i]] = toGroup[i];
-                    if (group == 'consonants') {
+                    if (group == 'consonants' || group == 'other') {
                         consonants[fromGroup[i]] = toGroup[i];
                     }
                 }
