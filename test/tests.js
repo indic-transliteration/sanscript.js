@@ -310,6 +310,7 @@ test('Devanagari', function() {
     var f = transHelper('devanagari', 'hk');
     f('अ##क्ष##र', 'aक्षra', 'Basic disable');
     f('##अ##क्षर', 'अkSara', 'Initial disable');
+    f('अक्ष##र##', 'akSaर', 'Final disable');
     f('अक्ष##र####', 'akSaर', 'Redundant disable');
     f('अक्ष#र', 'akSa#ra', 'Misleading disable');
 });

@@ -197,7 +197,7 @@ var Sanscript = new function() {
         /* National Library at Kolkata
          * ---------------------------
          * Apart from using "ē" and "ō" instead of "e" and "o", this scheme is
-         * identical to IAST.
+         * identical to IAST. ṝ, ḷ, and ḹ are not part of the scheme proper.
          */
         kolkata: {
             vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ ē ai ō au'.split(' '),
@@ -207,8 +207,8 @@ var Sanscript = new function() {
             symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' ')
         },
         
-        /* Sanskrit Library Phonetic Basic encoding
-         * ----------------------------------------
+        /* Sanskrit Library Phonetic Basic
+         * -------------------------------
          * With one ASCII letter per phoneme, this is the tersest transliteration
          * scheme in use today and is especially suited to computer processing.
          */
@@ -390,7 +390,7 @@ var Sanscript = new function() {
     		        }
 		            buf.push(token);
 		            tokenBuffer = tokenBuffer.substr(1);
-		            // 'break' is redundant here, "j == ..." is only true on
+		            // 'break' is redundant here, "j == ..." is true only on
 		            // the last iteration.
 		        }
 		    }
@@ -413,7 +413,7 @@ var Sanscript = new function() {
         var buf = [],
             consonants = map.consonants,
             danglingHash = false,
-            hadConsonant = false,
+            hadRomanConsonant = false,
             letters = map.letters,
             marks = map.marks,
             temp,
@@ -428,6 +428,11 @@ var Sanscript = new function() {
                 } else {
                     danglingHash = true;
                 }
+                if (hadRomanConsonant) {
+				    // Consecutive consonants -> implicit 'a'
+					buf.push('a');
+					hadRomanConsonant = false;
+				}
                 continue;
             } else if (!transliterationEnabled) {
                 buf.push(L);
@@ -436,26 +441,29 @@ var Sanscript = new function() {
             
 			if ((temp = marks[L]) !== undefined) {
 				buf.push(temp);
-				hadConsonant = false;
+				hadRomanConsonant = false;
 			} else {
-				if (toRoman && hadConsonant) {
+			    if (danglingHash) {
+			        buf.push('#');
+			    }
+				if (hadRomanConsonant) {
 				    // Consecutive consonants -> implicit 'a'
 					buf.push('a');
-					hadConsonant = false;
+					hadRomanConsonant = false;
 				}
 				
 				// Push transliterated letter if possible. Otherwise, push
 				// the letter itself.
 				if (temp = letters[L]) {
 					buf.push(temp);
-					hadConsonant = (L in consonants);
+					hadRomanConsonant = toRoman && (L in consonants);
 				} else {
 					buf.push(L);
 				}
 			}
         }
         // Ends in bare consonant -> implicit 'a'
-        if (toRoman && hadConsonant) {
+        if (hadRomanConsonant) {
             buf.push('a');
         }
         return buf.join('');
