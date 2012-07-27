@@ -11,6 +11,21 @@
 
 var Sanscript = new function() {
     var Sanscript = this;
+    
+    /* Schemes
+     * =======
+     * Schemes are of two kinds: "Brahmic" and "roman." "Brahmic" schemes
+     * describe abugida scripts found in India. "Roman" schemes describe
+     * manufactured alphabets that are meant to describe or encode Brahmi
+     * scripts. Abugidas and alphabets are processed by separate algorithms
+     * because of the unique difficulties involved with each.
+     *
+     * Brahmic consonants are stated without a virama. Roman consonants are
+     * stated without the vowel 'a'.
+     *
+     * (Since "abugida" is not a well-known term, Sanscript uses "Brahmic"
+     * and "roman" for clarity.)
+     */
     Sanscript.schemes = {
     
         /* Bengali
@@ -23,12 +38,12 @@ var Sanscript = new function() {
             other_marks: 'ং ঃ ঁ'.split(' '),
             virama: ['্'],
             consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ব শ ষ স হ ळ ক্ষ জ্ঞ'.split(' '),
-            symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥ ‍'.split(' '),
+            symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥'.split(' '),
         },
         
         /* Devanagari
          * ----------
-         * The most comprehensive and unambiguous Brahmi script listed.
+         * The most comprehensive and unambiguous Brahmic script listed.
          */
         devanagari: {
             vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ'.split(' '),
@@ -36,7 +51,8 @@ var Sanscript = new function() {
             other_marks: 'ं ः ँ'.split(' '),
             virama: ['्'],
             consonants: 'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह ळ क्ष ज्ञ'.split(' '),
-            symbols: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥ ‍'.split(' '), // Last element is ZWJ
+            symbols: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥'.split(' '),
+            zwj: ['‍'],
             skip: [''],
             candra: ['ॅ'],
             other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ'.split(' ')
@@ -52,7 +68,7 @@ var Sanscript = new function() {
             other_marks: 'ં ઃ ઁ'.split(' '),
             virama: ['્'],
             consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
-            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥ ‍'.split(' '),
+            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥'.split(' '),
         },
         
         /* Gurmukhi
@@ -65,7 +81,7 @@ var Sanscript = new function() {
             other_marks: 'ਂ ਃ ਁ'.split(' '),
             virama: ['੍'],
             consonants: 'ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼ ਕ੍ਸ਼ ਜ੍ਞ'.split(' '),
-            symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥ ‍'.split(' '),
+            symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥'.split(' '),
         },
         
         /* Kannada
@@ -78,7 +94,7 @@ var Sanscript = new function() {
             other_marks: 'ಂ ಃ ँ'.split(' '),
             virama: ['್'],
             consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ ಕ್ಷ ಜ್ಞ'.split(' '),
-            symbols: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥ ‍'.split(' '),
+            symbols: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥'.split(' '),
         },
         
         /* Malayalam
@@ -91,7 +107,7 @@ var Sanscript = new function() {
             other_marks: 'ം ഃ ँ'.split(' '),
             virama: ['്'],
             consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ യ ര ല വ ശ ഷ സ ഹ ള ക്ഷ ജ്ഞ'.split(' '),
-            symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥ ‍'.split(' '),
+            symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥'.split(' '),
         },
         
         /* Oriya
@@ -104,7 +120,7 @@ var Sanscript = new function() {
             other_marks: 'ଂ ଃ ଁ'.split(' '),
             virama: ['୍'],
             consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ଯ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
-            symbols: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥ ‍'.split(' '), // Last element is ZWJ
+            symbols: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥'.split(' '), // Last element is ZWJ
         },
         
         /* Tamil
@@ -118,7 +134,7 @@ var Sanscript = new function() {
             other_marks: 'ஂ ஃ '.split(' '),
             virama: ['்'],
             consonants: 'க க க க ங ச ச ஜ ச ஞ ட ட ட ட ண த த த த ந ப ப ப ப ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
-            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௐ ऽ । ॥ ‍'.split(' '),
+            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௐ ऽ । ॥'.split(' '),
         },
         
         /* Telugu
@@ -131,7 +147,7 @@ var Sanscript = new function() {
             other_marks: 'ం ః ఁ'.split(' '),
             virama: ['్'],
             consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ య ర ల వ శ ష స హ ళ క్ష జ్ఞ'.split(' '),
-            symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥ ‍'.split(' '),
+            symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥'.split(' '),
         },
         
         /* International Alphabet of Sanskrit Transliteration
@@ -143,7 +159,7 @@ var Sanscript = new function() {
             other_marks: ['ṃ','ḥ','~'],
             virama: [''],
             consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥ ".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' ')
         },
         
         /* ITRANS
@@ -159,8 +175,9 @@ var Sanscript = new function() {
             other_marks: ['M','H','.N'],
             virama: [''],
             consonants: 'k kh g gh ~N ch Ch j jh ~n T Th D Dh N t th d dh n p ph b bh m y r l v sh Sh s h L kSh j~n'.split(' '),
-            symbols: '0 1 2 3 4 5 6 7 8 9 OM .a | || {}'.split(' '),
+            symbols: '0 1 2 3 4 5 6 7 8 9 OM .a | ||'.split(' '),
             candra: ['.c'],
+            zwj: ['{}'],
             skip: '_',
             other: 'q K G z .D .Dh f Y R'.split(' ') 
         },
@@ -174,7 +191,7 @@ var Sanscript = new function() {
             other_marks: 'M H ~'.split(' '),
             virama: [''],
             consonants: 'k kh g gh G c ch j jh J T Th D Dh N t th d dh n p ph b bh m y r l v z S s h L kS jJ'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 OM ' | || ".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 OM ' | ||".split(' ')
         },
         
         /* National Library at Kolkata
@@ -187,7 +204,7 @@ var Sanscript = new function() {
             other_marks: ['ṃ','ḥ','~'],
             virama: [''],
             consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥ ".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' ')
         },
         
         /* Sanskrit Library Phonetic Basic encoding
@@ -200,7 +217,7 @@ var Sanscript = new function() {
             other_marks: 'M H ~'.split(' '),
             virama: [''],
             consonants: 'k K g G N c C j J Y w W q Q R t T d D n p P b B m y r l v S z s h L kz jY'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' . .. ".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' . ..".split(' ')
         },
         
         /* Velthuis
@@ -212,7 +229,7 @@ var Sanscript = new function() {
             other_marks: '.m .h '.split(' '), // TODO
             virama: [''],
             consonants: 'k kh g gh "n c ch j jh ~n .t .th .d .d .n t th d dh n p ph b bh m y r l v ~s .s s h L k.s j~n'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | || ".split(' '),
+            symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | ||".split(' '),
         },
     };
     
@@ -250,22 +267,6 @@ var Sanscript = new function() {
         var scheme = Sanscript.schemes[name];
         scheme.vowel_marks = scheme.vowels.slice(1);
     }
-    
-    /**
-     * Check whether the given scheme encodes romanized Sanskrit.
-     * O(n) is fast enough.
-     *
-     * @param name  the scheme name
-     * @return      boolean
-     */
-    Sanscript.isRomanScheme = function(name) {
-        for (var i = 0, x; x = romanSchemes[i]; i++) {
-            if (name === x) {
-                return true;
-            }
-        }
-        return false;
-    };
   
     /**
      * Create a map from every character in `from` to its partner in `to`.
@@ -401,14 +402,14 @@ var Sanscript = new function() {
     };
     
     /**
-     * Transliterate from a Brahmi script.
+     * Transliterate from a Brahmic script.
      *
      * @param data     the string to transliterate
      * @param map      map data generated from makeMap()
      * @param options  transliteration options (TODO)
      * @return         the finished string 
      */
-    var transliterateBrahmi = function(data, map, options) {
+    var transliterateBrahmic = function(data, map, options) {
         var buf = [],
             consonants = map.consonants,
             danglingHash = false,
@@ -478,7 +479,83 @@ var Sanscript = new function() {
         if (transMap.fromRoman) {
             return transliterateRoman(data, transMap, options);
         } else {
-            return transliterateBrahmi(data, transMap, options);
+            return transliterateBrahmic(data, transMap, options);
         }
+    };
+    
+    /**
+     * Check whether the given scheme encodes romanized Sanskrit.
+     *
+     * @param name  the scheme name
+     * @return      boolean
+     */
+    Sanscript.isRomanScheme = function(name) {
+        // O(n) is fast enough.
+        for (var i = 0, x; x = romanSchemes[i]; i++) {
+            if (name === x) {
+                return true;
+            }
+        }
+        return false;
+    };
+        
+    /**
+     * Add a Brahmic scheme to Sanscript.
+     *
+     * Schemes are of two types: "Brahmic" and "roman". Brahmic consonants
+     * have an inherent vowel sound, but roman consonants do not. This is the
+     * main difference between these two types of scheme.
+     *
+     * A scheme definition is an associative array ("{}") that maps a group
+     * name to a list of characters. These are the group names Sanscript uses,
+     * with examples from the Devanagari scheme:
+     *
+     * vowels     :  vowels (14)
+     *               (अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ)
+     * vowel_marks:  vowel marks (13)
+     *               (ा ि ी ु ू ृ ॄ ॢ ॣ े ै ो ौ)
+     * other_marks:  The anusvara, visarga, and candrabindu (3)
+     *               (ं ः ँ)
+     * virama     :  The virama (1)
+     *               (्)
+     * consonants :  Various consonants (36)
+     *               (क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह ळ क्ष ज्ञ)
+     * symbols    :  the digits, the letter ॐ, and some punctuation (14)
+     *               (० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥)
+     * zwj        :  the zero-width joiner (1) (ITRANS only)
+     *               (‍) <-- not empty
+     * skip       :  a "null" letter (1) (ITRANS only)
+     *               () <-- empty
+     * candra     :  a plain "candra" letter (1)
+     *               (ॅ)
+     * other      :  non-Sanskrit consonants (9)
+     *               (क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ)
+     *
+     * The first five groups ("vowels" through "consonants") are the most
+     * useful.
+     * 
+     * @param name    the scheme name
+     * @param scheme  the scheme data itself. This should be constructed as
+     *                described above.
+     */
+    Sanscript.addBrahmicScheme = function(name, scheme) {
+        Sanscript.schemes[name] = scheme;
+    };
+    
+    /**
+     * Add a roman scheme to Sanscript.
+     *
+     * See the commends on Sanscript.addBrahmicScheme. The "vowel_marks" field
+     * can be omitted.
+     
+     * @param name    the scheme name
+     * @param scheme  the scheme data itself
+     */ 
+    Sanscript.addRomanScheme = function(name, scheme) {
+        if (!('vowel_marks' in scheme)) {
+            scheme.vowel_marks = scheme.vowels.slice(1);
+        }
+        Sanscript.schemes[name] = scheme;
+        romanSchemes.push(name);
     };
 };

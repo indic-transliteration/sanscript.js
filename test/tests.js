@@ -314,7 +314,9 @@ test('Alternates', function() {
     };
     
     f('A I U RRi RRI LLi LLI', 'aa ii uu R^i R^I L^i L^I');
+    f('kA kI kU kRRi kRRI kLLi kLLI', 'kaa kii kuu kR^i kR^I kL^i kL^I');
     f('I U', 'ee oo');
+    f('kI kU', 'kee koo');
     f('aM aM', 'a.m a.n');
     f('ca', 'cha');
     f('Cha Cha', 'Ca chha');
