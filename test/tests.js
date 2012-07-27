@@ -148,6 +148,25 @@ test('Roman scheme membership', function() {
     }
 });
 
+
+test('Adding schemes', function() {
+    var sanskritOCR = {
+        vowels: ["a", "å", "i", "ï", "u", "÷", "Ÿ", "", "", "", "e", "ai", "o", "au"],
+        consonants: ["k", "kh", "g", "gh", "¼", 
+			"c", "ch", "j", "jh", "ñ", 
+			"¶", "¶h", "·", "·h", "½", 
+			"t", "th", "d", "dh", "n", 
+			"p", "ph", "b", "bh", "m", 
+			"y", "r", "l", "v", 
+			"¸", "¹", "s", "h", 
+			"", "k¹", "jñ",]
+    };
+    Sanscript.addRomanScheme('sanskritOCR', sanskritOCR);
+    var f = transHelper('sanskritOCR', 'devanagari');
+    f('bhïma', 'भीम');
+    f('narå½åm', 'नराणाम्');
+});
+
 // -----------------------------------------------------------------------
 
 module('Transliteration');
