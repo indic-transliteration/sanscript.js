@@ -547,8 +547,7 @@
      * other      :  non-Sanskrit consonants (9)
      *               (क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ)
      *
-     * The first five groups ("vowels" through "consonants") are the most
-     * useful.
+     * The first six groups ("vowels" through "symbols") are the most useful.
      * 
      * @param name    the scheme name
      * @param scheme  the scheme data itself. This should be constructed as
