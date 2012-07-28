@@ -270,8 +270,11 @@
                 z: ['J']
             }
         },
+        // Set of roman schemes
         romanSchemes = {'iast': true, 'itrans': true, 'hk': true,
-                        'kolkata': true, 'slp1': true, 'velthuis': true};
+                        'kolkata': true, 'slp1': true, 'velthuis': true},
+        // object cache
+        cache = {};
     
     // Add a "vowel_marks" field for each roman scheme
     (function() {
@@ -501,16 +504,41 @@
      */
     Sanscript.t = function(data, from, to, options) {
         options = options || {};
-        var defaults = {
-            virama: true
-        };
+        var cachedOptions = cache.options || {},
+            defaults = {
+                virama: true
+            },
+            hasPriorState = (cache.from === from && cache.to === to),
+            map; 
+
+        // Here we simultaneously build up an `options` object and compare
+        // these options to the options from the last run.
         for (var key in defaults) {
-            if (!options.hasOwnProperty(key)) {
-                options[key] = defaults[key];
+            if (defaults.hasOwnProperty(key)) {
+                var value = defaults[key];
+                if (key in options) {
+                    value = options[key];
+                }
+                options[key] = value;
+                // The comparison method is not generalizable, but since these
+                // objects are associative arrays with identical keys and with
+                // values of known type, it works fine here.
+                if (value !== cachedOptions[key]) {
+                    hasPriorState = false;
+                }
             }
         }
-
-        var transMap = makeMap(from, to, options);
+        
+        if (hasPriorState) {
+            map = cache.map;
+        } else {
+            map = makeMap(from, to, options);
+            cache = {
+                from: from,
+                map: map,
+                options: options,
+                to: to};
+        }
 
         if (from === 'itrans') {
             // Easy way out for "{\m+}".
@@ -518,10 +546,10 @@
             // Easy way out for "\".
             data = data.replace(/\\([^'_]|$)/g, "##$1##");
         }
-        if (transMap.fromRoman) {
-            return transliterateRoman(data, transMap, options);
+        if (map.fromRoman) {
+            return transliterateRoman(data, map, options);
         } else {
-            return transliterateBrahmic(data, transMap, options);
+            return transliterateBrahmic(data, map, options);
         }
     };
 
