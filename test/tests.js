@@ -180,9 +180,9 @@ module('Transliteration');
  * @param toScript    the destination script
  * @return            the function described above.
  */
-var transHelper = function(fromScript, toScript) {
-    return function(from, to, description) {
-        equal(Sanscript.t(from, fromScript, toScript), to, description);
+var transHelper = function(from, to, options) {
+    return function(input, output, description) {
+        equal(Sanscript.t(input, from, to, options), output, description);
     };
 };
 
@@ -267,6 +267,13 @@ test('Devanagari to Kannada', function() {
     textTests(from, to, f);
 });
 
+test('Devanagari to Malayalam', function() {
+    var from = data.devanagari, to = data.malayalam,
+        f = transHelper('devanagari', 'malayalam');
+    letterTests(from, to, f);
+    textTests(from, to, f);
+});
+
 test('Devanagari to Oriya', function() {
     var from = data.devanagari, to = data.oriya,
         f = transHelper('devanagari', 'oriya');
@@ -331,6 +338,15 @@ test('Devanagari', function() {
 
 // -----------------------------------------------------------------------
 
+module('Options');
+
+test('Hindi-style transliteration', function() {
+    var f = transHelper('itrans', 'devanagari', {'virama': false});
+    f('karaN', 'करण');
+});
+
+// -----------------------------------------------------------------------
+
 module('ITRANS');
 
 
@@ -378,7 +394,23 @@ test('Accent', function() {
 });
 
 test('Non-Sanskrit letters', function() {
-    var f = transHelper('itrans', 'devanagari');
-    f('qa KA Gi zI .Du .DU fRRi YRRI RLLi', 'क़ ख़ा ग़ि ज़ी ड़ु ड़ू फ़ृ य़ॄ ऱॢ');
-    f('ka.cna', 'कॅन');
+    var ben = transHelper('itrans', 'bengali'),
+        dev = transHelper('itrans', 'devanagari'),
+        kan = transHelper('itrans', 'kannada'),
+        guj = transHelper('itrans', 'gujarati'),
+        gur = transHelper('itrans', 'gurmukhi'),
+        mal = transHelper('itrans', 'malayalam'),
+        ori = transHelper('itrans', 'oriya'),
+        tam = transHelper('itrans', 'tamil'),
+        tel = transHelper('itrans', 'telugu');
+    ben('.De .Dhe Ye', 'ডে ঢে যে');
+    dev('qa KA Gi zI .Du .DU fRRi YRRI RLLi', 'क़ ख़ा ग़ि ज़ी ड़ु ड़ू फ़ृ य़ॄ ऱॢ');
+    dev('ka.cna', 'कॅन');
+    kan('fI RI', 'ಫೀ ಱೀ');
+    guj('ka.cna', 'કૅન');
+    gur('Ko Go zo Jo .Do fo', 'ਖੋ ਗੋ ਜੋ ਜੋ ਡੋ ਫੋ');
+    mal('RI', 'റീ');
+    ori('.DU .DhU YU', 'ଡୂ ଢୂ ଯୂ');
+    tam('RI', 'றீ');
+    tel('qA KA RA', 'కా ఖా ఱా');
 });
