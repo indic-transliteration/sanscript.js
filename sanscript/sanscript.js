@@ -9,9 +9,9 @@
  * Released under the MIT and GPL Licenses.
  */
 
-var Sanscript = new function() {
-    var Sanscript = this;
-    
+(function(Sanscript, undefined) {
+    "use strict";
+
     /* Schemes
      * =======
      * Schemes are of two kinds: "Brahmic" and "roman." "Brahmic" schemes
@@ -27,7 +27,7 @@ var Sanscript = new function() {
      * and "roman" for clarity.)
      */
     Sanscript.schemes = {
-    
+
         /* Bengali
          * -------
          * 'va' and 'ba' are both rendered as ব.
@@ -38,9 +38,9 @@ var Sanscript = new function() {
             other_marks: 'ং ঃ ঁ'.split(' '),
             virama: ['্'],
             consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ব শ ষ স হ ळ ক্ষ জ্ঞ'.split(' '),
-            symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥'.split(' '),
+            symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥'.split(' ')
         },
-        
+
         /* Devanagari
          * ----------
          * The most comprehensive and unambiguous Brahmic script listed.
@@ -52,12 +52,12 @@ var Sanscript = new function() {
             virama: ['्'],
             consonants: 'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह ळ क्ष ज्ञ'.split(' '),
             symbols: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥'.split(' '),
-            zwj: ['‍'],
+            zwj: ['\u200D'],
             skip: [''],
             candra: ['ॅ'],
             other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ'.split(' ')
         },
-        
+
         /* Gujarati
          * --------
          * Sanskrit-complete.
@@ -68,9 +68,9 @@ var Sanscript = new function() {
             other_marks: 'ં ઃ ઁ'.split(' '),
             virama: ['્'],
             consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
-            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥'.split(' '),
+            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥'.split(' ')
         },
-        
+
         /* Gurmukhi
          * --------
          * Missing R/RR/lR/lRR
@@ -81,9 +81,9 @@ var Sanscript = new function() {
             other_marks: 'ਂ ਃ ਁ'.split(' '),
             virama: ['੍'],
             consonants: 'ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼ ਕ੍ਸ਼ ਜ੍ਞ'.split(' '),
-            symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥'.split(' '),
+            symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥'.split(' ')
         },
-        
+
         /* Kannada
          * -------
          * Missing lR/lRR
@@ -94,9 +94,9 @@ var Sanscript = new function() {
             other_marks: 'ಂ ಃ ँ'.split(' '),
             virama: ['್'],
             consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ ಕ್ಷ ಜ್ಞ'.split(' '),
-            symbols: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥'.split(' '),
+            symbols: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥'.split(' ')
         },
-        
+
         /* Malayalam
          * ---------
          * Sanskrit-complete.
@@ -107,9 +107,9 @@ var Sanscript = new function() {
             other_marks: 'ം ഃ ँ'.split(' '),
             virama: ['്'],
             consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ യ ര ല വ ശ ഷ സ ഹ ള ക്ഷ ജ്ഞ'.split(' '),
-            symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥'.split(' '),
+            symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥'.split(' ')
         },
-        
+
         /* Oriya
          * -----
          * Missing lR/lRR vowel marks
@@ -120,9 +120,9 @@ var Sanscript = new function() {
             other_marks: 'ଂ ଃ ଁ'.split(' '),
             virama: ['୍'],
             consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ଯ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
-            symbols: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥'.split(' '), // Last element is ZWJ
+            symbols: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥'.split(' ') // Last element is ZWJ
         },
-        
+
         /* Tamil
          * -----
          * Missing R/RR/lR/lRR vowel marks and voice/aspiration distinctions.
@@ -134,9 +134,9 @@ var Sanscript = new function() {
             other_marks: 'ஂ ஃ '.split(' '),
             virama: ['்'],
             consonants: 'க க க க ங ச ச ஜ ச ஞ ட ட ட ட ண த த த த ந ப ப ப ப ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
-            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௐ ऽ । ॥'.split(' '),
+            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௐ ऽ । ॥'.split(' ')
         },
-        
+
         /* Telugu
          * ------
          * Sanskrit-complete.
@@ -147,21 +147,21 @@ var Sanscript = new function() {
             other_marks: 'ం ః ఁ'.split(' '),
             virama: ['్'],
             consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ య ర ల వ శ ష స హ ళ క్ష జ్ఞ'.split(' '),
-            symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥'.split(' '),
+            symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥'.split(' ')
         },
-        
+
         /* International Alphabet of Sanskrit Transliteration
          * --------------------------------------------------
          * The most "professional" Sanskrit romanization scheme.
          */
         iast: {
             vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ e ai o au'.split(' '),
-            other_marks: ['ṃ','ḥ','~'],
+            other_marks: ['ṃ', 'ḥ', '~'],
             virama: [''],
             consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
             symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' ')
         },
-        
+
         /* ITRANS
          * ------
          * One of the first romanization schemes -- and one of the most
@@ -172,16 +172,16 @@ var Sanscript = new function() {
          */
         itrans: {
             vowels: 'a A i I u U RRi RRI LLi LLI e ai o au'.split(' '),
-            other_marks: ['M','H','.N'],
+            other_marks: ['M', 'H', '.N'],
             virama: [''],
             consonants: 'k kh g gh ~N ch Ch j jh ~n T Th D Dh N t th d dh n p ph b bh m y r l v sh Sh s h L kSh j~n'.split(' '),
             symbols: '0 1 2 3 4 5 6 7 8 9 OM .a | ||'.split(' '),
             candra: ['.c'],
             zwj: ['{}'],
             skip: '_',
-            other: 'q K G z .D .Dh f Y R'.split(' ') 
+            other: 'q K G z .D .Dh f Y R'.split(' ')
         },
-        
+
         /* Harvard-Kyoto
          * -------------
          * A simple 1:1 mapping.
@@ -193,7 +193,7 @@ var Sanscript = new function() {
             consonants: 'k kh g gh G c ch j jh J T Th D Dh N t th d dh n p ph b bh m y r l v z S s h L kS jJ'.split(' '),
             symbols: "0 1 2 3 4 5 6 7 8 9 OM ' | ||".split(' ')
         },
-        
+
         /* National Library at Kolkata
          * ---------------------------
          * Apart from using "ē" and "ō" instead of "e" and "o", this scheme is
@@ -201,12 +201,12 @@ var Sanscript = new function() {
          */
         kolkata: {
             vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ ē ai ō au'.split(' '),
-            other_marks: ['ṃ','ḥ','~'],
+            other_marks: ['ṃ', 'ḥ', '~'],
             virama: [''],
             consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
             symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' ')
         },
-        
+
         /* Sanskrit Library Phonetic Basic
          * -------------------------------
          * With one ASCII letter per phoneme, this is the tersest transliteration
@@ -219,56 +219,57 @@ var Sanscript = new function() {
             consonants: 'k K g G N c C j J Y w W q Q R t T d D n p P b B m y r l v S z s h L kz jY'.split(' '),
             symbols: "0 1 2 3 4 5 6 7 8 9 oM ' . ..".split(' ')
         },
-        
+
         /* Velthuis
          * --------
          * A case-insensitive Sanskrit encoding.
          */
         velthuis: {
             vowels: 'a aa i ii u uu .r .rr .li .ll e ai o au'.split(' '),
-            other_marks: '.m .h '.split(' '), // TODO
+            other_marks: '.m .h '.split(' '),
             virama: [''],
             consonants: 'k kh g gh "n c ch j jh ~n .t .th .d .d .n t th d dh n p ph b bh m y r l v ~s .s s h L k.s j~n'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | ||".split(' '),
-        },
+            symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | ||".split(' ')
+        }
     };
-    
+
     // Maps primary representations to a list of alternates.
-	var allAlternates = {
-	    itrans: {
-	        A: ['aa'],
-	        I: ['ii', 'ee'],
-	        U: ['uu', 'oo'],
-	        RRi: ['R^i'],
-	        RRI: ['R^I'],
-	        LLi: ['L^i'],
-	        LLI: ['L^I'],
-	        '': ['.h'], // map '.h' to nothing
-	        M: ['.m', '.n'],
-	        '~N': ['N^'],
-	        ch: ['c'],
-	        Ch: ['C', 'chh'],
-	        '~n': ['JN'],
-	        v: ['w'],
-	        Sh: ['S', 'shh'],
-	        kSh: ['kS', 'x'],
-	        'j~n': ['GY', 'dny'],
-	        OM: ['AUM'],
-	        ".a": ['~'],
-	        '|': ['.'],
-	        '||': ['..'],
-	        z: ['J'],
-	    },
-	},
-	
-    romanSchemes = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'];
+    var allAlternates = {
+            itrans: {
+                A: ['aa'],
+                I: ['ii', 'ee'],
+                U: ['uu', 'oo'],
+                RRi: ['R^i'],
+                RRI: ['R^I'],
+                LLi: ['L^i'],
+                LLI: ['L^I'],
+                '': ['.h'], // map '.h' to nothing
+                M: ['.m', '.n'],
+                '~N': ['N^'],
+                ch: ['c'],
+                Ch: ['C', 'chh'],
+                '~n': ['JN'],
+                v: ['w'],
+                Sh: ['S', 'shh'],
+                kSh: ['kS', 'x'],
+                'j~n': ['GY', 'dny'],
+                OM: ['AUM'],
+                ".a": ['~'],
+                '|': ['.'],
+                '||': ['..'],
+                z: ['J']
+            }
+        },
+        romanSchemes = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'];
     
     // Add a "vowel_marks" field for each roman scheme
-    for (var i = 0, name; name = romanSchemes[i]; i++) {
-        var scheme = Sanscript.schemes[name];
-        scheme.vowel_marks = scheme.vowels.slice(1);
-    }
-  
+    (function () {
+        for (var i = 0, name; (name = romanSchemes[i]); i++) {
+            var scheme = Sanscript.schemes[name];
+            scheme.vowel_marks = scheme.vowels.slice(1);
+        }
+    })();
+
     /**
      * Create a map from every character in `from` to its partner in `to`.
      * Also, store any "marks" that `from` might have.
@@ -285,29 +286,34 @@ var Sanscript = new function() {
             marks = {},
             toScheme = Sanscript.schemes[to];
         for (var group in fromScheme) {
+            if (!fromScheme.hasOwnProperty(group)) {
+                continue;
+            }
             var fromGroup = fromScheme[group],
                 toGroup = toScheme[group];
             if (toGroup === undefined) {
                 continue;
             }
-            for (var i in fromGroup) {
+            for (var i = 0; i < fromGroup.length; i++) {
                 var F = fromGroup[i],
                     T = toGroup[i],
-                    alts = alternates[F];
+                    alts = alternates[F] || [],
+                    numAlts = alts.length,
+                    j = 0;
                 if (group === 'vowel_marks' || group === 'virama') {
                     marks[F] = T;
-                    for (var j in alts) {
+                    for (j = 0; j < numAlts; j++) {
                         marks[alts[j]] = T;
                     }
                 } else {
                     letters[F] = T;
-                    for (var j in alts) {
+                    for (j = 0; j < numAlts; j++) {
                         letters[alts[j]] = T;
                     }
-                    if (group == 'consonants' || group == 'other') {
+                    if (group === 'consonants' || group === 'other') {
                         consonants[F] = T;
                         
-                        for (var j in alts) {
+                        for (j = 0; j < numAlts; j++) {
                             consonants[alts[j]] = T;
                         }
                     }
@@ -321,7 +327,7 @@ var Sanscript = new function() {
             toRoman: Sanscript.isRomanScheme(to),
             virama: toScheme.virama};
     };
-    
+
     /**
      * Transliterate from a romanized script.
      *
@@ -331,77 +337,77 @@ var Sanscript = new function() {
      * @return         the finished string 
      */
     var transliterateRoman = function(data, map, options) {
-		var buf = [],
-			consonants = map.consonants,
-			dataLength = data.length,
-			hadConsonant = false,
-			letters = map.letters,
-			marks = map.marks,
-			maxTokenLength = 3,
-			tempLetter,
-			tempMark,
-			tokenBuffer = '',
-			toRoman = map.toRoman,
-			transliterationEnabled = true,
-			virama = map.virama;
+        var buf = [],
+            consonants = map.consonants,
+            dataLength = data.length,
+            hadConsonant = false,
+            letters = map.letters,
+            marks = map.marks,
+            maxTokenLength = 3,
+            tempLetter,
+            tempMark,
+            tokenBuffer = '',
+            toRoman = map.toRoman,
+            transliterationEnabled = true,
+            virama = map.virama;
         // Iterate while there's more left.
-		for (var i = 0, L; L = data.charAt(i) || tokenBuffer; i++) {
-		    // Build up a token provided it's still possible.
-		    var difference = maxTokenLength - tokenBuffer.length;
-		    if (difference > 0 && i < dataLength) {
-		        tokenBuffer += L;
-		        if (difference > 1) {
-		            continue;
-		        }
-		    }
-		    // Match all token substrings to our map.
-		    for (var j = 0; j < maxTokenLength; j++) {
-		        var token = tokenBuffer.substr(0,maxTokenLength-j);
-		        
-		        if (token == '##') {
-		            transliterationEnabled = !transliterationEnabled;
-		            tokenBuffer = tokenBuffer.substr(2);
-		            break;
-		        }
-		        if ((tempLetter = letters[token]) !== undefined && transliterationEnabled) {
-		            if (toRoman) {
-		                buf.push(tempLetter);
-		            } else {
-		                // Handle the implicit vowel. Ignore 'a' and force
-		                // vowels to appear as marks if we've just seen a
-		                // consonant.
-		                if (hadConsonant) {
-		                    if (tempMark = marks[token]) {
-		                        buf.push(tempMark)
-		                    } else if (token != 'a') {
-		                        buf.push(virama);
-		                        buf.push(tempLetter);
-		                    }
-		                } else {
-		                    buf.push(tempLetter);
-		                }
-		                hadConsonant = token in consonants;
-		            }
-					tokenBuffer = tokenBuffer.substr(maxTokenLength-j);
-					break;
-		        } else if (j == maxTokenLength - 1) {
-		            if (hadConsonant) {	            
-    		            hadConsonant = false;
-    		            buf.push(virama)
-    		        }
-		            buf.push(token);
-		            tokenBuffer = tokenBuffer.substr(1);
-		            // 'break' is redundant here, "j == ..." is true only on
-		            // the last iteration.
-		        }
-		    }
-		}
-		if (hadConsonant) {
-		    buf.push(virama);
-		}
-		return buf.join('');
+        for (var i = 0, L; (L = data.charAt(i)) || tokenBuffer; i++) {
+            // Build up a token provided it's still possible.
+            var difference = maxTokenLength - tokenBuffer.length;
+            if (difference > 0 && i < dataLength) {
+                tokenBuffer += L;
+                if (difference > 1) {
+                    continue;
+                }
+            }
+            // Match all token substrings to our map.
+            for (var j = 0; j < maxTokenLength; j++) {
+                var token = tokenBuffer.substr(0,maxTokenLength-j);
+                
+                if (token === '##') {
+                    transliterationEnabled = !transliterationEnabled;
+                    tokenBuffer = tokenBuffer.substr(2);
+                    break;
+                }
+                if ((tempLetter = letters[token]) !== undefined && transliterationEnabled) {
+                    if (toRoman) {
+                        buf.push(tempLetter);
+                    } else {
+                        // Handle the implicit vowel. Ignore 'a' and force
+                        // vowels to appear as marks if we've just seen a
+                        // consonant.
+                        if (hadConsonant) {
+                            if ((tempMark = marks[token])) {
+                                buf.push(tempMark);
+                            } else if (token !== 'a') {
+                                buf.push(virama);
+                                buf.push(tempLetter);
+                            }
+                        } else {
+                            buf.push(tempLetter);
+                        }
+                        hadConsonant = token in consonants;
+                    }
+                    tokenBuffer = tokenBuffer.substr(maxTokenLength-j);
+                    break;
+                } else if (j === maxTokenLength - 1) {
+                    if (hadConsonant) {                
+                        hadConsonant = false;
+                        buf.push(virama);
+                    }
+                    buf.push(token);
+                    tokenBuffer = tokenBuffer.substr(1);
+                    // 'break' is redundant here, "j == ..." is true only on
+                    // the last iteration.
+                }
+            }
+        }
+        if (hadConsonant) {
+            buf.push(virama);
+        }
+        return buf.join('');
     };
-    
+
     /**
      * Transliterate from a Brahmic script.
      *
@@ -419,10 +425,10 @@ var Sanscript = new function() {
             marks = map.marks,
             temp,
             toRoman = map.toRoman,
-			transliterationEnabled = true;
-        for (var i = 0, L; L = data.charAt(i); i++) {
+            transliterationEnabled = true;
+        for (var i = 0, L; (L = data.charAt(i)); i++) {
             // Toggle transliteration state
-            if (L == '#') {
+            if (L === '#') {
                 if (danglingHash) {
                     transliterationEnabled = !transliterationEnabled;
                     danglingHash = false;
@@ -430,38 +436,38 @@ var Sanscript = new function() {
                     danglingHash = true;
                 }
                 if (hadRomanConsonant) {
-				    // Consecutive consonants -> implicit 'a'
-					buf.push('a');
-					hadRomanConsonant = false;
-				}
+                    // Consecutive consonants -> implicit 'a'
+                    buf.push('a');
+                    hadRomanConsonant = false;
+                }
                 continue;
             } else if (!transliterationEnabled) {
                 buf.push(L);
                 continue;
             }
             
-			if ((temp = marks[L]) !== undefined) {
-				buf.push(temp);
-				hadRomanConsonant = false;
-			} else {
-			    if (danglingHash) {
-			        buf.push('#');
-			    }
-				if (hadRomanConsonant) {
-				    // Consecutive consonants -> implicit 'a'
-					buf.push('a');
-					hadRomanConsonant = false;
-				}
-				
-				// Push transliterated letter if possible. Otherwise, push
-				// the letter itself.
-				if (temp = letters[L]) {
-					buf.push(temp);
-					hadRomanConsonant = toRoman && (L in consonants);
-				} else {
-					buf.push(L);
-				}
-			}
+            if ((temp = marks[L]) !== undefined) {
+                buf.push(temp);
+                hadRomanConsonant = false;
+            } else {
+                if (danglingHash) {
+                    buf.push('#');
+                }
+                if (hadRomanConsonant) {
+                    // Consecutive consonants -> implicit 'a'
+                    buf.push('a');
+                    hadRomanConsonant = false;
+                }
+                
+                // Push transliterated letter if possible. Otherwise, push
+                // the letter itself.
+                if ((temp = letters[L])) {
+                    buf.push(temp);
+                    hadRomanConsonant = toRoman && (L in consonants);
+                } else {
+                    buf.push(L);
+                }
+            }
         }
         // Ends in bare consonant -> implicit 'a'
         if (hadRomanConsonant) {
@@ -469,7 +475,7 @@ var Sanscript = new function() {
         }
         return buf.join('');
     };
-    
+
     /**
      * Transliterate from one script to another.
      *
@@ -495,7 +501,7 @@ var Sanscript = new function() {
             return transliterateBrahmic(data, transMap, options);
         }
     };
-    
+
     /**
      * Check whether the given scheme encodes romanized Sanskrit.
      *
@@ -504,14 +510,14 @@ var Sanscript = new function() {
      */
     Sanscript.isRomanScheme = function(name) {
         // O(n) is fast enough.
-        for (var i = 0, x; x = romanSchemes[i]; i++) {
+        for (var i = 0, x; (x = romanSchemes[i]); i++) {
             if (name === x) {
                 return true;
             }
         }
         return false;
     };
-        
+
     /**
      * Add a Brahmic scheme to Sanscript.
      *
@@ -536,9 +542,9 @@ var Sanscript = new function() {
      * symbols    :  the digits, the letter ॐ, and some punctuation (14)
      *               (० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥)
      * zwj        :  the zero-width joiner (1) (ITRANS only)
-     *               (‍) <-- not empty
+     *               (\u200D)
      * skip       :  a "null" letter (1) (ITRANS only)
-     *               () <-- empty
+     *               ()
      * candra     :  a plain "candra" letter (1)
      *               (ॅ)
      * other      :  non-Sanskrit consonants (9)
@@ -554,7 +560,7 @@ var Sanscript = new function() {
     Sanscript.addBrahmicScheme = function(name, scheme) {
         Sanscript.schemes[name] = scheme;
     };
-    
+
     /**
      * Add a roman scheme to Sanscript.
      *
@@ -571,4 +577,4 @@ var Sanscript = new function() {
         Sanscript.schemes[name] = scheme;
         romanSchemes.push(name);
     };
-};
+}(window.Sanscript = window.Sanscript || {}));
