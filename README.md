@@ -3,7 +3,7 @@ Sanscript.js
 
 Introduction
 -----------------------------
-Sanscript is a transliteration library. It supports the most popular Indian scripts and several different romanization schemes. Although Sanscript focuses on Sanskrit transliteration, it has partial support for other languages and is easy to extend.
+Sanscript is a transliteration library for Indian languages. It supports the most popular Indian scripts and several different romanization schemes. Although Sanscript focuses on Sanskrit transliteration, it has partial support for other languages and is easy to extend.
 
 Usage
 -----------------------------
@@ -37,9 +37,6 @@ and the following Roman scemes:
 * `slp1` (Sanskrit Library Phonetic Basic)
 * `velthuis` (Velthuis)
 
-### Transliterating to lossy schemes
-A **lossy** scheme does not have the letters needed to support lossless translation. For example, Bengali is a lossy scheme because it uses `ব` for both `ba` and `va`. In future releases, Sanscript will allow you to choose how to handle lossiness. For the time being, it makes some fairly bad hard-coded assumptions. Corrections and advice are always welcome.
-
 ### Disabling transliteration
 When Sanscript sees the token `##`, it toggles the transliteration state:
 
@@ -51,6 +48,19 @@ When Sanscript sees the token `\`, it disables transliteration on the character 
     Sanscript.t('a \\a', 'itrans', 'devanagari'); // अ a
     Sanscript.t('\\##aham', 'itrans', 'devanagari'); // ##अहम्
 
+### Transliterating to lossy schemes
+A **lossy** scheme does not have the letters needed to support lossless translation. For example, Bengali is a lossy scheme because it uses `ব` for both `ba` and `va`. In future releases, Sanscript might let you choose how to handle lossiness. For the time being, it makes some fairly bad hard-coded assumptions. Corrections and advice are always welcome.
+
+### Transliteration options
+You can tweak the transliteration function by passing an `options` object:
+
+    var output = Sanscript.t(input, from, to, options);
+    
+`options` maps options to values. Currently, these options are supported:
+
+* `sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b> --> <ब्>इति</ब्>`). Defaults to `false`.
+* `virama` - If true, put a virama after every word-final consonant. If false, use Hindi-style transliteration (`ajay -> अजय`). Defaults to `true`.
+
 Adding new schemes
 -----------------------------
 Adding a new scheme is simple:
@@ -58,4 +68,4 @@ Adding a new scheme is simple:
     Sanscript.addBrahmicScheme(schemeName, schemeData);
     Sanscript.addRomanScheme(schemeName, schemeData);
 
-For help in creating `schemeData`, see the comments on the `addBrahmicScheme` and `addRomanScheme`. You can also see how the default schemes are defined.
+For help in creating `schemeData`, see the comments on the `addBrahmicScheme` and `addRomanScheme` functions.

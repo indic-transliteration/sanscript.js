@@ -345,6 +345,14 @@ module('Options');
 test('Hindi-style transliteration', function() {
     var f = transHelper('itrans', 'devanagari', {'virama': false});
     f('karaN', 'करण');
+    f('rAj ke lie', 'राज के लिए');
+});
+
+test('Skipping SGML', function() {
+    var f1 = transHelper('hk', 'devanagari', {'sgml': true});
+    var f2 = transHelper('hk', 'devanagari', {'sgml': false});
+    f1('<p>nara iti</p>', '<प्>नर इति</प्>');
+    f2('<p>nara iti</p>', '<p>नर इति</p>');
 });
 
 // -----------------------------------------------------------------------

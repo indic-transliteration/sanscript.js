@@ -48,15 +48,29 @@
          */
         devanagari: {
             vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ'.split(' '),
+            // "Dependent" forms of the vowels. If a letter is not listed in
+            // `vowels`, it should not be in `vowel_marks`.
             vowel_marks: 'ा ि ी ु ू ृ ॄ ॢ ॣ े ै ो ौ'.split(' '),
             other_marks: 'ं ः ँ'.split(' '),
+            // In syllabic scripts like Devanagari, consonants have an inherent
+            // vowel that must be suppressed explicitly. We do so by putting a
+            // virama after the consonant.
             virama: ['्'],
+            // Various Sanskrit consonants and consonant clusters. Every token
+            // here has an explicit vowel. Thus "क" is "ka" instead of "k". 
             consonants: 'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह ळ क्ष ज्ञ'.split(' '),
+            // Numbers and punctuation
             symbols: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥'.split(' '),
+            // Zero-width joiner. This is used to separate a consonant cluster
+            // and avoid a complex ligature.
             zwj: ['\u200D'],
+            // Dummy consonant. This is used in ITRANS to prevert certain types
+            // of parser ambiguity. Thus "barau -> बरौ" but "bara_u -> बरउ".
             skip: [''],
+            // Vedic accent. Currently, only udatta and anudatta are supported.
             accent: ['\u0951', '\u0952'],
             candra: ['ॅ'],
+            // Non-Sanskrit consonants.
             other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ'.split(' ')
         },
 
@@ -410,7 +424,9 @@
                 } else if (j === maxTokenLength - 1) {
                     if (hadConsonant) {                
                         hadConsonant = false;
-                        buf.push(virama);
+                        if (optVirama) {
+                            buf.push(virama);
+                        }
                     }
                     buf.push(token);
                     tokenBuffer = tokenBuffer.substr(1);
@@ -506,6 +522,7 @@
         options = options || {};
         var cachedOptions = cache.options || {},
             defaults = {
+                sgml: false,
                 virama: true
             },
             hasPriorState = (cache.from === from && cache.to === to),
@@ -520,7 +537,7 @@
                     value = options[key];
                 }
                 options[key] = value;
-                // The comparison method is not generalizable, but since these
+                // This comparison method is not generalizable, but since these
                 // objects are associative arrays with identical keys and with
                 // values of known type, it works fine here.
                 if (value !== cachedOptions[key]) {
@@ -540,12 +557,18 @@
                 to: to};
         }
 
+        // If !options.sgml, escape SGML.
+        if (!options.sgml) {
+            data = data.replace(/(<.*?>)/g, '##$1##');
+        }
+        
         if (from === 'itrans') {
             // Easy way out for "{\m+}".
             data = data.replace(/\{\\m\+\}/g,".h.N");
             // Easy way out for "\".
             data = data.replace(/\\([^'_]|$)/g, "##$1##");
         }
+
         if (map.fromRoman) {
             return transliterateRoman(data, map, options);
         } else {
@@ -571,31 +594,11 @@
      * main difference between these two types of scheme.
      *
      * A scheme definition is an associative array ("{}") that maps a group
-     * name to a list of characters. These are the group names Sanscript uses,
-     * with examples from the Devanagari scheme:
+     * name to a list of characters. For illustration, see the "devanagari"
+     * scheme at the top of this file.
      *
-     * vowels     :  vowels (14)
-     *               (अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ)
-     * vowel_marks:  vowel marks (13)
-     *               (ा ि ी ु ू ृ ॄ ॢ ॣ े ै ो ौ)
-     * other_marks:  The anusvara, visarga, and candrabindu (3)
-     *               (ं ः ँ)
-     * virama     :  The virama (1)
-     *               (्)
-     * consonants :  Various consonants (36)
-     *               (क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह ळ क्ष ज्ञ)
-     * symbols    :  the digits, the letter ॐ, and some punctuation (14)
-     *               (० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥)
-     * zwj        :  the zero-width joiner (1) (ITRANS only)
-     *               (\u200D)
-     * skip       :  a "null" letter (1) (ITRANS only)
-     *               ()
-     * candra     :  a plain "candra" letter (1)
-     *               (ॅ)
-     * other      :  non-Sanskrit consonants (9)
-     *               (क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ)
-     *
-     * The first six groups ("vowels" through "symbols") are the most useful.
+     * You can use whatever group names you like, but for the best results,
+     * you should use the same group names that Sanscript does.
      * 
      * @param name    the scheme name
      * @param scheme  the scheme data itself. This should be constructed as
