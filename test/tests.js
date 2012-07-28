@@ -284,6 +284,7 @@ test('Harvard-Kyoto to Devanagari', function() {
         f = transHelper('hk', 'devanagari');
     letterTests(from, to, f);
     textTests(from, to, f);
+    f('naraxiti', 'नरxइति', 'Undefined letters');
 });
 
 test('Harvard-Kyoto to IAST', function() {
@@ -291,6 +292,12 @@ test('Harvard-Kyoto to IAST', function() {
         f = transHelper('hk', 'iast');
     letterTests(from, to, f);
     textTests(from, to, f);
+    f('tAmxiti', 'tāmxiti', 'Undefined letters');
+});
+
+test('Undefined letters', function() {
+    var f = transHelper('devanagari', 'gurmukhi');
+    f('ऋच्छति', 'ऋਚ੍ਛਤਿ');
 });
 
 // -----------------------------------------------------------------------
