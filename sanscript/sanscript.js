@@ -9,7 +9,7 @@
  * Released under the MIT and GPL Licenses.
  */
 
-(function(Sanscript, undefined) {
+(function(Sanscript) {
     "use strict";
 
     /* Schemes
@@ -54,6 +54,7 @@
             symbols: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥'.split(' '),
             zwj: ['\u200D'],
             skip: [''],
+            accent: ['\u0951', '\u0952'],
             candra: ['ॅ'],
             other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ'.split(' ')
         },
@@ -179,6 +180,7 @@
             candra: ['.c'],
             zwj: ['{}'],
             skip: '_',
+            accent: ["\\'", "\\_"],
             other: 'q K G z .D .Dh f Y R'.split(' ')
         },
 
@@ -495,9 +497,8 @@
             // Easy way out for "{\m+}".
             data = data.replace(/\{\\m\+\}/g,".h.N");
             // Easy way out for "\".
-            data = data.replace(/\\(.?)/g, "##$1##");
+            data = data.replace(/\\([^'_]|$)/g, "##$1##");
         }
-        
         if (transMap.fromRoman) {
             return transliterateRoman(data, transMap, options);
         } else {

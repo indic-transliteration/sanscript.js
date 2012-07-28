@@ -372,6 +372,11 @@ test('Backslash escape', function() {
     f('nara\\', 'नर');
 });
 
+test('Accent', function() {
+    var f = transHelper('itrans', 'devanagari');
+    f("a\\_gnimI\\'le pu\\_rohi\\'tam", 'अ॒ग्निमी॑ले पु॒रोहि॑तम्');
+});
+
 test('Non-Sanskrit letters', function() {
     var f = transHelper('itrans', 'devanagari');
     f('qa KA Gi zI .Du .DU fRRi YRRI RLLi', 'क़ ख़ा ग़ि ज़ी ड़ु ड़ू फ़ृ य़ॄ ऱॢ');
