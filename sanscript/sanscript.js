@@ -260,13 +260,16 @@
                 z: ['J']
             }
         },
-        romanSchemes = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'];
+        romanSchemes = {'iast': true, 'itrans': true, 'hk': true,
+                        'kolkata': true, 'slp1': true, 'velthuis': true};
     
     // Add a "vowel_marks" field for each roman scheme
-    (function () {
-        for (var i = 0, name; (name = romanSchemes[i]); i++) {
-            var scheme = Sanscript.schemes[name];
-            scheme.vowel_marks = scheme.vowels.slice(1);
+    (function() {
+        for (var name in romanSchemes) {
+            if (romanSchemes.hasOwnProperty(name)) {
+                var scheme = Sanscript.schemes[name];
+                scheme.vowel_marks = scheme.vowels.slice(1);
+            }
         }
     })();
 
@@ -509,13 +512,7 @@
      * @return      boolean
      */
     Sanscript.isRomanScheme = function(name) {
-        // O(n) is fast enough.
-        for (var i = 0, x; (x = romanSchemes[i]); i++) {
-            if (name === x) {
-                return true;
-            }
-        }
-        return false;
+        return romanSchemes.hasOwnProperty(name);
     };
 
     /**
@@ -575,6 +572,6 @@
             scheme.vowel_marks = scheme.vowels.slice(1);
         }
         Sanscript.schemes[name] = scheme;
-        romanSchemes.push(name);
+        romanSchemes[name] = true;
     };
 }(window.Sanscript = window.Sanscript || {}));
