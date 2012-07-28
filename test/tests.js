@@ -105,7 +105,6 @@ var data = {
 
 module('Setup');
 
-
 /* Scheme basics
  * -------------
  * Test that all schemes have the same number of elements for each category,
@@ -169,7 +168,6 @@ test('Adding schemes', function() {
 // -----------------------------------------------------------------------
 
 module('Transliteration');
-
 
 /**
  * For a script pair (f, t), return a function that takes two strings s1 and
@@ -318,7 +316,6 @@ test('Undefined letters', function() {
 
 module('Toggle');
 
-
 test('Harvard-Kyoto', function() {
     var f = transHelper('hk', 'devanagari');
     f('akSa##kSa##ra', 'अक्षkSaर', 'Basic disable');
@@ -348,7 +345,6 @@ test('Hindi-style transliteration', function() {
 // -----------------------------------------------------------------------
 
 module('ITRANS');
-
 
 test('Zero-width joiner', function() {
     var f = transHelper('itrans', 'devanagari');

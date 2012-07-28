@@ -182,7 +182,7 @@
         itrans: {
             vowels: 'a A i I u U RRi RRI LLi LLI e ai o au'.split(' '),
             other_marks: ['M', 'H', '.N'],
-            virama: [''],
+            virama: ['.h'],
             consonants: 'k kh g gh ~N ch Ch j jh ~n T Th D Dh N t th d dh n p ph b bh m y r l v sh Sh s h L kSh j~n'.split(' '),
             symbols: '0 1 2 3 4 5 6 7 8 9 OM .a | ||'.split(' '),
             candra: ['.c'],
@@ -253,7 +253,7 @@
                 RRI: ['R^I'],
                 LLi: ['L^i'],
                 LLI: ['L^I'],
-                '': ['.h'], // map '.h' to nothing
+                '.h': [''],
                 M: ['.m', '.n'],
                 '~N': ['N^'],
                 ch: ['c'],
@@ -346,7 +346,7 @@
      *
      * @param data     the string to transliterate
      * @param map      map data generated from makeMap()
-     * @param options  transliteration options (TODO)
+     * @param options  transliteration options
      * @return         the finished string 
      */
     var transliterateRoman = function(data, map, options) {
@@ -427,7 +427,7 @@
      *
      * @param data     the string to transliterate
      * @param map      map data generated from makeMap()
-     * @param options  transliteration options (TODO)
+     * @param options  transliteration options
      * @return         the finished string 
      */
     var transliterateBrahmic = function(data, map, options) {
@@ -496,7 +496,7 @@
      * @param data     the string to transliterate
      * @param from     the source script
      * @param to       the the destination script
-     * @param options  transliteration options (TODO)
+     * @param options  transliteration options [optional]
      * @return         the finished string 
      */
     Sanscript.t = function(data, from, to, options) {
