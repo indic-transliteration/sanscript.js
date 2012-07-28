@@ -7,7 +7,7 @@ var data = {
         symbols: 'ॐ । ॥ ০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯',
         putra: 'পুত্র',
         naraIti: 'নর ইতি',
-        sentence: 'ধর্মক্ষেত্রে কুরুক্ষেত্রে সমবেতা যুযুত্সবঃ ।',
+        sentence: 'ধর্মক্ষেত্রে কুরুক্ষেত্রে সমবেতা যুযুত্সবঃ ।'
     },
     devanagari: {
         vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ',
@@ -17,7 +17,7 @@ var data = {
         symbols: 'ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९',
         putra: 'पुत्र',
         naraIti: 'नर इति',
-        sentence: 'धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।',
+        sentence: 'धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।'
     },
     gujarati: {
         vowels: 'અ આ ઇ ઈ ઉ ઊ ઋ ૠ ઌ ૡ એ ઐ ઓ ઔ',
@@ -27,7 +27,7 @@ var data = {
         symbols: 'ૐ ૤ ૥ ૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯',
         putra: 'પુત્ર',
         naraIti: 'નર ઇતિ',
-        sentence: 'ધર્મક્ષેત્રે કુરુક્ષેત્રે સમવેતા યુયુત્સવઃ ૤',
+        sentence: 'ધર્મક્ષેત્રે કુરુક્ષેત્રે સમવેતા યુયુત્સવઃ ૤'
     },
     gurmukhi: {
         vowels: 'ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ',
@@ -37,7 +37,7 @@ var data = {
         symbols: 'ॐ । ॥ ੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯',
         putra: 'ਪੁਤ੍ਰ',
         naraIti: 'ਨਰ ਇਤਿ',
-        sentence: 'ਧਰ੍ਮਕ੍ਸ਼ੇਤ੍ਰੇ ਕੁਰੁਕ੍ਸ਼ੇਤ੍ਰੇ ਸਮਵੇਤਾ ਯੁਯੁਤ੍ਸਵਃ ।',
+        sentence: 'ਧਰ੍ਮਕ੍ਸ਼ੇਤ੍ਰੇ ਕੁਰੁਕ੍ਸ਼ੇਤ੍ਰੇ ਸਮਵੇਤਾ ਯੁਯੁਤ੍ਸਵਃ ।'
     },
     hk: {
         vowels: 'a A i I u U R RR lR lRR e ai o au',
@@ -47,7 +47,7 @@ var data = {
         symbols: 'OM | || 0 1 2 3 4 5 6 7 8 9',
         putra: 'putra',
         naraIti: 'nara iti',
-        sentence: 'dharmakSetre kurukSetre samavetA yuyutsavaH |',
+        sentence: 'dharmakSetre kurukSetre samavetA yuyutsavaH |'
     },
     iast: {
         vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ e ai o au',
@@ -57,7 +57,7 @@ var data = {
         symbols: 'oṃ । ॥ 0 1 2 3 4 5 6 7 8 9',
         putra: 'putra',
         naraIti: 'nara iti',
-        sentence: 'dharmakṣetre kurukṣetre samavetā yuyutsavaḥ ।',
+        sentence: 'dharmakṣetre kurukṣetre samavetā yuyutsavaḥ ।'
     },
     kannada: {
         vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಏ ಐ ಓ ಔ',
@@ -67,7 +67,7 @@ var data = {
         symbols: 'ಓಂ । ॥ ೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯',
         putra: 'ಪುತ್ರ',
         naraIti: 'ನರ ಇತಿ',
-        sentence: 'ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ ಸಮವೇತಾ ಯುಯುತ್ಸವಃ ।',
+        sentence: 'ಧರ್ಮಕ್ಷೇತ್ರೇ ಕುರುಕ್ಷೇತ್ರೇ ಸಮವೇತಾ ಯುಯುತ್ಸವಃ ।'
     },
     malayalam: {
         vowels: 'അ ആ ഇ ഈ ഉ ഊ ഋ ൠ ഌ ൡ ഏ ഐ ഓ ഔ',
@@ -98,8 +98,7 @@ var data = {
         putra: 'పుత్ర',
         naraIti: 'నర ఇతి',
         sentence: 'ధర్మక్షేత్రే కురుక్షేత్రే సమవేతా యుయుత్సవః ।'
-    },
-
+    }
 };
 
 // -----------------------------------------------------------------------
@@ -117,15 +116,15 @@ test('Scheme definitions', function() {
     // contains every category, including "marks".
     var schemes = Sanscript.schemes,
         devanagari = schemes.devanagari,
-        lengths = {}
+        lengths = {};
     for (var key in devanagari) {
-        lengths[key] = devanagari[key].length
+        lengths[key] = devanagari[key].length;
     }
     
     for (var name in schemes) {
         for (var key in schemes[name]) {
             // The virama is distinct from other categories.
-            if (key != 'virama') {
+            if (key !== 'virama') {
                 equal(schemes[name][key].length, lengths[key], name + "." + key);
             }
         }
@@ -159,7 +158,7 @@ test('Adding schemes', function() {
 			"p", "ph", "b", "bh", "m", 
 			"y", "r", "l", "v", 
 			"¸", "¹", "s", "h", 
-			"", "k¹", "jñ",]
+			"", "k¹", "jñ"]
     };
     Sanscript.addRomanScheme('sanskritOCR', sanskritOCR);
     var f = transHelper('sanskritOCR', 'devanagari');
@@ -184,12 +183,16 @@ module('Transliteration');
 var transHelper = function(fromScript, toScript) {
     return function(from, to, description) {
         equal(Sanscript.t(from, fromScript, toScript), to, description);
-    }
-}
+    };
+};
 
 /* Letters transliteration tests
  * -----------------------------
  * Basic checks on letters and symbols.
+ *
+ * @param from  the source data
+ * @param to    the destination data
+ * @param f     the function to use
  */
 function letterTests(from, to, f) {
     f(from.vowels, to.vowels, 'Vowels');
@@ -202,6 +205,10 @@ function letterTests(from, to, f) {
 /* Text transliteration tests
  * --------------------------
  * Basic checks on words and sentences.
+ *
+ * @param from  the source data
+ * @param to    the destination data
+ * @param f     the function to use
  */
 function textTests(from, to, f) {
     f(from.putra, to.putra, 'Single word');
@@ -336,7 +343,7 @@ test('Zero-width joiner', function() {
 test('Alternates', function() {
     var f = function(itrans1, itrans2, description) {
         dev1 = Sanscript.t(itrans1, 'itrans', 'devanagari'),
-            dev2 = Sanscript.t(itrans2, 'itrans', 'devanagari')
+            dev2 = Sanscript.t(itrans2, 'itrans', 'devanagari');
         equal(dev2, dev1, description);
     };
     
