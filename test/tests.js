@@ -132,12 +132,13 @@ test('Scheme definitions', function() {
 
 /* Roman schemes
  * -------------
- * Test that Sanscript.isRomanScheme returns true for all Roman schemes.
+ * Test that Sanscript.isRomanScheme returns true for all roman schemes.
  */
 test('Roman scheme membership', function() {
     var roman = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'],
-        other = ['devanagari'];
-    
+        other = ['bengali', 'devanagari', 'gujarati', 'gurmukhi', 'kannada',
+                 'malayalam', 'oriya', 'tamil', 'telugu'];
+
     for (var i in roman) {
         ok(Sanscript.isRomanScheme(roman[i]), roman[i]);
     }
@@ -174,9 +175,10 @@ module('Transliteration');
  * s2 and asserts that s1, when transliterated from f to t, equals s2. The
  * returned function takes an optional 'description' parameter for QUnit.
  *
- * @param fromScript  the source script
- * @param toScript    the destination script
- * @return            the function described above.
+ * @param from     the source script
+ * @param to       the destination script
+ * @param options  transliteration options
+ * @return         the function described above.
  */
 var transHelper = function(from, to, options) {
     return function(input, output, description) {
@@ -184,8 +186,8 @@ var transHelper = function(from, to, options) {
     };
 };
 
-/* Letters transliteration tests
- * -----------------------------
+/* Letter transliteration tests
+ * ----------------------------
  * Basic checks on letters and symbols.
  *
  * @param from  the source data
@@ -324,7 +326,7 @@ test('Harvard-Kyoto', function() {
     f('akSa##ra', 'अक्षra', 'Final disable 2');
     f('akSa##kSa##ra####', 'अक्षkSaर', 'Redundant disable 1');
     f('a####kSara', 'अक्षर', 'Redundant disable 2');
-    f('akSa#ra', 'अक्ष#र', 'Redundant disable');
+    f('akSa#ra', 'अक्ष#र', 'Misleading disable');
 });
 
 test('Devanagari', function() {

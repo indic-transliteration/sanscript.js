@@ -1,10 +1,8 @@
 /**
- * sanscript.js
+ * Sanscript
  *
- * sanscript.js is a Sanskrit transliteration library. Currently, it supports
+ * Sanscript is a Sanskrit transliteration library. Currently, it supports
  * other Indian languages only incidentally.
- *
- * Produced by learnsanskrit.org
  *
  * Released under the MIT and GPL Licenses.
  */
@@ -47,30 +45,44 @@
          * The most comprehensive and unambiguous Brahmic script listed.
          */
         devanagari: {
+            // "Independent" forms of the vowels. These are used whenever the
+            // vowel does not immediately follow a consonant.
             vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ'.split(' '),
-            // "Dependent" forms of the vowels. If a letter is not listed in
-            // `vowels`, it should not be in `vowel_marks`.
+
+            // "Dependent" forms of the vowels. These are used whenever the
+            // vowel immediately follows a consonant. If a letter is not
+            // listed in `vowels`, it should not be listed here.
             vowel_marks: 'ा ि ी ु ू ृ ॄ ॢ ॣ े ै ो ौ'.split(' '),
+
+            // Miscellaneous marks, all of which are used in Sanskrit.
             other_marks: 'ं ः ँ'.split(' '),
+
             // In syllabic scripts like Devanagari, consonants have an inherent
             // vowel that must be suppressed explicitly. We do so by putting a
             // virama after the consonant.
             virama: ['्'],
+
             // Various Sanskrit consonants and consonant clusters. Every token
-            // here has an explicit vowel. Thus "क" is "ka" instead of "k". 
+            // here has an explicit vowel. Thus "क" is "ka" instead of "k".
             consonants: 'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह ळ क्ष ज्ञ'.split(' '),
+
             // Numbers and punctuation
             symbols: '० १ २ ३ ४ ५ ६ ७ ८ ९ ॐ ऽ । ॥'.split(' '),
+
             // Zero-width joiner. This is used to separate a consonant cluster
             // and avoid a complex ligature.
             zwj: ['\u200D'],
+
             // Dummy consonant. This is used in ITRANS to prevert certain types
-            // of parser ambiguity. Thus "barau -> बरौ" but "bara_u -> बरउ".
+            // of parser ambiguity. Thus "barau" -> बरौ but "bara_u" -> बरउ.
             skip: [''],
-            // Vedic accent. Currently, only udatta and anudatta are supported.
+
+            // Vedic accent. Udatta and anudatta.
             accent: ['\u0951', '\u0952'],
+
             candra: ['ॅ'],
-            // Non-Sanskrit consonants.
+
+            // Non-Sanskrit consonants
             other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ'.split(' ')
         },
 
@@ -147,7 +159,7 @@
         /* Tamil
          * -----
          * Missing R/RR/lR/lRR vowel marks and voice/aspiration distinctions.
-         * The most imcomplete of the Sanskrit schemes here.
+         * The most incomplete of the Sanskrit schemes here.
          */
         tamil: {
             vowels: 'அ ஆ இ ஈ உ ஊ     ஏ ஐ ஓ ஔ'.split(' '),
@@ -284,12 +296,14 @@
                 z: ['J']
             }
         },
+
         // Set of roman schemes
         romanSchemes = {'iast': true, 'itrans': true, 'hk': true,
                         'kolkata': true, 'slp1': true, 'velthuis': true},
+
         // object cache
         cache = {};
-    
+
     // Add a "vowel_marks" field for each roman scheme
     (function() {
         for (var name in romanSchemes) {
@@ -350,6 +364,7 @@
                 }
             }
         }
+
         return {consonants: consonants,
             fromRoman: Sanscript.isRomanScheme(from),
             letters: letters,
@@ -381,9 +396,9 @@
             toRoman = map.toRoman,
             transliterationEnabled = true,
             virama = map.virama;
-        // Iterate while there's more left.
+
         for (var i = 0, L; (L = data.charAt(i)) || tokenBuffer; i++) {
-            // Build up a token provided it's still possible.
+            // Fill the token buffer, if possible.
             var difference = maxTokenLength - tokenBuffer.length;
             if (difference > 0 && i < dataLength) {
                 tokenBuffer += L;
@@ -391,6 +406,7 @@
                     continue;
                 }
             }
+
             // Match all token substrings to our map.
             for (var j = 0; j < maxTokenLength; j++) {
                 var token = tokenBuffer.substr(0,maxTokenLength-j);
@@ -459,6 +475,7 @@
             temp,
             toRoman = map.toRoman,
             transliterationEnabled = true;
+
         for (var i = 0, L; (L = data.charAt(i)); i++) {
             // Toggle transliteration state
             if (L === '#') {
@@ -469,7 +486,6 @@
                     danglingHash = true;
                 }
                 if (hadRomanConsonant) {
-                    // Consecutive consonants -> implicit 'a'
                     buf.push('a');
                     hadRomanConsonant = false;
                 }
@@ -487,7 +503,6 @@
                     buf.push('#');
                 }
                 if (hadRomanConsonant) {
-                    // Consecutive consonants -> implicit 'a'
                     buf.push('a');
                     hadRomanConsonant = false;
                 }
@@ -502,7 +517,6 @@
                 }
             }
         }
-        // Ends in bare consonant -> implicit 'a'
         if (hadRomanConsonant) {
             buf.push('a');
         }
@@ -515,7 +529,7 @@
      * @param data     the string to transliterate
      * @param from     the source script
      * @param to       the the destination script
-     * @param options  transliteration options [optional]
+     * @param options  transliteration options
      * @return         the finished string 
      */
     Sanscript.t = function(data, from, to, options) {
@@ -537,6 +551,7 @@
                     value = options[key];
                 }
                 options[key] = value;
+                
                 // This comparison method is not generalizable, but since these
                 // objects are associative arrays with identical keys and with
                 // values of known type, it works fine here.
@@ -557,15 +572,13 @@
                 to: to};
         }
 
-        // If !options.sgml, escape SGML.
         if (!options.sgml) {
             data = data.replace(/(<.*?>)/g, '##$1##');
         }
         
+        // Easy way out for "{\m+}" and "\".
         if (from === 'itrans') {
-            // Easy way out for "{\m+}".
             data = data.replace(/\{\\m\+\}/g,".h.N");
-            // Easy way out for "\".
             data = data.replace(/\\([^'_]|$)/g, "##$1##");
         }
 

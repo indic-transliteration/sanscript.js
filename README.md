@@ -1,4 +1,4 @@
-Sanscript.js
+Sanscript
 =============================
 
 Introduction
@@ -28,7 +28,7 @@ By default, Sanscript supports the following Brahmic schemes:
 * `tamil`
 * `telugu`
 
-and the following Roman scemes:
+and the following Roman schemes:
 
 * `hk` (Harvard-Kyoto)
 * `iast` (International Alphabet of Sanskrit Transliteration)
@@ -58,8 +58,8 @@ You can tweak the transliteration function by passing an `options` object:
     
 `options` maps options to values. Currently, these options are supported:
 
-* `sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b> --> <ब्>इति</ब्>`). Defaults to `false`.
-* `virama` - If true, put a virama after every word-final consonant. If false, use Hindi-style transliteration (`ajay -> अजय`). Defaults to `true`.
+* `sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b>` → `<ब्>इति</ब्>`). Defaults to `false`.
+* `virama` - If true, put a virama after every word-final consonant. If false, use Hindi-style transliteration (`ajay` → `अजय`). Defaults to `true`.
 
 Adding new schemes
 -----------------------------
