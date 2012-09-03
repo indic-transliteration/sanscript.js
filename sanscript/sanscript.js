@@ -10,6 +10,11 @@
 (function(Sanscript) {
     "use strict";
 
+    Sanscript.defaults = {
+        skip_sgml: false,
+        syncope: false
+    };
+
     /* Schemes
      * =======
      * Schemes are of two kinds: "Brahmic" and "roman." "Brahmic" schemes
@@ -24,7 +29,7 @@
      * (Since "abugida" is not a well-known term, Sanscript uses "Brahmic"
      * and "roman" for clarity.)
      */
-    Sanscript.schemes = {
+    var schemes = Sanscript.schemes = {
 
         /* Bengali
          * -------
@@ -234,14 +239,9 @@
          * ---------------------------
          * Apart from using "ē" and "ō" instead of "e" and "o", this scheme is
          * identical to IAST. ṝ, ḷ, and ḹ are not part of the scheme proper.
+         *
+         * This is defined further below.
          */
-        kolkata: {
-            vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ ē ai ō au'.split(' '),
-            other_marks: ['ṃ', 'ḥ', '~'],
-            virama: [''],
-            consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' ')
-        },
 
         /* Sanskrit Library Phonetic Basic
          * -------------------------------
@@ -268,6 +268,26 @@
             symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | ||".split(' ')
         }
     };
+
+    /**
+     * Create a deep copy of an object, for certain kinds of objects.
+     *
+     * @param scheme  the scheme to copy
+     * @return        the copy
+     */
+    var cheapCopy = function(scheme) {
+        var copy = {};
+        for (var key in scheme) {
+            if (!scheme.hasOwnProperty(key)) {
+                continue;
+            }
+            copy[key] = scheme[key].slice(0);
+        }
+        return copy;
+    };
+
+    schemes.kolkata = cheapCopy(schemes.iast);
+    schemes.kolkata.vowels = 'a ā i ī u ū ṛ ṝ ḷ ḹ ē ai ō au'.split(' ');
 
     // Maps primary representations to a list of alternates.
     var allAlternates = {
@@ -304,8 +324,8 @@
         // object cache
         cache = {};
 
-    // Add a "vowel_marks" field for each roman scheme
     (function() {
+        // Add a "vowel_marks" field for each roman scheme
         for (var name in romanSchemes) {
             if (romanSchemes.hasOwnProperty(name)) {
                 var scheme = Sanscript.schemes[name];
