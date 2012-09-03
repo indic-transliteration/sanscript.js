@@ -33,6 +33,7 @@ and the following Roman schemes:
 * `hk` (Harvard-Kyoto)
 * `iast` (International Alphabet of Sanskrit Transliteration)
 * `itrans` (ITRANS)
+* `itrans_dravidian` (ITRANS with support for Dravidian short "e" and "o")
 * `kolkata` (National Library at Kolkata)
 * `slp1` (Sanskrit Library Phonetic Basic)
 * `velthuis` (Velthuis)
@@ -58,8 +59,8 @@ You can tweak the transliteration function by passing an `options` object:
     
 `options` maps options to values. Currently, these options are supported:
 
-* `sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b>` → `<ब्>इति</ब्>`). Defaults to `false`.
-* `virama` - If true, put a virama after every word-final consonant. If false, use Hindi-style transliteration (`ajay` → `अजय`). Defaults to `true`.
+* `skip_sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b>` → `<ब्>इति</ब्>`). Defaults to `false`.
+* `syncope` - If true, use Hindi-style transliteration (`ajay` → `अजय`). In linguistics, this behavior is known as [schwa syncope](http://en.wikipedia.org/wiki/Schwa_deletion_in_Indo-Aryan_languages). Defaults to `false`.
 
 Adding new schemes
 -----------------------------
