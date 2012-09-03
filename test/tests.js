@@ -1,3 +1,20 @@
+var names = {
+    bengali: 'Bengali',
+    devanagari: 'Devanagari',
+    gujarati: 'Gujarati',
+    gurmukhi: 'Gurmukhi',
+    hk: 'Harvard-Kyoto',
+    iast: 'IAST',
+    itrans: 'ITRANS',
+    itrans_dravidian: 'ITRANS',
+    kannada: 'Kannada',
+    kolkata: 'Kolkata',
+    malayalam: 'Malayalam',
+    oriya: 'Oriya',
+    tamil: 'Tamil',
+    telugu: 'Telugu',
+};
+
 var data = {
     bengali: {
         vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ এ ঐ ও ঔ',
@@ -11,7 +28,9 @@ var data = {
     },
     devanagari: {
         vowels: 'अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ',
+        short_vowels: 'ऎ ए ऒ ओ',
         marks: 'क खा गि घी ङु चू छृ जॄ झॢ ञॣ टे ठै डो ढौ णं तः थ्',
+        short_marks: 'कॆ के कॊ को',
         consonants: 'क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म',
         other: 'य र ल व श ष स ह ळ',
         symbols: 'ॐ । ॥ ० १ २ ३ ४ ५ ६ ७ ८ ९',
@@ -69,9 +88,19 @@ var data = {
         naraIti: 'nara iti',
         sentence: 'dharmakShetre kurukShetre samavetA yuyutsavaH |'
     },
+    itrans_dravidian: {
+        short_vowels: 'e E o O',
+        short_marks: 'ke kE ko kO',
+    },
+    kolkata: {
+        short_vowels: 'e ē o ō',
+        short_marks: 'ke kē ko kō',
+    },
     kannada: {
         vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಏ ಐ ಓ ಔ',
+        short_vowels: 'ಎ ಏ ಒ ಓ',
         marks: 'ಕ ಖಾ ಗಿ ಘೀ ಙು ಚೂ ಛೃ ಜೄ ಟೇ ಠೈ ಡೋ ಢೌ ಣಂ ತಃ ಥ್',
+        short_marks: 'ಕೆ ಕೇ ಕೊ ಕೋ',
         consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ',
         other: 'ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ',
         symbols: 'ಓಂ । ॥ ೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯',
@@ -81,7 +110,9 @@ var data = {
     },
     malayalam: {
         vowels: 'അ ആ ഇ ഈ ഉ ഊ ഋ ൠ ഌ ൡ ഏ ഐ ഓ ഔ',
+        short_vowels: 'എ ഏ ഒ ഓ',
         marks: 'ക ഖാ ഗി ഘീ ങു ചൂ ഛൃ ജൄ ഝൢ ഞൣ ടേ ഠൈ ഡോ ഢൌ ണം തഃ ഥ്',
+        short_marks: 'കെ കേ കൊ കോ',
         consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ',
         other: 'യ ര ല വ ശ ഷ സ ഹ ള',
         symbols: 'ഓം । ॥ ൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯',
@@ -99,9 +130,15 @@ var data = {
         naraIti: 'ନର ଇତି',
         sentence: 'ଧର୍ମକ୍ଷେତ୍ରେ କୁରୁକ୍ଷେତ୍ରେ ସମଵେତା ଯୁଯୁତ୍ସଵଃ ।'
     },
+    tamil: {
+        short_vowels: 'எ ஏ ஒ ஓ',
+        short_marks: 'கெ கே கொ கோ',
+    },
     telugu: {
         vowels: 'అ ఆ ఇ ఈ ఉ ఊ ఋ ౠ ఌ ౡ ఏ ఐ ఓ ఔ',
+        short_vowels: 'ఎ ఏ ఒ ఓ',
         marks: 'క ఖా గి ఘీ ఙు చూ ఛృ జౄ ఝౢ ఞౣ టే ఠై డో ఢౌ ణం తః థ్',
+        short_marks: 'కె కే కొ కో',
         consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ',
         other: 'య ర ల వ శ ష స హ ళ',
         symbols: 'ఓం । ॥ ౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯',
@@ -330,6 +367,31 @@ test('Undefined letters', function() {
     var f = transHelper('devanagari', 'gurmukhi');
     f('ऋच्छति', 'ऋਚ੍ਛਤਿ');
 });
+
+// -----------------------------------------------------------------------
+
+module('Dravidian');
+
+function dravidianTest(fromScript, toScript) {
+    label = names[fromScript] + ' to ' + names[toScript];
+    test(label, function() {
+        var f = transHelper(fromScript, toScript),
+            from = data[fromScript],
+            to = data[toScript];
+        f(from.short_vowels, to.short_vowels, 'Vowels (forward)');
+        f(from.short_marks, to.short_marks, 'Vowel marks (forward)');
+    });
+}
+
+console.log(Sanscript.schemes);
+
+dravidianTest('itrans_dravidian', 'kolkata');
+dravidianTest('itrans_dravidian', 'devanagari');
+dravidianTest('itrans_dravidian', 'kannada');
+dravidianTest('itrans_dravidian', 'malayalam');
+dravidianTest('itrans_dravidian', 'tamil');
+dravidianTest('itrans_dravidian', 'telugu');
+dravidianTest('kolkata', 'devanagari');
 
 // -----------------------------------------------------------------------
 
