@@ -389,7 +389,7 @@
             letters = map.letters,
             marks = map.marks,
             maxTokenLength = 3,
-            optVirama = options.virama,
+            optSyncope = options.syncope,
             tempLetter,
             tempMark,
             tokenBuffer = '',
@@ -440,7 +440,7 @@
                 } else if (j === maxTokenLength - 1) {
                     if (hadConsonant) {                
                         hadConsonant = false;
-                        if (optVirama) {
+                        if (!optSyncope) {
                             buf.push(virama);
                         }
                     }
@@ -451,7 +451,7 @@
                 }
             }
         }
-        if (hadConsonant && optVirama) {
+        if (hadConsonant && !optSyncope) {
             buf.push(virama);
         }
         return buf.join('');
@@ -494,7 +494,7 @@
                 buf.push(L);
                 continue;
             }
-            
+
             if ((temp = marks[L]) !== undefined) {
                 buf.push(temp);
                 hadRomanConsonant = false;
@@ -535,10 +535,7 @@
     Sanscript.t = function(data, from, to, options) {
         options = options || {};
         var cachedOptions = cache.options || {},
-            defaults = {
-                sgml: false,
-                virama: true
-            },
+            defaults = Sanscript.defaults,
             hasPriorState = (cache.from === from && cache.to === to),
             map; 
 
@@ -560,7 +557,7 @@
                 }
             }
         }
-        
+
         if (hasPriorState) {
             map = cache.map;
         } else {
@@ -572,10 +569,10 @@
                 to: to};
         }
 
-        if (!options.sgml) {
+        if (options.skip_sgml) {
             data = data.replace(/(<.*?>)/g, '##$1##');
         }
-        
+
         // Easy way out for "{\m+}" and "\".
         if (from === 'itrans') {
             data = data.replace(/\{\\m\+\}/g,".h.N");

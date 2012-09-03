@@ -345,16 +345,18 @@ test('Devanagari', function() {
 module('Options');
 
 test('Hindi-style transliteration', function() {
-    var f = transHelper('itrans', 'devanagari', {'virama': false});
+    var f = transHelper('itrans', 'devanagari', {syncope: true});
     f('karaN', 'करण');
     f('rAj ke lie', 'राज के लिए');
 });
 
 test('Skipping SGML', function() {
-    var f1 = transHelper('hk', 'devanagari', {'sgml': true});
-    var f2 = transHelper('hk', 'devanagari', {'sgml': false});
+    var f1 = transHelper('hk', 'devanagari');
+    var f2 = transHelper('hk', 'devanagari', {skip_sgml: false});
+    var f3 = transHelper('hk', 'devanagari', {skip_sgml: true});
     f1('<p>nara iti</p>', '<प्>नर इति</प्>');
-    f2('<p>nara iti</p>', '<p>नर इति</p>');
+    f2('<p>nara iti</p>', '<प्>नर इति</प्>');
+    f3('<p>nara iti</p>', '<p>नर इति</p>');
 });
 
 // -----------------------------------------------------------------------
