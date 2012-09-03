@@ -59,6 +59,16 @@ var data = {
         naraIti: 'nara iti',
         sentence: 'dharmakṣetre kurukṣetre samavetā yuyutsavaḥ ।'
     },
+    itrans: {
+        vowels: 'a A i I u U RRi RRI LLi LLI e ai o au',
+        marks: 'ka khA gi ghI ~Nu chU ChRRi jRRI jhLLi ~nLLI Te Thai Do Dhau NaM taH th',
+        consonants: 'ka kha ga gha ~Na cha Cha ja jha ~na Ta Tha Da Dha Na ta tha da dha na pa pha ba bha ma',
+        other: 'ya ra la va sha Sha sa ha La',
+        symbols: 'OM | || 0 1 2 3 4 5 6 7 8 9',
+        putra: 'putra',
+        naraIti: 'nara iti',
+        sentence: 'dharmakShetre kurukShetre samavetA yuyutsavaH |'
+    },
     kannada: {
         vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಏ ಐ ಓ ಔ',
         marks: 'ಕ ಖಾ ಗಿ ಘೀ ಙು ಚೂ ಛೃ ಜೄ ಟೇ ಠೈ ಡೋ ಢೌ ಣಂ ತಃ ಥ್',
@@ -309,6 +319,13 @@ test('Harvard-Kyoto to IAST', function() {
     f('tAmxiti', 'tāmxiti', 'Undefined letters');
 });
 
+test('ITRANS to Devanagari', function() {
+    var from = data.itrans, to = data.devanagari,
+        f = transHelper('itrans', 'devanagari');
+    letterTests(from, to, f);
+    textTests(from, to, f);
+});
+
 test('Undefined letters', function() {
     var f = transHelper('devanagari', 'gurmukhi');
     f('ऋच्छति', 'ऋਚ੍ਛਤਿ');
@@ -376,22 +393,23 @@ test('Alternates', function() {
         equal(dev2, dev1, description);
     };
     
-    f('A I U RRi RRI LLi LLI', 'aa ii uu R^i R^I L^i L^I');
-    f('kA kI kU kRRi kRRI kLLi kLLI', 'kaa kii kuu kR^i kR^I kL^i kL^I');
-    f('I U', 'ee oo');
-    f('kI kU', 'kee koo');
-    f('aM aM', 'a.m a.n');
-    f('~Na', 'N^a');
-    f('ca', 'cha');
-    f('Cha Cha', 'Ca chha');
-    f('va', 'wa');
-    f('Sha Sha', 'Sa shha');
-    f('kSha kSha kSha', 'kSa kshha xa');
-    f('j~na j~na', 'GYa dnya');
-    f('OM', 'AUM');
-    f(".a | ||", '~ . ..');
-    f('za', 'Ja');
-    f('a{\\m+}', 'a.h.N');
+    f('A I U RRi RRI LLi LLI', 'aa ii uu R^i R^I L^i L^I', 'vowels');
+    f('kA kI kU kRRi kRRI kLLi kLLI', 'kaa kii kuu kR^i kR^I kL^i kL^I',
+        'vowels (marks)');
+    f('I U', 'ee oo', 'long I and U');
+    f('kI kU', 'kee koo', 'long I and U (marks)');
+    f('aM aM', 'a.m a.n', 'anusvara');
+    f('~Na', 'N^a', 'na (kavarga)');
+    f('ca', 'cha', 'ca');
+    f('Cha Cha', 'Ca chha', 'cha');
+    f('va', 'wa', 'va/wa');
+    f('Sha Sha', 'Sa shha', 'sha (retroflex)');
+    f('kSha kSha kSha', 'kSa kshha xa', 'ksha');
+    f('j~na j~na', 'GYa dnya', 'jna');
+    f('OM', 'AUM', 'om');
+    f(".a | ||", '~ . ..', 'punctuation');
+    f('za', 'Ja', 'Devanagari za');
+    f('a{\\m+}', 'a.h.N', '{\\m+}');
 });
 
 test('Backslash escape', function() {
