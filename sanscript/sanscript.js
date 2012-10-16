@@ -121,10 +121,10 @@
 
         /* Kannada
          * -------
-         * Missing lR/lRR
+         * Missing lR/lRR vowel marks
          */
         kannada: {
-            vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ   ಎ ಏ ಐ ಒ ಓ ಔ'.split(' '),
+            vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಌ ೡ ಎ ಏ ಐ ಒ ಓ ಔ'.split(' '),
             vowel_marks: 'ಾ ಿ ೀ ು ೂ ೃ ೄ   ೆ ೇ ೈ ೊ ೋ ೌ'.split(' '),
             other_marks: 'ಂ ಃ ँ'.split(' '),
             virama: ['್'],
