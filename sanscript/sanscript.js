@@ -121,11 +121,11 @@
 
         /* Kannada
          * -------
-         * Missing lR/lRR vowel marks
+         * Sanskrit-complete.
          */
         kannada: {
             vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಌ ೡ ಎ ಏ ಐ ಒ ಓ ಔ'.split(' '),
-            vowel_marks: 'ಾ ಿ ೀ ು ೂ ೃ ೄ   ೆ ೇ ೈ ೊ ೋ ೌ'.split(' '),
+            vowel_marks: 'ಾ ಿ ೀ ು ೂ ೃ ೄ ೢ ೣ ೆ ೇ ೈ ೊ ೋ ೌ'.split(' '),
             other_marks: 'ಂ ಃ ँ'.split(' '),
             virama: ['್'],
             consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ ಕ್ಷ ಜ್ಞ'.split(' '),

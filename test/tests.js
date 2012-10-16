@@ -15,6 +15,9 @@ var names = {
     telugu: 'Telugu',
 };
 
+console.log(Sanscript.t('अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ', 'devanagari', 'kannada'));
+console.log(Sanscript.t('क खा गि घी ङु चू छृ जॄ झॢ ञॣ टे ठै डो ढौ णं तः थ्', 'devanagari', 'kannada'));
+
 var data = {
     bengali: {
         vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ এ ঐ ও ঔ',
@@ -97,9 +100,9 @@ var data = {
         short_marks: 'ke kē ko kō',
     },
     kannada: {
-        vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಏ ಐ ಓ ಔ',
+        vowels: 'ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೠ ಌ ೡ ಏ ಐ ಓ ಔ',
         short_vowels: 'ಎ ಏ ಒ ಓ',
-        marks: 'ಕ ಖಾ ಗಿ ಘೀ ಙು ಚೂ ಛೃ ಜೄ ಟೇ ಠೈ ಡೋ ಢೌ ಣಂ ತಃ ಥ್',
+        marks: 'ಕ ಖಾ ಗಿ ಘೀ ಙು ಚೂ ಛೃ ಜೄ ಝೢ ಞೣ ಟೇ ಠೈ ಡೋ ಢೌ ಣಂ ತಃ ಥ್',
         short_marks: 'ಕೆ ಕೇ ಕೊ ಕೋ',
         consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ',
         other: 'ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ',
@@ -306,11 +309,7 @@ test('Devanagari to Kannada', function() {
     // Letters
     var from = data.devanagari, to = data.kannada,
         f = transHelper('devanagari', 'kannada');
-    f('अ आ इ ई उ ऊ ऋ ॠ ए ऐ ओ औ', to.vowels, 'Vowels'); // no ऌ or ॡ
-    f('क खा गि घी ङु चू छृ जॄ टे ठै डो ढौ णं तः थ्', to.marks, 'Marks'); // no ऌ or ॡ
-    f(from.consonants, to.consonants, 'Stops and nasals');
-    f(from.other, to.other, 'Other consonants');
-    f(from.symbols, to.symbols, 'Symbols and punctuation');
+    letterTests(from, to, f);
     textTests(from, to, f);
 });
 
