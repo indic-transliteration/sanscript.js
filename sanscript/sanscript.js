@@ -404,6 +404,7 @@
             consonants = {},
             fromScheme = Sanscript.schemes[from],
             letters = {},
+            tokenLengths = [],
             marks = {},
             toScheme = Sanscript.schemes[to];
 
@@ -422,6 +423,12 @@
                     alts = alternates[F] || [],
                     numAlts = alts.length,
                     j = 0;
+
+                tokenLengths.push(F.length);
+                for (j = 0; j < numAlts; j++) {
+                    tokenLengths.push(alts[j].length);
+                }
+
                 if (group === 'vowel_marks' || group === 'virama') {
                     marks[F] = T;
                     for (j = 0; j < numAlts; j++) {
@@ -447,6 +454,7 @@
             fromRoman: Sanscript.isRomanScheme(from),
             letters: letters,
             marks: marks,
+            maxTokenLength: Math.max.apply(Math, tokenLengths),
             toRoman: Sanscript.isRomanScheme(to),
             virama: toScheme.virama};
     };
@@ -466,7 +474,7 @@
             hadConsonant = false,
             letters = map.letters,
             marks = map.marks,
-            maxTokenLength = 3,
+            maxTokenLength = map.maxTokenLength,
             optSyncope = options.syncope,
             tempLetter,
             tempMark,
