@@ -394,7 +394,7 @@
 
         // ITRANS variant, which supports Dravidian short 'e' and 'o'.
         var itrans_dravidian = cheapCopy(schemes.itrans);
-        itrans_dravidian.vowels = 'a A i I u U Ri RRI Li LLi e E ai o O au'.split(' ');
+        itrans_dravidian.vowels = 'a A i I u U Ri RRI LLi LLi e E ai o O au'.split(' ');
         itrans_dravidian.vowel_marks = itrans_dravidian.vowels.slice(1);
         allAlternates.itrans_dravidian = allAlternates.itrans;
         Sanscript.addRomanScheme('itrans_dravidian', itrans_dravidian);
