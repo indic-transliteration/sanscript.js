@@ -483,6 +483,10 @@ test('Backslash escape', function() {
 test('Accent', function() {
     var f = transHelper('itrans', 'devanagari');
     f("a\\_gnimI\\'le pu\\_rohi\\'tam", 'अ॒ग्निमी॑ले पु॒रोहि॑तम्');
+    f("naH\\' naH\\_ naH\\`", 'नः॑ नः॒ नः॒', 'Visarga + accent');
+    f("na\\'H na\\_H na\\`H", 'नः॑ नः॒ नः॒', 'Accent + visarga');
+    f("taM\\' ta.m\\' ta.n\\' taM\\_ ta.m\\_ ta.n\\_ taM\\` ta.m\\` ta.n\\`", 'तं॑ तं॑ तं॑ तं॒ तं॒ तं॒ तं॒ तं॒ तं॒', 'Anusvara + accent');
+    f("ta\\'M ta\\'.m ta\\'.n ta\\_M ta\\_.m ta\\_.n ta\\`M ta\\`.m ta\\`.n", 'तं॑ तं॑ तं॑ तं॒ तं॒ तं॒ तं॒ तं॒ तं॒', 'Accent + anusvara');
 });
 
 test('Non-Sanskrit letters', function() {

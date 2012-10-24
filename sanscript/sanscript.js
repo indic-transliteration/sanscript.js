@@ -85,6 +85,10 @@
             // Vedic accent. Udatta and anudatta.
             accent: ['\u0951', '\u0952'],
 
+            // Accent combined with anusvara and and visarga. For compatibility
+            // with ITRANS, which allows the reverse of these four.
+            combo_accent: 'ः॑ ः॒ ं॑ ं॒'.split(' '),
+
             candra: ['ॅ'],
 
             // Non-Sanskrit consonants
@@ -220,6 +224,7 @@
             zwj: ['{}'],
             skip: '_',
             accent: ["\\'", "\\_"],
+            combo_accent: "\\'H \\_H \\'M \\_M".split(' '),
             other: 'q K G z .D .Dh f Y R'.split(' ')
         },
 
@@ -293,6 +298,10 @@
             kSh: ['kS', 'x'],
             'j~n': ['GY', 'dny'],
             OM: ['AUM'],
+            "\\_": ["\\`"],
+            "\\_H": ["\\`H"],
+            "\\'M": ["\\'.m", "\\'.n"],
+            "\\_M": "\\_.m \\_.n \\`M \\`.m \\`.n".split(' '),
             ".a": ['~'],
             '|': ['.'],
             '||': ['..'],
@@ -662,7 +671,7 @@
         // Easy way out for "{\m+}" and "\".
         if (from === 'itrans') {
             data = data.replace(/\{\\m\+\}/g,".h.N");
-            data = data.replace(/\\([^'_]|$)/g, "##$1##");
+            data = data.replace(/\\([^'`_]|$)/g, "##$1##");
         }
 
         if (map.fromRoman) {
