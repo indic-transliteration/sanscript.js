@@ -404,7 +404,7 @@ test('Harvard-Kyoto', function() {
     f('akSa##ra', 'अक्षra', 'Final disable 2');
     f('akSa##kSa##ra####', 'अक्षkSaर', 'Redundant disable 1');
     f('a####kSara', 'अक्षर', 'Redundant disable 2');
-    f('akSa#ra', 'अक्ष#र', 'Misleading disable');
+    f('a#kSara', 'अ#क्षर', 'Misleading disable');
 });
 
 test('Devanagari', function() {
@@ -415,7 +415,7 @@ test('Devanagari', function() {
     f('अक्ष##र', 'akSaर', 'Final disable 2');
     f('अक्ष##र####', 'akSaर', 'Redundant disable 1');
     f('अ####क्षर', 'akSara', 'Redundant disable 2');
-    f('अक्ष#र', 'akSa#ra', 'Misleading disable');
+    f('अ#क्षर', 'a#kSara', 'Misleading disable');
 });
 
 // -----------------------------------------------------------------------

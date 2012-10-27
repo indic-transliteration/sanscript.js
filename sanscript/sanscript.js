@@ -596,6 +596,7 @@
             } else {
                 if (danglingHash) {
                     buf.push('#');
+                    danglingHash = false;
                 }
                 if (hadRomanConsonant) {
                     buf.push('a');
