@@ -447,6 +447,13 @@ test('Zero-width joiner', function() {
     f('k{}Shetra', 'क्‍षेत्र', 'Separated consonants');
 });
 
+test('Virama', function() {
+    var f = transHelper('itrans', 'devanagari');
+    var g = transHelper('devanagari', 'itrans');
+    f('tattatvam.h', 'तत्तत्वम्', 'ITRANS to Devanagari');
+    g('तत्तत्वम्', 'tattatvam', 'Devanagari to ITRANS');
+});
+
 test('Alternates', function() {
     var f = function(itrans1, itrans2, description) {
         dev1 = Sanscript.t(itrans1, 'itrans', 'devanagari'),

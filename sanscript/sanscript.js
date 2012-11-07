@@ -217,7 +217,7 @@
         itrans: {
             vowels: 'a A i I u U RRi RRI LLi LLI  e ai  o au'.split(' '),
             other_marks: ['M', 'H', '.N'],
-            virama: ['.h'],
+            virama: [''],
             consonants: 'k kh g gh ~N ch Ch j jh ~n T Th D Dh N t th d dh n p ph b bh m y r l v sh Sh s h L kSh j~n'.split(' '),
             symbols: '0 1 2 3 4 5 6 7 8 9 OM .a | ||'.split(' '),
             candra: ['.c'],
@@ -287,7 +287,6 @@
             RRI: ['R^I'],
             LLi: ['L^i'],
             LLI: ['L^I'],
-            '.h': [''],
             M: ['.m', '.n'],
             '~N': ['N^'],
             ch: ['c'],
@@ -669,9 +668,10 @@
             data = data.replace(/(<.*?>)/g, '##$1##');
         }
 
-        // Easy way out for "{\m+}" and "\".
+        // Easy way out for "{\m+}", "\", and ".h".
         if (from === 'itrans') {
-            data = data.replace(/\{\\m\+\}/g,".h.N");
+            data = data.replace(/\{\\m\+\}/g, ".h.N");
+            data = data.replace(/\.h/g, '');
             data = data.replace(/\\([^'`_]|$)/g, "##$1##");
         }
 
