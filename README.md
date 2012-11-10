@@ -37,6 +37,7 @@ and the following Roman schemes:
 * `kolkata` (National Library at Kolkata)
 * `slp1` (Sanskrit Library Phonetic Basic)
 * `velthuis` (Velthuis)
+* `wx` (WX)
 
 ### Disabling transliteration
 When Sanscript sees the token `##`, it toggles the transliteration state:
