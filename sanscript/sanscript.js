@@ -271,7 +271,19 @@
             virama: [''],
             consonants: 'k kh g gh "n c ch j jh ~n .t .th .d .d .n t th d dh n p ph b bh m y r l v ~s .s s h L k.s j~n'.split(' '),
             symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | ||".split(' ')
-        }
+        },
+
+        /* WX
+         * --
+         * As terse as SLP1.
+         */
+        wx: {
+            vowels: 'a A i I u U q Q L   e E  o O'.split(' '),
+            other_marks: 'M H z'.split(' '),
+            virama: [''],
+            consonants: 'k K g G f c C j J F t T d D N w W x X n p P b B m y r l v S R s h  kR jF'.split(' '),
+            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' | ||".split(' '),
+        },
     },
 
     // Set of names of schemes
@@ -381,7 +393,7 @@
     (function() {
         // Set up roman schemes
         var kolkata = schemes.kolkata = cheapCopy(schemes.iast),
-            schemeNames = 'iast itrans hk kolkata slp1 velthuis'.split(' ');
+            schemeNames = 'iast itrans hk kolkata slp1 velthuis wx'.split(' ');
         kolkata.vowels = 'a ā i ī u ū ṛ ṝ ḷ ḹ e ē ai o ō au'.split(' ');
 
         // These schemes already belong to Sanscript.schemes. But by adding

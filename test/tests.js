@@ -148,6 +148,13 @@ var data = {
         putra: 'పుత్ర',
         naraIti: 'నర ఇతి',
         sentence: 'ధర్మక్షేత్రే కురుక్షేత్రే సమవేతా యుయుత్సవః ।'
+    },
+    wx: {
+        consonants: 'ka Ka ga Ga fa ca Ca ja Ja Fa ta Ta da Da Na wa Wa xa Xa na pa Pa ba Ba ma',
+        symbols: 'oM | || 0 1 2 3 4 5 6 7 8 9',
+        putra: 'puwra',
+        naraIti: 'nara iwi',
+        sentence: 'XarmakRewre kurukRewre samavewA yuyuwsavaH |'
     }
 };
 
@@ -185,7 +192,7 @@ test('Scheme definitions', function() {
  * Test that Sanscript.isRomanScheme returns true for all roman schemes.
  */
 test('Roman scheme membership', function() {
-    var roman = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis'],
+    var roman = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis', 'wx'],
         other = ['bengali', 'devanagari', 'gujarati', 'gurmukhi', 'kannada',
                  'malayalam', 'oriya', 'tamil', 'telugu'];
 
@@ -359,6 +366,14 @@ test('ITRANS to Devanagari', function() {
     var from = data.itrans, to = data.devanagari,
         f = transHelper('itrans', 'devanagari');
     letterTests(from, to, f);
+    textTests(from, to, f);
+});
+
+test('WX to Devanagari', function() {
+    var from = data.wx, to = data.devanagari,
+        f = transHelper('wx', 'devanagari');
+    f(from.consonants, to.consonants, 'Stops and nasals');
+    f(from.symbols, to.symbols, 'Symbols and punctuation');
     textTests(from, to, f);
 });
 
