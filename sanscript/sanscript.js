@@ -191,7 +191,7 @@
             virama: ['్'],
             consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ య ర ల వ శ ష స హ ళ క్ష జ్ఞ'.split(' '),
             symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥'.split(' '),
-            other: 'క ఖ       ఱ'.split(' ')
+            other: '        ఱ'.split(' ')
         },
 
         /* International Alphabet of Sanskrit Transliteration
@@ -414,7 +414,7 @@
     /**
      * Create a map from every character in `from` to its partner in `to`.
      * Also, store any "marks" that `from` might have.
-     * 
+     *
      * @param from     input scheme
      * @param to       output scheme
      * @param options  scheme options
@@ -461,7 +461,7 @@
                     }
                     if (group === 'consonants' || group === 'other') {
                         consonants[F] = T;
-                        
+
                         for (j = 0; j < numAlts; j++) {
                             consonants[alts[j]] = T;
                         }
@@ -485,7 +485,7 @@
      * @param data     the string to transliterate
      * @param map      map data generated from makeMap()
      * @param options  transliteration options
-     * @return         the finished string 
+     * @return         the finished string
      */
     var transliterateRoman = function(data, map, options) {
         var buf = [],
@@ -516,7 +516,7 @@
             // Match all token substrings to our map.
             for (var j = 0; j < maxTokenLength; j++) {
                 var token = tokenBuffer.substr(0,maxTokenLength-j);
-                
+
                 if (token === '##') {
                     transliterationEnabled = !transliterationEnabled;
                     tokenBuffer = tokenBuffer.substr(2);
@@ -544,7 +544,7 @@
                     tokenBuffer = tokenBuffer.substr(maxTokenLength-j);
                     break;
                 } else if (j === maxTokenLength - 1) {
-                    if (hadConsonant) {                
+                    if (hadConsonant) {
                         hadConsonant = false;
                         if (!optSyncope) {
                             buf.push(virama);
@@ -569,7 +569,7 @@
      * @param data     the string to transliterate
      * @param map      map data generated from makeMap()
      * @param options  transliteration options
-     * @return         the finished string 
+     * @return         the finished string
      */
     var transliterateBrahmic = function(data, map, options) {
         var buf = [],
@@ -613,7 +613,7 @@
                     buf.push('a');
                     hadRomanConsonant = false;
                 }
-                
+
                 // Push transliterated letter if possible. Otherwise, push
                 // the letter itself.
                 if ((temp = letters[L])) {
@@ -637,14 +637,14 @@
      * @param from     the source script
      * @param to       the the destination script
      * @param options  transliteration options
-     * @return         the finished string 
+     * @return         the finished string
      */
     Sanscript.t = function(data, from, to, options) {
         options = options || {};
         var cachedOptions = cache.options || {},
             defaults = Sanscript.defaults,
             hasPriorState = (cache.from === from && cache.to === to),
-            map; 
+            map;
 
         // Here we simultaneously build up an `options` object and compare
         // these options to the options from the last run.
@@ -655,7 +655,7 @@
                     value = options[key];
                 }
                 options[key] = value;
-                
+
                 // This comparison method is not generalizable, but since these
                 // objects are associative arrays with identical keys and with
                 // values of known type, it works fine here.

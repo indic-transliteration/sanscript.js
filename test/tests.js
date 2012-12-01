@@ -176,7 +176,7 @@ test('Scheme definitions', function() {
     for (var key in devanagari) {
         lengths[key] = devanagari[key].length;
     }
-    
+
     for (var name in schemes) {
         for (var key in schemes[name]) {
             // The virama is distinct from other categories.
@@ -208,13 +208,13 @@ test('Roman scheme membership', function() {
 test('Adding schemes', function() {
     var sanskritOCR = {
         vowels: ["a", "å", "i", "ï", "u", "÷", "Ÿ", "", "", "", "e", "ai", "o", "au"],
-        consonants: ["k", "kh", "g", "gh", "¼", 
-			"c", "ch", "j", "jh", "ñ", 
-			"¶", "¶h", "·", "·h", "½", 
-			"t", "th", "d", "dh", "n", 
-			"p", "ph", "b", "bh", "m", 
-			"y", "r", "l", "v", 
-			"¸", "¹", "s", "h", 
+        consonants: ["k", "kh", "g", "gh", "¼",
+			"c", "ch", "j", "jh", "ñ",
+			"¶", "¶h", "·", "·h", "½",
+			"t", "th", "d", "dh", "n",
+			"p", "ph", "b", "bh", "m",
+			"y", "r", "l", "v",
+			"¸", "¹", "s", "h",
 			"", "k¹", "jñ"]
     };
     Sanscript.addRomanScheme('sanskritOCR', sanskritOCR);
@@ -288,7 +288,7 @@ test('Devanagari to Harvard-Kyoto', function() {
         f = transHelper('devanagari', 'hk');
     letterTests(from, to, f);
     textTests(from, to, f);
-    
+
     // Other
     f('wwॠww', 'wwRRww', 'Vowel among other letters');
     f('wwकww', 'wwkaww', 'Consonant among other letters');
@@ -375,6 +375,12 @@ test('WX to Devanagari', function() {
     f(from.consonants, to.consonants, 'Stops and nasals');
     f(from.symbols, to.symbols, 'Symbols and punctuation');
     textTests(from, to, f);
+});
+
+test('Telugu to Devanagari', function() {
+    var from = data.telugu, to = data.devanagari,
+        f = transHelper('telugu', 'devanagari');
+        textTests(from, to, f);
 });
 
 test('Undefined letters', function() {
@@ -475,7 +481,7 @@ test('Alternates', function() {
             dev2 = Sanscript.t(itrans2, 'itrans', 'devanagari');
         equal(dev2, dev1, description);
     };
-    
+
     f('A I U RRi RRI LLi LLI', 'aa ii uu R^i R^I L^i L^I', 'vowels');
     f('kA kI kU kRRi kRRI kLLi kLLI', 'kaa kii kuu kR^i kR^I kL^i kL^I',
         'vowels (marks)');
@@ -530,5 +536,4 @@ test('Non-Sanskrit letters', function() {
     mal('RI', 'റീ');
     ori('.DU .DhU YU', 'ଡୂ ଢୂ ଯୂ');
     tam('RI', 'றீ');
-    tel('qA KA RA', 'కా ఖా ఱా');
 });
