@@ -404,8 +404,9 @@ class Sanscript {
     // Set up various schemes
     private function setUpSchemes() {
         // Set up roman schemes
-        $kolkata = $this->schemes['kolkata'] = $this->cheapCopy($this->schemes['iast']);
+        $kolkata = $this->cheapCopy($this->schemes['iast']);
         $kolkata['vowels'] = array("a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "e", "ē", "ai", "o", "ō", "au");
+        $this->schemes['kolkata'] = &$kolkata;
 
         $schemeNames = array("iast", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx");
         // These schemes already belong to $schemes. But by adding
