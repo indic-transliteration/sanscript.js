@@ -394,14 +394,16 @@ class Sanscript {
     private function cheapCopy(&$scheme) {
         $copy = array();
         foreach ($scheme as $key => $value) {
-            // PHP assignment automatically copies array $value.
+            // PHP assignment automatically copies an array $value.
             // @see http://us2.php.net/manual/en/language.types.array.php
             $copy[$key] = $value;
         }
         return $copy;
     }
 
-    // Set up various schemes
+    /**
+     * Set up various schemes.
+     */
     private function setUpSchemes() {
         // Set up roman schemes
         $kolkata = $this->cheapCopy($this->schemes['iast']);
@@ -433,7 +435,6 @@ class Sanscript {
      * @param options  scheme options
      */
     private function makeMap($from, $to, &$options) {
-        $alternates = isset($this->allAlternates[$from]) ? $this->allAlternates[$from] : array();
         $consonants = array();
         $fromScheme = &$this->schemes[$from];
         $letters = array();
@@ -441,13 +442,22 @@ class Sanscript {
         $marks = array();
         $toScheme = &$this->schemes[$to];
 
+        if (isset($this->allAlternates[$from])) {
+            $alternates = &$this->allAlternates[$from];
+        } else {
+            $alternates = array();
+        }
+
         foreach ($fromScheme as $group => &$fromGroup) {
             if (!isset($toScheme[$group])) {
                 continue;
             }
+            $fromLength = count($fromGroup);
             $toGroup = &$toScheme[$group];
-            for ($i = 0; $i < count($fromGroup); $i++) {
+
+            for ($i = 0; $i < $fromLength; $i++) {
                 $F = $fromGroup[$i];
+
                 if ($F !== '') {
                     $T = $toGroup[$i];
                     $alts = isset($alternates[$F]) ? $alternates[$F] : array();
@@ -479,13 +489,13 @@ class Sanscript {
         }
 
         return array(
-            "consonants" => $consonants,
-            "fromRoman" => $this->isRomanScheme($from),
-            "letters" => $letters,
-            "marks" => $marks,
-            "maxTokenLength" => max($tokenLengths),
-            "toRoman" => $this->isRomanScheme($to),
-            "virama" => $toScheme['virama'][0],
+            'consonants' => $consonants,
+            'fromRoman' => $this->isRomanScheme($from),
+            'letters' => $letters,
+            'marks' => $marks,
+            'maxTokenLength' => max($tokenLengths),
+            'toRoman' => $this->isRomanScheme($to),
+            'virama' => $toScheme['virama'][0],
         );
     }
 
@@ -569,7 +579,7 @@ class Sanscript {
         if ($hadConsonant && !$optSyncope) {
             $buf[] = $virama;
         }
-        return implode($buf);
+        return implode('', $buf);
     }
 
     /**
@@ -636,7 +646,7 @@ class Sanscript {
         if ($hadRomanConsonant) {
             $buf[] = 'a';
         }
-        return implode($buf);
+        return implode('', $buf);
     }
 
     /**
@@ -676,10 +686,10 @@ class Sanscript {
         } else {
             $map = &$this->makeMap($from, $to, $options);
             $this->cache = array(
-                "from" => $from,
-                "map" => $map,
-                "options" => $options,
-                "to" => $to,
+                'from' => $from,
+                'map' => $map,
+                'options' => $options,
+                'to' => $to,
             );
         }
 
