@@ -86,14 +86,14 @@ class Sanscript {
 
                 // Zero-width joiner. This is used to separate a consonant cluster
                 // and avoid a complex ligature.
-                "zwj" => array("\u200D"),
+                "zwj" => json_decode('["\u200D"]'),
 
                 // Dummy consonant. This is used in ITRANS to prevert certain types
                 // of parser ambiguity. Thus "barau" -> बरौ but "bara_u" -> बरउ.
                 "skip" => array(""),
 
                 // Vedic accent. Udatta and anudatta.
-                "accent" => array("\u0951", "\u0952"),
+                "accent" => json_decode('["\u0951", "\u0952"]'),
 
                 // Accent combined with anusvara and and visarga. For compatibility
                 // with ITRANS, which allows the reverse of these four.
