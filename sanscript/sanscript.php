@@ -690,7 +690,7 @@ class Sanscript {
         if ($from === 'itrans') {
             $data = preg_replace("/\{\\m\+\}/u", ".h.N", $data);
             $data = preg_replace("/\.h/u", "", $data);
-            $data = preg_replace("/\\([^'`_]|$)/u", "##$1##", $data);
+            $data = preg_replace("/\\\([^'`_]|$)/u", "##$1##", $data);
         }
 
         if ($map['fromRoman']) {
