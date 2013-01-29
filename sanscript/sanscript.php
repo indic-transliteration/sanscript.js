@@ -539,7 +539,7 @@ class Sanscript {
                         // consonant.
                         if ($hadConsonant) {
                             if (isset($marks[$token])) {
-                              $buf[] = $marks[$token];
+                                $buf[] = $marks[$token];
                             } else if ($token !== 'a') {
                                 $buf[] = $virama;
                                 $buf[] = $letters[$token];
@@ -624,7 +624,7 @@ class Sanscript {
 
                 // Push transliterated letter if possible. Otherwise, push
                 // the letter itself.
-                if (isset($letters[$L])) {
+                if (isset($letters[$L]) && $letters[$L] !== '') {
                     $buf[] = $letters[$L];
                     $hadRomanConsonant = $toRoman && isset($consonants[$L]);
                 } else {
