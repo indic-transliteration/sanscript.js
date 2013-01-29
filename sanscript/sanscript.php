@@ -447,7 +447,7 @@ class Sanscript {
             $toGroup = &$toScheme[$group];
             for ($i = 0; $i < count($fromGroup); $i++) {
                 $F = $fromGroup[$i];
-                if (!empty($F)) {
+                if ($F !== '') {
                     $T = $toGroup[$i];
                     $alts = isset($alternates[$F]) ? $alternates[$F] : array();
 
@@ -511,7 +511,7 @@ class Sanscript {
         $dataChars = preg_split('//u', $data, -1, PREG_SPLIT_NO_EMPTY);
         $dataLength = count($dataChars);
 
-        for ($i = 0; (($i < $dataLength) && ($L = $dataChars[$i])) || $tokenBuffer; $i++) {
+        for ($i = 0; (($i < $dataLength) && (($L = $dataChars[$i]) || TRUE)) || $tokenBuffer; $i++) {
             // Fill the token buffer, if possible.
             $difference = $maxTokenLength - mb_strlen($tokenBuffer, 'UTF-8');
             if ($difference > 0 && $i < $dataLength) {
