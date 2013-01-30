@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit>
+  <testsuites>
+    <testsuite name="Sanscript">
+      <file>SanscriptSetup.php</file>
+      <file>SanscriptTransliteration.php</file>
+      <file>SanscriptDravidian.php</file>
+      <file>SanscriptToggle.php</file>
+      <file>SanscriptOptions.php</file>
+      <file>SanscriptITRANS.php</file>
+    </testsuite>
+  </testsuites>
+</phpunit>
