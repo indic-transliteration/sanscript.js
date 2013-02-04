@@ -7,6 +7,7 @@
  *
  * Released under the MIT and GPL Licenses.
  */
+
 class Sanscript {
     // Transliteration option defaults.
     public $defaults;
