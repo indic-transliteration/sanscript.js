@@ -152,12 +152,12 @@ abstract class SanscriptBase extends PHPUnit_Framework_TestCase {
     /**
      * For a script pair (f, t), return a function that takes two strings s1 and
      * s2 and asserts that s1, when transliterated from f to t, equals s2. The
-     * returned function takes an optional 'description' parameter for QUnit.
+     * returned function takes an optional 'description' parameter for PHPUnit.
      *
-     * @param from     the source script
-     * @param to       the destination script
-     * @param options  transliteration options
-     * @return         the function described above.
+     * @param $from     the source script
+     * @param $to       the destination script
+     * @param $options  transliteration options
+     * @return          the function described above.
      */
     protected function transHelper($from, $to, $options = NULL) {
         $that = $this;

@@ -9,7 +9,7 @@
  */
 
 class Sanscript {
-    // Transliteration option defaults.
+    // Transliteration process option defaults.
     public $defaults;
     // Set of all transliteration schemes.
     public $schemes;
@@ -340,8 +340,8 @@ class Sanscript {
     /**
      * Check whether the given scheme encodes romanized Sanskrit.
      *
-     * @param name  the scheme name
-     * @return      boolean
+     * @param $name  the scheme name
+     * @return       boolean
      */
     public function isRomanScheme($name) {
         return isset($this->romanSchemes[$name]);
@@ -354,16 +354,16 @@ class Sanscript {
      * have an inherent vowel sound, but roman consonants do not. This is the
      * main difference between these two types of scheme.
      *
-     * A scheme definition is an object ("{}") that maps a group name to a
-     * list of characters. For illustration, see the "devanagari" scheme at
-     * the top of this file.
+     * A scheme definition is an array that maps a group name to a list of
+     * characters. For illustration, see the "devanagari" scheme at the top of
+     * this file.
      *
      * You can use whatever group names you like, but for the best results,
      * you should use the same group names that Sanscript does.
      *
-     * @param name    the scheme name
-     * @param scheme  the scheme data itself. This should be constructed as
-     *                described above.
+     * @param $name    the scheme name
+     * @param $scheme  the scheme data itself. This should be constructed as
+     *                 described above.
      */
     public function addBrahmicScheme($name, &$scheme) {
         $this->schemes[$name] = $scheme;
@@ -375,8 +375,8 @@ class Sanscript {
      * See the comments on Sanscript.addBrahmicScheme. The "vowel_marks" field
      * can be omitted.
      *
-     * @param name    the scheme name
-     * @param scheme  the scheme data itself
+     * @param $name    the scheme name
+     * @param $scheme  the scheme data itself
      */
     public function addRomanScheme($name, &$scheme) {
         if (!isset($scheme['vowel_marks'])) {
@@ -389,8 +389,8 @@ class Sanscript {
     /**
      * Create a deep copy of an object, for certain kinds of objects.
      *
-     * @param scheme  the scheme to copy
-     * @return        the copy
+     * @param $scheme  the scheme to copy
+     * @return         the copy
      */
     private function cheapCopy(&$scheme) {
         $copy = array();
@@ -431,9 +431,9 @@ class Sanscript {
      * Create a map from every character in `from` to its partner in `to`.
      * Also, store any "marks" that `from` might have.
      *
-     * @param from     input scheme
-     * @param to       output scheme
-     * @param options  scheme options
+     * @param $from     input scheme
+     * @param $to       output scheme
+     * @param $options  scheme options
      */
     private function makeMap($from, $to, &$options) {
         $consonants = array();
@@ -503,10 +503,10 @@ class Sanscript {
     /**
      * Transliterate from a romanized script.
      *
-     * @param data     the string to transliterate
-     * @param map      map data generated from makeMap()
-     * @param options  transliteration options
-     * @return         the finished string
+     * @param $data     the string to transliterate
+     * @param $map      map data generated from makeMap()
+     * @param $options  transliteration options
+     * @return          the finished string
      */
     private function transliterateRoman($data, &$map, &$options) {
         $buf = array();
@@ -586,10 +586,10 @@ class Sanscript {
     /**
      * Transliterate from a Brahmic script.
      *
-     * @param data     the string to transliterate
-     * @param map      map data generated from makeMap()
-     * @param options  transliteration options
-     * @return         the finished string
+     * @param $data     the string to transliterate
+     * @param $map      map data generated from makeMap()
+     * @param $options  transliteration options
+     * @return          the finished string
      */
     private function transliterateBrahmic($data, &$map, &$options) {
         $buf = array();
@@ -653,22 +653,20 @@ class Sanscript {
     /**
      * Transliterate from one script to another.
      *
-     * @param data     the string to transliterate
-     * @param from     the source script
-     * @param to       the the destination script
-     * @param options  transliteration options
-     * @return         the finished string
+     * @param $data     the string to transliterate
+     * @param $from     the source script
+     * @param $to       the the destination script
+     * @param $options  transliteration options
+     * @return          the finished string
      */
     public function t($data, $from, $to, $options = NULL) {
         $options = isset($options) ? $options : array();
         $cachedOptions = isset($this->cache['options']) ? $this->cache['options'] : array();
-        $defaults = $this->defaults;
         $hasPriorState = (isset($this->cache['from']) && $this->cache['from'] === $from && isset($this->cache['to']) && $this->cache['to'] === $to);
-        $map;
 
         // Here we simultaneously build up an `options` object and compare
         // these options to the options from the last run.
-        foreach ($defaults as $key => $value) {
+        foreach ($this->defaults as $key => $value) {
             if (isset($options[$key])) {
                 $value = $options[$key];
             }
