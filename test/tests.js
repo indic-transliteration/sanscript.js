@@ -55,11 +55,11 @@ var data = {
         vowels: 'ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ',
         marks: 'ਕ ਖਾ ਗਿ ਘੀ ਙੁ ਚੂ ਟੇ ਠੈ ਡੋ ਢੌ ਣਂ ਤਃ ਥ੍',
         consonants: 'ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ',
-        other: 'ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼',
+        other: 'ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼',
         symbols: 'ॐ । ॥ ੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯',
         putra: 'ਪੁਤ੍ਰ',
         naraIti: 'ਨਰ ਇਤਿ',
-        sentence: 'ਧਰ੍ਮਕ੍ਸ਼ੇਤ੍ਰੇ ਕੁਰੁਕ੍ਸ਼ੇਤ੍ਰੇ ਸਮਵੇਤਾ ਯੁਯੁਤ੍ਸਵਃ ।'
+        sentence: 'ਧਰ੍ਮਕ੍ਸ਼ੇਤ੍ਰੇ ਕੁਰੁਕ੍ਸ਼ੇਤ੍ਰੇ ਸਮਵੇਤਾ ਯੁਯੁਤ੍ਸਵਃ ।'
     },
     hk: {
         vowels: 'a A i I u U R RR lR lRR e ai o au',
@@ -520,6 +520,7 @@ test('Accent', function() {
 test('Non-Sanskrit letters', function() {
     var ben = transHelper('itrans', 'bengali'),
         dev = transHelper('itrans', 'devanagari'),
+        dev2 = transHelper('devanagari', 'itrans'),
         kan = transHelper('itrans', 'kannada'),
         guj = transHelper('itrans', 'gujarati'),
         gur = transHelper('itrans', 'gurmukhi'),
@@ -536,4 +537,6 @@ test('Non-Sanskrit letters', function() {
     mal('RI', 'റീ');
     ori('.DU .DhU YU', 'ଡୂ ଢୂ ଯୂ');
     tam('RI', 'றீ');
+    dev2('क़ ख़ा ग़ि ज़ी ड़ु ड़ू फ़ृ य़ॄ ऱॢ' ,'qa KA Gi zI .Du .DU fRRi YRRI RLLi'); 
+    dev2('कॅन','ka.cna');     
 });
