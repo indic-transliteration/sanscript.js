@@ -490,10 +490,10 @@ class Sanscript {
         }
 
         return array(
-            'consonants' => $consonants,
+            'consonants' => &$consonants,
             'fromRoman' => $this->isRomanScheme($from),
-            'letters' => $letters,
-            'marks' => $marks,
+            'letters' => &$letters,
+            'marks' => &$marks,
             'maxTokenLength' => max($tokenLengths),
             'toRoman' => $this->isRomanScheme($to),
             'virama' => $toScheme['virama'][0],
@@ -683,10 +683,10 @@ class Sanscript {
         if ($hasPriorState) {
             $map = &$this->cache['map'];
         } else {
-            $map = &$this->makeMap($from, $to, $options);
+            $map = $this->makeMap($from, $to, $options);
             $this->cache = array(
                 'from' => $from,
-                'map' => $map,
+                'map' => &$map,
                 'options' => $options,
                 'to' => $to,
             );
