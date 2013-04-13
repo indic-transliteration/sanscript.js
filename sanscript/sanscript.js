@@ -157,7 +157,7 @@
          */
         oriya: {
             vowels: 'ଅ ଆ ଇ ଈ ଉ ଊ ଋ ୠ ଌ ୡ  ଏ ଐ  ଓ ଔ'.split(' '),
-            vowel_marks: 'ା ି ୀ ୁ ୂ ୃ ୄ    େ ୈ  ୋ ୌ'.split(' '),
+            vowel_marks: 'ା ି ୀ ୁ ୂ ୃ ୄ ୢ ୣ  େ ୈ  ୋ ୌ'.split(' '),
             other_marks: 'ଂ ଃ ଁ'.split(' '),
             virama: ['୍'],
             consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ଯ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
