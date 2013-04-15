@@ -153,7 +153,7 @@
 
         /* Oriya
          * -----
-         * Missing lR/lRR vowel marks
+         * Sanskrit-complete.
          */
         oriya: {
             vowels: 'ଅ ଆ ଇ ଈ ଉ ଊ ଋ ୠ ଌ ୡ  ଏ ଐ  ଓ ଔ'.split(' '),
