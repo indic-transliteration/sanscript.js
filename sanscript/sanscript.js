@@ -282,8 +282,8 @@
             other_marks: 'M H z'.split(' '),
             virama: [''],
             consonants: 'k K g G f c C j J F t T d D N w W x X n p P b B m y r l v S R s h  kR jF'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' | ||".split(' '),
-        },
+            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' | ||".split(' ')
+        }
     },
 
     // Set of names of schemes
@@ -635,7 +635,7 @@
      *
      * @param data     the string to transliterate
      * @param from     the source script
-     * @param to       the the destination script
+     * @param to       the destination script
      * @param options  transliteration options
      * @return         the finished string
      */
