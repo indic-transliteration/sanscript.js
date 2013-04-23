@@ -495,13 +495,26 @@
             letters = map.letters,
             marks = map.marks,
             maxTokenLength = map.maxTokenLength,
+            optSkipSGML = options.skip_sgml,
             optSyncope = options.syncope,
             tempLetter,
             tempMark,
             tokenBuffer = '',
             toRoman = map.toRoman,
-            transliterationEnabled = true,
             virama = map.virama;
+
+        // Transliteration state. It's controlled by these values:
+        // - `skippingSGML`: are we in SGML?
+        // - `toggledTrans`: are we in a toggled region?
+        //
+        // We combine these values into a single variable `skippingTrans`:
+        //
+        //     `skippingTrans` = skippingSGML || toggledTrans;
+        //
+        // If (and only if) this value is true, don't transliterate.
+        var skippingSGML = false,
+            skippingTrans = false,
+            toggledTrans = false;
 
         for (var i = 0, L; (L = data.charAt(i)) || tokenBuffer; i++) {
             // Fill the token buffer, if possible.
@@ -517,12 +530,17 @@
             for (var j = 0; j < maxTokenLength; j++) {
                 var token = tokenBuffer.substr(0,maxTokenLength-j);
 
-                if (token === '##') {
-                    transliterationEnabled = !transliterationEnabled;
+                if (skippingSGML === true) {
+                    skippingSGML = (token !== '>');
+                } else if (token === '<') {
+                    skippingSGML = optSkipSGML;
+                } else if (token === '##') {
+                    toggledTrans = !toggledTrans;
                     tokenBuffer = tokenBuffer.substr(2);
                     break;
                 }
-                if ((tempLetter = letters[token]) !== undefined && transliterationEnabled) {
+                skippingTrans = skippingSGML || toggledTrans;
+                if ((tempLetter = letters[token]) !== undefined && !skippingTrans) {
                     if (toRoman) {
                         buf.push(tempLetter);
                     } else {
