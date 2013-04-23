@@ -694,10 +694,6 @@
                 to: to};
         }
 
-        if (options.skip_sgml) {
-            data = data.replace(/(<.*?>)/g, '##$1##');
-        }
-
         // Easy way out for "{\m+}", "\", and ".h".
         if (from === 'itrans') {
             data = data.replace(/\{\\m\+\}/g, ".h.N");
