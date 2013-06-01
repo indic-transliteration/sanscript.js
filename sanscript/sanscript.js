@@ -598,13 +598,13 @@
             marks = map.marks,
             temp,
             toRoman = map.toRoman,
-            transliterationEnabled = true;
+            skippingTrans = false;
 
         for (var i = 0, L; (L = data.charAt(i)); i++) {
             // Toggle transliteration state
             if (L === '#') {
                 if (danglingHash) {
-                    transliterationEnabled = !transliterationEnabled;
+                    skippingTrans = !skippingTrans;
                     danglingHash = false;
                 } else {
                     danglingHash = true;
@@ -614,7 +614,7 @@
                     hadRomanConsonant = false;
                 }
                 continue;
-            } else if (!transliterationEnabled) {
+            } else if (skippingTrans) {
                 buf.push(L);
                 continue;
             }

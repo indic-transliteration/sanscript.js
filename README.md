@@ -1,4 +1,4 @@
-Sanscript
+Sanscript.js
 =============================
 
 Introduction
