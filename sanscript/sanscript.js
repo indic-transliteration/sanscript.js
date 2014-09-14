@@ -11,8 +11,11 @@
     "use strict";
 
     Sanscript.defaults = {
-        skip_sgml: false,
-        syncope: false
+        skip_sgml: true,
+        syncope: false,
+        enableTamilPronounciation: true,
+        enableTamilCharPositionFixes: true,
+        enableSanskritVedicAccents : true,
     };
 
     /* Schemes
@@ -42,7 +45,9 @@
             virama: ['্'],
             consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ব শ ষ স হ ळ ক্ষ জ্ঞ'.split(' '),
             symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥'.split(' '),
-            other: '    ড ঢ  য '.split(' ')
+            other: '    ড ঢ  য '.split(' '),
+            accent: ["", ""],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Devanagari
@@ -105,8 +110,10 @@
             other_marks: 'ં ઃ ઁ'.split(' '),
             virama: ['્'],
             consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
-            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥'.split(' '),
-            candra: ['ૅ']
+            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ । ॥'.split(' '),
+            candra: ['ૅ'],
+            accent: ["", ""],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Gurmukhi
@@ -120,7 +127,9 @@
             virama: ['੍'],
             consonants: 'ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼ ਕ੍ਸ਼ ਜ੍ਞ'.split(' '),
             symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥'.split(' '),
-            other: ' ਖ ਗ ਜ ਡ  ਫ  '.split(' ')
+            other: ' ਖ ਗ ਜ ਡ  ਫ  '.split(' '),
+            accent: ["", ""],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Kannada
@@ -134,7 +143,9 @@
             virama: ['್'],
             consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ ಕ್ಷ ಜ್ಞ'.split(' '),
             symbols: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥'.split(' '),
-            other: '      ಫ  ಱ'.split(' ')
+            other: '      ಫ  ಱ'.split(' '),
+            accent: ["", ""],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Malayalam
@@ -148,7 +159,9 @@
             virama: ['്'],
             consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ യ ര ല വ ശ ഷ സ ഹ ള ക്ഷ ജ്ഞ'.split(' '),
             symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥'.split(' '),
-            other: '        റ'.split(' ')
+            other: '        റ'.split(' '),
+            accent: ["", ""],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Oriya
@@ -162,7 +175,9 @@
             virama: ['୍'],
             consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ଯ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
             symbols: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥'.split(' '),
-            other: '    ଡ ଢ  ଯ '.split(' ')
+            other: '    ଡ ଢ  ଯ '.split(' '),
+            accent: ["", ""],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Tamil
@@ -173,11 +188,13 @@
         tamil: {
             vowels: 'அ ஆ இ ஈ உ ஊ     எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
             vowel_marks: 'ா ி ீ ு ூ     ெ ே ை ொ ோ ௌ'.split(' '),
-            other_marks: 'ஂ ஃ '.split(' '),
+            other_marks: 'ம்’ ஃ '.split(' '),
             virama: ['்'],
-            consonants: 'க க க க ங ச ச ஜ ச ஞ ட ட ட ட ண த த த த ந ப ப ப ப ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
-            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௐ ऽ । ॥'.split(' '),
-            other: '        ற'.split(' ')
+            consonants: 'க க² க³ க⁴ ங ச ச² ஜ ச ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ந ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
+            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '),
+            other: '        ற'.split(' '),
+            accent: ["", ""],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Telugu
@@ -191,7 +208,9 @@
             virama: ['్'],
             consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ య ర ల వ శ ష స హ ళ క్ష జ్ఞ'.split(' '),
             symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥'.split(' '),
-            other: '        ఱ'.split(' ')
+            other: '        ఱ'.split(' '),
+            accent: ["", ""],
+            combo_accent: ["", "", "", ""]
         },
 
         /* International Alphabet of Sanskrit Transliteration
@@ -701,10 +720,27 @@
             data = data.replace(/\\([^'`_]|$)/g, "##$1##");
         }
 
+        var alldata = '';
         if (map.fromRoman) {
-            return transliterateRoman(data, map, options);
+            alldata = transliterateRoman(data, map, options);
         } else {
-            return transliterateBrahmic(data, map, options);
+            alldata = transliterateBrahmic(data, map, options);
         }
+
+        // Fix any remaining quotations for Vedic Accents
+        if (from === 'itrans' && to === 'devanagari' && options.enableSanskritVedicAccents === true) {
+            alldata = alldata.replace('\"', '\u1CDA');
+        }
+
+        // Enable Tamil Accents Support
+        if (to == 'tamil' && options.enableTamilPronounciation == true) {
+            alldata = alldata.replace(/(.)(²|³|⁴)(ா|ி|ீ|ு|ூ|ெ|ே|ை|ொ|ோ|ௌ|்)/g,"$1$3$2")
+        }
+        if (to == 'tamil' && options.enableTamilCharPositionFixes == true) {
+            alldata = alldata
+            .replace(/(^|\s+)(த|ந்|தை)/g,"$1ந$2")
+            .replace(/([^\s])ந/g, "$1ன")
+        }
+        return alldata;
     };
 }(window.Sanscript = window.Sanscript || {}));
