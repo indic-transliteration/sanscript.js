@@ -11,7 +11,7 @@
     "use strict";
 
     Sanscript.defaults = {
-        skip_sgml: true,
+        skip_sgml: false,
         syncope: false,
         enableTamilPronounciation: true,
         enableTamilCharPositionFixes: true,
@@ -110,7 +110,7 @@
             other_marks: 'ં ઃ ઁ'.split(' '),
             virama: ['્'],
             consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
-            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ । ॥'.split(' '),
+            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥'.split(' '),
             candra: ['ૅ'],
             accent: ["", ""],
             combo_accent: ["", "", "", ""]
