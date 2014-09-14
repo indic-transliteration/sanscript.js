@@ -57,7 +57,7 @@ A **lossy** scheme does not have the letters needed to support lossless translat
 You can tweak the transliteration function by passing an `options` object:
 
     var output = Sanscript.t(input, from, to, options);
-    
+
 `options` maps options to values. Currently, these options are supported:
 
 * `skip_sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b>` → `<ब्>इति</ब्>`). Defaults to `false`.
@@ -71,3 +71,12 @@ Adding a new scheme is simple:
     Sanscript.addRomanScheme(schemeName, schemeData);
 
 For help in creating `schemeData`, see the comments on the `addBrahmicScheme` and `addRomanScheme` functions.
+
+Testing
+-------
+
+Top level `Makefile` Starts a Webserver using `PHP` on Port `9732`.
+
+`make` - will start the webserver on port `9732`
+
+Open your browser and launch this url `http://127.0.0.1:9732/test/index.html` and see that all tests are ok.
