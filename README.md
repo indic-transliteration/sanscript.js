@@ -80,3 +80,10 @@ Top level `Makefile` Starts a Webserver using `PHP` on Port `9732`.
 `make` - will start the webserver on port `9732`
 
 Open your browser and launch this url `http://127.0.0.1:9732/test/index.html` and see that all tests are ok.
+
+Changelog
+---------
+
+* Added Sanskrit Vedic Accent Support
+* Added Tamil Accent Support
+
