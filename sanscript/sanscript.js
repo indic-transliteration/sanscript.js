@@ -110,10 +110,12 @@
             other_marks: 'ં ઃ ઁ'.split(' '),
             virama: ['્'],
             consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
-            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥'.split(' '),
+            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ . ..'.split(' '),
             candra: ['ૅ'],
+			skip: [''],
             accent: ["", ""],
-            combo_accent: ["", "", "", ""]
+            combo_accent: ["", "", "", ""],
+		    other: 'ક ખ ગ જ ડ ઢ ફ ય ર'.split(' ')
         },
 
         /* Gurmukhi
@@ -186,12 +188,13 @@
          * The most incomplete of the Sanskrit schemes here.
          */
         tamil: {
-            vowels: 'அ ஆ இ ஈ உ ஊ     எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
-            vowel_marks: 'ா ி ீ ு ூ     ெ ே ை ொ ோ ௌ'.split(' '),
-            other_marks: 'ம்’ ஃ '.split(' '),
+            vowels: 'அ ஆ இ ஈ உ ஊ ருʼ ரூʼ லுʼ லூʼ எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
+            vowel_marks: 'ா ி ீ ு ூ ருʼ ரூʼ லுʼ லூʼ ெ ே ை ொ ோ ௌ'.split(' '),
+            other_marks: 'ம்’ : '.split(' '),
             virama: ['்'],
             consonants: 'க க² க³ க⁴ ங ச ச² ஜ ச ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ந ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
-            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '),
+/*            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '), */
+            symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
             other: '        ற'.split(' '),
             accent: ["", ""],
             combo_accent: ["", "", "", ""]
@@ -728,9 +731,12 @@
         }
 
         // Fix any remaining quotations for Vedic Accents
-        if (from === 'itrans' && to === 'devanagari' && options.enableSanskritVedicAccents === true) {
-            alldata = alldata.replace('\"', '\u1CDA');
-        }
+        if (to === 'devanagari' && options.enableSanskritVedicAccents === true) {
+            //alldata = alldata.replace('\\"', "\u1CDA").replace('"', "\u1CDA").replace('&quot;', "\u1CDA");
+            alldata = alldata.replace(/\\?"/g, "\u1CDA");
+	} else if (! (to === "itrans" || to == "iast")) {
+            alldata = alldata.replace(/\\?"/g, "");
+	}
 
         // Enable Tamil Accents Support
         if (to == 'tamil' && options.enableTamilPronounciation == true) {
