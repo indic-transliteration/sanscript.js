@@ -13,7 +13,7 @@
     Sanscript.defaults = {
         skip_sgml: false,
         syncope: false,
-        enableTamilPronounciation: true,
+        enableTamilPronunciation: true,
         enableTamilCharPositionFixes: true,
         enableSanskritVedicAccents : true,
     };
@@ -197,8 +197,8 @@
             vowel_marks: 'ா ி ீ ு ூ ருʼ ரூʼ லுʼ லூʼ ெ ே ை ொ ோ ௌ'.split(' '),
             other_marks: 'ம்’ : '.split(' '),
             virama: ['்'],
-            consonants: 'க க² க³ க⁴ ங ச ச² ஜ ச ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ந ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
-/*          symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '), */
+            consonants: 'க க² க³ க⁴ ங ச ச² ஜ ச ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ன ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
+/*            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '), */
             symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
             other: '        ற'.split(' '),
             accent: ["", ""],
@@ -749,15 +749,39 @@
   } else if (! (to === "itrans" || to == "iast")) {
             alldata = alldata.replace(/\\?"/g, "");
   }
-
+    // Enable Malayalam Chillu Support - code to be streamlined after rules are defined correctly
+        if (to == 'malayalam' ) {
+            // m to M ; 
+            alldata = alldata.replace(/മ്/g,"ം")
+            // re-change to glyph when followed by p or m, 
+            alldata = alldata.replace(/ംമ/g,"മ്മ")     
+            alldata = alldata.replace(/ംപ/g,"മ്പ")             
+            // change to atomic chillu causes problems for conjunct glyphs
+            // use ZWJ to create chillus for N, n, r, l, L
+            alldata = alldata.replace(/(ണ്|ന്|ര്|ല്|ള്)/g,"$1\u200D")  
+            // fix NTa  NNa  
+            alldata = alldata.replace(/ണ്‍ട/g,"ണ്ട")  
+            alldata = alldata.replace(/ണ്‍ണ/g,"ണ്ണ")  
+            // fix nta  nna  
+            alldata = alldata.replace(/ന്‍ത/g,"ന്ത")  
+            alldata = alldata.replace(/ന്‍ന/g,"ന്ന")  
+            // remove ZWJ when followed by ya la va
+            alldata = alldata.replace(/\u200D(യ|വ|ല)/g,"$1")              
+          // chillu k not used much
+          // alldata = alldata.replace(/ക്/g,"ക്‍")     
+          // glyph not defined for this yet
+          // alldata = alldata.replace(/ൻ്റ/g,"ൻ്റ) ")                        
+        }
+        
         // Enable Tamil Accents Support
-        if (to == 'tamil' && options.enableTamilPronounciation == true) {
+        if (to == 'tamil' && options.enableTamilPronunciation == true) {
             alldata = alldata.replace(/(.)(²|³|⁴)(ா|ி|ீ|ு|ூ|ெ|ே|ை|ொ|ோ|ௌ|்)/g,"$1$3$2")
         }
         if (to == 'tamil' && options.enableTamilCharPositionFixes == true) {
             alldata = alldata
-            .replace(/(^|\s+)(த|ந்|தை)/g,"$1ந$2")
-            .replace(/([^\s])ந/g, "$1ன")
+            .replace(/([\s-])ன/g, "$1ந")
+            .replace(/ன்த/g,"ந்த")
+            .replace(/ன்ன/g,"ந்ந")
         }
         return alldata;
     };
