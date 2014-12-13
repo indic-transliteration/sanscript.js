@@ -13,7 +13,7 @@
     Sanscript.defaults = {
         skip_sgml: false,
         syncope: false,
-        enableTamilPronounciation: true,
+        enableTamilPronunciation: true,
         enableTamilCharPositionFixes: true,
         enableSanskritVedicAccents : true,
     };
@@ -47,6 +47,7 @@
             symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥'.split(' '),
             other: '    ড ঢ  য '.split(' '),
             accent: ["", ""],
+            candra: [''],
             combo_accent: ["", "", "", ""]
         },
 
@@ -112,10 +113,10 @@
             consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
             symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ . ..'.split(' '),
             candra: ['ૅ'],
-	    skip: [''],
+            skip: [''],
             accent: ["", ""],
             combo_accent: ["", "", "", ""],
-	    other: 'ક ખ ગ જ ડ ઢ ફ ય ર'.split(' ')
+        other: 'ક ખ ગ જ ડ ઢ ફ ય ર'.split(' ')
         },
 
         /* Gurmukhi
@@ -131,6 +132,7 @@
             symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥'.split(' '),
             other: ' ਖ ਗ ਜ ਡ  ਫ  '.split(' '),
             accent: ["", ""],
+            candra: [''],
             combo_accent: ["", "", "", ""]
         },
 
@@ -147,6 +149,7 @@
             symbols: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥'.split(' '),
             other: '      ಫ  ಱ'.split(' '),
             accent: ["", ""],
+            candra: [''],
             combo_accent: ["", "", "", ""]
         },
 
@@ -163,6 +166,7 @@
             symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥'.split(' '),
             other: '        റ'.split(' '),
             accent: ["", ""],
+            candra: [''],
             combo_accent: ["", "", "", ""]
         },
 
@@ -179,6 +183,7 @@
             symbols: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥'.split(' '),
             other: '    ଡ ଢ  ଯ '.split(' '),
             accent: ["", ""],
+            candra: [''],
             combo_accent: ["", "", "", ""]
         },
 
@@ -192,10 +197,12 @@
             vowel_marks: 'ா ி ீ ு ூ ருʼ ரூʼ லுʼ லூʼ ெ ே ை ொ ோ ௌ'.split(' '),
             other_marks: 'ம்’ : '.split(' '),
             virama: ['்'],
-            consonants: 'க க² க³ க⁴ ங ச ச² ஜ ச ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ந ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
+            consonants: 'க க² க³ க⁴ ங ச ச² ஜ ச ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ன ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
+/*            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '), */
             symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
             other: '        ற'.split(' '),
             accent: ["", ""],
+            candra: [''],
             combo_accent: ["", "", "", ""]
         },
 
@@ -212,6 +219,7 @@
             symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥'.split(' '),
             other: '        ఱ'.split(' '),
             accent: ["", ""],
+            candra: [''],
             combo_accent: ["", "", "", ""]
         },
 
@@ -224,7 +232,8 @@
             other_marks: ['ṃ', 'ḥ', '~'],
             virama: [''],
             consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' '),
+            candra: ['̆']
         },
 
         /* ITRANS
@@ -258,7 +267,8 @@
             other_marks: 'M H ~'.split(' '),
             virama: [''],
             consonants: 'k kh g gh G c ch j jh J T Th D Dh N t th d dh n p ph b bh m y r l v z S s h L kS jJ'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 OM ' | ||".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 OM ' | ||".split(' '),
+            candra: ['']
         },
 
         /* National Library at Kolkata
@@ -279,7 +289,8 @@
             other_marks: 'M H ~'.split(' '),
             virama: [''],
             consonants: 'k K g G N c C j J Y w W q Q R t T d D n p P b B m y r l v S z s h L kz jY'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' . ..".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' . ..".split(' '),
+            candra: ['̆']
         },
 
         /* Velthuis
@@ -291,7 +302,8 @@
             other_marks: '.m .h '.split(' '),
             virama: [''],
             consonants: 'k kh g gh "n c ch j jh ~n .t .th .d .d .n t th d dh n p ph b bh m y r l v ~s .s s h L k.s j~n'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | ||".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | ||".split(' '),
+            candra: ['̆']
         },
 
         /* WX
@@ -303,7 +315,8 @@
             other_marks: 'M H z'.split(' '),
             virama: [''],
             consonants: 'k K g G f c C j J F t T d D N w W x X n p P b B m y r l v S R s h  kR jF'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' | ||".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' | ||".split(' '),
+            candra: ['̆']
         }
     },
 
@@ -733,18 +746,42 @@
         if (to === 'devanagari' && options.enableSanskritVedicAccents === true) {
             //alldata = alldata.replace('\\"', "\u1CDA").replace('"', "\u1CDA").replace('&quot;', "\u1CDA");
             alldata = alldata.replace(/\\?"/g, "\u1CDA");
-	} else if (! (to === "itrans" || to == "iast")) {
+  } else if (! (to === "itrans" || to == "iast")) {
             alldata = alldata.replace(/\\?"/g, "");
-	}
-
+  }
+    // Enable Malayalam Chillu Support - code to be streamlined after rules are defined correctly
+        if (to == 'malayalam' ) {
+            // m to M ; 
+            alldata = alldata.replace(/മ്/g,"ം")
+            // re-change to glyph when followed by p or m, 
+            alldata = alldata.replace(/ംമ/g,"മ്മ")     
+            alldata = alldata.replace(/ംപ/g,"മ്പ")             
+            // change to atomic chillu causes problems for conjunct glyphs
+            // use ZWJ to create chillus for N, n, r, l, L
+            alldata = alldata.replace(/(ണ്|ന്|ര്|ല്|ള്)/g,"$1\u200D")  
+            // fix NTa  NNa  
+            alldata = alldata.replace(/ണ്‍ട/g,"ണ്ട")  
+            alldata = alldata.replace(/ണ്‍ണ/g,"ണ്ണ")  
+            // fix nta  nna  
+            alldata = alldata.replace(/ന്‍ത/g,"ന്ത")  
+            alldata = alldata.replace(/ന്‍ന/g,"ന്ന")  
+            // remove ZWJ when followed by ya la va
+            alldata = alldata.replace(/\u200D(യ|വ|ല)/g,"$1")              
+          // chillu k not used much
+          // alldata = alldata.replace(/ക്/g,"ക്‍")     
+          // glyph not defined for this yet
+          // alldata = alldata.replace(/ൻ്റ/g,"ൻ്റ) ")                        
+        }
+        
         // Enable Tamil Accents Support
-        if (to == 'tamil' && options.enableTamilPronounciation == true) {
+        if (to == 'tamil' && options.enableTamilPronunciation == true) {
             alldata = alldata.replace(/(.)(²|³|⁴)(ா|ி|ீ|ு|ூ|ெ|ே|ை|ொ|ோ|ௌ|்)/g,"$1$3$2")
         }
         if (to == 'tamil' && options.enableTamilCharPositionFixes == true) {
             alldata = alldata
-            .replace(/(^|\s+)(த|ந்|தை)/g,"$1ந$2")
-            .replace(/([^\s])ந/g, "$1ன")
+            .replace(/([\s-])ன/g, "$1ந")
+            .replace(/ன்த/g,"ந்த")
+            .replace(/ன்ன/g,"ந்ந")
         }
         return alldata;
     };
