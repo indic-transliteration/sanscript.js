@@ -163,7 +163,8 @@
             other_marks: 'ം ഃ ँ'.split(' '),
             virama: ['്'],
             consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ യ ര ല വ ശ ഷ സ ഹ ള ക്ഷ ജ്ഞ'.split(' '),
-            symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥'.split(' '),
+        /*  symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥'.split(' '),            */
+            symbols: '0 1 2 3 4 5 6 7 8 9 ഓം ഽ । ॥'.split(' '),
             other: '        റ'.split(' '),
             accent: ["", ""],
             candra: [''],
@@ -198,7 +199,7 @@
             other_marks: 'ம்’ : '.split(' '),
             virama: ['்'],
             consonants: 'க க² க³ க⁴ ங ச ச² ஜ ச ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ன ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
-/*            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '), */
+/*          symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '), */
             symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
             other: '        ற'.split(' '),
             accent: ["", ""],
@@ -766,7 +767,9 @@
             alldata = alldata.replace(/ന്‍ത/g,"ന്ത")  
             alldata = alldata.replace(/ന്‍ന/g,"ന്ന")  
             // remove ZWJ when followed by ya la va
-            alldata = alldata.replace(/\u200D(യ|വ|ല)/g,"$1")              
+            alldata = alldata.replace(/\u200D(യ|വ|ല)/g,"$1")            
+            // fix for ര്‍വ.  -  r^va
+            alldata = alldata.replace(/ര്വ/g,"ര്‍വ")          
           // chillu k not used much
           // alldata = alldata.replace(/ക്/g,"ക്‍")     
           // glyph not defined for this yet
