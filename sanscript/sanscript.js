@@ -6,7 +6,7 @@
  *
  * Released under the MIT and GPL Licenses.
  *
- * Last updated on 12/27/2014 by Shree for Tamil Vedic Accents
+ * Last updated on 12/31/2014 by Shree for Tamil Vedic Accents
  */
 
 (function(Sanscript) {
@@ -115,6 +115,7 @@
             symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ . ..'.split(' '),
             candra: ['ૅ'],
             skip: [''],
+            accent: ['\u0951', '\u0952', "\u1cda", "\ua8f3"],
             combo_accent: ["", "", "", ""],
         other: 'ક ખ ગ જ ડ ઢ ફ ય ર'.split(' ')
         },
@@ -132,6 +133,7 @@
             symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥'.split(' '),
             other: ' ਖ ਗ ਜ ਡ  ਫ  '.split(' '),
             candra: [''],
+            accent: ['\u0951', '\u0952', "\u1cda", "\ua8f3"],
             combo_accent: ["", "", "", ""]
         },
 
@@ -725,8 +727,8 @@
         // Easy way out for "{\m+}", "\", and ".h".
         if (from === 'itrans') {
             data = data.replace(/\.h/g, '');
-            data = data.replace(/\{\\m\+\}/g, "ꣳ");
-            data = data.replace(/\(\\"\)/u/g, "##$1##");
+            data = data.replace(/\{\\m\+\}/g, "##<strong>ꣳ</strong>##");
+            data = data.replace(/\(\\"\)/g, "##$1##");
             data = data.replace(/\\([^'`_]|$)/g, "##$1##");
         }
 
@@ -737,13 +739,6 @@
             alldata = transliterateBrahmic(data, map, options);
         }
 
-        // Fix any remaining quotations for Vedic Accents
-        if (to === 'devanagari' && options.enableSanskritVedicAccents === true) {
-            //alldata = alldata.replace('\\"', "\u1CDA").replace('"', "\u1CDA").replace('&quot;', "\u1CDA");
-            alldata = alldata.replace(/\\?"/g, "\u1CDA");
-  } else if (! (to === "itrans" || to == "iast")) {
-            alldata = alldata.replace(/\\?"/g, "");
-  }
     // Enable Malayalam Chillu Support - code to be streamlined after rules are defined correctly
         if (to == 'malayalam' ) {
             // m to M ; 
@@ -773,9 +768,10 @@
         // Enable Tamil Accents Support
         if (to == 'tamil' && options.enableTamilPronunciation == true) {
             alldata = alldata
-            .replace(/(.)(²|³|⁴)(்|:|ʼ ᳚)/g,"$1$3$2")
-            .replace(/(.)(²|³|⁴)(ா|ி|ீ|ு|ூ|ெ|ே|ை|ொ|ோ|ௌ ᳚)/g,"$1$3$2")
-            .replace(/(.)(²|³|⁴)(்|:|ʼ|॒|॑| ᳚)/g,"$1$3$2")
+            .replace(/(.)(²|³|⁴)(ா|ி|ீ|ு|ூ|ெ|ே|ை|ொ|ோ|ௌ)/g,"$1$3$2") 
+            .replace(/(.)(²|³|⁴)(்|:|ʼ|॒|॑|᳚)/g,"$1$3$2")
+            .replace(/(.)(²|³|⁴|ʼ)(॒|॑|᳚)/g,"$1$3$2")
+            .replace(/(.)(:)(॒|॑)/g,"$1$3$2") 
         }
         if (to == 'tamil' && options.enableTamilCharPositionFixes == true) {
             alldata = alldata
