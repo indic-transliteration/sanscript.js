@@ -6,7 +6,7 @@
  *
  * Released under the MIT and GPL Licenses.
  *
- * Last updated on 12/31/2014 by Shree for Tamil Vedic Accents
+ * Last updated on Feb 11, 2015  by Shree for Tamil Vedic Accents
  */
 
 (function(Sanscript) {
@@ -192,7 +192,7 @@
          */
         tamil: {
             vowels: 'அ ஆ இ ஈ உ ஊ ருʼ ரூʼ லுʼ லூʼ எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
-            vowel_marks: 'ா ி ீ ு ூ ருʼ ரூʼ லுʼ லூʼ ெ ே ை ொ ோ ௌ'.split(' '),
+            vowel_marks: 'ா ி ீ ு ூ ்ருʼ ்ரூʼ ்லுʼ ்லூʼ ெ ே ை ொ ோ ௌ'.split(' '),
             other_marks: 'ம் : '.split(' '),
             virama: ['்'],
             consonants: 'க க² க³ க⁴ ங ச ச² ஜ ச ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ன ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
@@ -748,7 +748,8 @@
             alldata = alldata.replace(/ംപ/g,"മ്പ")             
             // change to atomic chillu causes problems for conjunct glyphs
             // use ZWJ to create chillus for N, n, r, l, L
-            alldata = alldata.replace(/(ണ്|ന്|ര്|ല്|ള്)/g,"$1\u200D")  
+            // alldata = alldata.replace(/(ണ്|ന്|ര്|ല്|ള്)/g,"$1\u200D")  
+            alldata = alldata.replace(/(ര്|ല്|ള്)/g,"$1\u200D")  
             // fix NTa  NNa  
             alldata = alldata.replace(/ണ്‍ട/g,"ണ്ട")  
             alldata = alldata.replace(/ണ്‍ണ/g,"ണ്ണ")  
@@ -777,7 +778,9 @@
             alldata = alldata
             .replace(/([\s-])ன/g, "$1ந")
             .replace(/ன்த/g,"ந்த")
-            .replace(/ன்ன/g,"ந்ந")
+      //    .replace(/ன்ன/g,"ந்ந")
+            .replace(/னாம/g,"நாம")
+            .replace(/னாராயண/g,"நாராயண")
         }
         return alldata;
     };
