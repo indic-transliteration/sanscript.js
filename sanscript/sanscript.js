@@ -393,8 +393,8 @@
     (function() {
         // Set up roman schemes
         var kolkata = schemes.kolkata = cheapCopy(schemes.iast),
-            schemeNames = 'iast itrans hk kolkata slp1 velthuis wx'.split(' ');
-        kolkata.vowels = 'a ā i ī u ū ṛ ṝ ḷ ḹ e ē ai o ō au'.split(' ');
+            schemeNames = ["iast", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx"];
+        kolkata.vowels = ["a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "e", "ē", "ai", "o", "ō", "au"];
 
         // These schemes already belong to Sanscript.schemes. But by adding
         // them again with `addRomanScheme`, we automatically build up
@@ -405,7 +405,7 @@
 
         // ITRANS variant, which supports Dravidian short 'e' and 'o'.
         var itrans_dravidian = cheapCopy(schemes.itrans);
-        itrans_dravidian.vowels = 'a A i I u U Ri RRI LLi LLi e E ai o O au'.split(' ');
+        itrans_dravidian.vowels = ["a", "A", "i", "I", "u", "U", "Ri", "RRI", "LLi", "LLi", "e", "E", "ai", "o", "O", "au"];
         itrans_dravidian.vowel_marks = itrans_dravidian.vowels.slice(1);
         allAlternates.itrans_dravidian = allAlternates.itrans;
         Sanscript.addRomanScheme('itrans_dravidian', itrans_dravidian);
