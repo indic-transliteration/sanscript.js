@@ -1,0 +1,8 @@
+#!/bin/sh
+MYDIR=$( pwd )
+cd com/wellebee/sanskrit
+rm -f *.class
+javac *.java
+cd $MYDIR
+jar cvf sanscript.jar com/wellebee/sanskrit/*.class
+jar tvf sanscript.jar
