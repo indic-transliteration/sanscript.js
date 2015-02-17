@@ -174,6 +174,7 @@ public class SanscriptTest {
     protected interface TransHelper {
          void run(String input, String output, String description);
     }
+
     /**
      * For a script pair (f, t), return a function that takes two strings s1 and
      * s2 and asserts that s1, when transliterated from f to t, equals s2. The
