@@ -684,7 +684,7 @@ public class Sanscript {
 
                 // Push transliterated letter if possible. Otherwise, push
                 // the letter itself.
-                if ((temp = letters.get(L)) != null) {
+                if ((temp = letters.get(L)) != null && !temp.equals("")) {
                     buf.append(temp);
                     hadRomanConsonant = toRoman && (consonants.get(L) != null);
                 } else {
