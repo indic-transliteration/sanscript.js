@@ -5,7 +5,7 @@ import org.junit.Test;
 public class SanscriptTestOptions extends SanscriptTest {
     @Test
     public void testHindiStyleTransliteration() {
-        Sanscript.Options options = new Sanscript.Options();
+        Sanscript.Options options = new Sanscript.HashOptions();
         options.put("syncope", true);
         TransHelper f = transHelper("itrans", "devanagari", options);
         f.run("karaN", "करण", "");
@@ -14,8 +14,8 @@ public class SanscriptTestOptions extends SanscriptTest {
 
     @Test
     public void testSkippingSGML() {
-        Sanscript.Options options1 = new Sanscript.Options();
-        Sanscript.Options options2 = new Sanscript.Options();
+        Sanscript.Options options1 = new Sanscript.HashOptions();
+        Sanscript.Options options2 = new Sanscript.HashOptions();
         options1.put("skip_sgml", false);
         options2.put("skip_sgml", true);
         TransHelper f1 = transHelper("hk", "devanagari");

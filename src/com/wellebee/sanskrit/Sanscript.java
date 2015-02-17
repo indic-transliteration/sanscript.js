@@ -20,16 +20,22 @@ public class Sanscript {
         initializeSpecialSchemes();
     }
 
-    public static class Options extends HashMap<String, Object> {
-        Options() {
+    public static interface Options extends Map<String, Object> {}
+
+    public static class HashOptions extends HashMap<String, Object> implements Options  {
+        HashOptions() {
             put("skip_sgml", false);
             put("syncope", false);
         }
     }
 
-    Options defaults = new Options();
+    Options defaults = new HashOptions();
 
-    public static class Scheme extends HashMap<String, String[]> {
+    public static interface Scheme extends Map<String, String[]> {
+        public Scheme cheapCopy();
+    }
+
+    public static class HashScheme extends HashMap<String, String[]> implements Scheme {
         /**
          * Create a deep copy of a scheme.
          *
@@ -37,7 +43,7 @@ public class Sanscript {
          * @return        the copy
          */
         public Scheme cheapCopy() {
-            Scheme copy = new Scheme();
+            Scheme copy = new HashScheme();
             for (Map.Entry<String, String[]> entry : entrySet()) {
                 String[] value = entry.getValue();
                 copy.put(entry.getKey(), Arrays.copyOf(value, value.length));
@@ -47,7 +53,7 @@ public class Sanscript {
         }
     }
 
-    public static class Schemes extends HashMap<String, Scheme> {}
+    class Schemes extends HashMap<String, Scheme> {}
 
     Schemes schemes = new Schemes();
 
@@ -76,7 +82,7 @@ public class Sanscript {
          * -------
          * 'va' and 'ba' are both rendered as ব.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"অ", "আ", "ই", "ঈ", "উ", "ঊ", "ঋ", "ৠ", "ঌ", "ৡ", "", "এ", "ঐ", "", "ও", "ঔ"});
         scheme.put("vowel_marks", new String[] {"া", "ি", "ী", "ু", "ূ", "ৃ", "ৄ", "ৢ", "ৣ", "", "ে", "ৈ", "", "ো", "ৌ"});
         scheme.put("other_marks", new String[] {"ং", "ঃ", "ঁ"});
@@ -90,7 +96,7 @@ public class Sanscript {
          * ----------
          * The most comprehensive and unambiguous Brahmic script listed.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         // "Independent" forms of the vowels. These are used whenever the
         // vowel does not immediately follow a consonant.
         scheme.put("vowels", new String[] {"अ", "आ", "इ", "ई", "उ", "ऊ", "ऋ", "ॠ", "ऌ", "ॡ", "ऎ", "ए", "ऐ", "ऒ", "ओ", "औ"});
@@ -140,7 +146,7 @@ public class Sanscript {
          * --------
          * Sanskrit-complete.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"અ", "આ", "ઇ", "ઈ", "ઉ", "ઊ", "ઋ", "ૠ", "ઌ", "ૡ", "", "એ", "ઐ", "", "ઓ", "ઔ"});
         scheme.put("vowel_marks", new String[] {"ા", "િ", "ી", "ુ", "ૂ", "ૃ", "ૄ", "ૢ", "ૣ", "", "ે", "ૈ", "", "ો", "ૌ"});
         scheme.put("other_marks", new String[] {"ં", "ઃ", "ઁ"});
@@ -154,7 +160,7 @@ public class Sanscript {
          * --------
          * Missing R/RR/lR/lRR
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"ਅ", "ਆ", "ਇ", "ਈ", "ਉ", "ਊ", "", "", "", "", "", "ਏ", "ਐ", "", "ਓ", "ਔ"});
         scheme.put("vowel_marks", new String[] {"ਾ", "ਿ", "ੀ", "ੁ", "ੂ", "", "", "", "", "", "ੇ", "ੈ", "", "ੋ", "ੌ"});
         scheme.put("other_marks", new String[] {"ਂ", "ਃ", "ਁ"});
@@ -168,7 +174,7 @@ public class Sanscript {
          * -------
          * Sanskrit-complete.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"ಅ", "ಆ", "ಇ", "ಈ", "ಉ", "ಊ", "ಋ", "ೠ", "ಌ", "ೡ", "ಎ", "ಏ", "ಐ", "ಒ", "ಓ", "ಔ"});
         scheme.put("vowel_marks", new String[] {"ಾ", "ಿ", "ೀ", "ು", "ೂ", "ೃ", "ೄ", "ೢ", "ೣ", "ೆ", "ೇ", "ೈ", "ೊ", "ೋ", "ೌ"});
         scheme.put("other_marks", new String[] {"ಂ", "ಃ", "ँ"});
@@ -182,7 +188,7 @@ public class Sanscript {
          * ---------
          * Sanskrit-complete.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"അ", "ആ", "ഇ", "ഈ", "ഉ", "ഊ", "ഋ", "ൠ", "ഌ", "ൡ", "എ", "ഏ", "ഐ", "ഒ", "ഓ", "ഔ"});
         scheme.put("vowel_marks", new String[] {"ാ", "ി", "ീ", "ു", "ൂ", "ൃ", "ൄ", "ൢ", "ൣ", "െ", "േ", "ൈ", "ൊ", "ോ", "ൌ"});
         scheme.put("other_marks", new String[] {"ം", "ഃ", "ँ"});
@@ -196,7 +202,7 @@ public class Sanscript {
          * -----
          * Sanskrit-complete.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"ଅ", "ଆ", "ଇ", "ଈ", "ଉ", "ଊ", "ଋ", "ୠ", "ଌ", "ୡ", "", "ଏ", "ଐ", "", "ଓ", "ଔ"});
         scheme.put("vowel_marks", new String[] {"ା", "ି", "ୀ", "ୁ", "ୂ", "ୃ", "ୄ", "ୢ", "ୣ", "", "େ", "ୈ", "", "ୋ", "ୌ"});
         scheme.put("other_marks", new String[] {"ଂ", "ଃ", "ଁ"});
@@ -211,7 +217,7 @@ public class Sanscript {
          * Missing R/RR/lR/lRR vowel marks and voice/aspiration distinctions.
          * The most incomplete of the Sanskrit schemes here.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"அ", "ஆ", "இ", "ஈ", "உ", "ஊ", "", "", "", "", "எ", "ஏ", "ஐ", "ஒ", "ஓ", "ஔ"});
         scheme.put("vowel_marks", new String[] {"ா", "ி", "ீ", "ு", "ூ", "", "", "", "", "ெ", "ே", "ை", "ொ", "ோ", "ௌ"});
         scheme.put("other_marks", new String[] {"ஂ", "ஃ", ""});
@@ -225,7 +231,7 @@ public class Sanscript {
          * ------
          * Sanskrit-complete.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఋ", "ౠ", "ఌ", "ౡ", "ఎ", "ఏ", "ఐ", "ఒ", "ఓ", "ఔ"});
         scheme.put("vowel_marks", new String[] {"ా", "ి", "ీ", "ు", "ూ", "ృ", "ౄ", "ౢ", "ౣ", "ె", "ే", "ై", "ొ", "ో", "ౌ"});
         scheme.put("other_marks", new String[] {"ం", "ః", "ఁ"});
@@ -239,7 +245,7 @@ public class Sanscript {
          * --------------------------------------------------
          * The most "professional" Sanskrit romanization scheme.put("
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "", "e", "ai", "", "o", "au"});
         scheme.put("other_marks", new String[] {"ṃ", "ḥ", "~"});
         scheme.put("virama", new String[] {""});
@@ -255,7 +261,7 @@ public class Sanscript {
          *
          * '_' is a "null" letter, which allows adjacent vowels.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"a", "A", "i", "I", "u", "U", "RRi", "RRI", "LLi", "LLI", "", "e", "ai", "", "o", "au"});
         scheme.put("other_marks", new String[] {"M", "H", ".N"});
         scheme.put("virama", new String[] {""});
@@ -273,7 +279,7 @@ public class Sanscript {
          * -------------
          * A simple 1:1 mapping.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"a", "A", "i", "I", "u", "U", "R", "RR", "lR", "lRR", "", "e", "ai", "", "o", "au"});
         scheme.put("other_marks", new String[] {"M", "H", "~",});
         scheme.put("virama", new String[] {""});
@@ -294,7 +300,7 @@ public class Sanscript {
          * With one ASCII letter per phoneme, this is the tersest transliteration
          * scheme in use today and is especially suited to computer processing.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"a", "A", "i", "I", "u", "U", "f", "F", "x", "X", "", "e", "E", "", "o", "O"});
         scheme.put("other_marks", new String[] {"M", "H", "~"});
         scheme.put("virama", new String[] {""});
@@ -306,7 +312,7 @@ public class Sanscript {
          * --------
          * A case-insensitive Sanskrit encoding.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"a", "aa", "i", "ii", "u", "uu", ".r", ".rr", ".li", ".ll", "", "e", "ai", "", "o", "au"});
         scheme.put("other_marks", new String[] {".m", ".h", ""});
         scheme.put("virama", new String[] {""});
@@ -318,7 +324,7 @@ public class Sanscript {
          * --
          * As terse as SLP1.
          */
-        scheme = new Scheme();
+        scheme = new HashScheme();
         scheme.put("vowels", new String[] {"a", "A", "i", "I", "u", "U", "q", "Q", "L", "", "", "e", "E", "", "o", "O"});
         scheme.put("other_marks", new String[] {"M", "H", "z"});
         scheme.put("virama", new String[] {""});
@@ -709,9 +715,9 @@ public class Sanscript {
      */
     public String t(String data, String from, String to, Options options) {
         if (options == null) {
-            options = new Options();
+            options = new HashOptions();
         }
-        Options cachedOptions = cache.options != null ? cache.options : new Options();
+        Options cachedOptions = cache.options != null ? cache.options : new HashOptions();
         boolean hasPriorState = (cache.from == from && cache.to == to);
         TMap map;
 

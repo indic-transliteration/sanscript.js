@@ -45,7 +45,7 @@ public class SanscriptTestSetup extends SanscriptTest {
 
     @Test
     public void testAddingSchemes() {
-        Sanscript.Scheme sanskritOCR = new Sanscript.Scheme();
+        Sanscript.Scheme sanskritOCR = new Sanscript.HashScheme();
         sanskritOCR.put("vowels", new String[] {"a", "å", "i", "ï", "u", "÷", "Ÿ", "", "", "", "e", "ai", "o", "au"});
         sanskritOCR.put("consonants", new String[] {"k", "kh", "g", "gh", "¼",
         "c", "ch", "j", "jh", "ñ",
