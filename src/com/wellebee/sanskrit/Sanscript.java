@@ -23,13 +23,13 @@ public class Sanscript {
     public static interface Options extends Map<String, Object> {}
 
     public static class HashOptions extends HashMap<String, Object> implements Options  {
-        HashOptions() {
-            put("skip_sgml", false);
-            put("syncope", false);
+        public HashOptions set(String key, Object value) {
+            put(key, value);
+            return this;
         }
     }
 
-    Options defaults = new HashOptions();
+    Options defaults = new HashOptions().set("skip_sgml", false).set("syncope", false);
 
     public static interface Scheme extends Map<String, String[]> {
         public Scheme cheapCopy();

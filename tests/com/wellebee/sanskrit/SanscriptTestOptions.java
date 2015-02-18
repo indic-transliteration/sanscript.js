@@ -14,10 +14,8 @@ public class SanscriptTestOptions extends SanscriptTest {
 
     @Test
     public void testSkippingSGML() {
-        Sanscript.Options options1 = new Sanscript.HashOptions();
-        Sanscript.Options options2 = new Sanscript.HashOptions();
-        options1.put("skip_sgml", false);
-        options2.put("skip_sgml", true);
+        Sanscript.Options options1 = new Sanscript.HashOptions().set("skip_sgml", false);
+        Sanscript.Options options2 = new Sanscript.HashOptions().set("skip_sgml", true);
         TransHelper f1 = transHelper("hk", "devanagari");
         TransHelper f2 = transHelper("hk", "devanagari", options1);
         TransHelper f3 = transHelper("hk", "devanagari", options2);
