@@ -718,7 +718,7 @@ public class Sanscript {
             options = new HashOptions();
         }
         Options cachedOptions = cache.options != null ? cache.options : new HashOptions();
-        boolean hasPriorState = (cache.from == from && cache.to == to);
+        boolean hasPriorState = (cache.from != null && cache.from.equals(from) && cache.to != null && cache.to.equals(to));
         TMap map;
 
         // Here we simultaneously build up an `options` object and compare
@@ -737,7 +737,6 @@ public class Sanscript {
                 if (!value.equals(cachedOptions.get(key))) {
                     hasPriorState = false;
                 }
-
         }
 
         if (hasPriorState) {
