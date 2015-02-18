@@ -186,10 +186,9 @@ public class SanscriptTest {
      * @return          the function described above.
      */
     protected TransHelper transHelper(String from, String to, Sanscript.Options options) {
-        TransHelper transHelper = (input, output, description) -> {
+        return (input, output, description) -> {
             assertEquals(description, output, sanscript.t(input, from, to, options));
         };
-        return transHelper;
     }
 
     protected TransHelper transHelper(String from, String to) {
