@@ -29,7 +29,7 @@ public class Sanscript {
         }
     }
 
-    Options defaults = new HashOptions().set("skip_sgml", false).set("syncope", false);
+    private Options defaults = new HashOptions().set("skip_sgml", false).set("syncope", false);
 
     public static interface Scheme extends Map<String, String[]> {
         public Scheme cheapCopy();
@@ -53,9 +53,9 @@ public class Sanscript {
         }
     }
 
-    class Schemes extends HashMap<String, Scheme> {}
+    public class Schemes extends HashMap<String, Scheme> {}
 
-    Schemes schemes = new Schemes();
+    private Schemes schemes = new Schemes();
 
     public Schemes getSchemes() {
         return schemes;
@@ -75,7 +75,7 @@ public class Sanscript {
      * (Since "abugida" is not a well-known term, Sanscript uses "Brahmic"
      * and "roman" for clarity.)
      */
-    void initializeSchemes() {
+    private void initializeSchemes() {
         Scheme scheme;
 
         /* Bengali
@@ -334,15 +334,15 @@ public class Sanscript {
     }
 
     // Set of names of Roman schemes.
-    Map<String, Boolean> romanSchemes = new HashMap<String, Boolean>();
+    private Map<String, Boolean> romanSchemes = new HashMap<String, Boolean>();
 
     // Map of alternate encodings.
-    class AlternateMap extends HashMap<String, String[]> {}
-    class Alternates extends HashMap<String, AlternateMap> {}
+    private class AlternateMap extends HashMap<String, String[]> {}
+    private class Alternates extends HashMap<String, AlternateMap> {}
 
-    Alternates allAlternates = new Alternates();
+    private Alternates allAlternates = new Alternates();
 
-    void initializeAlternates() {
+    private void initializeAlternates() {
         AlternateMap map = new AlternateMap();
         map.put("A", new String[] {"aa"});
         map.put("I", new String[] {"ii", "ee"});
@@ -373,14 +373,14 @@ public class Sanscript {
     }
 
     // object cache
-    class Cache {
+    private class Cache {
         public String from = null;
         public String to = null;
         public TMap map = null;
         public Options options = null;
     }
 
-    Cache cache = new Cache();
+    private Cache cache = new Cache();
 
     /**
      * Check whether the given scheme encodes romanized Sanskrit.
@@ -433,7 +433,7 @@ public class Sanscript {
     }
 
     // Set up various schemes
-    void initializeSpecialSchemes() {
+    private void initializeSpecialSchemes() {
         // Set up roman schemes
         Scheme kolkata = schemes.get("iast").cheapCopy();
         kolkata.put("vowels", new String[] {"a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "e", "ē", "ai", "o", "ō", "au"});
@@ -455,9 +455,9 @@ public class Sanscript {
         addRomanScheme("itrans_dravidian", itrans_dravidian);
     }
 
-    class SMap extends HashMap<String, String> {}
+    private class SMap extends HashMap<String, String> {}
 
-    class TMap {
+    private class TMap {
         public boolean fromRoman;
         public boolean toRoman;
         public SMap consonants;
@@ -475,7 +475,7 @@ public class Sanscript {
      * @param to       output scheme
      * @param options  scheme options
      */
-    TMap makeMap(String from, String to, Options options) {
+    private TMap makeMap(String from, String to, Options options) {
         AlternateMap alternates = allAlternates.get(from) != null ? allAlternates.get(from) : new AlternateMap();
         SMap consonants = new SMap();
         Scheme fromScheme = schemes.get(from);
@@ -542,7 +542,7 @@ public class Sanscript {
      * @param options  transliteration options
      * @return         the finished string
      */
-    String transliterateRoman(String data, TMap map, Options options) {
+    private String transliterateRoman(String data, TMap map, Options options) {
         StringBuilder buf = new StringBuilder();
         SMap consonants = map.consonants;
         int dataLength = data.length();
@@ -644,7 +644,7 @@ public class Sanscript {
      * @param options  transliteration options
      * @return         the finished string
      */
-    String transliterateBrahmic(String data, TMap map, Options options) {
+    private String transliterateBrahmic(String data, TMap map, Options options) {
         StringBuilder buf = new StringBuilder();
         SMap consonants = map.consonants;
         boolean danglingHash = false;

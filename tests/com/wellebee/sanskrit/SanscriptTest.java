@@ -8,7 +8,7 @@ public class SanscriptTest {
     protected Sanscript sanscript = new Sanscript();
 
     protected class DataSet extends HashMap<String, String> {}
-    public class DataSets extends HashMap<String, DataSet> {}
+    protected class DataSets extends HashMap<String, DataSet> {}
     protected DataSets dataSets = new DataSets();
 
     SanscriptTest() {
