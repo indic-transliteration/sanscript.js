@@ -20,8 +20,10 @@ public class Sanscript {
         initializeSpecialSchemes();
     }
 
+    // Options interface.
     public static interface Options extends Map<String, Object> {}
 
+    // Options default implementation.
     public static class HashOptions extends HashMap<String, Object> implements Options  {
         public HashOptions set(String key, Object value) {
             put(key, value);
@@ -31,24 +33,20 @@ public class Sanscript {
 
     private Options defaults = new HashOptions().set("skip_sgml", false).set("syncope", false);
 
+    // Scheme interface.
     public static interface Scheme extends Map<String, String[]> {
+        // Create a deep copy of a scheme.
         public Scheme cheapCopy();
     }
 
+    // Scheme default implementation.
     public static class HashScheme extends HashMap<String, String[]> implements Scheme {
-        /**
-         * Create a deep copy of a scheme.
-         *
-         * @param scheme  the scheme to copy
-         * @return        the copy
-         */
         public Scheme cheapCopy() {
             Scheme copy = new HashScheme();
             for (Map.Entry<String, String[]> entry : entrySet()) {
                 String[] value = entry.getValue();
                 copy.put(entry.getKey(), Arrays.copyOf(value, value.length));
             }
-
             return copy;
         }
     }
@@ -57,6 +55,11 @@ public class Sanscript {
 
     private Schemes schemes = new Schemes();
 
+    /**
+     * Returns the collection of all schemes.
+     *
+     * @return Schemes
+     */
     public Schemes getSchemes() {
         return schemes;
     }
@@ -513,7 +516,6 @@ public class Sanscript {
                     }
                     if (group.equals("consonants") || group.equals("other")) {
                         consonants.put(F, T);
-
                         for (String alt : alts) {
                             consonants.put(alt, T);
                         }
@@ -763,6 +765,7 @@ public class Sanscript {
         }
     }
 
+    // Version of t() that supplies null options.
     public String t(String data, String from, String to) {
         return t(data, from, to, null);
     }

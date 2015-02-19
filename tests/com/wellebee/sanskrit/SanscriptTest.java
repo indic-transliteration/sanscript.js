@@ -171,6 +171,9 @@ public class SanscriptTest {
         dataSets.put("wx", dataSet);
     }
 
+    /**
+     * The functional interface for a test runner.
+     */
     protected interface TransHelper {
          void run(String input, String output, String description);
     }
@@ -191,6 +194,7 @@ public class SanscriptTest {
         };
     }
 
+    // Version of transHelper() that supplies null options.
     protected TransHelper transHelper(String from, String to) {
         return transHelper(from, to, null);
     }

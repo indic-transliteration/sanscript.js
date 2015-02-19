@@ -5,8 +5,7 @@ import org.junit.Test;
 public class SanscriptTestOptions extends SanscriptTest {
     @Test
     public void testHindiStyleTransliteration() {
-        Sanscript.Options options = new Sanscript.HashOptions();
-        options.put("syncope", true);
+        Sanscript.Options options = new Sanscript.HashOptions().set("syncope", true);
         TransHelper f = transHelper("itrans", "devanagari", options);
         f.run("karaN", "करण", "");
         f.run("rAj ke lie", "राज के लिए", "");
