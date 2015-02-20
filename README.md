@@ -1,15 +1,21 @@
-Sanscript.js
+Sanscript.java
 =============================
 
 Introduction
 -----------------------------
-Sanscript is a transliteration library for Indian languages. It supports the most popular Indian scripts and several different romanization schemes. Although Sanscript focuses on Sanskrit transliteration, it has partial support for other languages and is easy to extend.
+Sanscript is a transliteration library for Indian languages written in Java. It supports the most popular Indian scripts and several different romanization schemes. Although Sanscript focuses on Sanskrit transliteration, it has partial support for other languages and is easy to extend.
+
+Requirements
+-----------------------------
+Sanscript requires Java 8 or higher.
 
 Usage
 -----------------------------
 Sanscript is simple to use:
 
-    var output = Sanscript.t(input, from, to);
+    import com.wellebee.sanskrit;
+    Sanscript sanscript = new Sanscript();
+    String output = sanscript.t(input, from, to);
 
 Here, `from` and `to` are the names of different **schemes**. In Sanscript, the word "scheme" refers to both scripts and romanizations. These schemes are of two types:
 
@@ -42,13 +48,13 @@ and the following Roman schemes:
 ### Disabling transliteration
 When Sanscript sees the token `##`, it toggles the transliteration state:
 
-    Sanscript.t('ga##Na##pa##te', 'hk', 'devanagari'); // गNaपte
-    Sanscript.t('ध##र्म##क्षेत्रे', 'devanagari', 'hk'); // dhaर्मkSetre
+    sanscript.t("ga##Na##pa##te", "hk", "devanagari"); // गNaपte
+    sanscript.t("ध##र्म##क्षेत्रे", "devanagari", "hk"); // dhaर्मkSetre
 
 When Sanscript sees the token `\`, it disables transliteration on the character that immediately follows. `\` is used for ITRANS compatibility; we recommend always using `##` instead.
 
-    Sanscript.t('a \\a', 'itrans', 'devanagari'); // अ a
-    Sanscript.t('\\##aham', 'itrans', 'devanagari'); // ##अहम्
+    sanscript.t("a \\a", "itrans", "devanagari"); // अ a
+    sanscript.t("\\##aham", "itrans", "devanagari"); // ##अहम्
 
 ### Transliterating to lossy schemes
 A **lossy** scheme does not have the letters needed to support lossless translation. For example, Bengali is a lossy scheme because it uses `ব` for both `ba` and `va`. In future releases, Sanscript might let you choose how to handle lossiness. For the time being, it makes some fairly bad hard-coded assumptions. Corrections and advice are always welcome.
@@ -56,8 +62,8 @@ A **lossy** scheme does not have the letters needed to support lossless translat
 ### Transliteration options
 You can tweak the transliteration function by passing an `options` object:
 
-    var output = Sanscript.t(input, from, to, options);
-    
+    String output = sanscript.t(input, from, to, options);
+
 `options` maps options to values. Currently, these options are supported:
 
 * `skip_sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b>` → `<ब्>इति</ब्>`). Defaults to `false`.
@@ -67,7 +73,7 @@ Adding new schemes
 -----------------------------
 Adding a new scheme is simple:
 
-    Sanscript.addBrahmicScheme(schemeName, schemeData);
-    Sanscript.addRomanScheme(schemeName, schemeData);
+    sanscript.addBrahmicScheme(schemeName, scheme);
+    sanscript.addRomanScheme(schemeName, scheme);
 
-For help in creating `schemeData`, see the comments on the `addBrahmicScheme` and `addRomanScheme` functions.
+For help in creating `scheme`, see the comments on the `addBrahmicScheme` and `addRomanScheme` functions.
