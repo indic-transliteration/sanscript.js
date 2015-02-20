@@ -14,7 +14,7 @@ public class SanscriptTestToggle extends SanscriptTest {
         f.run("a####kSara", "अक्षर", "Redundant disable 2");
         f.run("a#kSara", "अ#क्षर", "Misleading disable");
     }
-
+    @Test
     public void testDevanagari() {
         TransHelper f = transHelper("devanagari", "hk");
         f.run("अ##क्ष##र", "aक्षra", "Basic disable");
