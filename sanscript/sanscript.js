@@ -755,7 +755,7 @@
             alldata = alldata.replace(/ಞ್(ಚ|ಛ|ಜ|ಝ)/g,"ಂ$1")
             alldata = alldata.replace(/ಣ್(ಟ|ಠ|ಡ|ಢ)/g,"ಂ$1")
             alldata = alldata.replace(/ನ್(ತ|ಥ|ದ|ಧ)/g,"ಂ$1")
-            alldata = alldata.replace(/ಮ್(ಪ|ಫ|ಬ|ಭ|\s)/g,"ಂ$1")
+            alldata = alldata.replace(/ಮ್(ಪ|ಫ|ಬ|ಭ|\s|\p{P})/g,"ಂ$1")
         }         
     // Enable Malayalam Chillu Support - code to be streamlined after rules are defined correctly
         if (to == 'malayalam' ) {
