@@ -6,7 +6,7 @@
  *
  * Released under the MIT and GPL Licenses.
  *
- * Last updated on Feb 11, 2015  by Shree for Tamil Vedic Accents
+ * Last updated on 3/15/2015 by Shree for Kannada Anusvar
  */
 
 (function(Sanscript) {
@@ -38,17 +38,18 @@
 
         /* Bengali
          * -------
-         * 'va' and 'ba' are both rendered as ব.
+         * 'va' and 'ba' are both rendered as ব. 
          */
         bengali: {
             vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ  এ ঐ  ও ঔ'.split(' '),
             vowel_marks: 'া ি ী ু ূ ৃ ৄ ৢ ৣ  ে ৈ  ো ৌ'.split(' '),
             other_marks: 'ং ঃ ঁ'.split(' '),
             virama: ['্'],
-            consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ব শ ষ স হ ळ ক্ষ জ্ঞ'.split(' '),
-            symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥'.split(' '),
+            consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য় র ল ব শ ষ স হ ळ ক্ষ জ্ঞ'.split(' '),
+            symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ওঁ ঽ । ॥'.split(' '),
             other: '    ড ঢ  য '.split(' '),
             candra: [''],
+            accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
             combo_accent: ["", "", "", ""]
         },
 
@@ -112,7 +113,7 @@
             other_marks: 'ં ઃ ઁ'.split(' '),
             virama: ['્'],
             consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
-            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ . ..'.split(' '),
+            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ । ॥'.split(' '),
             candra: ['ૅ'],
             skip: [''],
             accent: ['\u0951', '\u0952', "\u1cda", "\ua8f3"],
@@ -166,6 +167,7 @@
             symbols: '0 1 2 3 4 5 6 7 8 9 ഓം ഽ । ॥'.split(' '),
             other: '        റ'.split(' '),
             candra: [''],
+            accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
             combo_accent: ["", "", "", ""]
         },
 
@@ -178,10 +180,11 @@
             vowel_marks: 'ା ି ୀ ୁ ୂ ୃ ୄ ୢ ୣ  େ ୈ  ୋ ୌ'.split(' '),
             other_marks: 'ଂ ଃ ଁ'.split(' '),
             virama: ['୍'],
-            consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ଯ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
+            consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ୟ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
             symbols: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥'.split(' '),
             other: '    ଡ ଢ  ଯ '.split(' '),
             candra: [''],
+            accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
             combo_accent: ["", "", "", ""]
         },
 
@@ -200,6 +203,7 @@
             symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
             other: '        ற'.split(' '),
             candra: [''],
+            accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
             combo_accent: ["", "", "", ""]
         },
 
@@ -728,8 +732,8 @@
         if (from === 'itrans') {
             data = data.replace(/\.h/g, '');
             data = data.replace(/\{\\m\+\}/g, "##<strong>ꣳ</strong>##");
-            data = data.replace(/\(\\"\)/g, "##$1##");
-            data = data.replace(/\\([^'`_]|$)/g, "##$1##");
+//            data = data.replace(/\(\\"\)/g, "##$1##");
+//            data = data.replace(/\\([^'`_]|$)/g, "##$1##");
         }
 
         var alldata = '';
@@ -738,29 +742,53 @@
         } else {
             alldata = transliterateBrahmic(data, map, options);
         }
-
+        
+    // bengali ya - change virama plus য় to virama plus য
+        if (to == 'bengali' ) {
+            // m to M ; 
+            alldata = alldata.replace(/্য়/g,"্য")
+        } 
+    // kannada - change panchama varna to anusvar
+        if (to == 'kannada' ) {
+            // ~n, ~N, N to M ; 
+            alldata = alldata.replace(/ಙ್(ಕ|ಖ|ಗ|ಘ)/g,"ಂ$1")
+            alldata = alldata.replace(/ಞ್(ಚ|ಛ|ಜ|ಝ)/g,"ಂ$1")
+            alldata = alldata.replace(/ಣ್(ಟ|ಠ|ಡ|ಢ)/g,"ಂ$1")
+            alldata = alldata.replace(/ನ್(ತ|ಥ|ದ|ಧ)/g,"ಂ$1")
+            alldata = alldata.replace(/ಮ್(ಪ|ಫ|ಬ|ಭ|\s)/g,"ಂ$1")
+        }         
     // Enable Malayalam Chillu Support - code to be streamlined after rules are defined correctly
         if (to == 'malayalam' ) {
             // m to M ; 
             alldata = alldata.replace(/മ്/g,"ം")
+            // use ZWJ to create chillus for N, n, r, l, L
+            alldata = alldata.replace(/(ണ്|ന്|ര്|ല്|ള്)/g,"$1\u200D")  
             // re-change to glyph when followed by p or m, 
             alldata = alldata.replace(/ംമ/g,"മ്മ")     
-            alldata = alldata.replace(/ംപ/g,"മ്പ")             
-            // change to atomic chillu causes problems for conjunct glyphs
-            // use ZWJ to create chillus for N, n, r, l, L
-            // alldata = alldata.replace(/(ണ്|ന്|ര്|ല്|ള്)/g,"$1\u200D")  
-            alldata = alldata.replace(/(ര്|ല്|ള്)/g,"$1\u200D")  
-            // fix NTa  NNa  
+            alldata = alldata.replace(/ംപ/g,"മ്പ")  
+            // or when following t as in gm tm  nm mm Nm
+            alldata = alldata.replace(/ഗ്ം/g,"ഗ്മ്") 
+            alldata = alldata.replace(/ത്ം/g,"ത്മ്") 
+            alldata = alldata.replace(/ൻം/g,"ന്മ്") 
+            alldata = alldata.replace(/ംം/g,"മ്മ്") 
+            alldata = alldata.replace(/ൺം/g,"ണ്മ്")          
+            // fix NTa-NNa  
             alldata = alldata.replace(/ണ്‍ട/g,"ണ്ട")  
+            alldata = alldata.replace(/ണ്‍ഠ/g,"ണ്ഠ")  
+            alldata = alldata.replace(/ണ്‍ഡ/g,"ണ്ഡ")  
+            alldata = alldata.replace(/ണ്‍ഢ/g,"ണ്ഢ")  
             alldata = alldata.replace(/ണ്‍ണ/g,"ണ്ണ")  
-            // fix nta  nna  
+            // fix nta-nna  
             alldata = alldata.replace(/ന്‍ത/g,"ന്ത")  
-            alldata = alldata.replace(/ന്‍ന/g,"ന്ന")  
+            alldata = alldata.replace(/ന്‍ഥ/g,"ന്ഥ")  
+            alldata = alldata.replace(/ന്‍ദ/g,"ന്ദ")
+            alldata = alldata.replace(/ന്‍ധ/g,"ന്ധ")  
+            alldata = alldata.replace(/ന്‍ന/g,"ന്ന")   
             // remove ZWJ when followed by ya la va
-            alldata = alldata.replace(/\u200D(യ|വ|ല)/g,"$1")          
+            alldata = alldata.replace(/\u200D(യ|വ|ല)/g,"$1")                 
             // fix for ര്‍വ.  -  r^va
-            alldata = alldata.replace(/ര്വ/g,"ര്‍വ")               
-          // chillu k not used much
+            alldata = alldata.replace(/ര്വ/g,"ര്‍വ")                                     
+            // chillu k not used much
           // alldata = alldata.replace(/ക്/g,"ക്‍")     
           // glyph not defined for this yet
           // alldata = alldata.replace(/ൻ്റ/g,"ൻ്റ) ")                        
@@ -776,7 +804,7 @@
         }
         if (to == 'tamil' && options.enableTamilCharPositionFixes == true) {
             alldata = alldata
-            .replace(/([\s-])ன/g, "$1ந")
+            .replace(/([\s\p{P}])ன/g, "$1ந")
             .replace(/ன்த/g,"ந்த")
       //    .replace(/ன்ன/g,"ந்ந")
             .replace(/னாம/g,"நாம")
