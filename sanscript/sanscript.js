@@ -6,7 +6,10 @@
  *
  * Released under the MIT and GPL Licenses.
  *
- * Last updated on 3/15/2015 by Shree for Kannada Anusvar
+ CHANGELOG
+ 2015 use \u2060 word joiner for vedic accents for bangla, malayalam, oriya and tamil
+ 3/15/2015 by Shree for Kannada Anusvar
+ 7/23/2016 fix for Bangla for  ळ to ল় as per aksharamukha
  */
 
 (function(Sanscript) {
@@ -38,14 +41,14 @@
 
         /* Bengali
          * -------
-         * 'va' and 'ba' are both rendered as ব. 
+         * 'va' and 'ba' are both rendered as ব. ळ to ল় as per aksharamukha
          */
         bengali: {
             vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ  এ ঐ  ও ঔ'.split(' '),
             vowel_marks: 'া ি ী ু ূ ৃ ৄ ৢ ৣ  ে ৈ  ো ৌ'.split(' '),
             other_marks: 'ং ঃ ঁ'.split(' '),
             virama: ['্'],
-            consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য় র ল ব শ ষ স হ ळ ক্ষ জ্ঞ'.split(' '),
+            consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য় র ল ব শ ষ স হ ল় ক্ষ জ্ঞ'.split(' '),
             symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ওঁ ঽ । ॥'.split(' '),
             other: '    ড ঢ  য '.split(' '),
             candra: [''],
@@ -755,7 +758,7 @@
             alldata = alldata.replace(/ಞ್(ಚ|ಛ|ಜ|ಝ)/g,"ಂ$1")
             alldata = alldata.replace(/ಣ್(ಟ|ಠ|ಡ|ಢ)/g,"ಂ$1")
             alldata = alldata.replace(/ನ್(ತ|ಥ|ದ|ಧ)/g,"ಂ$1")
-            alldata = alldata.replace(/ಮ್(ಪ|ಫ|ಬ|ಭ|\s|\p{P})/g,"ಂ$1")
+            alldata = alldata.replace(/ಮ್(ಪ|ಫ|ಬ|ಭ)/g,"ಂ$1")
         }         
     // Enable Malayalam Chillu Support - code to be streamlined after rules are defined correctly
         if (to == 'malayalam' ) {
