@@ -858,6 +858,13 @@
             .replace(/னாம/g,"நாம")
             .replace(/னாராயண/g,"நாராயண")
         }
+        if (to == 'grantamil' && options.enableTamilCharPositionFixes == true) {
+            alldata = alldata
+            .replace(/([\s\p{P}])ன/g, "$1ந")
+            .replace(/ன்த/g,"ந்த")
+            .replace(/னாம/g,"நாம")
+            .replace(/னாராயண/g,"நாராயண")
+        }
        if (to == 'tamil') {
             alldata = alldata
             .replace(/ம்க/g,"ங்க")
