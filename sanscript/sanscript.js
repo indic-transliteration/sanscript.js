@@ -10,6 +10,11 @@
  2015 use \u2060 word joiner for vedic accents for bangla, malayalam, oriya and tamil
  3/15/2015 by Shree for Kannada Anusvar
  7/23/2016 fix for Bangla for  ळ to ল় as per aksharamukha
+ 2016 Oct 17 - add Grantha (Indolipi - in Bangla range) using e-Grantamil font, ^e, ^o, ^Z for Tamil
+ 2017 Jan04 - fix jha transliteration for Tamil
+ 2017 Jan 06 - fix anuswar sounds for Tamil via substitution - ref Sivakumar email
+ 2017 Feb 14 - make IAST standard, create a diff one for sa-Latn
+ 2017 Jul 30 - add GranTamil for EaswaranJi
  */
 
 (function(Sanscript) {
@@ -50,9 +55,48 @@
             virama: ['্'],
             consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য় র ল ব শ ষ স হ ল় ক্ষ জ্ঞ'.split(' '),
             symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ওঁ ঽ । ॥'.split(' '),
-            other: '    ড ঢ  য '.split(' '),
+            other: '    ড ঢ  য ল'.split(' '),
             candra: [''],
             accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
+            combo_accent: ["", "", "", ""]
+        },
+		/* Grantha
+         * -------
+         * Grantha in Bengali Range as per Elmar's Indolipi font e-Grantamil, 
+		 * য, ওং is changed compared to Bangla
+         */
+        grantha: {
+            vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ  এ ঐ  ও ঔ'.split(' '),
+            vowel_marks: 'া ি ী ু ূ ৃ ৄ ৢ ৣ  ে ৈ  ো ৌ'.split(' '),
+            other_marks: 'ং ঃ ঁ'.split(' '),
+            virama: ['্'],
+            consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ৱ শ ষ স হ ৰ ক্ষ জ্ঞ'.split(' '),
+            // symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ঀ ঽ । ॥'.split(' '),
+            symbols: '0 1 2 3 4 5 6 7 8 9 ঀ ঽ । ॥'.split(' '),
+            other: '    ড ঢ  য '.split(' '),
+            candra: [''],
+            // Vedic accent. Udatta and anudatta, double udatta and ardhachandra viraama.
+            accent: ['\u0951', '\u0952', '\u1cda', "\ua8f3"],
+            combo_accent: ["", "", "", ""]
+        },
+
+        /* GranTamil
+         * -----
+         * Grantha in Bengali Range as per Elmar's Indolipi font e-Grantamil, 
+         * added for missing letters in Tamil, instead of number superscripts
+		 * for EaswaranJi
+         */
+        grantamil: {
+            vowels: 'அ ஆ இ ஈ உ ஊ ঋ ৠ ঌ ৡ எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
+            vowel_marks: 'ா ி ீ ு ூ ৃ ৄ ৢ ৣ ெ ே ை ொ ோ ௌ'.split(' '),
+            other_marks: 'ং ঃ ঁ'.split(' '),
+            virama: ['்'],
+            consonants: 'க খ গ ঘ ங ச ছ জ ঝ ஞ ட ঠ ড ঢ ண த থ দ ধ ன ப ফ ব ভ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
+            symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
+            other: '        ற ழ'.split(' '),
+            candra: [''],
+            // Vedic accent. Udatta and anudatta, double udatta and ardhachandra viraama.
+            accent: ['\u0951', '\u0952', '\u1cda', "\ua8f3"],
             combo_accent: ["", "", "", ""]
         },
 
@@ -103,7 +147,7 @@
             candra: ['ॅ'],
 
             // Non-Sanskrit consonants
-            other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ'.split(' ')
+            other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ ऴ'.split(' ')
         },
 
         /* Gujarati
@@ -121,7 +165,7 @@
             skip: [''],
             accent: ['\u0951', '\u0952', "\u1cda", "\ua8f3"],
             combo_accent: ["", "", "", ""],
-        other: 'ક ખ ગ જ ડ ઢ ફ ય ર'.split(' ')
+        other: 'ક ખ ગ જ ડ ઢ ફ ય ર ળ઼'.split(' ')
         },
 
         /* Gurmukhi
@@ -135,7 +179,7 @@
             virama: ['੍'],
             consonants: 'ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼ ਕ੍ਸ਼ ਜ੍ਞ'.split(' '),
             symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥'.split(' '),
-            other: ' ਖ ਗ ਜ ਡ  ਫ  '.split(' '),
+            other: ' ਖ ਗ ਜ ਡ  ਫ  ਲ਼'.split(' '),
             candra: [''],
             accent: ['\u0951', '\u0952', "\u1cda", "\ua8f3"],
             combo_accent: ["", "", "", ""]
@@ -152,7 +196,7 @@
             virama: ['್'],
             consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ ಕ್ಷ ಜ್ಞ'.split(' '),
             symbols: '0 1 2 3 4 5 6 7 8 9 ಓಂ ಽ । ॥'.split(' '),
-            other: '      ಫ  ಱ'.split(' '),
+            other: '      ಫ  ಱ ೞ'.split(' '),
             candra: [''],
             combo_accent: ["", "", "", ""]
         },
@@ -168,7 +212,7 @@
             virama: ['്'],
             consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ യ ര ല വ ശ ഷ സ ഹ ള ക്ഷ ജ്ഞ'.split(' '),
             symbols: '0 1 2 3 4 5 6 7 8 9 ഓം ഽ । ॥'.split(' '),
-            other: '        റ'.split(' '),
+            other: '        റ ഴ'.split(' '),
             candra: [''],
             accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
             combo_accent: ["", "", "", ""]
@@ -201,10 +245,10 @@
             vowel_marks: 'ா ி ீ ு ூ ்ருʼ ்ரூʼ ்லுʼ ்லூʼ ெ ே ை ொ ோ ௌ'.split(' '),
             other_marks: 'ம் : '.split(' '),
             virama: ['்'],
-            consonants: 'க க² க³ க⁴ ங ச ச² ஜ ச ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ன ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
+            consonants: 'க க² க³ க⁴ ங ச ச² ஜ ஜ² ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ன ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
 /*            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '), */
             symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
-            other: '        ற'.split(' '),
+            other: '        ற ழ'.split(' '),
             candra: [''],
             accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
             combo_accent: ["", "", "", ""]
@@ -221,23 +265,24 @@
             virama: ['్'],
             consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ య ర ల వ శ ష స హ ళ క్ష జ్ఞ'.split(' '),
             symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥'.split(' '),
-            other: '        ఱ'.split(' '),
+            other: '        ఱ ఴ'.split(' '),
             candra: [''],
             combo_accent: ["", "", "", ""]
         },
 
-        /* International Alphabet of Sanskrit Transliteration
+        
+        /* International Alphabet of Sanskrit Transliteration 
          * --------------------------------------------------
          * The most "professional" Sanskrit romanization scheme.
          */
         iast: {
-            vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ  e ai  o au'.split(' '),
+            vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ e e ai o o au'.split(' '),
             other_marks: ['ṃ', 'ḥ', '~'],
             virama: [''],
-            consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' '),
+            consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḷ kṣ jñ'.split(' '),
+            symbols: "0 1 2 3 4 5 6 7 8 9 Om̃ ' । ॥".split(' '),
             candra: ['̆'],
-            other: 'q K G z .D .Dh f Y R'.split(' ')
+            other: 'q k͟h ġ z ṛ ṛh f ẏ ṟ ḻ'.split(' ')
         },
 
         /* ITRANS
@@ -249,7 +294,7 @@
          * '_' is a "null" letter, which allows adjacent vowels.
          */
         itrans: {
-            vowels: 'a A i I u U RRi RRI LLi LLI  e ai  o au'.split(' '),
+            vowels: 'a A i I u U RRi RRI LLi LLI ^e e ai ^o o au'.split(' '),
             other_marks: ['M', 'H', '.N'],
             virama: [''],
             consonants: 'k kh g gh ~N ch Ch j jh ~n T Th D Dh N t th d dh n p ph b bh m y r l v sh Sh s h L kSh j~n'.split(' '),
@@ -258,7 +303,7 @@
             zwj: ['{}'],
             skip: '_',
             combo_accent: "\\'H \\_H \\'M \\_M".split(' '),
-            other: 'q K G z .D .Dh f Y R'.split(' ')
+            other: 'q K G z .D .Dh f Y R Z'.split(' ')
         },
 
         /* Harvard-Kyoto
@@ -812,6 +857,14 @@
       //    .replace(/ன்ன/g,"ந்ந")
             .replace(/னாம/g,"நாம")
             .replace(/னாராயண/g,"நாராயண")
+        }
+       if (to == 'tamil') {
+            alldata = alldata
+            .replace(/ம்க/g,"ங்க")
+            .replace(/ம்ச/g,"ஞ்ச")
+            .replace(/ம்ஜ/g,"ஞ்ஜ")
+            .replace(/ம்த/g,"ந்த")
+            .replace(/ம்ட/g,"ண்ட")
         }
         return alldata;
     };
