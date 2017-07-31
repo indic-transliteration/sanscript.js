@@ -79,7 +79,6 @@
             accent: ['\u0951', '\u0952', '\u1cda', "\ua8f3"],
             combo_accent: ["", "", "", ""]
         },
-
         /* GranTamil
          * -----
          * Grantha in Bengali Range as per Elmar's Indolipi font e-Grantamil, 
@@ -89,7 +88,7 @@
         grantamil: {
             vowels: 'அ ஆ இ ஈ உ ஊ ঋ ৠ ঌ ৡ எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
             vowel_marks: 'ா ி ீ ு ூ ৃ ৄ ৢ ৣ ெ ே ை ொ ோ ௌ'.split(' '),
-            other_marks: 'ং ঃ ঁ'.split(' '),
+            other_marks: 'ம் ঃ ঁ'.split(' '),
             virama: ['்'],
             consonants: 'க খ গ ঘ ங ச ছ জ ঝ ஞ ட ঠ ড ঢ ண த থ দ ধ ன ப ফ ব ভ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
             symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
@@ -861,11 +860,21 @@
         if (to == 'grantamil' && options.enableTamilCharPositionFixes == true) {
             alldata = alldata
             .replace(/([\s\p{P}])ன/g, "$1ந")
-            .replace(/ன்த/g,"ந்த")
+            .replace(/^ன/g, "ந")
+            .replace(/ன்([தথদধமயவ])/g,"ந்$1")
+            .replace(/ன்ந/g,"ன்ன")
             .replace(/னாம/g,"நாம")
             .replace(/னாராயண/g,"நாராயண")
         }
        if (to == 'tamil') {
+            alldata = alldata
+            .replace(/ம்க/g,"ங்க")
+            .replace(/ம்ச/g,"ஞ்ச")
+            .replace(/ம்ஜ/g,"ஞ்ஜ")
+            .replace(/ம்த/g,"ந்த")
+            .replace(/ம்ட/g,"ண்ட")
+        }
+       if (to == 'grantamil') {
             alldata = alldata
             .replace(/ம்க/g,"ங்க")
             .replace(/ம்ச/g,"ஞ்ச")
