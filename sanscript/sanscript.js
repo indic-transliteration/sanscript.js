@@ -6,15 +6,16 @@
  *
  * Released under the MIT and GPL Licenses.
  *
- CHANGELOG
+ CHANGELOG - Shree
  2015 use \u2060 word joiner for vedic accents for bangla, malayalam, oriya and tamil
- 3/15/2015 by Shree for Kannada Anusvar
- 7/23/2016 fix for Bangla for  ळ to ল় as per aksharamukha
+ 2015/3/15 for Kannada Anusvar
+ 2016/7/23 fix for Bangla for  ळ to ল় as per aksharamukha
  2016 Oct 17 - add Grantha (Indolipi - in Bangla range) using e-Grantamil font, ^e, ^o, ^Z for Tamil
  2017 Jan04 - fix jha transliteration for Tamil
  2017 Jan 06 - fix anuswar sounds for Tamil via substitution - ref Sivakumar email
  2017 Feb 14 - make IAST standard, create a diff one for sa-Latn
- 2017 Jul 30 - add GranTamil for EaswaranJi
+ 2017 Jul-Aug - add GranTamil for EaswaranJi, mixes Tamil and Bengali/Grantha characters
+ 2017 Aug 11 - fix for tamil - saMGYitam - ஸஞ்ஜ்ஞிதம்
  */
 
 (function(Sanscript) {
@@ -71,26 +72,25 @@
             other_marks: 'ং ঃ ঁ'.split(' '),
             virama: ['্'],
             consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ৱ শ ষ স হ ৰ ক্ষ জ্ঞ'.split(' '),
-            // symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ঀ ঽ । ॥'.split(' '),
             symbols: '0 1 2 3 4 5 6 7 8 9 ঀ ঽ । ॥'.split(' '),
             other: '    ড ঢ  য '.split(' '),
             candra: [''],
-            // Vedic accent. Udatta and anudatta, double udatta and ardhachandra viraama.
             accent: ['\u0951', '\u0952', '\u1cda', "\ua8f3"],
             combo_accent: ["", "", "", ""]
         },
         /* GranTamil
          * -----
          * Grantha in Bengali Range as per Elmar's Indolipi font e-Grantamil, 
-         * added for missing letters in Tamil, instead of number superscripts
-		 * for EaswaranJi
+         * added for missing letters in Tamil, instead of number superscripts for EaswaranJi
+		 * use ந for na as per grantha, 
+		 * use tamil maatraas with bengali consonants - errs in browsers
          */
         grantamil: {
             vowels: 'அ ஆ இ ஈ உ ஊ ঋ ৠ ঌ ৡ எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
-            vowel_marks: 'ா ி ீ ு ூ ৃ ৄ ৢ ৣ ெ ே ை ொ ோ ௌ'.split(' '),
+            vowel_marks: 'ா ி ீ ு ூ ৃ ৄ ৢ ৣ ெ ே ை ொ ோ ௌ'.split(' '),  // needs some fixes for grantha characters for e ai o au
             other_marks: 'ம் ঃ ঁ'.split(' '),
             virama: ['்'],
-            consonants: 'க খ গ ঘ ங ச ছ জ ঝ ஞ ட ঠ ড ঢ ண த থ দ ধ ன ப ফ ব ভ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
+            consonants: 'க খ গ ঘ ங ச ছ জ ঝ ஞ ட ঠ ড ঢ ண த থ দ ধ ந ப ফ ব ভ ம ய ர ல வ ஶ ஷ ஸ ஹ ৰ க்ஷ ஜ்ஞ'.split(' '),
             symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
             other: '        ற ழ'.split(' '),
             candra: [''],
@@ -857,22 +857,21 @@
             .replace(/னாம/g,"நாம")
             .replace(/னாராயண/g,"நாராயண")
         }
-        if (to == 'grantamil' && options.enableTamilCharPositionFixes == true) {
-            alldata = alldata
-            .replace(/([\s\p{P}])ன/g, "$1ந")
-            .replace(/^ன/g, "ந")
-            .replace(/ன்([தথদধமயவ])/g,"ந்$1")
-            .replace(/ன்ந/g,"ன்ன")
-            .replace(/னாம/g,"நாம")
-            .replace(/னாராயண/g,"நாராயண")
-        }
        if (to == 'tamil') {
             alldata = alldata
             .replace(/ம்க/g,"ங்க")
             .replace(/ம்ச/g,"ஞ்ச")
             .replace(/ம்ஜ/g,"ஞ்ஜ")
+            .replace(/ஞ்ஜ்ஞ/g,"ம்ஜ்ஞ")
             .replace(/ம்த/g,"ந்த")
             .replace(/ம்ட/g,"ண்ட")
+        }
+        if (to == 'grantamil' && options.enableTamilCharPositionFixes == true) {
+            alldata = alldata
+            .replace(/(খ|গ|ঘ|ছ|জ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ே)/g, "◌ே$1") //Add invisible \u25CC for it to work
+            .replace(/(খ|গ|ঘ|ছ|জ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ோ)/g, "◌ே$1া") //Add invisible \u25CC for it to work
+            .replace(/(খ|গ|ঘ|ছ|জ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ை)/g, "$2$1")
+            .replace(/(খ|গ|ঘ|ছ|জ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ௌ)/g, "ெ$1ள")
         }
        if (to == 'grantamil') {
             alldata = alldata
