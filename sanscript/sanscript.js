@@ -16,6 +16,7 @@
  2017 Feb 14 - make IAST standard, create a diff one for sa-Latn
  2017 Jul-Aug - add GranTamil for EaswaranJi, mixes Tamil and Bengali/Grantha characters
  2017 Aug 11 - fix for tamil - saMGYitam - ஸஞ்ஜ்ஞிதம்
+ 2017 Aug 13 - fix for grantamil - use Tamil ja not grantha
  */
 
 (function(Sanscript) {
@@ -90,7 +91,7 @@
             vowel_marks: 'ா ி ீ ு ூ ৃ ৄ ৢ ৣ ெ ே ை ொ ோ ௌ'.split(' '),  // needs some fixes for grantha characters for e ai o au
             other_marks: 'ம் ঃ ঁ'.split(' '),
             virama: ['்'],
-            consonants: 'க খ গ ঘ ங ச ছ জ ঝ ஞ ட ঠ ড ঢ ண த থ দ ধ ந ப ফ ব ভ ம ய ர ல வ ஶ ஷ ஸ ஹ ৰ க்ஷ ஜ்ஞ'.split(' '),
+            consonants: 'க খ গ ঘ ங ச ছ ஜ ঝ ஞ ட ঠ ড ঢ ண த থ দ ধ ந ப ফ ব ভ ம ய ர ல வ ஶ ஷ ஸ ஹ ৰ க்ஷ ஜ்ஞ'.split(' '),
             symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
             other: '        ற ழ'.split(' '),
             candra: [''],
@@ -868,10 +869,10 @@
         }
         if (to == 'grantamil' && options.enableTamilCharPositionFixes == true) {
             alldata = alldata
-            .replace(/(খ|গ|ঘ|ছ|জ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ே)/g, "◌ே$1") //Add invisible \u25CC for it to work
-            .replace(/(খ|গ|ঘ|ছ|জ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ோ)/g, "◌ே$1া") //Add invisible \u25CC for it to work
-            .replace(/(খ|গ|ঘ|ছ|জ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ை)/g, "$2$1")
-            .replace(/(খ|গ|ঘ|ছ|জ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ௌ)/g, "ெ$1ள")
+            .replace(/(খ|গ|ঘ|ছ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ே)/g, "◌ே$1") //Add invisible \u25CC for it to work
+            .replace(/(খ|গ|ঘ|ছ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ோ)/g, "◌ே$1া") //Add invisible \u25CC for it to work
+            .replace(/(খ|গ|ঘ|ছ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ை)/g, "◌ை$1") //Add invisible ◌ at beginning 
+            .replace(/(খ|গ|ঘ|ছ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ௌ)/g, "◌ெ$1ள") //Add invisible ◌ at beginning 
         }
        if (to == 'grantamil') {
             alldata = alldata
