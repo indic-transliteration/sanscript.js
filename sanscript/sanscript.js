@@ -5,6 +5,18 @@
  * other Indian languages only incidentally.
  *
  * Released under the MIT and GPL Licenses.
+ *
+ CHANGELOG - Shree
+ 2015 use \u2060 word joiner for vedic accents for bangla, malayalam, oriya and tamil
+ 2015/3/15 for Kannada Anusvar
+ 2016/7/23 fix for Bangla for  ळ to ল় as per aksharamukha
+ 2016 Oct 17 - add Grantha (Indolipi - in Bangla range) using e-Grantamil font, ^e, ^o, ^Z for Tamil
+ 2017 Jan04 - fix jha transliteration for Tamil
+ 2017 Jan 06 - fix anuswar sounds for Tamil via substitution - ref Sivakumar email
+ 2017 Feb 14 - make IAST standard, create a diff one for sa-Latn
+ 2017 Jul-Aug - add GranTamil for EaswaranJi, mixes Tamil and Bengali/Grantha characters
+ 2017 Aug 11 - fix for tamil - saMGYitam - ஸஞ்ஜ்ஞிதம்
+ 2017 Aug 13 - fix for grantamil - use Tamil ja not grantha
  */
 
 (function(Sanscript) {
@@ -12,7 +24,10 @@
 
     Sanscript.defaults = {
         skip_sgml: false,
-        syncope: false
+        syncope: false,
+        enableTamilPronunciation: true,
+        enableTamilCharPositionFixes: true,
+        enableSanskritVedicAccents : true,
     };
 
     /* Schemes
@@ -33,16 +48,56 @@
 
         /* Bengali
          * -------
-         * 'va' and 'ba' are both rendered as ব.
+         * 'va' and 'ba' are both rendered as ব. ळ to ল় as per aksharamukha
          */
         bengali: {
             vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ  এ ঐ  ও ঔ'.split(' '),
             vowel_marks: 'া ি ী ু ূ ৃ ৄ ৢ ৣ  ে ৈ  ো ৌ'.split(' '),
             other_marks: 'ং ঃ ঁ'.split(' '),
             virama: ['্'],
-            consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ব শ ষ স হ ळ ক্ষ জ্ঞ'.split(' '),
-            symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ॐ ঽ । ॥'.split(' '),
-            other: '    ড ঢ  য '.split(' ')
+            consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য় র ল ব শ ষ স হ ল় ক্ষ জ্ঞ'.split(' '),
+            symbols: '০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯ ওঁ ঽ । ॥'.split(' '),
+            other: '    ড ঢ  য ল'.split(' '),
+            candra: [''],
+            accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
+            combo_accent: ["", "", "", ""]
+        },
+		/* Grantha
+         * -------
+         * Grantha in Bengali Range as per Elmar's Indolipi font e-Grantamil, 
+		 * য, ওং is changed compared to Bangla
+         */
+        grantha: {
+            vowels: 'অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ  এ ঐ  ও ঔ'.split(' '),
+            vowel_marks: 'া ি ী ু ূ ৃ ৄ ৢ ৣ  ে ৈ  ো ৌ'.split(' '),
+            other_marks: 'ং ঃ ঁ'.split(' '),
+            virama: ['্'],
+            consonants: 'ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল ৱ শ ষ স হ ৰ ক্ষ জ্ঞ'.split(' '),
+            symbols: '0 1 2 3 4 5 6 7 8 9 ঀ ঽ । ॥'.split(' '),
+            other: '    ড ঢ  য '.split(' '),
+            candra: [''],
+            accent: ['\u0951', '\u0952', '\u1cda', "\ua8f3"],
+            combo_accent: ["", "", "", ""]
+        },
+        /* GranTamil
+         * -----
+         * Grantha in Bengali Range as per Elmar's Indolipi font e-Grantamil, 
+         * added for missing letters in Tamil, instead of number superscripts for EaswaranJi
+		 * use ந for na as per grantha, 
+		 * use tamil maatraas with bengali consonants - errs in browsers
+         */
+        grantamil: {
+            vowels: 'அ ஆ இ ஈ உ ஊ ঋ ৠ ঌ ৡ எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
+            vowel_marks: 'ா ி ீ ு ூ ৃ ৄ ৢ ৣ ெ ே ை ொ ோ ௌ'.split(' '),  // needs some fixes for grantha characters for e ai o au
+            other_marks: 'ம் ঃ ঁ'.split(' '),
+            virama: ['்'],
+            consonants: 'க খ গ ঘ ங ச ছ ஜ ঝ ஞ ட ঠ ড ঢ ண த থ দ ধ ந ப ফ ব ভ ம ய ர ல வ ஶ ஷ ஸ ஹ ৰ க்ஷ ஜ்ஞ'.split(' '),
+            symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
+            other: '        ற ழ'.split(' '),
+            candra: [''],
+            // Vedic accent. Udatta and anudatta, double udatta and ardhachandra viraama.
+            accent: ['\u0951', '\u0952', '\u1cda', "\ua8f3"],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Devanagari
@@ -82,8 +137,8 @@
             // of parser ambiguity. Thus "barau" -> बरौ but "bara_u" -> बरउ.
             skip: [''],
 
-            // Vedic accent. Udatta and anudatta.
-            accent: ['\u0951', '\u0952'],
+            // Vedic accent. Udatta and anudatta, double udatta and ardhachandra viraama.
+            accent: ['\u0951', '\u0952', "\u1cda", "\ua8f3"],
 
             // Accent combined with anusvara and and visarga. For compatibility
             // with ITRANS, which allows the reverse of these four.
@@ -92,7 +147,7 @@
             candra: ['ॅ'],
 
             // Non-Sanskrit consonants
-            other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ'.split(' ')
+            other: 'क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ ऱ ऴ'.split(' ')
         },
 
         /* Gujarati
@@ -105,8 +160,12 @@
             other_marks: 'ં ઃ ઁ'.split(' '),
             virama: ['્'],
             consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ ય ર લ વ શ ષ સ હ ળ ક્ષ જ્ઞ'.split(' '),
-            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ ૤ ૥'.split(' '),
-            candra: ['ૅ']
+            symbols: '૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯ ૐ ઽ । ॥'.split(' '),
+            candra: ['ૅ'],
+            skip: [''],
+            accent: ['\u0951', '\u0952', "\u1cda", "\ua8f3"],
+            combo_accent: ["", "", "", ""],
+        other: 'ક ખ ગ જ ડ ઢ ફ ય ર ળ઼'.split(' ')
         },
 
         /* Gurmukhi
@@ -120,7 +179,10 @@
             virama: ['੍'],
             consonants: 'ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼ ਕ੍ਸ਼ ਜ੍ਞ'.split(' '),
             symbols: '੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯ ॐ ऽ । ॥'.split(' '),
-            other: ' ਖ ਗ ਜ ਡ  ਫ  '.split(' ')
+            other: ' ਖ ਗ ਜ ਡ  ਫ  ਲ਼'.split(' '),
+            candra: [''],
+            accent: ['\u0951', '\u0952', "\u1cda", "\ua8f3"],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Kannada
@@ -133,8 +195,10 @@
             other_marks: 'ಂ ಃ ँ'.split(' '),
             virama: ['್'],
             consonants: 'ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ ಕ್ಷ ಜ್ಞ'.split(' '),
-            symbols: '೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯ ಓಂ ಽ । ॥'.split(' '),
-            other: '      ಫ  ಱ'.split(' ')
+            symbols: '0 1 2 3 4 5 6 7 8 9 ಓಂ ಽ । ॥'.split(' '),
+            other: '      ಫ  ಱ ೞ'.split(' '),
+            candra: [''],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Malayalam
@@ -147,8 +211,11 @@
             other_marks: 'ം ഃ ँ'.split(' '),
             virama: ['്'],
             consonants: 'ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ യ ര ല വ ശ ഷ സ ഹ ള ക്ഷ ജ്ഞ'.split(' '),
-            symbols: '൦ ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ഓം ഽ । ॥'.split(' '),
-            other: '        റ'.split(' ')
+            symbols: '0 1 2 3 4 5 6 7 8 9 ഓം ഽ । ॥'.split(' '),
+            other: '        റ ഴ'.split(' '),
+            candra: [''],
+            accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Oriya
@@ -160,9 +227,12 @@
             vowel_marks: 'ା ି ୀ ୁ ୂ ୃ ୄ ୢ ୣ  େ ୈ  ୋ ୌ'.split(' '),
             other_marks: 'ଂ ଃ ଁ'.split(' '),
             virama: ['୍'],
-            consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ଯ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
+            consonants: 'କ ଖ ଗ ଘ ଙ ଚ ଛ ଜ ଝ ଞ ଟ ଠ ଡ ଢ ଣ ତ ଥ ଦ ଧ ନ ପ ଫ ବ ଭ ମ ୟ ର ଲ ଵ ଶ ଷ ସ ହ ଳ କ୍ଷ ଜ୍ଞ'.split(' '),
             symbols: '୦ ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯ ଓଂ ଽ । ॥'.split(' '),
-            other: '    ଡ ଢ  ଯ '.split(' ')
+            other: '    ଡ ଢ  ଯ '.split(' '),
+            candra: [''],
+            accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Tamil
@@ -171,13 +241,17 @@
          * The most incomplete of the Sanskrit schemes here.
          */
         tamil: {
-            vowels: 'அ ஆ இ ஈ உ ஊ     எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
-            vowel_marks: 'ா ி ீ ு ூ     ெ ே ை ொ ோ ௌ'.split(' '),
-            other_marks: 'ஂ ஃ '.split(' '),
+            vowels: 'அ ஆ இ ஈ உ ஊ ருʼ ரூʼ லுʼ லூʼ எ ஏ ஐ ஒ ஓ ஔ'.split(' '),
+            vowel_marks: 'ா ி ீ ு ூ ்ருʼ ்ரூʼ ்லுʼ ்லூʼ ெ ே ை ொ ோ ௌ'.split(' '),
+            other_marks: 'ம் : '.split(' '),
             virama: ['்'],
-            consonants: 'க க க க ங ச ச ஜ ச ஞ ட ட ட ட ண த த த த ந ப ப ப ப ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
-            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௐ ऽ । ॥'.split(' '),
-            other: '        ற'.split(' ')
+            consonants: 'க க² க³ க⁴ ங ச ச² ஜ ஜ² ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ன ப ப² ப³ ப⁴ ம ய ர ல வ ஶ ஷ ஸ ஹ ள க்ஷ ஜ்ஞ'.split(' '),
+/*            symbols: '௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ஓம்ʼ ऽ । ॥'.split(' '), */
+            symbols: '0 1 2 3 4 5 6 7 8 9 ௐ ऽ । ॥'.split(' '),
+            other: '        ற ழ'.split(' '),
+            candra: [''],
+            accent: ['\u2060', '\u2060', "\u2060", "\u2060"],
+            combo_accent: ["", "", "", ""]
         },
 
         /* Telugu
@@ -191,19 +265,24 @@
             virama: ['్'],
             consonants: 'క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ఠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ య ర ల వ శ ష స హ ళ క్ష జ్ఞ'.split(' '),
             symbols: '౦ ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯ ఓం ఽ । ॥'.split(' '),
-            other: '        ఱ'.split(' ')
+            other: '        ఱ ఴ'.split(' '),
+            candra: [''],
+            combo_accent: ["", "", "", ""]
         },
 
-        /* International Alphabet of Sanskrit Transliteration
+        
+        /* International Alphabet of Sanskrit Transliteration 
          * --------------------------------------------------
          * The most "professional" Sanskrit romanization scheme.
          */
         iast: {
-            vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ  e ai  o au'.split(' '),
+            vowels: 'a ā i ī u ū ṛ ṝ ḷ ḹ e e ai o o au'.split(' '),
             other_marks: ['ṃ', 'ḥ', '~'],
             virama: [''],
-            consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḻ kṣ jñ'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oṃ ' । ॥".split(' ')
+            consonants: 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḷ kṣ jñ'.split(' '),
+            symbols: "0 1 2 3 4 5 6 7 8 9 Om̃ ' । ॥".split(' '),
+            candra: ['̆'],
+            other: 'q k͟h ġ z ṛ ṛh f ẏ ṟ ḻ'.split(' ')
         },
 
         /* ITRANS
@@ -215,7 +294,7 @@
          * '_' is a "null" letter, which allows adjacent vowels.
          */
         itrans: {
-            vowels: 'a A i I u U RRi RRI LLi LLI  e ai  o au'.split(' '),
+            vowels: 'a A i I u U RRi RRI LLi LLI ^e e ai ^o o au'.split(' '),
             other_marks: ['M', 'H', '.N'],
             virama: [''],
             consonants: 'k kh g gh ~N ch Ch j jh ~n T Th D Dh N t th d dh n p ph b bh m y r l v sh Sh s h L kSh j~n'.split(' '),
@@ -223,9 +302,8 @@
             candra: ['.c'],
             zwj: ['{}'],
             skip: '_',
-            accent: ["\\'", "\\_"],
             combo_accent: "\\'H \\_H \\'M \\_M".split(' '),
-            other: 'q K G z .D .Dh f Y R'.split(' ')
+            other: 'q K G z .D .Dh f Y R Z'.split(' ')
         },
 
         /* Harvard-Kyoto
@@ -237,7 +315,8 @@
             other_marks: 'M H ~'.split(' '),
             virama: [''],
             consonants: 'k kh g gh G c ch j jh J T Th D Dh N t th d dh n p ph b bh m y r l v z S s h L kS jJ'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 OM ' | ||".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 OM ' | ||".split(' '),
+            candra: ['']
         },
 
         /* National Library at Kolkata
@@ -258,7 +337,8 @@
             other_marks: 'M H ~'.split(' '),
             virama: [''],
             consonants: 'k K g G N c C j J Y w W q Q R t T d D n p P b B m y r l v S z s h L kz jY'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' . ..".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' . ..".split(' '),
+            candra: ['̆']
         },
 
         /* Velthuis
@@ -270,7 +350,8 @@
             other_marks: '.m .h '.split(' '),
             virama: [''],
             consonants: 'k kh g gh "n c ch j jh ~n .t .th .d .d .n t th d dh n p ph b bh m y r l v ~s .s s h L k.s j~n'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | ||".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 o.m ' | ||".split(' '),
+            candra: ['̆']
         },
 
         /* WX
@@ -282,7 +363,8 @@
             other_marks: 'M H z'.split(' '),
             virama: [''],
             consonants: 'k K g G f c C j J F t T d D N w W x X n p P b B m y r l v S R s h  kR jF'.split(' '),
-            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' | ||".split(' ')
+            symbols: "0 1 2 3 4 5 6 7 8 9 oM ' | ||".split(' '),
+            candra: ['̆']
         }
     },
 
@@ -696,15 +778,110 @@
 
         // Easy way out for "{\m+}", "\", and ".h".
         if (from === 'itrans') {
-            data = data.replace(/\{\\m\+\}/g, ".h.N");
             data = data.replace(/\.h/g, '');
-            data = data.replace(/\\([^'`_]|$)/g, "##$1##");
+            data = data.replace(/\{\\m\+\}/g, "##<strong>ꣳ</strong>##");
+//            data = data.replace(/\(\\"\)/g, "##$1##");
+//            data = data.replace(/\\([^'`_]|$)/g, "##$1##");
         }
 
+        var alldata = '';
         if (map.fromRoman) {
-            return transliterateRoman(data, map, options);
+            alldata = transliterateRoman(data, map, options);
         } else {
-            return transliterateBrahmic(data, map, options);
+            alldata = transliterateBrahmic(data, map, options);
         }
+        
+    // bengali ya - change virama plus য় to virama plus য
+        if (to == 'bengali' ) {
+            // m to M ; 
+            alldata = alldata.replace(/্য়/g,"্য")
+        } 
+    // kannada - change panchama varna to anusvar
+        if (to == 'kannada' ) {
+            // ~n, ~N, N to M ; 
+            alldata = alldata.replace(/ಙ್(ಕ|ಖ|ಗ|ಘ)/g,"ಂ$1")
+            alldata = alldata.replace(/ಞ್(ಚ|ಛ|ಜ|ಝ)/g,"ಂ$1")
+            alldata = alldata.replace(/ಣ್(ಟ|ಠ|ಡ|ಢ)/g,"ಂ$1")
+            alldata = alldata.replace(/ನ್(ತ|ಥ|ದ|ಧ)/g,"ಂ$1")
+            alldata = alldata.replace(/ಮ್(ಪ|ಫ|ಬ|ಭ)/g,"ಂ$1")
+        }         
+    // Enable Malayalam Chillu Support - code to be streamlined after rules are defined correctly
+        if (to == 'malayalam' ) {
+            // m to M ; 
+            alldata = alldata.replace(/മ്/g,"ം")
+            // use ZWJ to create chillus for N, n, r, l, L
+            alldata = alldata.replace(/(ണ്|ന്|ര്|ല്|ള്)/g,"$1\u200D")  
+            // re-change to glyph when followed by p or m, 
+            alldata = alldata.replace(/ംമ/g,"മ്മ")     
+            alldata = alldata.replace(/ംപ/g,"മ്പ")  
+            // or when following t as in gm tm  nm mm Nm
+            alldata = alldata.replace(/ഗ്ം/g,"ഗ്മ്") 
+            alldata = alldata.replace(/ത്ം/g,"ത്മ്") 
+            alldata = alldata.replace(/ൻം/g,"ന്മ്") 
+            alldata = alldata.replace(/ംം/g,"മ്മ്") 
+            alldata = alldata.replace(/ൺം/g,"ണ്മ്")          
+            // fix NTa-NNa  
+            alldata = alldata.replace(/ണ്‍ട/g,"ണ്ട")  
+            alldata = alldata.replace(/ണ്‍ഠ/g,"ണ്ഠ")  
+            alldata = alldata.replace(/ണ്‍ഡ/g,"ണ്ഡ")  
+            alldata = alldata.replace(/ണ്‍ഢ/g,"ണ്ഢ")  
+            alldata = alldata.replace(/ണ്‍ണ/g,"ണ്ണ")  
+            // fix nta-nna  
+            alldata = alldata.replace(/ന്‍ത/g,"ന്ത")  
+            alldata = alldata.replace(/ന്‍ഥ/g,"ന്ഥ")  
+            alldata = alldata.replace(/ന്‍ദ/g,"ന്ദ")
+            alldata = alldata.replace(/ന്‍ധ/g,"ന്ധ")  
+            alldata = alldata.replace(/ന്‍ന/g,"ന്ന")   
+            // remove ZWJ when followed by ya la va
+            alldata = alldata.replace(/\u200D(യ|വ|ല)/g,"$1")                 
+            // fix for ര്‍വ.  -  r^va
+            alldata = alldata.replace(/ര്വ/g,"ര്‍വ")                                     
+            // chillu k not used much
+          // alldata = alldata.replace(/ക്/g,"ക്‍")     
+          // glyph not defined for this yet
+          // alldata = alldata.replace(/ൻ്റ/g,"ൻ്റ) ")                        
+        }
+        
+        // Enable Tamil Accents Support
+        if (to == 'tamil' && options.enableTamilPronunciation == true) {
+            alldata = alldata
+            .replace(/(.)(²|³|⁴)(ா|ி|ீ|ு|ூ|ெ|ே|ை|ொ|ோ|ௌ)/g,"$1$3$2") 
+            .replace(/(.)(²|³|⁴)(்|:|ʼ|॒|॑|᳚)/g,"$1$3$2")
+            .replace(/(.)(²|³|⁴|ʼ)(॒|॑|᳚)/g,"$1$3$2")
+            .replace(/(.)(:)(॒|॑)/g,"$1$3$2") 
+        }
+        if (to == 'tamil' && options.enableTamilCharPositionFixes == true) {
+            alldata = alldata
+            .replace(/([\s\p{P}])ன/g, "$1ந")
+            .replace(/ன்த/g,"ந்த")
+      //    .replace(/ன்ன/g,"ந்ந")
+            .replace(/னாம/g,"நாம")
+            .replace(/னாராயண/g,"நாராயண")
+        }
+       if (to == 'tamil') {
+            alldata = alldata
+            .replace(/ம்க/g,"ங்க")
+            .replace(/ம்ச/g,"ஞ்ச")
+            .replace(/ம்ஜ/g,"ஞ்ஜ")
+            .replace(/ஞ்ஜ்ஞ/g,"ம்ஜ்ஞ")
+            .replace(/ம்த/g,"ந்த")
+            .replace(/ம்ட/g,"ண்ட")
+        }
+        if (to == 'grantamil' && options.enableTamilCharPositionFixes == true) {
+            alldata = alldata
+            .replace(/(খ|গ|ঘ|ছ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ே)/g, "◌ே$1") //Add invisible \u25CC for it to work
+            .replace(/(খ|গ|ঘ|ছ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ோ)/g, "◌ே$1া") //Add invisible \u25CC for it to work
+            .replace(/(খ|গ|ঘ|ছ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ை)/g, "◌ை$1") //Add invisible ◌ at beginning 
+            .replace(/(খ|গ|ঘ|ছ|ঝ|ঠ|ড|ঢ|থ|দ|ধ|ফ|ব|ভ|ৰ)(ௌ)/g, "◌ெ$1ள") //Add invisible ◌ at beginning 
+        }
+       if (to == 'grantamil') {
+            alldata = alldata
+            .replace(/ம்க/g,"ங்க")
+            .replace(/ம்ச/g,"ஞ்ச")
+            .replace(/ம்ஜ/g,"ஞ்ஜ")
+            .replace(/ம்த/g,"ந்த")
+            .replace(/ம்ட/g,"ண்ட")
+        }
+        return alldata;
     };
 }(window.Sanscript = window.Sanscript || {}));
