@@ -4,7 +4,7 @@
  * Sanscript is a Sanskrit transliteration library. Currently, it supports
  * other Indian languages only incidentally.
  *
- * Released under the MIT and GPL Licenses.
+ * License: MIT
  */
 
 (function(Sanscript) {
