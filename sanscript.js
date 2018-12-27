@@ -7,9 +7,11 @@
  * License: MIT
  */
 
-(function(Sanscript) {
+function exportSanscriptSingleton(global){
     "use strict";
 
+    var Sanscript = {};
+    // First, we define the Sanscript singleton, with its variables and methods.
     Sanscript.defaults = {
         "skip_sgml": false,
         "syncope": false
@@ -234,7 +236,7 @@
          */
         "hk": {
             "vowels": ["a", "A", "i", "I", "u", "U", "R", "RR", "lR", "lRR", "", "e", "ai", "", "o", "au"],
-            "other_marks": ["M", "H", "~",],
+            "other_marks": ["M", "H", "~"],
             "virama": [""],
             "consonants": ["k", "kh", "g", "gh", "G", "c", "ch", "j", "jh", "J", "T", "Th", "D", "Dh", "N", "t", "th", "d", "dh", "n", "p", "ph", "b", "bh", "m", "y", "r", "l", "v", "z", "S", "s", "h", "L", "kS", "jJ"],
             "symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "OM", "'", "|", "||"]
@@ -283,7 +285,7 @@
             "virama": [""],
             "consonants": ["k", "K", "g", "G", "f", "c", "C", "j", "J", "F", "t", "T", "d", "D", "N", "w", "W", "x", "X", "n", "p", "P", "b", "B", "m", "y", "r", "l", "v", "S", "R", "s", "h", "", "kR", "jF"],
             "symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "oM", "'", "|", "||"]
-        },
+        }
     },
 
     // Set of names of schemes
@@ -707,4 +709,23 @@
             return transliterateBrahmic(data, map, options);
         }
     };
-}(window.Sanscript = window.Sanscript || {}));
+
+    // Now that Sanscript is fully defined, we now safely export it for use elsewhere.
+    // The below block was copied from https://www.npmjs.com/package/sanscript .
+    // define seems to be a requirejs thing https://requirejs.org/docs/whyamd.html#amd .
+    if (typeof define === 'function' && define.amd) {
+        define(function(){ return Sanscript; });
+    }
+    else if(typeof exports !== 'undefined'){
+        if (typeof module !== 'undefined' && module.exports) {
+            exports = module.exports = Sanscript;
+        }
+
+        exports.Sanscript = Sanscript;
+    }else {
+        global.Sanscript = Sanscript;
+    }
+}
+
+// noinspection ThisExpressionReferencesGlobalObjectJS
+exportSanscriptSingleton(this);

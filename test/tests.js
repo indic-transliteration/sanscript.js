@@ -160,14 +160,14 @@ var data = {
 
 // -----------------------------------------------------------------------
 
-module('Setup');
+QUnit.module('Setup');
 
 /* Scheme basics
  * -------------
  * Test that all schemes have the same number of elements for each category,
  * e.g. "vowels" and "consonants".
  */
-test('Scheme definitions', function() {
+QUnit.test('Scheme definitions', function() {
     // Find the typical lengths of each category. We use Devanagari because it
     // contains every category, including "marks".
     var schemes = Sanscript.schemes,
@@ -181,7 +181,7 @@ test('Scheme definitions', function() {
         for (var key in schemes[name]) {
             // The virama is distinct from other categories.
             if (key !== 'virama') {
-                equal(schemes[name][key].length, lengths[key], name + "." + key);
+                QUnit.assert.equal(schemes[name][key].length, lengths[key], name + "." + key);
             }
         }
     }
@@ -191,21 +191,21 @@ test('Scheme definitions', function() {
  * -------------
  * Test that Sanscript.isRomanScheme returns true for all roman schemes.
  */
-test('Roman scheme membership', function() {
+QUnit.test('Roman scheme membership', function() {
     var roman = ['iast', 'itrans', 'hk', 'kolkata', 'slp1', 'velthuis', 'wx'],
         other = ['bengali', 'devanagari', 'gujarati', 'gurmukhi', 'kannada',
                  'malayalam', 'oriya', 'tamil', 'telugu'];
 
     for (var i in roman) {
-        ok(Sanscript.isRomanScheme(roman[i]), roman[i]);
+        QUnit.assert.ok(Sanscript.isRomanScheme(roman[i]), roman[i]);
     }
     for (var i in other) {
-        ok(!Sanscript.isRomanScheme(other[i]), other[i]);
+        QUnit.assert.ok(!Sanscript.isRomanScheme(other[i]), other[i]);
     }
 });
 
 
-test('Adding schemes', function() {
+QUnit.test('Adding schemes', function() {
     var sanskritOCR = {
         vowels: ["a", "å", "i", "ï", "u", "÷", "Ÿ", "", "", "", "e", "ai", "o", "au"],
         consonants: ["k", "kh", "g", "gh", "¼",
@@ -225,7 +225,7 @@ test('Adding schemes', function() {
 
 // -----------------------------------------------------------------------
 
-module('Transliteration');
+QUnit.module('Transliteration');
 
 /**
  * For a script pair (f, t), return a function that takes two strings s1 and
@@ -239,7 +239,7 @@ module('Transliteration');
  */
 var transHelper = function(from, to, options) {
     return function(input, output, description) {
-        equal(Sanscript.t(input, from, to, options), output, description);
+        QUnit.assert.equal(Sanscript.t(input, from, to, options), output, description);
     };
 };
 
@@ -273,7 +273,7 @@ function textTests(from, to, f) {
     f(from.sentence, to.sentence, 'Basic sentence');
 }
 
-test('Devanagari to Bengali', function() {
+QUnit.test('Devanagari to Bengali', function() {
     var from = data.devanagari, to = data.bengali,
         f = transHelper('devanagari', 'bengali');
     letterTests(from, to, f);
@@ -282,7 +282,7 @@ test('Devanagari to Bengali', function() {
     f('ब', 'ব', 'ब transliteration');
 });
 
-test('Devanagari to Harvard-Kyoto', function() {
+QUnit.test('Devanagari to Harvard-Kyoto', function() {
     var from = data.devanagari,
         to = data.hk,
         f = transHelper('devanagari', 'hk');
@@ -294,14 +294,14 @@ test('Devanagari to Harvard-Kyoto', function() {
     f('wwकww', 'wwkaww', 'Consonant among other letters');
 });
 
-test('Devanagari to Gujarati', function() {
+QUnit.test('Devanagari to Gujarati', function() {
     var from = data.devanagari, to = data.gujarati,
         f = transHelper('devanagari', 'gujarati');
     letterTests(from, to, f);
     textTests(from, to, f);
 });
 
-test('Devanagari to Gurmukhi', function() {
+QUnit.test('Devanagari to Gurmukhi', function() {
     var from = data.devanagari, to = data.gurmukhi,
         f = transHelper('devanagari', 'gurmukhi');
     f('अ आ इ ई उ ऊ ए ऐ ओ औ', to.vowels, 'Vowels'); // no ऋ/ॠ/ऌ/ॡ
@@ -312,7 +312,7 @@ test('Devanagari to Gurmukhi', function() {
     textTests(from, to, f);
 });
 
-test('Devanagari to Kannada', function() {
+QUnit.test('Devanagari to Kannada', function() {
     // Letters
     var from = data.devanagari, to = data.kannada,
         f = transHelper('devanagari', 'kannada');
@@ -320,14 +320,14 @@ test('Devanagari to Kannada', function() {
     textTests(from, to, f);
 });
 
-test('Devanagari to Malayalam', function() {
+QUnit.test('Devanagari to Malayalam', function() {
     var from = data.devanagari, to = data.malayalam,
         f = transHelper('devanagari', 'malayalam');
     letterTests(from, to, f);
     textTests(from, to, f);
 });
 
-test('Devanagari to Oriya', function() {
+QUnit.test('Devanagari to Oriya', function() {
     var from = data.devanagari, to = data.oriya,
         f = transHelper('devanagari', 'oriya');
     f(from.vowels, to.vowels, 'Vowels');
@@ -339,14 +339,14 @@ test('Devanagari to Oriya', function() {
     textTests(from, to, f);
 });
 
-test('Devanagari to Telugu', function() {
+QUnit.test('Devanagari to Telugu', function() {
     var from = data.devanagari, to = data.telugu,
         f = transHelper('devanagari', 'telugu');
     letterTests(from, to, f);
     textTests(from, to, f);
 });
 
-test('Harvard-Kyoto to Devanagari', function() {
+QUnit.test('Harvard-Kyoto to Devanagari', function() {
     var from = data.hk, to = data.devanagari,
         f = transHelper('hk', 'devanagari');
     letterTests(from, to, f);
@@ -354,7 +354,7 @@ test('Harvard-Kyoto to Devanagari', function() {
     f('naraxiti', 'नरxइति', 'Undefined letters');
 });
 
-test('Harvard-Kyoto to IAST', function() {
+QUnit.test('Harvard-Kyoto to IAST', function() {
     var from = data.hk, to = data.iast,
         f = transHelper('hk', 'iast');
     letterTests(from, to, f);
@@ -362,14 +362,14 @@ test('Harvard-Kyoto to IAST', function() {
     f('tAmxiti', 'tāmxiti', 'Undefined letters');
 });
 
-test('ITRANS to Devanagari', function() {
+QUnit.test('ITRANS to Devanagari', function() {
     var from = data.itrans, to = data.devanagari,
         f = transHelper('itrans', 'devanagari');
     letterTests(from, to, f);
     textTests(from, to, f);
 });
 
-test('WX to Devanagari', function() {
+QUnit.test('WX to Devanagari', function() {
     var from = data.wx, to = data.devanagari,
         f = transHelper('wx', 'devanagari');
     f(from.consonants, to.consonants, 'Stops and nasals');
@@ -377,24 +377,24 @@ test('WX to Devanagari', function() {
     textTests(from, to, f);
 });
 
-test('Telugu to Devanagari', function() {
+QUnit.test('Telugu to Devanagari', function() {
     var from = data.telugu, to = data.devanagari,
         f = transHelper('telugu', 'devanagari');
         textTests(from, to, f);
 });
 
-test('Undefined letters', function() {
+QUnit.test('Undefined letters', function() {
     var f = transHelper('devanagari', 'gurmukhi');
     f('ऋच्छति', 'ऋਚ੍ਛਤਿ');
 });
 
 // -----------------------------------------------------------------------
 
-module('Dravidian');
+QUnit.module('Dravidian');
 
 function dravidianTest(fromScript, toScript) {
     label = names[fromScript] + ' to ' + names[toScript];
-    test(label, function() {
+    QUnit.test(label, function() {
         var f = transHelper(fromScript, toScript),
             from = data[fromScript],
             to = data[toScript];
@@ -415,9 +415,9 @@ dravidianTest('kolkata', 'devanagari');
 
 // -----------------------------------------------------------------------
 
-module('Toggle');
+QUnit.module('Toggle');
 
-test('Harvard-Kyoto', function() {
+QUnit.test('Harvard-Kyoto', function() {
     var f = transHelper('hk', 'devanagari');
     f('akSa##kSa##ra', 'अक्षkSaर', 'Basic disable');
     f('##akSa##kSa##ra', 'akSaक्षra', 'Initial disable');
@@ -428,7 +428,7 @@ test('Harvard-Kyoto', function() {
     f('a#kSara', 'अ#क्षर', 'Misleading disable');
 });
 
-test('Devanagari', function() {
+QUnit.test('Devanagari', function() {
     var f = transHelper('devanagari', 'hk');
     f('अ##क्ष##र', 'aक्षra', 'Basic disable');
     f('##अ##क्षर', 'अkSara', 'Initial disable');
@@ -441,15 +441,15 @@ test('Devanagari', function() {
 
 // -----------------------------------------------------------------------
 
-module('Options');
+QUnit.module('Options');
 
-test('Hindi-style transliteration', function() {
+QUnit.test('Hindi-style transliteration', function() {
     var f = transHelper('itrans', 'devanagari', {syncope: true});
     f('karaN', 'करण');
     f('rAj ke lie', 'राज के लिए');
 });
 
-test('Skipping SGML', function() {
+QUnit.test('Skipping SGML', function() {
     var f1 = transHelper('hk', 'devanagari');
     var f2 = transHelper('hk', 'devanagari', {skip_sgml: false});
     var f3 = transHelper('hk', 'devanagari', {skip_sgml: true});
@@ -461,26 +461,26 @@ test('Skipping SGML', function() {
 
 // -----------------------------------------------------------------------
 
-module('ITRANS');
+QUnit.module('ITRANS');
 
-test('Zero-width joiner', function() {
+QUnit.test('Zero-width joiner', function() {
     var f = transHelper('itrans', 'devanagari');
     f('bara_u', 'बरउ', 'Separated vowels');
     f('k{}Shetra', 'क्‍षेत्र', 'Separated consonants');
 });
 
-test('Virama', function() {
+QUnit.test('Virama', function() {
     var f = transHelper('itrans', 'devanagari');
     var g = transHelper('devanagari', 'itrans');
     f('tattatvam.h', 'तत्तत्वम्', 'ITRANS to Devanagari');
     g('तत्तत्वम्', 'tattatvam', 'Devanagari to ITRANS');
 });
 
-test('Alternates', function() {
+QUnit.test('Alternates', function() {
     var f = function(itrans1, itrans2, description) {
         dev1 = Sanscript.t(itrans1, 'itrans', 'devanagari'),
             dev2 = Sanscript.t(itrans2, 'itrans', 'devanagari');
-        equal(dev2, dev1, description);
+        QUnit.assert.equal(dev2, dev1, description);
     };
 
     f('A I U RRi RRI LLi LLI', 'aa ii uu R^i R^I L^i L^I', 'vowels');
@@ -502,14 +502,14 @@ test('Alternates', function() {
     f('a{\\m+}', 'a.h.N', '{\\m+}');
 });
 
-test('Backslash escape', function() {
+QUnit.test('Backslash escape', function() {
     var f = transHelper('itrans', 'devanagari');
     f('\\nara', 'nअर');
     f('na\\ra', 'नrअ');
     f('nara\\', 'नर');
 });
 
-test('Accent', function() {
+QUnit.test('Accent', function() {
     var f = transHelper('itrans', 'devanagari');
     f("a\\_gnimI\\'le pu\\_rohi\\'tam", 'अ॒ग्निमी॑ले पु॒रोहि॑तम्');
     f("naH\\' naH\\_ naH\\`", 'नः॑ नः॒ नः॒', 'Visarga + accent');
@@ -518,7 +518,7 @@ test('Accent', function() {
     f("ta\\'M ta\\'.m ta\\'.n ta\\_M ta\\_.m ta\\_.n ta\\`M ta\\`.m ta\\`.n", 'तं॑ तं॑ तं॑ तं॒ तं॒ तं॒ तं॒ तं॒ तं॒', 'Accent + anusvara');
 });
 
-test('Non-Sanskrit letters', function() {
+QUnit.test('Non-Sanskrit letters', function() {
     var ben = transHelper('itrans', 'bengali'),
         dev = transHelper('itrans', 'devanagari'),
         kan = transHelper('itrans', 'kannada'),

@@ -1,0 +1,48 @@
+{
+  "name": "@sanskrit-coders/sanscript",
+  "version": "1.0.2",
+  "description": "Sanscript is a transliteration library for Indian languages. It supports the most popular Indian scripts and several different romanization schemes. Although Sanscript focuses on Sanskrit transliteration, it has partial support for other languages and is easy to extend.",
+  "main": "sanscript.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "qunit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanskrit/sanscript.js.git"
+  },
+  "keywords": [
+    "bengali",
+    "devanagari",
+    "gujarati",
+    "gurmukhi",
+    "kannada",
+    "malayalam",
+    "oriya",
+    "tamil",
+    "telugu",
+    "hk",
+    "Harvard-Kyoto",
+    "iast",
+    "International Alphabet of Sanskrit Transliteration",
+    "itrans",
+    "itrans_dravidian",
+    "kolkata",
+    "National Library at Kolkata",
+    "slp1",
+    "Sanskrit Library Phonetic",
+    "velthuis",
+    "wx"
+  ],
+  "author": "Arun Prasad and Sanskrit coders",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sanskrit/sanscript.js/issues"
+  },
+  "homepage": "https://github.com/sanskrit/sanscript.js#readme",
+  "devDependencies": {
+    "qunit": "^2.8.0"
+  }
+}

@@ -1,12 +1,18 @@
 Sanscript.js
 =============================
 
-Introduction
------------------------------
+## Introduction
+
 Sanscript is a transliteration library for Indian languages. It supports the most popular Indian scripts and several different romanization schemes. Although Sanscript focuses on Sanskrit transliteration, it has partial support for other languages and is easy to extend.
 
-Usage
------------------------------
+## Setup
+The package is officially distributed at npm [here](https://www.npmjs.com/package/@sanskrit-coders/sanscript), whereas a variant due to Vikram Iyer is separately available [here](https://www.npmjs.com/package/sanscript). So one can use commands such as:
+
+- `npm install @sanskrit-coders/sanscript`
+- `yarn add @sanskrit-coders/sanscript`
+
+## Usage
+
 Sanscript is simple to use:
 
     var output = Sanscript.t(input, from, to);
@@ -63,11 +69,18 @@ You can tweak the transliteration function by passing an `options` object:
 * `skip_sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b>` → `<ब्>इति</ब्>`). Defaults to `false`.
 * `syncope` - If true, use Hindi-style transliteration (`ajay` → `अजय`). In linguistics, this behavior is known as [schwa syncope](http://en.wikipedia.org/wiki/Schwa_deletion_in_Indo-Aryan_languages). Defaults to `false`.
 
-Adding new schemes
------------------------------
+## Contributing
+### Adding new schemes
+
 Adding a new scheme is simple:
 
     Sanscript.addBrahmicScheme(schemeName, schemeData);
     Sanscript.addRomanScheme(schemeName, schemeData);
 
 For help in creating `schemeData`, see the comments on the `addBrahmicScheme` and `addRomanScheme` functions.
+
+### Testing
+We use qunit. Just install the dev dependencies with `yarn` and then open [test/index.html](test/index.html) to see the tests run.
+
+### Publishing to npm
+`npm publish --access public`
