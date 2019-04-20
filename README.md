@@ -62,8 +62,11 @@ A **lossy** scheme does not have the letters needed to support lossless translat
 ### Transliteration options
 You can tweak the transliteration function by passing an `options` object:
 
-    var output = Sanscript.t(input, from, to, options);
-    
+```
+<script src="node_modules/@sanskrit-coders/sanscript/sanscript.js"></script>
+var output = Sanscript.t(input, from, to, options);
+```
+
 `options` maps options to values. Currently, these options are supported:
 
 * `skip_sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b>` → `<ब्>इति</ब्>`). Defaults to `false`.
