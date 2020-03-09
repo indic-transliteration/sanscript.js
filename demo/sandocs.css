@@ -1,0 +1,631 @@
+/*
+* @author Naresh
+* @date Sep 2014
+* @license CCSLA
+*/
+/* change Kannada to Noto from Goda */
+
+/* FOR DOCUMENT PAGES  */
+/* Gujarati */
+@font-face {
+font-family: 'GJOTKapila_N_Ship';
+src:  url('https://sanskritdocuments.org/css/fonts/GJOTKapila_N_Ship.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Malayalam */
+@font-face {
+font-family: 'Rachana';
+src:  url('https://sanskritdocuments.org/css/fonts/Rachana.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Telugu */
+@font-face {
+font-family: 'Mandali';
+src:  url('https://sanskritdocuments.org/css/fonts/Mandali.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Kannada */
+@font-face {
+font-family: 'NotoSerifKannada';
+src:  url('https://sanskritdocuments.org/css/fonts/NotoSerifKannada-Regular.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Kannada */
+@font-face {
+font-family: 'NotoSansKannada';
+src:  url('https://sanskritdocuments.org/css/fonts/NotoSansKannada-Regular.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Telugu */
+@font-face {
+font-family: 'Pothana';
+src:  url('https://sanskritdocuments.org/css/fonts/Pothana2000Vedic_1_2_1.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Tamil */
+@font-face {
+font-family: 'GranTamil';
+src:  url('https://sanskritdocuments.org/css/fonts/e-Grantamil.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Oriya */
+@font-face {
+font-family: 'LohitOdia';
+src:  url('https://sanskritdocuments.org/css/fonts/Lohit-Odia.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Bengali */
+@font-face {
+font-family: 'LohitBengali';
+src:  url('https://sanskritdocuments.org/css/fonts/Lohit-Bengali.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Hindi */
+@font-face {
+font-family: 'Shobhika';
+src:  url('https://sanskritdocuments.org/css/fonts/Shobhika-Regular.otf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Punjabi */
+@font-face {
+font-family: 'AnmolUni';
+src:  url('https://sanskritdocuments.org/css/fonts/AnmolUni.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+/* Uni range only for Deva, Deva-extended and Vedic  so that English is rendered in different font 
+*  unicode-range: U+900-97F, U+A8E0-A8FF, U+1CD0-1CFF ; */
+@font-face {
+font-family: 'Siddhanta';
+src:  url('https://sanskritdocuments.org/css/fonts/Siddhanta.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+@font-face {
+font-family: 'Sanskrit2003';
+src:  url('https://sanskritdocuments.org/css/fonts/Sanskrit2003.ttf') format('truetype'); 
+font-weight: normal;
+font-style: normal;
+}
+*[lang="te"] {
+font-family: 'Mandali', serif !important; 
+font-size: 1.2em;
+line-height:2.2;
+font-weight:bold;
+}
+*[lang="kn"] {
+font-family: 'NotoSerifKannada', serif !important;
+font-size: 1.2em;
+line-height:2.0;
+}
+*[lang="ml"] {
+font-family: 'Rachana', serif !important; 
+font-size: 1.5em;
+font-weight:bold;
+}
+*[lang="ta"] {
+font-family: 'GranTamil', serif !important; 
+line-height:1.6;
+font-size: 1.2em;
+font-weight:bold;
+}
+*[lang="pa"] {
+font-family: 'AnmolUni', serif !important; 
+font-size: 1.3em;
+}
+*[lang="or"] {
+font-family: 'LohitOdia', serif !important; 
+font-size: 1.2em;
+font-weight:bold;
+}
+*[lang="bn"] {
+font-family: 'LohitBengali',serif !important; 
+font-size: 1.2em;
+font-weight:bold;
+}
+*[lang="gu"] {
+font-family: 'GJOTKapila_N_Ship', serif !important; 
+font-size: 1.2em;
+}
+*[lang="ru"] {
+font-family: 'Siddhanta',  serif  !important; 
+font-size: 1em;
+}
+*[lang="iast"] {
+font-family: 'Shobhika',  serif  !important; 
+font-size: 1em;
+}
+*[lang="en-IN"] {
+font-family: 'Sanskrit2003',  serif  !important; 
+font-size: 1em;
+}
+*[lang="sa"] {
+font-family:  'Shobhika', serif  !important; 
+font-size: 1.2em;
+}
+*[lang="hi"] {
+font-family:  'Sanskrit2003', serif  !important; 
+line-height:1.2;
+font-size: 1.2em;
+}
+*[lang="gr"] {
+font-family:  'GranTamil', serif  !important; 
+font-size: 1.3em;
+font-weight:bold;
+color:brown;
+}
+*[lang="gt"] {
+font-family:  'GranTamil', serif  !important; 
+font-size: 1.3em;
+font-weight:bold;
+color:maroon;
+}
+//* Document level adjustments */
+@media (max-width: 1231px){ html { font-size: 125%; }}
+@media (max-width: 1024px){ html { font-size: 115%; }}
+@media (max-width: 768px) { html { font-size: 105%; }}
+@media (max-width: 767px) {#search {display:none;}}
+@media (max-width: 480px) { html { font-size: 85%; }}
+@media (max-width: 368px) { html { font-size: 75%; }}
+@media (min-width: 368px) { #top-nav-list {font-size: 1em;}}
+@media (max-width: 367px) { ul#top-nav-list {display:none;}}
+
+#brand {
+text-align:center;
+}
+a {
+text-decoration: none;
+color: Maroon;
+}
+@media (max-width: 367px) { #breadcrumb {display:none;}}
+@media (min-width: 368px) { #breadcrumb {
+	font-size: 75%; 
+	display: inline-block;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
+	overflow: hidden;
+	border-radius: 5px;
+}
+
+#breadcrumb a {
+	text-decoration: none;
+	outline: none;
+	display: block;
+	float: left;
+	line-height: 36px;
+	color: white;
+	/*need more margin on the left of links to accomodate the numbers*/
+	padding: 0 10px 0 60px;
+	background: SandyBrown;
+	background: linear-gradient(SandyBrown, Chocolate);
+	position: relative;
+}
+/*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
+#breadcrumb a:first-child {
+	padding-left: 46px;
+	border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
+}
+#breadcrumb a:first-child:before {
+	left: 14px;
+}
+#breadcrumb a:last-child {
+	border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
+	padding-right: 20px;
+}
+
+/*hover/active styles*/
+#breadcrumb a.active, #breadcrumb a:hover{
+	background: Chocolate;
+	background: linear-gradient(Chocolate, Maroon);
+}
+#breadcrumb a.active:after, #breadcrumb a:hover:after {
+	background: Chocolate;
+	background: linear-gradient(135deg, Chocolate, Maroon);
+}
+
+/*adding the arrows for the breadcrumbs using rotated pseudo elements*/
+#breadcrumb a:after {
+	content: '';
+	position: absolute;
+	top: 0; 
+	right: -18px; /*half of square's length*/
+	/*same dimension as the line-height of #breadcrumb a */
+	width: 36px; 
+	height: 36px;
+	/*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's: 
+	length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
+	if diagonal required = 1; length = 1/1.414 = 0.707*/
+	transform: scale(0.707) rotate(45deg);
+	/*we need to prevent the arrows from getting buried under the next link*/
+	z-index: 1;
+	/*background same as links but the gradient will be rotated to compensate with the transform applied*/
+	background: SandyBrown;
+	background: linear-gradient(135deg, SandyBrown, Chocolate);
+	/*stylish arrow design using box shadow*/
+	box-shadow: 
+		2px -2px 0 2px rgba(0, 0, 0, 0.4), 
+		3px -3px 0 2px rgba(255, 255, 255, 0.1);
+	/*
+		5px - for rounded arrows and 
+		50px - to prevent hover glitches on the border created using shadows*/
+	border-radius: 0 5px 0 50px;
+}
+/*we dont need an arrow after the last link*/
+#breadcrumb a:last-child:after {
+	content: none;
+}
+}
+/* Set em level font-size only for elements of phrasing content model. */
+h1 { font-size: 1.3em; }
+h2 { font-size: 1.25em; }
+h3 { font-size: 1.2em; }
+p, blockquote {font-size: 1em;}
+.btn, .btndrop, .btndrop li, .anylinkcsscols li {font-size: 0.8em;}
+
+body { 
+background:#ffcc99;
+font-family: 'Shobhika', serif !important; 
+margin: 0;
+padding: 0;
+color: black;
+line-height:150%;
+}
+#wrapper {
+background:#ffcc99;
+margin:auto; 
+padding: 0px;
+width:100%;
+max-width:1232px;
+border: solid 2px maroon;
+}
+#BodyHref{
+width:97%;
+margin: 0 auto;
+}
+#BodyHref a:hover{
+text-decoration:underline;
+}
+#logo {
+float:left;
+vertical-align:middle;
+margin-right:10px;
+color:maroon;
+font-size:180%;
+line-height:80%;
+text-align:center;
+font-weight:bold;
+}
+#logo a {
+text-decoration: none;
+color:maroon;
+}
+#logo a:before {
+content: "संस्कृत ";
+}
+#logo a:hover:before {
+content: "Sanskrit ";
+color:blue;
+}
+em{
+font-style:normal;
+font-weight:bold;
+}
+#header {
+text-align:center;
+color: maroon;
+position: relative;
+padding: 5px 10px;
+margin: 0 0 10px 0;
+}
+#header h1 {
+margin: 0;
+padding: 0;
+text-shadow: 1px 1px 1px #aaa;
+}
+#header h2 {
+color: maroon;
+}
+#header p {
+margin: 5px;
+}
+#comment {
+border: solid 5px teal;
+background: #F1F1E7;
+margin: 5px;
+padding: 5px;
+font-size: 0.9em;
+font-weight:bold;
+text-align: justify;
+color:teal;
+}
+#docinfo {
+background: Chocolate;
+margin: 5px;
+padding: 5px;
+}
+#footnote {
+font-size:0.9em;
+}
+#footer {
+font-size:0.9em;
+font-weight:bold;
+line-height:200%;
+text-align:center;
+}
+#article{
+background: #FFF3E7;
+border: 1px solid #cccccc;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+align:"center";
+}
+/* == for sanskrit webpages to display devenagari without needing <br> after each line == */
+pre {
+white-space:pre-wrap;
+text-align: left;
+} 
+pre.inf{
+font-family: "Lucida Console", Monaco, monospace;
+font-size: 0.8em;
+color:#000000;
+font-weight:normal;
+margin: 0 auto;
+background:#FFEBD7;
+padding: 5px;
+}
+pre.namavali{
+white-space:pre-wrap;
+column-width: 22em; 
+-webkit-column-width: 22em; 
+-moz-column-width: 22em; 
+column-rule: 1px solid; 
+-webkit-column-gap: 1em;
+-moz-column-gap: 1em;
+column-gap: 1em;
+margin: 0 auto;
+padding: 0px 2em;
+background: #FFF3E7;
+border: 1px solid #cccccc;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+}
+pre.stotra{
+line-height: 175%;
+display: table;
+width: auto;
+margin: 0 auto;
+padding: 0px 2em;
+background: #FFF3E7;
+}
+#pre.stotra h1 {
+margin: 0;
+padding: 0;
+text-shadow: 1px 1px 1px #aaa;
+}
+#pre.stotra h2 {
+color: maroon;
+}
+pre.vedic{
+line-height:2.0;
+display: table;
+width: auto;
+margin: 0 auto;
+padding: 0px 2em;
+background: #FFF3E7;
+}
+pre.vedic em{
+font-weight:bold;
+}
+pre.vedic:lang(sa) {
+font-family:  'Siddhanta', serif  !important; 
+font-size: 1.2em;
+}
+pre.vedic:lang(kn) {
+font-family:  'NotoSansKannada', serif  !important; 
+font-size: 1.3em;
+color:teal;
+}
+pre.shobhika{
+line-height:1.8;
+display: table;
+width: auto;
+margin: 0 auto;
+padding: 0px 2em;
+background: #FFF3E7;
+color: MAROON;
+}
+pre.shobhika em{
+font-weight:bold;
+}
+pre.shobhika:lang(sa) {
+font-family:  'Shobhika', serif  !important; 
+font-size: 1.2em;
+}
+pre.center{
+margin: 5px;
+padding: 5px;
+text-align:center;
+line-height:175%;
+}
+/* ==============*/
+hr{ 
+padding: 0; 
+border: none; 
+border-top: medium double maroon; 
+color: maroon; 
+text-align:center;
+} 
+/* ================================ */
+#SktDocsMENU {
+}
+.menu {
+text-align:left;
+margin:3px;
+padding:2px; /* variable width */
+} 
+a.menu{
+color:#000000; 
+text-decoration:none;
+}
+/* CSS3 for Dropdown row */
+#MenuTabA { 
+text-align:center;
+margin:3px;
+}
+#MenuTabA li {
+display:inline;
+}
+#MenuTabA a {
+float:left;
+text-decoration:none; 
+padding:2px; /* variable width */
+margin:3px;
+}
+/* ================================ */
+/* CSS3 buttons Without Images - for TOP row */
+.btn{
+border:1px solid #000000; 
+-webkit-border-radius: 8px; 
+-moz-border-radius: 8px;
+border-radius: 8px;
+font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif;
+padding: 2px; 
+margin: 1px; 
+text-decoration:none; 
+font-weight:bold; 
+display:inline-block;
+color: maroon;
+background-color: #ffebd7; 
+background-image: -webkit-gradient(linear, left top, left bottom, from(#ffebd7), to(#ffebd7));
+background-image: -webkit-linear-gradient(top, #ffebd7, #ffebd7);
+background-image: -moz-linear-gradient(top, #ffebd7, #ffebd7);
+background-image: -ms-linear-gradient(top, #ffebd7, #ffebd7);
+background-image: -o-linear-gradient(top, #ffebd7, #ffebd7);
+background-image: linear-gradient(to bottom, #ffebd7, #ffebd7);
+filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffebd7, endColorstr=#ffebd7);
+}
+/* CSS3 buttons Without Images - for Dropdown row */
+.btndrop{
+border:1px solid #000000; 
+-webkit-border-radius: 8px; 
+-moz-border-radius: 8px;
+border-radius: 8px;
+font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif;
+font-weight:bold; 
+/* padding is around content - same background, margin is after border,is transparent */
+padding: 2px; 
+margin: 1px; 
+text-decoration:none; 
+display:inline-block;
+color: maroon;
+background-color: #ffebd7; 
+background-image: -webkit-gradient(linear, left top, left bottom, from(#ffebd7), to(#ffebd7));
+background-image: -webkit-linear-gradient(top, #ffebd7, #ffebd7);
+background-image: -moz-linear-gradient(top, #ffebd7, #ffebd7);
+background-image: -ms-linear-gradient(top, #ffebd7, #ffebd7);
+background-image: -o-linear-gradient(top, #ffebd7, #ffebd7);
+background-image: linear-gradient(to bottom, #ffebd7, #ffebd7);
+filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffebd7, endColorstr=#ffebd7);
+}
+.btndrop:after{
+color: blue;
+content: '▾';
+}
+.btndrop:hover{
+border:1px solid #AD5600;
+background-color: #ffebd7; 
+color: Teal;
+background-image: -webkit-gradient(linear, left top, left bottom, from(#ffcc99), to(#ffebd7));
+background-image: -webkit-linear-gradient(top, #ffcc99, #ffebd7);
+background-image: -moz-linear-gradient(top, #ffcc99, #ffebd7);
+background-image: -ms-linear-gradient(top, #ffcc99, #ffebd7);
+background-image: -o-linear-gradient(top, #ffcc99, #ffebd7);
+background-image: linear-gradient(to bottom, #ffcc99, #ffebd7);
+filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffcc99, endColorstr=#ffebd7);
+}
+/* ================================ */
+#top-nav-list {
+text-align:center;
+display: block;
+padding : 5px 0px;
+margin:0;
+}
+#top-nav-list li {
+padding: 2px;
+display: inline;
+list-style: none;
+}
+#top-nav-list > :first-child::before {
+content : '' !important;
+}
+#top-nav-list li::after {
+content : ' |';
+color: maroon;
+}
+/* ================================ */
+.flowingcolumns {
+column-width: 15em; 
+-webkit-column-width: 12em; 
+-moz-column-width: 12em; 
+-webkit-column-gap: 1em;
+-moz-column-gap: 1em;
+column-gap: 1em;
+}
+/* ================================ */
+.contribcolumns {
+white-space:pre-wrap;
+column-width: 14em; 
+-webkit-column-width: 14em; 
+-moz-column-width: 14em; 
+column-rule: 1px solid; 
+-webkit-column-gap: 1em;
+-moz-column-gap: 1em;
+column-gap: 1em;
+padding: 0px 1em;
+}
+/* ================================ */
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 0px;
+    background-color: #FFCC99;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: #FFEBD7;
+    float: left;
+    border: 1px solid Maroon;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: Sienna;
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: Chocolate;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #FFEBD7;
+    border-top: none;
+}

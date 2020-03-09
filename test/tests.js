@@ -46,10 +46,10 @@ var data = {
         marks: 'ક ખા ગિ ઘી ઙુ ચૂ છૃ જૄ ઝૢ ઞૣ ટે ઠૈ ડો ઢૌ ણં તઃ થ્',
         consonants: 'ક ખ ગ ઘ ઙ ચ છ જ ઝ ઞ ટ ઠ ડ ઢ ણ ત થ દ ધ ન પ ફ બ ભ મ',
         other: 'ય ર લ વ શ ષ સ હ ળ',
-        symbols: 'ૐ ૤ ૥ ૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯',
+        symbols: 'ૐ । ॥ ૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯', //'ૐ ૤ ૥ ૦ ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯',
         putra: 'પુત્ર',
         naraIti: 'નર ઇતિ',
-        sentence: 'ધર્મક્ષેત્રે કુરુક્ષેત્રે સમવેતા યુયુત્સવઃ ૤'
+        sentence: 'ધર્મક્ષેત્રે કુરુક્ષેત્રે સમવેતા યુયુત્સવઃ ।'//'ધર્મક્ષેત્રે કુરુક્ષેત્રે સમવેતા યુયુત્સવઃ ૤'
     },
     gurmukhi: {
         vowels: 'ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ',
@@ -134,8 +134,16 @@ var data = {
         sentence: 'ଧର୍ମକ୍ଷେତ୍ରେ କୁରୁକ୍ଷେତ୍ରେ ସମଵେତା ଯୁଯୁତ୍ସଵଃ ।'
     },
     tamil: {
+        vowels: 'அ ஆ இ ஈ உ ஊ ऋ ॠ ऌ ॡ ஏ ஐ ஓ ஔ',
         short_vowels: 'எ ஏ ஒ ஓ',
+        marks: 'க கா² கி³ கீ⁴ ஙு சூ ச² ஜ ஜ² ஞ டே டை² டோ³ டௌ⁴ ணஂ தஃ த்²',
         short_marks: 'கெ கே கொ கோ',
+        consonants: 'க க² க³ க⁴ ங ச ச² ஜ ஜ² ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ந ப ப² ப³ ப⁴ ம',
+        symbols: 'ௐ । ॥ ௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯',
+        other: 'ய ர ல வ ஶ ஷ ஸ ஹ ள',
+        putra: 'புத்ர',
+        naraIti: 'நர இதி',
+        sentence: 'த⁴ர்மக்ஷேத்ரே குருக்ஷேத்ரே ஸமவேதா யுயுத்ஸவஃ ।',
     },
     telugu: {
         vowels: 'అ ఆ ఇ ఈ ఉ ఊ ఋ ౠ ఌ ౡ ఏ ఐ ఓ ఔ',
@@ -336,6 +344,13 @@ QUnit.test('Devanagari to Oriya', function() {
     f(from.other, to.other, 'Other consonants');
     f(from.symbols, to.symbols, 'Symbols and punctuation');
     textTests(from, to, f);
+    textTests(from, to, f);
+});
+
+QUnit.test('Devanagari to Tamil', function() {
+    var from = data.devanagari, to = data.tamil,
+        f = transHelper('devanagari', 'tamil');
+    letterTests(from, to, f);
     textTests(from, to, f);
 });
 
