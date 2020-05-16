@@ -24,17 +24,9 @@ Here, `from` and `to` are the names of different **schemes**. In Sanscript, the 
 
 By default, Sanscript supports the following Brahmic schemes:
 
-* `bengali`
-* `devanagari`
-* `gujarati`
-* `gurmukhi`
-* `kannada`
-* `malayalam`
-* `oriya`
-* `tamil`
-* `telugu`
+ahom, assamese, avestan, balinese, bengali, bhaisuki, brahmi, brahmi_tamil, burmese, chakma, cham, cyrillic, devanagari, dogra, gondi_gunjala, gondi_masaram, grantha, grantha_pandya, gujarati, gurmukhi, hk, iast, itrans, itrans_dravidian, javanese, kannada, khamti_shan, kharoshti, khmer, khom_thai, khudawadi, kolkata, lao, lao_pali, lepcha, limbu, mahajani, malayalam, manipuri, marchen, modi, mon, mro, multani, newa, ol_chiki, oriya, persian_old, phags_pa, ranjana, rejang, rohingya, sanskritOCR, shan, sharada, siddham, sinhala, slp1, sora_sompeng, sundanese, syloti_nagari, tagalog, tagbanwa, tai_laing, takri, tamil, tamil_extended, tamil_superscripted, telugu, thai, tibetan, tirhuta_maithili, urdu, vattelutu, velthuis, wancho, warang_citi, wx, zanbazar_square
 
-and the following Roman schemes:
+of which the following are Roman schemes:
 
 * `hk` (Harvard-Kyoto)
 * `iast` (International Alphabet of Sanskrit Transliteration)
@@ -44,6 +36,7 @@ and the following Roman schemes:
 * `slp1` (Sanskrit Library Phonetic Basic)
 * `velthuis` (Velthuis)
 * `wx` (WX)
+* `cyrillic`
 
 ### Disabling transliteration
 When Sanscript sees the token `##`, it toggles the transliteration state:
