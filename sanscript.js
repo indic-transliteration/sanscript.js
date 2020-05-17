@@ -742,7 +742,10 @@ function exportSanscriptSingleton(global) {
                 "vowel_marks": ["ா", "ி", "ீ", "ு", "ூ", "்ருʼ", "்ரூʼ", "்லுʼ", "்லூʼ", "ெ", "ே", "ை", "ொ", "ோ", "ௌ"],
                 "other_marks": ["ம்ʼ", "꞉", "ம்ˮ"],
                 "virama": ["்"],
-                "consonants": ["க", "க²", "க³", "க⁴", "ங", "ச", "ச²", "ஜ", "ஜ²", "ஞ", "ட", "ட²", "ட³", "ட⁴", "ண", "த", "த²", "த³", "த⁴", "ந", "ப", "ப²", "ப³", "ப⁴", "ம", "ய", "ர", "ல", "வ", "ஶ", "ஷ", "ஸ", "ஹ", "ள", "க்ஷ", "ஜ்ஞ"],
+                "consonants": ["க", "க²", "க³", "க⁴", "ங", 
+                    "ச", "ச²", "ஜ", "ஜ²", "ஞ", 
+                    "ட", "ட²", "ட³", "ட⁴", "ண", 
+                    "த", "த²", "த³", "த⁴", "ந", "ப", "ப²", "ப³", "ப⁴", "ம", "ய", "ர", "ல", "வ", "ஶ", "ஷ", "ஸ", "ஹ", "ள", "க்ஷ", "ஜ்ஞ"],
                 "symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "ௐ", "(அ)", ".", ".."],
                 "combo_accent": ["॑꞉", "॒꞉", "ம்॑ʼ", "ம்॒ʼ"],
                 "candra": ["ே"],
@@ -1350,12 +1353,23 @@ function exportSanscriptSingleton(global) {
             data = data.replace(/\.h/g, '');
             data = data.replace(/\\([^'`_]|$)/g, "##$1##");
         }
-
-        if (map.fromRoman) {
-            return transliterateRoman(data, map, options);
-        } else {
-            return transliterateBrahmic(data, map, options);
+        if (from === "tamil_superscripted") {
+            let pattern = "([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)([²³⁴])";
+            data = data.replace(new RegExp(pattern, "g"), "$2$1");
+            console.error("transliteration from tamil_superscripted not fully implemented!");
         }
+
+        let result = "";
+        if (map.fromRoman) {
+            result = transliterateRoman(data, map, options);
+        } else {
+            result = transliterateBrahmic(data, map, options);
+        }
+        if (to === "tamil_superscripted") {
+            let pattern = "([²³⁴])([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)";
+            result = result.replace(new RegExp(pattern, "g"), "$2$1")
+        }
+        return result;
     };
 
     // Now that Sanscript is fully defined, we now safely export it for use elsewhere.

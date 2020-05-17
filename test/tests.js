@@ -530,6 +530,13 @@ QUnit.test('Accent', function() {
     f("na\\'H na\\_H na\\`H", 'नः॑ नः॒ नः॒', 'Accent + visarga');
     f("taM\\' ta.m\\' ta.n\\' taM\\_ ta.m\\_ ta.n\\_ taM\\` ta.m\\` ta.n\\`", 'तं॑ तं॑ तं॑ तं॒ तं॒ तं॒ तं॒ तं॒ तं॒', 'Anusvara + accent');
     f("ta\\'M ta\\'.m ta\\'.n ta\\_M ta\\_.m ta\\_.n ta\\`M ta\\`.m ta\\`.n", 'तं॑ तं॑ तं॑ तं॒ तं॒ तं॒ तं॒ तं॒ तं॒', 'Accent + anusvara');
+
+    var g = transHelper('devanagari', 'tamil_superscripted');
+    g("अ॒ग्निमी॑ले पु॒रोहि॑तम्", 'அ॒க்³நிமீ॑லே பு॒ரோஹி॑தம்');
+    g("ग्नि॒ गि॑ जु खा", 'க்³நி॒ கி॑³ ஜு கா²');
+    // var gInverse = transHelper('tamil_superscripted', 'devanagari');
+    // gInverse('க்³நி॒ கி॑³ ஜு கா²', "ग्नि॒ गि॑ जु खा");
+
 });
 
 QUnit.test('Non-Sanskrit letters', function() {
