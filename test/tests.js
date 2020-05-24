@@ -94,6 +94,16 @@ var data = {
         naraIti: 'nara iti',
         sentence: 'dharmakṣetre kurukṣetre samavetā yuyutsavaḥ ।'
     },
+    cyrillic: {
+        vowels: 'а а̄ и ӣ у ӯ р̣ р̣̄ л̣ л̣̄ э аи о ау',
+        marks: 'ка кха̄ ги гхӣ н̇у чӯ чхр̣ джр̣̄ джхл̣ н̃л̣̄ т̣э т̣хаи д̣о д̣хау н̣ам̣ тах̣ тх',
+        consonants: 'ка кха га гха н̇а ча чха джа джха н̃а т̣а т̣ха д̣а д̣ха н̣а та тха да дха на па пха ба бха ма',
+        other: 'йа ра ла ва ш́а ша са ха л̤а',
+        symbols: 'ом̣ । ॥ 0 1 2 3 4 5 6 7 8 9',
+        putra: 'путра',
+        naraIti: 'нара ити',
+        sentence: 'дхармакшэтрэ курукшэтрэ самавэта̄ йуйутсавах̣ ।'
+    },
     itrans: {
         vowels: 'a A i I u U RRi RRI LLi LLI e ai o au',
         marks: 'ka khA gi ghI ~Nu chU ChRRi jRRI jhLLi ~nLLI Te Thai Do Dhau NaM taH th',
@@ -294,6 +304,15 @@ QUnit.test('Devanagari to Bengali', function() {
     f('व', 'ব', 'व transliteration');
     f('ब', 'ব', 'ब transliteration');
 });
+
+QUnit.test('Devanagari to Cyrillic', function() {
+    var from = data.devanagari,
+        to = data.cyrillic,
+        f = transHelper('devanagari', 'cyrillic');
+    letterTests(from, to, f);
+    textTests(from, to, f);
+});
+
 
 QUnit.test('Devanagari to Harvard-Kyoto', function() {
     var from = data.devanagari,

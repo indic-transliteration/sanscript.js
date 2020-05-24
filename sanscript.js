@@ -189,7 +189,7 @@ function exportSanscriptSingleton(global) {
                 "other_marks": ["м̣", "х̣", "м̐"],
                 "virama": [""],
                 "consonants": ["к", "кх", "г", "гх", "н̇", "ч", "чх", "дж", "джх", "н̃", "т̣", "т̣х", "д̣", "д̣х", "н̣", "т", "тх", "д", "дх", "н", "п", "пх", "б", "бх", "м", "й", "р", "л", "в", "ш́", "ш", "с", "х", "л̤", "кш", "джн̃"],
-                "symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "ом̣", "'", ".", ".."],
+                "symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "ом̣", "'", "।", "॥"],
                 "candra": ["ӕ"],
                 "other": ["ԛ", "к͟х", "г̇", "з", "р̤", "р̤х", "ф", "й̣", "р̱"]
             },
@@ -1127,7 +1127,9 @@ function exportSanscriptSingleton(global) {
             marks: marks,
             maxTokenLength: Math.max.apply(Math, tokenLengths),
             toRoman: Sanscript.isRomanScheme(to),
-            virama: toScheme.virama
+            virama: toScheme.virama,
+            toSchemeA: toScheme.vowels[0],
+            fromSchemeA: fromScheme.vowels[0]
         };
     };
 
@@ -1202,7 +1204,7 @@ function exportSanscriptSingleton(global) {
                         if (hadConsonant) {
                             if ((tempMark = marks[token])) {
                                 buf.push(tempMark);
-                            } else if (token !== 'a') {
+                            } else if (token !== map.fromSchemeA) {
                                 buf.push(virama);
                                 buf.push(tempLetter);
                             }
@@ -1251,7 +1253,7 @@ function exportSanscriptSingleton(global) {
             temp,
             toRoman = map.toRoman,
             skippingTrans = false;
-
+        console.debug(map);
         for (var i = 0, L; (L = data.charAt(i)); i++) {
             // Toggle transliteration state
             if (L === '#') {
@@ -1262,7 +1264,7 @@ function exportSanscriptSingleton(global) {
                     danglingHash = true;
                 }
                 if (hadRomanConsonant) {
-                    buf.push('a');
+                    buf.push(map.toSchemeA);
                     hadRomanConsonant = false;
                 }
                 continue;
@@ -1280,7 +1282,7 @@ function exportSanscriptSingleton(global) {
                     danglingHash = false;
                 }
                 if (hadRomanConsonant) {
-                    buf.push('a');
+                    buf.push(map.toSchemeA);
                     hadRomanConsonant = false;
                 }
 
@@ -1295,7 +1297,7 @@ function exportSanscriptSingleton(global) {
             }
         }
         if (hadRomanConsonant) {
-            buf.push('a');
+            buf.push(map.toSchemeA);
         }
         return buf.join('');
     };
