@@ -1043,7 +1043,7 @@ function exportSanscriptSingleton(global) {
     (function () {
         // Set up roman schemes
         var kolkata = schemes.kolkata = cheapCopy(schemes.iast),
-            schemeNames = ["iast", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx"];
+            schemeNames = ["iast", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
         kolkata.vowels = ["a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "e", "ē", "ai", "o", "ō", "au"];
 
         // These schemes already belong to Sanscript.schemes. But by adding
