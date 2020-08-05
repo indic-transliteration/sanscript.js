@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "qunit",
+    "validate": "node ./node_modules/.bin/ajv validate -s src/sanscript.schema.json -d 'src/schemes/*/*.json'",
     "dist": "node dist.js"
   },
   "repository": {
@@ -102,6 +103,7 @@
   },
   "homepage": "https://github.com/sanskrit/sanscript.js#readme",
   "devDependencies": {
+    "ajv-cli": "^3.2.1",
     "qunit": "^2.8.0"
   }
 }
