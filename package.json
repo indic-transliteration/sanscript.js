@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "qunit"
+    "test": "qunit",
+    "dist": "node dist.js"
   },
   "repository": {
     "type": "git",
