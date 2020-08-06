@@ -56,7 +56,7 @@ A **lossy** scheme does not have the letters needed to support lossless translat
 You can tweak the transliteration function by passing an `options` object:
 
 ```
-<script src="node_modules/@sanskrit-coders/sanscript/sanscript.js"></script>
+<script src="node_modules/@sanskrit-coders/sanscript/dist/sanscript.js"></script>
 var output = Sanscript.t(input, from, to, options);
 ```
 
