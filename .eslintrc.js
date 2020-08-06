@@ -5,8 +5,9 @@ module.exports = {
         "es6"     : true,
         "node"    : true,
     },
-    "extends"       : "eslint:recommended",
-    "parserOptions" : {
+    "extends"        : "eslint:recommended",
+    "ignorePatterns" : [ "/dist/*" ],
+    "parserOptions"  : {
         "ecmaVersion" : 2018,
     },
     "root"  : true,
