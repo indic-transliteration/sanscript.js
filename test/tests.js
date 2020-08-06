@@ -199,12 +199,12 @@ QUnit.test("Scheme definitions", function () {
     var schemes = Sanscript.schemes,
         devanagari = schemes.devanagari,
         lengths = {};
-    for (var key in devanagari) {
+    for (const key in devanagari) {
         lengths[key] = devanagari[key].length;
     }
 
     for (var name in schemes) {
-        for (var key in schemes[name]) {
+        for (const key in schemes[name]) {
             // The virama is distinct from other categories.
             if (key !== "virama") {
                 QUnit.assert.equal(schemes[name][key].length, lengths[key], name + "." + key);
@@ -222,10 +222,10 @@ QUnit.test("Roman scheme membership", function () {
         other = ["bengali", "devanagari", "gujarati", "gurmukhi", "kannada",
             "malayalam", "oriya", "tamil", "telugu"];
 
-    for (var i in roman) {
+    for (const i in roman) {
         QUnit.assert.ok(Sanscript.isRomanScheme(roman[i]), roman[i]);
     }
-    for (var i in other) {
+    for (const i in other) {
         QUnit.assert.ok(!Sanscript.isRomanScheme(other[i]), other[i]);
     }
 });
@@ -429,7 +429,7 @@ QUnit.test("Undefined letters", function () {
 QUnit.module("Dravidian");
 
 function dravidianTest (fromScript, toScript) {
-    label = names[fromScript] + " to " + names[toScript];
+    const label = names[fromScript] + " to " + names[toScript];
     QUnit.test(label, function () {
         var f = transHelper(fromScript, toScript),
             from = data[fromScript],
@@ -514,8 +514,8 @@ QUnit.test("Virama", function () {
 
 QUnit.test("Alternates", function () {
     var f = function (itrans1, itrans2, description) {
-        dev1 = Sanscript.t(itrans1, "itrans", "devanagari"),
-        dev2 = Sanscript.t(itrans2, "itrans", "devanagari");
+        const dev1 = Sanscript.t(itrans1, "itrans", "devanagari");
+        const dev2 = Sanscript.t(itrans2, "itrans", "devanagari");
         QUnit.assert.equal(dev2, dev1, description);
     };
 
@@ -569,8 +569,8 @@ QUnit.test("Non-Sanskrit letters", function () {
         gur = transHelper("itrans", "gurmukhi"),
         mal = transHelper("itrans", "malayalam"),
         ori = transHelper("itrans", "oriya"),
-        tam = transHelper("itrans", "tamil"),
-        tel = transHelper("itrans", "telugu");
+        tam = transHelper("itrans", "tamil");
+    // var tel = transHelper("itrans", "telugu");
     ben(".De .Dhe Ye", "ডে ঢে যে");
     dev("qa KA Gi zI .Du .DU fRRi YRRI RLLi", "क़ ख़ा ग़ि ज़ी ड़ु ड़ू फ़ृ य़ॄ ऱॢ");
     dev("ka.cna", "कॅन");

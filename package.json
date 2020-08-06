@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dist": "node scripts/dist.js",
-    "lint": "node ./node_modules/.bin/eslint '*.js'",
+    "lint": "node ./node_modules/.bin/eslint '**/*.js'",
     "test": "qunit"
   },
   "repository": {
