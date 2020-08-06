@@ -1,3 +1,6 @@
+var QUnit = require('qunit');
+var Sanscript = require('../dist/sanscript');
+
 var names = {
     bengali: 'Bengali',
     devanagari: 'Devanagari',
