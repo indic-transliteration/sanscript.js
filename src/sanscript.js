@@ -7,14 +7,14 @@
  * License: MIT
  */
 
-function exportSanscriptSingleton(global, schemes) {
+function exportSanscriptSingleton (global, schemes) {
     "use strict";
 
     var Sanscript = {};
     // First, we define the Sanscript singleton, with its variables and methods.
     Sanscript.defaults = {
         "skip_sgml": false,
-        "syncope": false
+        "syncope": false,
     };
 
     /* Schemes
@@ -62,8 +62,8 @@ function exportSanscriptSingleton(global, schemes) {
                 ".a": ["~"],
                 "|": ["."],
                 "||": [".."],
-                "z": ["J"]
-            }
+                "z": ["J"],
+            },
         },
 
         // object cache
@@ -111,7 +111,7 @@ function exportSanscriptSingleton(global, schemes) {
      * @param scheme  the scheme data itself
      */
     Sanscript.addRomanScheme = function (name, scheme) {
-        if (!('vowel_marks' in scheme)) {
+        if (!("vowel_marks" in scheme)) {
             scheme.vowel_marks = scheme.vowels.slice(1);
         }
         Sanscript.schemes[name] = scheme;
@@ -154,7 +154,7 @@ function exportSanscriptSingleton(global, schemes) {
         itrans_dravidian.vowels = ["a", "A", "i", "I", "u", "U", "Ri", "RRI", "LLi", "LLi", "e", "E", "ai", "o", "O", "au"];
         itrans_dravidian.vowel_marks = itrans_dravidian.vowels.slice(1);
         allAlternates.itrans_dravidian = allAlternates.itrans;
-        Sanscript.addRomanScheme('itrans_dravidian', itrans_dravidian);
+        Sanscript.addRomanScheme("itrans_dravidian", itrans_dravidian);
     }());
 
     /**
@@ -195,7 +195,7 @@ function exportSanscriptSingleton(global, schemes) {
                     tokenLengths.push(alts[j].length);
                 }
 
-                if (group === 'vowel_marks' || group === 'virama') {
+                if (group === "vowel_marks" || group === "virama") {
                     marks[F] = T;
                     for (j = 0; j < numAlts; j++) {
                         marks[alts[j]] = T;
@@ -205,7 +205,7 @@ function exportSanscriptSingleton(global, schemes) {
                     for (j = 0; j < numAlts; j++) {
                         letters[alts[j]] = T;
                     }
-                    if (group === 'consonants' || group === 'other') {
+                    if (group === "consonants" || group === "other") {
                         consonants[F] = T;
 
                         for (j = 0; j < numAlts; j++) {
@@ -225,7 +225,7 @@ function exportSanscriptSingleton(global, schemes) {
             toRoman: Sanscript.isRomanScheme(to),
             virama: toScheme.virama,
             toSchemeA: toScheme.vowels[0],
-            fromSchemeA: fromScheme.vowels[0]
+            fromSchemeA: fromScheme.vowels[0],
         };
     };
 
@@ -249,7 +249,7 @@ function exportSanscriptSingleton(global, schemes) {
             optSyncope = options.syncope,
             tempLetter,
             tempMark,
-            tokenBuffer = '',
+            tokenBuffer = "",
             toRoman = map.toRoman,
             virama = map.virama;
 
@@ -281,10 +281,10 @@ function exportSanscriptSingleton(global, schemes) {
                 var token = tokenBuffer.substr(0, maxTokenLength - j);
 
                 if (skippingSGML === true) {
-                    skippingSGML = (token !== '>');
-                } else if (token === '<') {
+                    skippingSGML = (token !== ">");
+                } else if (token === "<") {
                     skippingSGML = optSkipSGML;
-                } else if (token === '##') {
+                } else if (token === "##") {
                     toggledTrans = !toggledTrans;
                     tokenBuffer = tokenBuffer.substr(2);
                     break;
@@ -328,7 +328,7 @@ function exportSanscriptSingleton(global, schemes) {
         if (hadConsonant && !optSyncope) {
             buf.push(virama);
         }
-        return buf.join('');
+        return buf.join("");
     };
 
     /**
@@ -352,7 +352,7 @@ function exportSanscriptSingleton(global, schemes) {
         console.debug(map);
         for (var i = 0, L; (L = data.charAt(i)); i++) {
             // Toggle transliteration state
-            if (L === '#') {
+            if (L === "#") {
                 if (danglingHash) {
                     skippingTrans = !skippingTrans;
                     danglingHash = false;
@@ -374,7 +374,7 @@ function exportSanscriptSingleton(global, schemes) {
                 hadRomanConsonant = false;
             } else {
                 if (danglingHash) {
-                    buf.push('#');
+                    buf.push("#");
                     danglingHash = false;
                 }
                 if (hadRomanConsonant) {
@@ -395,7 +395,7 @@ function exportSanscriptSingleton(global, schemes) {
         if (hadRomanConsonant) {
             buf.push(map.toSchemeA);
         }
-        return buf.join('');
+        return buf.join("");
     };
 
     /**
@@ -441,18 +441,18 @@ function exportSanscriptSingleton(global, schemes) {
                 from: from,
                 map: map,
                 options: options,
-                to: to
+                to: to,
             };
         }
 
         // Easy way out for "{\m+}", "\", and ".h".
-        if (from === 'itrans') {
+        if (from === "itrans") {
             data = data.replace(/\{\\m\+\}/g, ".h.N");
-            data = data.replace(/\.h/g, '');
+            data = data.replace(/\.h/g, "");
             data = data.replace(/\\([^'`_]|$)/g, "##$1##");
         }
         if (from === "tamil_superscripted") {
-            let pattern = "([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)([²³⁴])";
+            const pattern = "([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)([²³⁴])";
             data = data.replace(new RegExp(pattern, "g"), "$2$1");
             console.error("transliteration from tamil_superscripted not fully implemented!");
         }
@@ -464,8 +464,8 @@ function exportSanscriptSingleton(global, schemes) {
             result = transliterateBrahmic(data, map, options);
         }
         if (to === "tamil_superscripted") {
-            let pattern = "([²³⁴])([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)";
-            result = result.replace(new RegExp(pattern, "g"), "$2$1")
+            const pattern = "([²³⁴])([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)";
+            result = result.replace(new RegExp(pattern, "g"), "$2$1");
         }
         return result;
     };
@@ -473,12 +473,12 @@ function exportSanscriptSingleton(global, schemes) {
     // Now that Sanscript is fully defined, we now safely export it for use elsewhere.
     // The below block was copied from https://www.npmjs.com/package/sanscript .
     // define seems to be a requirejs thing https://requirejs.org/docs/whyamd.html#amd .
-    if (typeof define === 'function' && define.amd) {
+    if (typeof define === "function" && define.amd) {
         define(function () {
             return Sanscript;
         });
-    } else if (typeof exports !== 'undefined') {
-        if (typeof module !== 'undefined' && module.exports) {
+    } else if (typeof exports !== "undefined") {
+        if (typeof module !== "undefined" && module.exports) {
             exports = module.exports = Sanscript;
         }
 
@@ -488,5 +488,5 @@ function exportSanscriptSingleton(global, schemes) {
     }
 }
 
-// noinspection ThisExpressionReferencesGlobalObjectJS
+/* global schemes */
 exportSanscriptSingleton(this, schemes);

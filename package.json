@@ -7,8 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "qunit",
-    "dist": "node dist.js"
+    "dist": "node dist.js",
+    "lint": "node ./node_modules/.bin/eslint '*.js'",
+    "test": "qunit"
   },
   "repository": {
     "type": "git",
@@ -102,6 +103,7 @@
   },
   "homepage": "https://github.com/sanskrit/sanscript.js#readme",
   "devDependencies": {
+    "eslint": "^7.6.0",
     "qunit": "^2.8.0"
   }
 }
