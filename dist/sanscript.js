@@ -13,29 +13,6 @@ schemes.ahom = {
 	"candra": ["𑜦"],
 	"other": ["𑜀", "𑜁", "𑜕", "𑜊", "𑜓", "𑜔", "𑜇", "𑜊", "𑜍"]
 };
-schemes.avestan = {
-	"vowels": ["𐬀", "𐬁", "𐬌", "𐬍", "𐬎", "𐬏", "𐬆𐬭𐬆", "𐬇𐬭𐬇", "𐬆𐬮𐬆", "𐬇𐬮𐬇", "𐬈", "𐬉", "𐬀𐬌", "𐬊", "𐬋", "𐬀𐬎"],
-	"vowel_marks": ["𐬁", "𐬌", "𐬍", "𐬎", "𐬏", "𐬆𐬭𐬆", "𐬇𐬭𐬇", "𐬆𐬮𐬆", "𐬇𐬮𐬇", "𐬈", "𐬉", "𐬀𐬌", "𐬊", "𐬋", "𐬀𐬎"],
-	"other_marks": ["𐬩", "𐬵", "𐬩"],
-	"virama": [""],
-	"consonants": ["𐬐𐬀", "𐬑𐬀", "𐬔𐬀", "𐬖𐬀", "𐬢𐬀", "𐬗𐬀", "𐬗𐬀", "𐬘𐬀", "𐬘𐬀", "𐬦𐬀", "𐬙𐬀", "𐬚𐬀", "𐬛𐬀", "𐬛𐬀", "𐬧𐬀", "𐬙𐬀", "𐬚𐬀", "𐬛𐬀", "𐬜𐬀", "𐬥𐬀", "𐬞𐬀", "𐬞𐬀", "𐬠𐬀", "𐬠𐬀", "𐬨𐬀", "𐬫𐬀", "𐬭𐬀", "𐬮𐬀", "𐬬𐬀", "𐬱𐬀", "𐬴𐬀", "𐬯𐬀", "𐬵𐬀", "𐬮𐬀", "𐬐𐬴𐬀", "𐬘𐬦𐬀"],
-	"symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "𐬋𐬨", "", "𐬼‏", "𐬽‏"],
-	"zwj": ["\u200D"],
-	"skip": [""],
-	"accent": ["\u0951", "\u0952"],
-	"combo_accent": ["𐬵'", "𐬵_", "𐬩'", "𐬩_"],
-	"candra": ["𐬉"],
-	"other": ["𐬐𐬀", "𐬓𐬀", "𐬕𐬀", "𐬰𐬀", "𐬛𐬀", "𐬜𐬀", "𐬟𐬀", "𐬪𐬀", "𐬭𐬀"]
-};
-schemes.bengali = {
-	"vowels": ["অ", "আ", "ই", "ঈ", "উ", "ঊ", "ঋ", "ৠ", "ঌ", "ৡ", "", "এ", "ঐ", "", "ও", "ঔ"],
-	"vowel_marks": ["া", "ি", "ী", "ু", "ূ", "ৃ", "ৄ", "ৢ", "ৣ", "", "ে", "ৈ", "", "ো", "ৌ"],
-	"other_marks": ["ং", "ঃ", "ঁ"],
-	"virama": ["্"],
-	"consonants": ["ক", "খ", "গ", "ঘ", "ঙ", "চ", "ছ", "জ", "ঝ", "ঞ", "ট", "ঠ", "ড", "ঢ", "ণ", "ত", "থ", "দ", "ধ", "ন", "প", "ফ", "ব", "ভ", "ম", "য", "র", "ল", "ব", "শ", "ষ", "স", "হ", "ळ", "ক্ষ", "জ্ঞ"],
-	"symbols": ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "ॐ", "ঽ", "।", "॥"],
-	"other": ["", "", "", "", "ড", "ঢ", "", "য", ""]
-};
 schemes.balinese = {
 	"vowels": ["ᬅ", "ᬆ", "ᬇ", "ᬈ", "ᬉ", "ᬊ", "ᬋ", "ᬌ", "ᬍ", "ᬎ", "ᬏ", "ᬏ", "ᬐ", "ᬑ", "ᬑ", "ᬒ"],
 	"vowel_marks": ["ᬵ", "ᬶ", "ᬷ", "ᬸ", "ᬹ", "ᬺ", "ᬻ", "ᬼ", "ᬽ", "ᬾ", "ᬾ", "ᬿ", "ᭀ", "ᭀ", "ᭁ"],
@@ -50,19 +27,42 @@ schemes.balinese = {
 	"candra": ["ᬾ"],
 	"other": ["ᬓ᬴", "ᬔ᬴", "ᬕ᬴", "ᬚ᬴", "ᬟ᬴", "ᬠ᬴", "ᬧ᬴", "ᬬ᬴", "ᬭ᬴"]
 };
-schemes.brahmi = {
-	"vowels": ["𑀅", "𑀆", "𑀇", "𑀈", "𑀉", "𑀊", "𑀋", "𑀌", "𑀍", "𑀎", "𑀏𑁆", "𑀏", "𑀐", "𑀑𑁆", "𑀑", "𑀒"],
-	"vowel_marks": ["𑀸", "𑀺", "𑀻", "𑀼", "𑀽", "𑀾", "𑀿", "𑁀", "𑁁", "𑁂", "𑁂", "𑁃", "𑁄", "𑁄", "𑁅"],
-	"other_marks": ["𑀁", "𑀂", "𑀀"],
-	"virama": ["𑁆"],
-	"consonants": ["𑀓", "𑀔", "𑀕", "𑀖", "𑀗", "𑀘", "𑀙", "𑀚", "𑀛", "𑀜", "𑀝", "𑀞", "𑀟", "𑀠", "𑀡", "𑀢", "𑀣", "𑀤", "𑀥", "𑀦", "𑀧", "𑀨", "𑀩", "𑀪", "𑀫", "𑀬", "𑀭", "𑀮", "𑀯", "𑀰", "𑀱", "𑀲", "𑀳", "𑀴", "𑀓𑁆𑀱", "𑀚𑁆𑀜"],
-	"symbols": ["𑁦", "𑁧", "𑁨", "𑁩", "𑁪", "𑁫", "𑁬", "𑁭", "𑁮", "𑁯", "𑀑𑀁", "", "𑁇", "𑁈"],
+schemes.assamese = {
+	"vowels": ["অ", "আ", "ই", "ঈ", "উ", "ঊ", "ঋ", "ৠ", "ঌ", "ৡ", "এ", "এ", "ঐ", "ও", "ও", "ঔ"],
+	"vowel_marks": ["া", "ি", "ী", "ু", "ূ", "ৃ", "ৄ", "ৢ", "ৣ", "ে", "ে", "ৈ", "ো", "ো", "ৌ"],
+	"other_marks": ["ং", "ঃ", "ঁ"],
+	"virama": ["্"],
+	"consonants": ["ক", "খ", "গ", "ঘ", "ঙ", "চ", "ছ", "জ", "ঝ", "ঞ", "ট", "ঠ", "ড", "ঢ", "ণ", "ত", "থ", "দ", "ধ", "ন", "প", "ফ", "ব", "ভ", "ম", "য", "ৰ", "ল", "ৱ", "শ", "ষ", "স", "হ", "ল়", "ক্ষ", "জ্ঞ"],
+	"symbols": ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "ওঁ", "ঽ", "।", "॥"],
 	"zwj": ["\u200D"],
 	"skip": [""],
 	"accent": ["\u0951", "\u0952"],
-	"combo_accent": ["𑀂॑", "𑀂॒", "𑀁॑", "𑀁॒"],
-	"candra": ["𑁂"],
-	"other": ["𑀓", "𑀔", "𑀕", "𑀚", "𑀟", "𑀠", "𑀨", "𑀬", "𑀭"]
+	"combo_accent": ["ঃ॑", "ঃ॒", "ং॑", "ং॒"],
+	"candra": ["ে"],
+	"other": ["ক়", "খ়", "গ়", "জ়", "ড়", "ঢ়", "ফ়", "য়", "ৰ়"]
+};
+schemes.bengali = {
+	"vowels": ["অ", "আ", "ই", "ঈ", "উ", "ঊ", "ঋ", "ৠ", "ঌ", "ৡ", "", "এ", "ঐ", "", "ও", "ঔ"],
+	"vowel_marks": ["া", "ি", "ী", "ু", "ূ", "ৃ", "ৄ", "ৢ", "ৣ", "", "ে", "ৈ", "", "ো", "ৌ"],
+	"other_marks": ["ং", "ঃ", "ঁ"],
+	"virama": ["্"],
+	"consonants": ["ক", "খ", "গ", "ঘ", "ঙ", "চ", "ছ", "জ", "ঝ", "ঞ", "ট", "ঠ", "ড", "ঢ", "ণ", "ত", "থ", "দ", "ধ", "ন", "প", "ফ", "ব", "ভ", "ম", "য", "র", "ল", "ব", "শ", "ষ", "স", "হ", "ळ", "ক্ষ", "জ্ঞ"],
+	"symbols": ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "ॐ", "ঽ", "।", "॥"],
+	"other": ["", "", "", "", "ড", "ঢ", "", "য", ""]
+};
+schemes.avestan = {
+	"vowels": ["𐬀", "𐬁", "𐬌", "𐬍", "𐬎", "𐬏", "𐬆𐬭𐬆", "𐬇𐬭𐬇", "𐬆𐬮𐬆", "𐬇𐬮𐬇", "𐬈", "𐬉", "𐬀𐬌", "𐬊", "𐬋", "𐬀𐬎"],
+	"vowel_marks": ["𐬁", "𐬌", "𐬍", "𐬎", "𐬏", "𐬆𐬭𐬆", "𐬇𐬭𐬇", "𐬆𐬮𐬆", "𐬇𐬮𐬇", "𐬈", "𐬉", "𐬀𐬌", "𐬊", "𐬋", "𐬀𐬎"],
+	"other_marks": ["𐬩", "𐬵", "𐬩"],
+	"virama": [""],
+	"consonants": ["𐬐𐬀", "𐬑𐬀", "𐬔𐬀", "𐬖𐬀", "𐬢𐬀", "𐬗𐬀", "𐬗𐬀", "𐬘𐬀", "𐬘𐬀", "𐬦𐬀", "𐬙𐬀", "𐬚𐬀", "𐬛𐬀", "𐬛𐬀", "𐬧𐬀", "𐬙𐬀", "𐬚𐬀", "𐬛𐬀", "𐬜𐬀", "𐬥𐬀", "𐬞𐬀", "𐬞𐬀", "𐬠𐬀", "𐬠𐬀", "𐬨𐬀", "𐬫𐬀", "𐬭𐬀", "𐬮𐬀", "𐬬𐬀", "𐬱𐬀", "𐬴𐬀", "𐬯𐬀", "𐬵𐬀", "𐬮𐬀", "𐬐𐬴𐬀", "𐬘𐬦𐬀"],
+	"symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "𐬋𐬨", "", "𐬼‏", "𐬽‏"],
+	"zwj": ["\u200D"],
+	"skip": [""],
+	"accent": ["\u0951", "\u0952"],
+	"combo_accent": ["𐬵'", "𐬵_", "𐬩'", "𐬩_"],
+	"candra": ["𐬉"],
+	"other": ["𐬐𐬀", "𐬓𐬀", "𐬕𐬀", "𐬰𐬀", "𐬛𐬀", "𐬜𐬀", "𐬟𐬀", "𐬪𐬀", "𐬭𐬀"]
 };
 schemes.bhaisuki = {
 	"vowels": ["𑰀", "𑰁", "𑰂", "𑰃", "𑰄", "𑰅", "𑰆", "𑰇", "𑰈", "𑰈", "𑰊", "𑰊", "𑰋", "𑰌", "𑰌", "𑰍"],
@@ -78,19 +78,19 @@ schemes.bhaisuki = {
 	"candra": ["𑰸"],
 	"other": ["𑰎", "𑰏", "𑰐", "𑰕", "𑰚", "𑰛", "𑰣", "𑰧", "𑰨"]
 };
-schemes.assamese = {
-	"vowels": ["অ", "আ", "ই", "ঈ", "উ", "ঊ", "ঋ", "ৠ", "ঌ", "ৡ", "এ", "এ", "ঐ", "ও", "ও", "ঔ"],
-	"vowel_marks": ["া", "ি", "ী", "ু", "ূ", "ৃ", "ৄ", "ৢ", "ৣ", "ে", "ে", "ৈ", "ো", "ো", "ৌ"],
-	"other_marks": ["ং", "ঃ", "ঁ"],
-	"virama": ["্"],
-	"consonants": ["ক", "খ", "গ", "ঘ", "ঙ", "চ", "ছ", "জ", "ঝ", "ঞ", "ট", "ঠ", "ড", "ঢ", "ণ", "ত", "থ", "দ", "ধ", "ন", "প", "ফ", "ব", "ভ", "ম", "য", "ৰ", "ল", "ৱ", "শ", "ষ", "স", "হ", "ল়", "ক্ষ", "জ্ঞ"],
-	"symbols": ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "ওঁ", "ঽ", "।", "॥"],
+schemes.brahmi = {
+	"vowels": ["𑀅", "𑀆", "𑀇", "𑀈", "𑀉", "𑀊", "𑀋", "𑀌", "𑀍", "𑀎", "𑀏𑁆", "𑀏", "𑀐", "𑀑𑁆", "𑀑", "𑀒"],
+	"vowel_marks": ["𑀸", "𑀺", "𑀻", "𑀼", "𑀽", "𑀾", "𑀿", "𑁀", "𑁁", "𑁂", "𑁂", "𑁃", "𑁄", "𑁄", "𑁅"],
+	"other_marks": ["𑀁", "𑀂", "𑀀"],
+	"virama": ["𑁆"],
+	"consonants": ["𑀓", "𑀔", "𑀕", "𑀖", "𑀗", "𑀘", "𑀙", "𑀚", "𑀛", "𑀜", "𑀝", "𑀞", "𑀟", "𑀠", "𑀡", "𑀢", "𑀣", "𑀤", "𑀥", "𑀦", "𑀧", "𑀨", "𑀩", "𑀪", "𑀫", "𑀬", "𑀭", "𑀮", "𑀯", "𑀰", "𑀱", "𑀲", "𑀳", "𑀴", "𑀓𑁆𑀱", "𑀚𑁆𑀜"],
+	"symbols": ["𑁦", "𑁧", "𑁨", "𑁩", "𑁪", "𑁫", "𑁬", "𑁭", "𑁮", "𑁯", "𑀑𑀁", "", "𑁇", "𑁈"],
 	"zwj": ["\u200D"],
 	"skip": [""],
 	"accent": ["\u0951", "\u0952"],
-	"combo_accent": ["ঃ॑", "ঃ॒", "ং॑", "ং॒"],
-	"candra": ["ে"],
-	"other": ["ক়", "খ়", "গ়", "জ়", "ড়", "ঢ়", "ফ়", "য়", "ৰ়"]
+	"combo_accent": ["𑀂॑", "𑀂॒", "𑀁॑", "𑀁॒"],
+	"candra": ["𑁂"],
+	"other": ["𑀓", "𑀔", "𑀕", "𑀚", "𑀟", "𑀠", "𑀨", "𑀬", "𑀭"]
 };
 schemes.brahmi_tamil = {
 	"vowels": ["𑀅", "𑀆", "𑀇", "𑀈", "𑀉", "𑀊", "𑀭𑀼", "𑀭𑀽", "𑀮𑀼", "𑀮𑀽", "𑀏𑁆", "𑀏", "𑀐", "𑀑𑁆", "𑀑", "𑀒"],
@@ -498,6 +498,16 @@ schemes.rohingya = {
 	"symbols": ["𐴰", "𐴱", "𐴲", "𐴳", "𐴴", "𐴵", "𐴶", "𐴷", "𐴸", "𐴹", "𐴀𐴀𐴡𐴴𐴔", "", "।", "॥"],
 	"candra": ["𐴀𐴠"]
 };
+schemes.shan = {
+	"vowels": ["အ", "အႃ", "အိ", "အီ", "အု", "အူ", "အၖ", "အၗ", "အၘ", "အၙ", "အေ", "အေ", "အႆ", "အေႃ", "အေႃ", "အဝ်"],
+	"vowel_marks": ["ႃ", "ိ", "ီ", "ု", "ူ", "ၖ", "ၗ", "ၘ", "ၙ", "ေ", "ေ", "ႆ", "ေႃ", "ေႃ", "ဝ်"],
+	"other_marks": ["ံ", "း", "ံ"],
+	"virama": ["်"],
+	"consonants": ["ၵ", "ၶ", "ၷ", "ꧠ", "င", "ၸ", "ꧡ", "ꩡ", "ꧢ", "ၺ", "ꩦ", "ꩧ", "ꩨ", "ꩩ", "ꧣ", "တ", "ထ", "ၻ", "ꩪ", "ၼ", "ပ", "ၽ", "ၿ", "ꧤ", "မ", "ယ", "ရ", "လ", "ဝ", "ၐ", "ၑ", "သ", "ႁ", "ꩮ", "ၵ်ၑ", "ꩡ်ၺ"],
+	"symbols": ["႐", "႑", "႒", "႓", "႔", "႕", "႖", "႗", "႘", "႙", "အေႃံ", "'", "၊", "။"],
+	"candra": ["ႄ"],
+	"other": ["ၵ", "ၶ", "ၷ", "ၹ", "ꩨ", "ꩩ", "ၾ", "ယ", "ရ"]
+};
 schemes.sharada = {
 	"vowels": ["𑆃", "𑆄", "𑆅", "𑆆", "𑆇", "𑆈", "𑆉", "𑆊", "𑆋", "𑆌", "𑆍𑇌", "𑆍", "𑆎", "𑆏𑇌", "𑆏", "𑆐"],
 	"vowel_marks": ["𑆳", "𑆴", "𑆵", "𑆶", "𑆷", "𑆸", "𑆹", "𑆺", "𑆻", "𑆼𑇌", "𑆼", "𑆽", "𑆾𑇌", "𑆾", "𑆿"],
@@ -511,16 +521,6 @@ schemes.sharada = {
 	"combo_accent": ["𑆂॑", "𑆂॒", "𑆁॑", "𑆁॒"],
 	"candra": ["𑆼"],
 	"other": ["𑆑𑇊", "𑆒𑇊", "𑆓𑇊", "𑆘𑇊", "𑆝𑇊", "𑆞𑇊", "𑆦𑇊", "𑆪𑇊", "𑆫𑇊"]
-};
-schemes.shan = {
-	"vowels": ["အ", "အႃ", "အိ", "အီ", "အု", "အူ", "အၖ", "အၗ", "အၘ", "အၙ", "အေ", "အေ", "အႆ", "အေႃ", "အေႃ", "အဝ်"],
-	"vowel_marks": ["ႃ", "ိ", "ီ", "ု", "ူ", "ၖ", "ၗ", "ၘ", "ၙ", "ေ", "ေ", "ႆ", "ေႃ", "ေႃ", "ဝ်"],
-	"other_marks": ["ံ", "း", "ံ"],
-	"virama": ["်"],
-	"consonants": ["ၵ", "ၶ", "ၷ", "ꧠ", "င", "ၸ", "ꧡ", "ꩡ", "ꧢ", "ၺ", "ꩦ", "ꩧ", "ꩨ", "ꩩ", "ꧣ", "တ", "ထ", "ၻ", "ꩪ", "ၼ", "ပ", "ၽ", "ၿ", "ꧤ", "မ", "ယ", "ရ", "လ", "ဝ", "ၐ", "ၑ", "သ", "ႁ", "ꩮ", "ၵ်ၑ", "ꩡ်ၺ"],
-	"symbols": ["႐", "႑", "႒", "႓", "႔", "႕", "႖", "႗", "႘", "႙", "အေႃံ", "'", "၊", "။"],
-	"candra": ["ႄ"],
-	"other": ["ၵ", "ၶ", "ၷ", "ၹ", "ꩨ", "ꩩ", "ၾ", "ယ", "ရ"]
 };
 schemes.siddham = {
 	"vowels": ["𑖀", "𑖁", "𑖂", "𑖃", "𑖄", "𑖅", "𑖆", "𑖇", "𑖈", "𑖉", "𑖊", "𑖊", "𑖋", "𑖌", "𑖌", "𑖍"],
@@ -621,6 +621,16 @@ schemes.tamil = {
 	"symbols": ["௦", "௧", "௨", "௩", "௪", "௫", "௬", "௭", "௮", "௯", "ௐ", "ऽ", "।", "॥"],
 	"other": ["", "", "", "", "", "", "", "", "ற"]
 };
+schemes.tamil_extended = {
+	"vowels": ["அ", "ஆ", "இ", "ஈ", "உ", "ஊ", "𑌋", "𑍠", "𑌌", "𑍡", "எ", "ஏ", "ஐ", "ஒ", "ஓ", "ஔ"],
+	"vowel_marks": ["ா", "ி", "ீ", "ு", "ூ", "𑍃", "𑍄", "𑍢", "𑍣", "ெ", "ே", "ை", "ொ", "ோ", "ௌ"],
+	"other_marks": ["𑌂", "𑌃", "𑌁"],
+	"virama": ["்"],
+	"consonants": ["க", "𑌖", "𑌗", "𑌘", "ங", "ச", "𑌛", "ஜ", "𑌝", "ஞ", "ட", "𑌠", "𑌡", "𑌢", "ண", "த", "𑌥", "𑌦", "𑌧", "ந", "ப", "𑌫", "𑌬", "𑌭", "ம", "ய", "ர", "ல", "வ", "ஶ", "ஷ", "ஸ", "ஹ", "ள", "க்ஷ", "ஜ்ஞ"],
+	"symbols": ["௦", "௧", "௨", "௩", "௪", "௫", "௬", "௭", "௮", "௯", "ௐ", "𑌽", "।", "॥"],
+	"candra": ["ெ"],
+	"other": ["க𑌼", "𑌖𑌼", "𑌗𑌼", "ஜ𑌼", "𑌡𑌼", "𑌢𑌼", "𑌫𑌼", "ய𑌼", "ற"]
+};
 schemes.tamil_superscripted = {
 	"vowels": ["அ", "ஆ", "இ", "ஈ", "உ", "ஊ", "ருʼ", "ரூʼ", "லுʼ", "லூʼ", "எ", "ஏ", "ஐ", "ஒ", "ஓ", "ஔ"],
 	"vowel_marks": ["ா", "ி", "ீ", "ு", "ூ", "்ருʼ", "்ரூʼ", "்லுʼ", "்லூʼ", "ெ", "ே", "ை", "ொ", "ோ", "ௌ"],
@@ -638,16 +648,6 @@ schemes.tamil_superscripted = {
 	"combo_accent": ["॑꞉", "॒꞉", "ம்॑ʼ", "ம்॒ʼ"],
 	"candra": ["ே"],
 	"other": ["ஃʼக", "ஃக²", "ஃக³", "ஃஜ", "ஃட²", "ஃட³", "ஃப", "ஃய", "ற"]
-};
-schemes.tamil_extended = {
-	"vowels": ["அ", "ஆ", "இ", "ஈ", "உ", "ஊ", "𑌋", "𑍠", "𑌌", "𑍡", "எ", "ஏ", "ஐ", "ஒ", "ஓ", "ஔ"],
-	"vowel_marks": ["ா", "ி", "ீ", "ு", "ூ", "𑍃", "𑍄", "𑍢", "𑍣", "ெ", "ே", "ை", "ொ", "ோ", "ௌ"],
-	"other_marks": ["𑌂", "𑌃", "𑌁"],
-	"virama": ["்"],
-	"consonants": ["க", "𑌖", "𑌗", "𑌘", "ங", "ச", "𑌛", "ஜ", "𑌝", "ஞ", "ட", "𑌠", "𑌡", "𑌢", "ண", "த", "𑌥", "𑌦", "𑌧", "ந", "ப", "𑌫", "𑌬", "𑌭", "ம", "ய", "ர", "ல", "வ", "ஶ", "ஷ", "ஸ", "ஹ", "ள", "க்ஷ", "ஜ்ஞ"],
-	"symbols": ["௦", "௧", "௨", "௩", "௪", "௫", "௬", "௭", "௮", "௯", "ௐ", "𑌽", "।", "॥"],
-	"candra": ["ெ"],
-	"other": ["க𑌼", "𑌖𑌼", "𑌗𑌼", "ஜ𑌼", "𑌡𑌼", "𑌢𑌼", "𑌫𑌼", "ய𑌼", "ற"]
 };
 schemes.telugu = {
 	"vowels": ["అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఋ", "ౠ", "ఌ", "ౡ", "ఎ", "ఏ", "ఐ", "ఒ", "ఓ", "ఔ"],
@@ -772,19 +772,19 @@ schemes.slp1 = {
 	"consonants": ["k", "K", "g", "G", "N", "c", "C", "j", "J", "Y", "w", "W", "q", "Q", "R", "t", "T", "d", "D", "n", "p", "P", "b", "B", "m", "y", "r", "l", "v", "S", "z", "s", "h", "L", "kz", "jY"],
 	"symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "oM", "'", ".", ".."]
 };
-schemes.wx = {
-	"vowels": ["a", "A", "i", "I", "u", "U", "q", "Q", "L", "", "", "e", "E", "", "o", "O"],
-	"other_marks": ["M", "H", "z"],
-	"virama": [""],
-	"consonants": ["k", "K", "g", "G", "f", "c", "C", "j", "J", "F", "t", "T", "d", "D", "N", "w", "W", "x", "X", "n", "p", "P", "b", "B", "m", "y", "r", "l", "v", "S", "R", "s", "h", "", "kR", "jF"],
-	"symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "oM", "'", "|", "||"]
-};
 schemes.velthuis = {
 	"vowels": ["a", "aa", "i", "ii", "u", "uu", ".r", ".rr", ".li", ".ll", "", "e", "ai", "", "o", "au"],
 	"other_marks": [".m", ".h", ""],
 	"virama": [""],
 	"consonants": ["k", "kh", "g", "gh", "\"n", "c", "ch", "j", "jh", "~n", ".t", ".th", ".d", ".d", ".n", "t", "th", "d", "dh", "n", "p", "ph", "b", "bh", "m", "y", "r", "l", "v", "~s", ".s", "s", "h", "L", "k.s", "j~n"],
 	"symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "o.m", "'", "|", "||"]
+};
+schemes.wx = {
+	"vowels": ["a", "A", "i", "I", "u", "U", "q", "Q", "L", "", "", "e", "E", "", "o", "O"],
+	"other_marks": ["M", "H", "z"],
+	"virama": [""],
+	"consonants": ["k", "K", "g", "G", "f", "c", "C", "j", "J", "F", "t", "T", "d", "D", "N", "w", "W", "x", "X", "n", "p", "P", "b", "B", "m", "y", "r", "l", "v", "S", "R", "s", "h", "", "kR", "jF"],
+	"symbols": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "oM", "'", "|", "||"]
 };
 /**
  * Sanscript
@@ -798,7 +798,7 @@ schemes.velthuis = {
 function exportSanscriptSingleton (global, schemes) {
     "use strict";
 
-    var Sanscript = {};
+    const Sanscript = {};
     // First, we define the Sanscript singleton, with its variables and methods.
     Sanscript.defaults = {
         "skip_sgml" : false,
@@ -821,41 +821,41 @@ function exportSanscriptSingleton (global, schemes) {
      */
     Sanscript.schemes = schemes;
     // Set of names of schemes
-    var romanSchemes = {},
+    const romanSchemes = {};
 
-        // Map of alternate encodings.
-        allAlternates = {
-            "itrans" : {
-                "A"    : ["aa"],
-                "I"    : ["ii", "ee"],
-                "U"    : ["uu", "oo"],
-                "RRi"  : ["R^i"],
-                "RRI"  : ["R^I"],
-                "LLi"  : ["L^i"],
-                "LLI"  : ["L^I"],
-                "M"    : [".m", ".n"],
-                "~N"   : ["N^"],
-                "ch"   : ["c"],
-                "Ch"   : ["C", "chh"],
-                "~n"   : ["JN"],
-                "v"    : ["w"],
-                "Sh"   : ["S", "shh"],
-                "kSh"  : ["kS", "x"],
-                "j~n"  : ["GY", "dny"],
-                "OM"   : ["AUM"],
-                "\\_"  : ["\\`"],
-                "\\_H" : ["\\`H"],
-                "\\'M" : ["\\'.m", "\\'.n"],
-                "\\_M" : ["\\_.m", "\\_.n", "\\`M", "\\`.m", "\\`.n"],
-                ".a"   : ["~"],
-                "|"    : ["."],
-                "||"   : [".."],
-                "z"    : ["J"],
-            },
+    // Map of alternate encodings.
+    const allAlternates = {
+        "itrans" : {
+            "A"    : ["aa"],
+            "I"    : ["ii", "ee"],
+            "U"    : ["uu", "oo"],
+            "RRi"  : ["R^i"],
+            "RRI"  : ["R^I"],
+            "LLi"  : ["L^i"],
+            "LLI"  : ["L^I"],
+            "M"    : [".m", ".n"],
+            "~N"   : ["N^"],
+            "ch"   : ["c"],
+            "Ch"   : ["C", "chh"],
+            "~n"   : ["JN"],
+            "v"    : ["w"],
+            "Sh"   : ["S", "shh"],
+            "kSh"  : ["kS", "x"],
+            "j~n"  : ["GY", "dny"],
+            "OM"   : ["AUM"],
+            "\\_"  : ["\\`"],
+            "\\_H" : ["\\`H"],
+            "\\'M" : ["\\'.m", "\\'.n"],
+            "\\_M" : ["\\_.m", "\\_.n", "\\`M", "\\`.m", "\\`.n"],
+            ".a"   : ["~"],
+            "|"    : ["."],
+            "||"   : [".."],
+            "z"    : ["J"],
         },
+    };
 
-        // object cache
-        cache = {};
+    // object cache
+    let cache = {};
 
     /**
      * Check whether the given scheme encodes romanized Sanskrit.
@@ -912,9 +912,9 @@ function exportSanscriptSingleton (global, schemes) {
      * @param scheme  the scheme to copy
      * @return        the copy
      */
-    var cheapCopy = function (scheme) {
-        var copy = {};
-        for (var key in scheme) {
+    const cheapCopy = function (scheme) {
+        const copy = {};
+        for (const key in scheme) {
             if (!scheme.hasOwnProperty(key)) {
                 continue;
             }
@@ -926,19 +926,20 @@ function exportSanscriptSingleton (global, schemes) {
     // Set up various schemes
     (function () {
         // Set up roman schemes
-        var kolkata = schemes.kolkata = cheapCopy(schemes.iast),
-            schemeNames = ["iast", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
+        const kolkata = cheapCopy(schemes.iast);
+        schemes.kolkata = kolkata;
+        const schemeNames = ["iast", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
         kolkata.vowels = ["a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "e", "ē", "ai", "o", "ō", "au"];
 
         // These schemes already belong to Sanscript.schemes. But by adding
         // them again with `addRomanScheme`, we automatically build up
         // `romanSchemes` and define a `vowel_marks` field for each one.
-        for (var i = 0, name; (name = schemeNames[i]); i++) {
+        for (let i = 0, name; (name = schemeNames[i]); i++) {
             Sanscript.addRomanScheme(name, schemes[name]);
         }
 
         // ITRANS variant, which supports Dravidian short 'e' and 'o'.
-        var itrans_dravidian = cheapCopy(schemes.itrans);
+        const itrans_dravidian = cheapCopy(schemes.itrans);
         itrans_dravidian.vowels = ["a", "A", "i", "I", "u", "U", "Ri", "RRI", "LLi", "LLi", "e", "E", "ai", "o", "O", "au"];
         itrans_dravidian.vowel_marks = itrans_dravidian.vowels.slice(1);
         allAlternates.itrans_dravidian = allAlternates.itrans;
@@ -953,30 +954,30 @@ function exportSanscriptSingleton (global, schemes) {
      * @param to       output scheme
      * @param options  scheme options
      */
-    var makeMap = function (from, to, options) {
-        var alternates = allAlternates[from] || {},
-            consonants = {},
-            fromScheme = Sanscript.schemes[from],
-            letters = {},
-            tokenLengths = [],
-            marks = {},
-            toScheme = Sanscript.schemes[to];
+    const makeMap = function (from, to, options) {
+        const alternates = allAlternates[from] || {};
+        const consonants = {};
+        const fromScheme = Sanscript.schemes[from];
+        const letters = {};
+        const tokenLengths = [];
+        const marks = {};
+        const toScheme = Sanscript.schemes[to];
 
-        for (var group in fromScheme) {
+        for (const group in fromScheme) {
             if (!fromScheme.hasOwnProperty(group)) {
                 continue;
             }
-            var fromGroup = fromScheme[group],
-                toGroup = toScheme[group];
+            const fromGroup = fromScheme[group];
+            const toGroup = toScheme[group];
             if (toGroup === undefined) {
                 continue;
             }
-            for (var i = 0; i < fromGroup.length; i++) {
-                var F = fromGroup[i],
-                    T = toGroup[i],
-                    alts = alternates[F] || [],
-                    numAlts = alts.length,
-                    j = 0;
+            for (let i = 0; i < fromGroup.length; i++) {
+                const F = fromGroup[i];
+                const T = toGroup[i];
+                const alts = alternates[F] || [];
+                const numAlts = alts.length;
+                let j = 0;
 
                 tokenLengths.push(F.length);
                 for (j = 0; j < numAlts; j++) {
@@ -1025,21 +1026,22 @@ function exportSanscriptSingleton (global, schemes) {
      * @param options  transliteration options
      * @return         the finished string
      */
-    var transliterateRoman = function (data, map, options) {
-        var buf = [],
-            consonants = map.consonants,
-            dataLength = data.length,
-            hadConsonant = false,
-            letters = map.letters,
-            marks = map.marks,
-            maxTokenLength = map.maxTokenLength,
-            optSkipSGML = options.skip_sgml,
-            optSyncope = options.syncope,
-            tempLetter,
-            tempMark,
-            tokenBuffer = "",
-            toRoman = map.toRoman,
-            virama = map.virama;
+    const transliterateRoman = function (data, map, options) {
+        const buf = [];
+        const consonants = map.consonants;
+        const dataLength = data.length;
+        const letters = map.letters;
+        const marks = map.marks;
+        const maxTokenLength = map.maxTokenLength;
+        const optSkipSGML = options.skip_sgml;
+        const optSyncope = options.syncope;
+        const toRoman = map.toRoman;
+        const virama = map.virama;
+
+        let hadConsonant = false;
+        let tempLetter;
+        let tempMark;
+        let tokenBuffer = "";
 
         // Transliteration state. It's controlled by these values:
         // - `skippingSGML`: are we in SGML?
@@ -1050,13 +1052,13 @@ function exportSanscriptSingleton (global, schemes) {
         //     `skippingTrans` = skippingSGML || toggledTrans;
         //
         // If (and only if) this value is true, don't transliterate.
-        var skippingSGML = false,
-            skippingTrans = false,
-            toggledTrans = false;
+        let skippingSGML = false;
+        let skippingTrans = false;
+        let toggledTrans = false;
 
-        for (var i = 0, L; (L = data.charAt(i)) || tokenBuffer; i++) {
+        for (let i = 0, L; (L = data.charAt(i)) || tokenBuffer; i++) {
             // Fill the token buffer, if possible.
-            var difference = maxTokenLength - tokenBuffer.length;
+            const difference = maxTokenLength - tokenBuffer.length;
             if (difference > 0 && i < dataLength) {
                 tokenBuffer += L;
                 if (difference > 1) {
@@ -1065,8 +1067,8 @@ function exportSanscriptSingleton (global, schemes) {
             }
 
             // Match all token substrings to our map.
-            for (var j = 0; j < maxTokenLength; j++) {
-                var token = tokenBuffer.substr(0, maxTokenLength - j);
+            for (let j = 0; j < maxTokenLength; j++) {
+                const token = tokenBuffer.substr(0, maxTokenLength - j);
 
                 if (skippingSGML === true) {
                     skippingSGML = (token !== ">");
@@ -1127,18 +1129,20 @@ function exportSanscriptSingleton (global, schemes) {
      * @param options  transliteration options
      * @return         the finished string
      */
-    var transliterateBrahmic = function (data, map, options) {
-        var buf = [],
-            consonants = map.consonants,
-            danglingHash = false,
-            hadRomanConsonant = false,
-            letters = map.letters,
-            marks = map.marks,
-            temp,
-            toRoman = map.toRoman,
-            skippingTrans = false;
+    const transliterateBrahmic = function (data, map, options) {
+        const buf = [];
+        const consonants = map.consonants;
+        const letters = map.letters;
+        const marks = map.marks;
+        const toRoman = map.toRoman;
+
+        let danglingHash = false;
+        let hadRomanConsonant = false;
+        let temp;
+        let skippingTrans = false;
+
         console.debug(map);
-        for (var i = 0, L; (L = data.charAt(i)); i++) {
+        for (let i = 0, L; (L = data.charAt(i)); i++) {
             // Toggle transliteration state
             if (L === "#") {
                 if (danglingHash) {
@@ -1197,16 +1201,16 @@ function exportSanscriptSingleton (global, schemes) {
      */
     Sanscript.t = function (data, from, to, options) {
         options = options || {};
-        var cachedOptions = cache.options || {},
-            defaults = Sanscript.defaults,
-            hasPriorState = (cache.from === from && cache.to === to),
-            map;
+        const cachedOptions = cache.options || {};
+        const defaults = Sanscript.defaults;
+        let hasPriorState = (cache.from === from && cache.to === to);
+        let map;
 
         // Here we simultaneously build up an `options` object and compare
         // these options to the options from the last run.
-        for (var key in defaults) {
+        for (const key in defaults) {
             if (defaults.hasOwnProperty(key)) {
-                var value = defaults[key];
+                let value = defaults[key];
                 if (key in options) {
                     value = options[key];
                 }
@@ -1267,7 +1271,8 @@ function exportSanscriptSingleton (global, schemes) {
         });
     } else if (typeof exports !== "undefined") {
         if (typeof module !== "undefined" && module.exports) {
-            exports = module.exports = Sanscript;
+            exports = Sanscript;
+            module.exports = Sanscript;
         }
 
         exports.Sanscript = Sanscript;

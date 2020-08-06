@@ -10,7 +10,7 @@
 function exportSanscriptSingleton (global, schemes) {
     "use strict";
 
-    var Sanscript = {};
+    const Sanscript = {};
     // First, we define the Sanscript singleton, with its variables and methods.
     Sanscript.defaults = {
         "skip_sgml" : false,
@@ -33,41 +33,41 @@ function exportSanscriptSingleton (global, schemes) {
      */
     Sanscript.schemes = schemes;
     // Set of names of schemes
-    var romanSchemes = {},
+    const romanSchemes = {};
 
-        // Map of alternate encodings.
-        allAlternates = {
-            "itrans" : {
-                "A"    : ["aa"],
-                "I"    : ["ii", "ee"],
-                "U"    : ["uu", "oo"],
-                "RRi"  : ["R^i"],
-                "RRI"  : ["R^I"],
-                "LLi"  : ["L^i"],
-                "LLI"  : ["L^I"],
-                "M"    : [".m", ".n"],
-                "~N"   : ["N^"],
-                "ch"   : ["c"],
-                "Ch"   : ["C", "chh"],
-                "~n"   : ["JN"],
-                "v"    : ["w"],
-                "Sh"   : ["S", "shh"],
-                "kSh"  : ["kS", "x"],
-                "j~n"  : ["GY", "dny"],
-                "OM"   : ["AUM"],
-                "\\_"  : ["\\`"],
-                "\\_H" : ["\\`H"],
-                "\\'M" : ["\\'.m", "\\'.n"],
-                "\\_M" : ["\\_.m", "\\_.n", "\\`M", "\\`.m", "\\`.n"],
-                ".a"   : ["~"],
-                "|"    : ["."],
-                "||"   : [".."],
-                "z"    : ["J"],
-            },
+    // Map of alternate encodings.
+    const allAlternates = {
+        "itrans" : {
+            "A"    : ["aa"],
+            "I"    : ["ii", "ee"],
+            "U"    : ["uu", "oo"],
+            "RRi"  : ["R^i"],
+            "RRI"  : ["R^I"],
+            "LLi"  : ["L^i"],
+            "LLI"  : ["L^I"],
+            "M"    : [".m", ".n"],
+            "~N"   : ["N^"],
+            "ch"   : ["c"],
+            "Ch"   : ["C", "chh"],
+            "~n"   : ["JN"],
+            "v"    : ["w"],
+            "Sh"   : ["S", "shh"],
+            "kSh"  : ["kS", "x"],
+            "j~n"  : ["GY", "dny"],
+            "OM"   : ["AUM"],
+            "\\_"  : ["\\`"],
+            "\\_H" : ["\\`H"],
+            "\\'M" : ["\\'.m", "\\'.n"],
+            "\\_M" : ["\\_.m", "\\_.n", "\\`M", "\\`.m", "\\`.n"],
+            ".a"   : ["~"],
+            "|"    : ["."],
+            "||"   : [".."],
+            "z"    : ["J"],
         },
+    };
 
-        // object cache
-        cache = {};
+    // object cache
+    let cache = {};
 
     /**
      * Check whether the given scheme encodes romanized Sanskrit.
@@ -124,9 +124,9 @@ function exportSanscriptSingleton (global, schemes) {
      * @param scheme  the scheme to copy
      * @return        the copy
      */
-    var cheapCopy = function (scheme) {
-        var copy = {};
-        for (var key in scheme) {
+    const cheapCopy = function (scheme) {
+        const copy = {};
+        for (const key in scheme) {
             if (!scheme.hasOwnProperty(key)) {
                 continue;
             }
@@ -138,19 +138,20 @@ function exportSanscriptSingleton (global, schemes) {
     // Set up various schemes
     (function () {
         // Set up roman schemes
-        var kolkata = schemes.kolkata = cheapCopy(schemes.iast),
-            schemeNames = ["iast", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
+        const kolkata = cheapCopy(schemes.iast);
+        schemes.kolkata = kolkata;
+        const schemeNames = ["iast", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
         kolkata.vowels = ["a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "e", "ē", "ai", "o", "ō", "au"];
 
         // These schemes already belong to Sanscript.schemes. But by adding
         // them again with `addRomanScheme`, we automatically build up
         // `romanSchemes` and define a `vowel_marks` field for each one.
-        for (var i = 0, name; (name = schemeNames[i]); i++) {
+        for (let i = 0, name; (name = schemeNames[i]); i++) {
             Sanscript.addRomanScheme(name, schemes[name]);
         }
 
         // ITRANS variant, which supports Dravidian short 'e' and 'o'.
-        var itrans_dravidian = cheapCopy(schemes.itrans);
+        const itrans_dravidian = cheapCopy(schemes.itrans);
         itrans_dravidian.vowels = ["a", "A", "i", "I", "u", "U", "Ri", "RRI", "LLi", "LLi", "e", "E", "ai", "o", "O", "au"];
         itrans_dravidian.vowel_marks = itrans_dravidian.vowels.slice(1);
         allAlternates.itrans_dravidian = allAlternates.itrans;
@@ -165,30 +166,30 @@ function exportSanscriptSingleton (global, schemes) {
      * @param to       output scheme
      * @param options  scheme options
      */
-    var makeMap = function (from, to, options) {
-        var alternates = allAlternates[from] || {},
-            consonants = {},
-            fromScheme = Sanscript.schemes[from],
-            letters = {},
-            tokenLengths = [],
-            marks = {},
-            toScheme = Sanscript.schemes[to];
+    const makeMap = function (from, to, options) {
+        const alternates = allAlternates[from] || {};
+        const consonants = {};
+        const fromScheme = Sanscript.schemes[from];
+        const letters = {};
+        const tokenLengths = [];
+        const marks = {};
+        const toScheme = Sanscript.schemes[to];
 
-        for (var group in fromScheme) {
+        for (const group in fromScheme) {
             if (!fromScheme.hasOwnProperty(group)) {
                 continue;
             }
-            var fromGroup = fromScheme[group],
-                toGroup = toScheme[group];
+            const fromGroup = fromScheme[group];
+            const toGroup = toScheme[group];
             if (toGroup === undefined) {
                 continue;
             }
-            for (var i = 0; i < fromGroup.length; i++) {
-                var F = fromGroup[i],
-                    T = toGroup[i],
-                    alts = alternates[F] || [],
-                    numAlts = alts.length,
-                    j = 0;
+            for (let i = 0; i < fromGroup.length; i++) {
+                const F = fromGroup[i];
+                const T = toGroup[i];
+                const alts = alternates[F] || [];
+                const numAlts = alts.length;
+                let j = 0;
 
                 tokenLengths.push(F.length);
                 for (j = 0; j < numAlts; j++) {
@@ -237,21 +238,22 @@ function exportSanscriptSingleton (global, schemes) {
      * @param options  transliteration options
      * @return         the finished string
      */
-    var transliterateRoman = function (data, map, options) {
-        var buf = [],
-            consonants = map.consonants,
-            dataLength = data.length,
-            hadConsonant = false,
-            letters = map.letters,
-            marks = map.marks,
-            maxTokenLength = map.maxTokenLength,
-            optSkipSGML = options.skip_sgml,
-            optSyncope = options.syncope,
-            tempLetter,
-            tempMark,
-            tokenBuffer = "",
-            toRoman = map.toRoman,
-            virama = map.virama;
+    const transliterateRoman = function (data, map, options) {
+        const buf = [];
+        const consonants = map.consonants;
+        const dataLength = data.length;
+        const letters = map.letters;
+        const marks = map.marks;
+        const maxTokenLength = map.maxTokenLength;
+        const optSkipSGML = options.skip_sgml;
+        const optSyncope = options.syncope;
+        const toRoman = map.toRoman;
+        const virama = map.virama;
+
+        let hadConsonant = false;
+        let tempLetter;
+        let tempMark;
+        let tokenBuffer = "";
 
         // Transliteration state. It's controlled by these values:
         // - `skippingSGML`: are we in SGML?
@@ -262,13 +264,13 @@ function exportSanscriptSingleton (global, schemes) {
         //     `skippingTrans` = skippingSGML || toggledTrans;
         //
         // If (and only if) this value is true, don't transliterate.
-        var skippingSGML = false,
-            skippingTrans = false,
-            toggledTrans = false;
+        let skippingSGML = false;
+        let skippingTrans = false;
+        let toggledTrans = false;
 
-        for (var i = 0, L; (L = data.charAt(i)) || tokenBuffer; i++) {
+        for (let i = 0, L; (L = data.charAt(i)) || tokenBuffer; i++) {
             // Fill the token buffer, if possible.
-            var difference = maxTokenLength - tokenBuffer.length;
+            const difference = maxTokenLength - tokenBuffer.length;
             if (difference > 0 && i < dataLength) {
                 tokenBuffer += L;
                 if (difference > 1) {
@@ -277,8 +279,8 @@ function exportSanscriptSingleton (global, schemes) {
             }
 
             // Match all token substrings to our map.
-            for (var j = 0; j < maxTokenLength; j++) {
-                var token = tokenBuffer.substr(0, maxTokenLength - j);
+            for (let j = 0; j < maxTokenLength; j++) {
+                const token = tokenBuffer.substr(0, maxTokenLength - j);
 
                 if (skippingSGML === true) {
                     skippingSGML = (token !== ">");
@@ -339,18 +341,20 @@ function exportSanscriptSingleton (global, schemes) {
      * @param options  transliteration options
      * @return         the finished string
      */
-    var transliterateBrahmic = function (data, map, options) {
-        var buf = [],
-            consonants = map.consonants,
-            danglingHash = false,
-            hadRomanConsonant = false,
-            letters = map.letters,
-            marks = map.marks,
-            temp,
-            toRoman = map.toRoman,
-            skippingTrans = false;
+    const transliterateBrahmic = function (data, map, options) {
+        const buf = [];
+        const consonants = map.consonants;
+        const letters = map.letters;
+        const marks = map.marks;
+        const toRoman = map.toRoman;
+
+        let danglingHash = false;
+        let hadRomanConsonant = false;
+        let temp;
+        let skippingTrans = false;
+
         console.debug(map);
-        for (var i = 0, L; (L = data.charAt(i)); i++) {
+        for (let i = 0, L; (L = data.charAt(i)); i++) {
             // Toggle transliteration state
             if (L === "#") {
                 if (danglingHash) {
@@ -409,16 +413,16 @@ function exportSanscriptSingleton (global, schemes) {
      */
     Sanscript.t = function (data, from, to, options) {
         options = options || {};
-        var cachedOptions = cache.options || {},
-            defaults = Sanscript.defaults,
-            hasPriorState = (cache.from === from && cache.to === to),
-            map;
+        const cachedOptions = cache.options || {};
+        const defaults = Sanscript.defaults;
+        let hasPriorState = (cache.from === from && cache.to === to);
+        let map;
 
         // Here we simultaneously build up an `options` object and compare
         // these options to the options from the last run.
-        for (var key in defaults) {
+        for (const key in defaults) {
             if (defaults.hasOwnProperty(key)) {
-                var value = defaults[key];
+                let value = defaults[key];
                 if (key in options) {
                     value = options[key];
                 }
@@ -479,7 +483,8 @@ function exportSanscriptSingleton (global, schemes) {
         });
     } else if (typeof exports !== "undefined") {
         if (typeof module !== "undefined" && module.exports) {
-            exports = module.exports = Sanscript;
+            exports = Sanscript;
+            module.exports = Sanscript;
         }
 
         exports.Sanscript = Sanscript;
