@@ -7,9 +7,10 @@
     "test": "test"
   },
   "scripts": {
+    "dist": "node scripts/dist.js",
+    "lint": "node ./node_modules/.bin/eslint '**/*.js'",
     "test": "qunit",
-    "validate": "node ./node_modules/.bin/ajv validate -s src/sanscript.schema.json -d 'src/schemes/*/*.json'",
-    "dist": "node dist.js"
+    "validate": "node ./node_modules/.bin/ajv validate -s src/sanscript.schema.json -d 'src/schemes/*/*.json'"
   },
   "repository": {
     "type": "git",
@@ -104,6 +105,7 @@
   "homepage": "https://github.com/sanskrit/sanscript.js#readme",
   "devDependencies": {
     "ajv-cli": "^3.2.1",
+    "eslint": "^7.6.0",
     "qunit": "^2.8.0"
   }
 }
