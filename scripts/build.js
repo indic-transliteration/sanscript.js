@@ -2,12 +2,14 @@ const fsp = require("fs").promises;
 const path = require("path");
 
 async function main () {
+    const rootDir = path.dirname(__dirname);
+
     // Get lists of Brahmic and roman schemes
     // Each of bschemes and rschemes is an array of which each element is of
     // the form [filename, filepath]
     const [bschemes, rschemes] = await Promise.all(
         ["brahmic", "roman"].map(async (x) => {
-            const dirpath = path.join(__dirname, "..", "src", "schemes", x);
+            const dirpath = path.join(rootDir, "src", "schemes", x);
             const paths = [];
             for (const filename of await fsp.readdir(dirpath)) {
                 paths.push([filename, path.join(dirpath, filename)]);
@@ -32,9 +34,9 @@ async function main () {
     let out;
     try {
         out = await fsp.open(
-            path.join(__dirname, "sanscript.js"), "w",
+            path.join(rootDir, "sanscript.es6.js"), "w",
         );
-        out.write("var schemes = {};\n");
+        out.write("const schemes = {};\n");
         for (const [scheme, contents] of bfiles) {
             out.write(`schemes.${scheme} = ${contents.toString().trim()};\n`);
         }
@@ -43,7 +45,7 @@ async function main () {
         }
         // Write the code to the output file
         out.write(await fsp.readFile(
-            path.join(__dirname, "..", "src", "sanscript.js"),
+            path.join(rootDir, "src", "sanscript.js"),
         ));
     } finally {
         if (out !== undefined)

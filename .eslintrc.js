@@ -6,8 +6,11 @@ module.exports = {
         "node"    : true,
     },
     "extends"        : "eslint:recommended",
-    "ignorePatterns" : [ "/dist/*" ],
-    "parserOptions"  : {
+    "ignorePatterns" : [
+        "/sanscript.es6.js",
+        "/sanscript.js",
+    ],
+    "parserOptions" : {
         "ecmaVersion" : 2018,
     },
     "root"  : true,
