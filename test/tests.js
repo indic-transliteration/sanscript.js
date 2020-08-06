@@ -26,9 +26,6 @@ const names = {
     telugu           : "Telugu",
 };
 
-console.log(Sanscript.t("अ आ इ ई उ ऊ ऋ ॠ ऌ ॡ ए ऐ ओ औ", "devanagari", "kannada"));
-console.log(Sanscript.t("क खा गि घी ङु चू छृ जॄ झॢ ञॣ टे ठै डो ढौ णं तः थ्", "devanagari", "kannada"));
-
 const data = {
     bengali : {
         vowels     : "অ আ ই ঈ উ ঊ ঋ ৠ ঌ ৡ এ ঐ ও ঔ",
@@ -456,8 +453,6 @@ function dravidianTest (fromScript, toScript) {
         f(from.short_marks, to.short_marks, "Vowel marks (forward)");
     });
 }
-
-console.log(Sanscript.schemes);
 
 dravidianTest("itrans_dravidian", "kolkata");
 dravidianTest("itrans_dravidian", "devanagari");
