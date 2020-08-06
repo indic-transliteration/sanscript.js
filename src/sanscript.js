@@ -353,7 +353,6 @@ function exportSanscriptSingleton (global, schemes) {
         let temp;
         let skippingTrans = false;
 
-        console.debug(map);
         for (let i = 0, L; (L = data.charAt(i)); i++) {
             // Toggle transliteration state
             if (L === "#") {

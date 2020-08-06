@@ -29,6 +29,10 @@ module.exports = {
         "semi"                        : ["error", "always"],
         "space-before-function-paren" : ["error", "always"],
 
+        "no-console" : ["error", {
+            allow : ["error"],
+        }],
+
         "key-spacing" : ["error", {
             "afterColon"  : true,
             "align"       : "colon",
