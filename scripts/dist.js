@@ -36,10 +36,10 @@ async function main () {
         );
         out.write("var schemes = {};\n");
         for (const [scheme, contents] of bfiles) {
-            out.write(`schemes.${scheme} = ${contents};\n`);
+            out.write(`schemes.${scheme} = ${contents.toString().trim()};\n\n`);
         }
         for (const [scheme, contents] of rfiles) {
-            out.write(`schemes.${scheme} = ${contents};\n`);
+            out.write(`schemes.${scheme} = ${contents.toString().trim()};\n\n`);
         }
         // Write the code to the output file
         out.write(await fsp.readFile(
