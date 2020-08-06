@@ -66,6 +66,14 @@ var output = Sanscript.t(input, from, to, options);
 * `syncope` - If true, use Hindi-style transliteration (`ajay` → `अजय`). In linguistics, this behavior is known as [schwa syncope](http://en.wikipedia.org/wiki/Schwa_deletion_in_Indo-Aryan_languages). Defaults to `false`.
 
 ## Contributing
+
+### Installing dependencies
+
+Run either:
+
+- `npm install`
+- `yarn`
+
 ### Adding new schemes
 
 Adding a new scheme is simple:
@@ -76,7 +84,12 @@ Adding a new scheme is simple:
 For help in creating `schemeData`, see the comments on the `addBrahmicScheme` and `addRomanScheme` functions.
 
 ### Testing
-We use qunit. Just install the dev dependencies with `yarn` and then open [test/index.html](test/index.html) to see the tests run.
+
+We use `qunit` for testing.
+After installing dependencies, you can either:
+
+* run `npm run test` to run tests from the command line
+* open [test/index.html](test/index.html) to run tests in the browser
 
 ### Publishing to npm
 `npm publish --access public`
