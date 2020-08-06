@@ -1,5 +1,4 @@
-const QUnit = require("qunit");
-const Sanscript = require("../dist/sanscript");
+/* globals QUnit, Sanscript */
 
 const names = {
     bengali          : "Bengali",
