@@ -28,14 +28,11 @@ async function main () {
         })),
     ));
 
-    // Create dist folder if it does not yet exist
-    await fsp.mkdir(path.join(__dirname, "..", "dist"), { recursive : true });
-
     // Get file handle for sanscript.js
     let out;
     try {
         out = await fsp.open(
-            path.join(__dirname, "..", "dist", "sanscript.js"), "w",
+            path.join(__dirname, "sanscript.js"), "w",
         );
         out.write("var schemes = {};\n");
         for (const [scheme, contents] of bfiles) {

@@ -5,7 +5,7 @@ if (typeof QUnit == "undefined") {
 }
 
 if (typeof Sanscript == "undefined") {
-    Sanscript = require("../dist/sanscript"); // eslint-disable-line no-global-assign
+    Sanscript = require("../sanscript"); // eslint-disable-line no-global-assign
 }
 
 const names = {
