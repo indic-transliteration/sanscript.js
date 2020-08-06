@@ -7,7 +7,7 @@ async function main () {
     // the form [filename, filepath]
     const [bschemes, rschemes] = await Promise.all(
         ["brahmic", "roman"].map(async (x) => {
-            const dirpath = path.join(__dirname, "src", "schemes", x);
+            const dirpath = path.join(__dirname, "..", "src", "schemes", x);
             const paths = [];
             for (const filename of await fsp.readdir(dirpath)) {
                 paths.push([filename, path.join(dirpath, filename)]);
@@ -32,7 +32,7 @@ async function main () {
     let out;
     try {
         out = await fsp.open(
-            path.join(__dirname, "sanscript.js"), "w",
+            path.join(__dirname, "..", "sanscript.js"), "w",
         );
         out.write("var schemes = {};\n");
         for (const [scheme, contents] of bfiles) {
@@ -43,7 +43,7 @@ async function main () {
         }
         // Write the code to the output file
         out.write(await fsp.readFile(
-            path.join(__dirname, "src", "sanscript.js"),
+            path.join(__dirname, "..", "src", "sanscript.js"),
         ));
     } finally {
         if (out !== undefined)
