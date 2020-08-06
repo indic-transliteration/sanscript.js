@@ -7,9 +7,12 @@
     "test": "test"
   },
   "scripts": {
-    "dist": "node scripts/dist.js",
+    "build": "node scripts/build.js",
+    "dist": "npm run build && npm run transpile",
+    "prepare": "npm run lint && npm run dist && npm run test",
     "lint": "node ./node_modules/.bin/eslint '**/*.js'",
-    "test": "qunit"
+    "test": "qunit",
+    "transpile": "node ./node_modules/.bin/babel sanscript.es6.js --out-file sanscript.js"
   },
   "repository": {
     "type": "git",
@@ -103,6 +106,9 @@
   },
   "homepage": "https://github.com/sanskrit/sanscript.js#readme",
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
     "eslint": "^7.6.0",
     "qunit": "^2.8.0"
   }

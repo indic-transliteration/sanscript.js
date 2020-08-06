@@ -32,9 +32,9 @@ async function main () {
     let out;
     try {
         out = await fsp.open(
-            path.join(__dirname, "sanscript.js"), "w",
+            path.join(__dirname, "..", "sanscript.es6.js"), "w",
         );
-        out.write("var schemes = {};\n");
+        out.write("const schemes = {};\n");
         for (const [scheme, contents] of bfiles) {
             out.write(`schemes.${scheme} = ${contents.toString().trim()};\n`);
         }
