@@ -1,5 +1,13 @@
 /* globals QUnit, Sanscript */
 
+if (typeof QUnit == "undefined") {
+    QUnit = require("qunit"); // eslint-disable-line no-global-assign
+}
+
+if (typeof Sanscript == "undefined") {
+    Sanscript = require("../dist/sanscript"); // eslint-disable-line no-global-assign
+}
+
 const names = {
     bengali          : "Bengali",
     devanagari       : "Devanagari",
