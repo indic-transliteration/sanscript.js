@@ -13,8 +13,8 @@ function exportSanscriptSingleton (global, schemes) {
     var Sanscript = {};
     // First, we define the Sanscript singleton, with its variables and methods.
     Sanscript.defaults = {
-        "skip_sgml": false,
-        "syncope": false,
+        "skip_sgml" : false,
+        "syncope"   : false,
     };
 
     /* Schemes
@@ -37,32 +37,32 @@ function exportSanscriptSingleton (global, schemes) {
 
         // Map of alternate encodings.
         allAlternates = {
-            "itrans": {
-                "A": ["aa"],
-                "I": ["ii", "ee"],
-                "U": ["uu", "oo"],
-                "RRi": ["R^i"],
-                "RRI": ["R^I"],
-                "LLi": ["L^i"],
-                "LLI": ["L^I"],
-                "M": [".m", ".n"],
-                "~N": ["N^"],
-                "ch": ["c"],
-                "Ch": ["C", "chh"],
-                "~n": ["JN"],
-                "v": ["w"],
-                "Sh": ["S", "shh"],
-                "kSh": ["kS", "x"],
-                "j~n": ["GY", "dny"],
-                "OM": ["AUM"],
-                "\\_": ["\\`"],
-                "\\_H": ["\\`H"],
-                "\\'M": ["\\'.m", "\\'.n"],
-                "\\_M": ["\\_.m", "\\_.n", "\\`M", "\\`.m", "\\`.n"],
-                ".a": ["~"],
-                "|": ["."],
-                "||": [".."],
-                "z": ["J"],
+            "itrans" : {
+                "A"    : ["aa"],
+                "I"    : ["ii", "ee"],
+                "U"    : ["uu", "oo"],
+                "RRi"  : ["R^i"],
+                "RRI"  : ["R^I"],
+                "LLi"  : ["L^i"],
+                "LLI"  : ["L^I"],
+                "M"    : [".m", ".n"],
+                "~N"   : ["N^"],
+                "ch"   : ["c"],
+                "Ch"   : ["C", "chh"],
+                "~n"   : ["JN"],
+                "v"    : ["w"],
+                "Sh"   : ["S", "shh"],
+                "kSh"  : ["kS", "x"],
+                "j~n"  : ["GY", "dny"],
+                "OM"   : ["AUM"],
+                "\\_"  : ["\\`"],
+                "\\_H" : ["\\`H"],
+                "\\'M" : ["\\'.m", "\\'.n"],
+                "\\_M" : ["\\_.m", "\\_.n", "\\`M", "\\`.m", "\\`.n"],
+                ".a"   : ["~"],
+                "|"    : ["."],
+                "||"   : [".."],
+                "z"    : ["J"],
             },
         },
 
@@ -217,15 +217,15 @@ function exportSanscriptSingleton (global, schemes) {
         }
 
         return {
-            consonants: consonants,
-            fromRoman: Sanscript.isRomanScheme(from),
-            letters: letters,
-            marks: marks,
-            maxTokenLength: Math.max.apply(Math, tokenLengths),
-            toRoman: Sanscript.isRomanScheme(to),
-            virama: toScheme.virama,
-            toSchemeA: toScheme.vowels[0],
-            fromSchemeA: fromScheme.vowels[0],
+            consonants     : consonants,
+            fromRoman      : Sanscript.isRomanScheme(from),
+            letters        : letters,
+            marks          : marks,
+            maxTokenLength : Math.max.apply(Math, tokenLengths),
+            toRoman        : Sanscript.isRomanScheme(to),
+            virama         : toScheme.virama,
+            toSchemeA      : toScheme.vowels[0],
+            fromSchemeA    : fromScheme.vowels[0],
         };
     };
 
@@ -438,10 +438,10 @@ function exportSanscriptSingleton (global, schemes) {
         } else {
             map = makeMap(from, to, options);
             cache = {
-                from: from,
-                map: map,
-                options: options,
-                to: to,
+                from    : from,
+                map     : map,
+                options : options,
+                to      : to,
             };
         }
 
