@@ -15,7 +15,9 @@ The package is officially distributed at npm [here](https://www.npmjs.com/packag
 
 Sanscript is simple to use:
 
-    var output = Sanscript.t(input, from, to);
+```js
+var output = Sanscript.t(input, from, to);
+```
 
 Here, `from` and `to` are the names of different **schemes**. In Sanscript, the word "scheme" refers to both scripts and romanizations. These schemes are of two types:
 
@@ -41,13 +43,17 @@ of which the following are Roman schemes:
 ### Disabling transliteration
 When Sanscript sees the token `##`, it toggles the transliteration state:
 
-    Sanscript.t('ga##Na##pa##te', 'hk', 'devanagari'); // गNaपte
-    Sanscript.t('ध##र्म##क्षेत्रे', 'devanagari', 'hk'); // dhaर्मkSetre
+```js
+Sanscript.t('ga##Na##pa##te', 'hk', 'devanagari'); // गNaपte
+Sanscript.t('ध##र्म##क्षेत्रे', 'devanagari', 'hk'); // dhaर्मkSetre
+```
 
 When Sanscript sees the token `\`, it disables transliteration on the character that immediately follows. `\` is used for ITRANS compatibility; we recommend always using `##` instead.
 
-    Sanscript.t('a \\a', 'itrans', 'devanagari'); // अ a
-    Sanscript.t('\\##aham', 'itrans', 'devanagari'); // ##अहम्
+```js
+Sanscript.t('a \\a', 'itrans', 'devanagari'); // अ a
+Sanscript.t('\\##aham', 'itrans', 'devanagari'); // ##अहम्
+```
 
 ### Transliterating to lossy schemes
 A **lossy** scheme does not have the letters needed to support lossless translation. For example, Bengali is a lossy scheme because it uses `ব` for both `ba` and `va`. In future releases, Sanscript might let you choose how to handle lossiness. For the time being, it makes some fairly bad hard-coded assumptions. Corrections and advice are always welcome.
@@ -55,9 +61,11 @@ A **lossy** scheme does not have the letters needed to support lossless translat
 ### Transliteration options
 You can tweak the transliteration function by passing an `options` object:
 
-```
+```html
 <script src="node_modules/@sanskrit-coders/sanscript/sanscript.js"></script>
-var output = Sanscript.t(input, from, to, options);
+<script>
+  var output = Sanscript.t(input, from, to, options);
+</script>
 ```
 
 `options` maps options to values. Currently, these options are supported:
@@ -78,8 +86,10 @@ Run either:
 
 Adding a new scheme is simple:
 
-    Sanscript.addBrahmicScheme(schemeName, schemeData);
-    Sanscript.addRomanScheme(schemeName, schemeData);
+```js
+Sanscript.addBrahmicScheme(schemeName, schemeData);
+Sanscript.addRomanScheme(schemeName, schemeData);
+```
 
 For help in creating `schemeData`, see the comments on the `addBrahmicScheme` and `addRomanScheme` functions.
 
@@ -92,4 +102,7 @@ After installing dependencies, you can either:
 * open [test/index.html](test/index.html) to run tests in the browser
 
 ### Publishing to npm
-`npm publish --access public`
+
+```shell
+npm publish --access public
+```
