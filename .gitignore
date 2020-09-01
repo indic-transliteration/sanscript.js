@@ -1,3 +1,7 @@
 *.*~
+.DS_Store
+
 node_modules
+
 /sanscript.js
+/sanscript.es6.js

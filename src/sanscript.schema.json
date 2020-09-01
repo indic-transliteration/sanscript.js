@@ -1,0 +1,101 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://github.com/sanskrit/sanscript.js/raw/master/src/sanscript.schema.json",
+    "title": "Sanscript Scheme",
+    "description": "A representation of a writing system (Brahmic or roman) that can be used for Sanskrit and other Indic languages",
+    "type": "object",
+    "properties": {
+        "vowels": {
+            "description": "'Independent' forms of the vowels. These are used whenever the vowel does not immediately follow a consonant.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 16
+        },
+        "vowel_marks": {
+            "description": "'Dependent' forms of the vowels. These are used whenever the vowel immediately follows a consonant. If a letter is not listed in `vowels`, it should not be listed here.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 15
+        },
+        "other_marks": {
+            "description": "Miscellaneous marks, all of which are used in Sanskrit.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 3
+        },
+        "virama": {
+            "description": "In syllabic scripts like Devanagari, consonants have an inherent vowel that must be suppressed explicitly. We do so by putting a virama after the consonant.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "maxItems": 1
+        },
+        "consonants": {
+            "description": "Various Sanskrit consonants and consonant clusters. Every token here has an explicit vowel. Thus 'क' is 'ka' instead of 'k'.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 36
+        },
+        "symbols": {
+            "description": "Numbers and punctuation",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 14
+        },
+        "zwj": {
+            "description": "Zero-width joiner. This is used to separate a consonant cluster and avoid a complex ligature.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "maxItems": 1
+        },
+        "skip": {
+            "description": "Dummy consonant. This is used in ITRANS to prevert certain types of parser ambiguity. Thus 'barau' -> बरौ but  'bara_u' -> बरउ."
+        },
+        "accent": {
+            "description": "Vedic accent. Udatta and anudatta.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 2
+        },
+        "combo_accent": {
+            "description": "Accent combined with anusvara and/or visarga. For compatibility with ITRANS, which allows the reverse of these four.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 4
+        },
+        "candra": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "maxItems": 1
+        },
+        "other": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 9
+        }
+    },
+    "required": [
+        "vowels", "virama", "consonants", "symbols"
+    ]
+}
