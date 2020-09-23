@@ -35,37 +35,6 @@ function exportSanscriptSingleton (global, schemes) {
     // Set of names of schemes
     const romanSchemes = {};
 
-    // Map of alternate encodings.
-    const allAlternates = {
-        "itrans" : {
-            "A"    : ["aa"],
-            "I"    : ["ii", "ee"],
-            "U"    : ["uu", "oo"],
-            "RRi"  : ["R^i"],
-            "RRI"  : ["R^I"],
-            "LLi"  : ["L^i"],
-            "LLI"  : ["L^I"],
-            "M"    : [".m", ".n"],
-            "~N"   : ["N^"],
-            "ch"   : ["c"],
-            "Ch"   : ["C", "chh"],
-            "~n"   : ["JN"],
-            "v"    : ["w"],
-            "Sh"   : ["S", "shh"],
-            "kSh"  : ["kS", "x"],
-            "j~n"  : ["GY", "dny"],
-            "OM"   : ["AUM"],
-            "\\_"  : ["\\`"],
-            "\\_H" : ["\\`H"],
-            "\\'M" : ["\\'.m", "\\'.n"],
-            "\\_M" : ["\\_.m", "\\_.n", "\\`M", "\\`.m", "\\`.n"],
-            ".a"   : ["~"],
-            "|"    : ["."],
-            "||"   : [".."],
-            "z"    : ["J"],
-        },
-    };
-
     // object cache
     let cache = {};
 
@@ -154,7 +123,6 @@ function exportSanscriptSingleton (global, schemes) {
         const itrans_dravidian = cheapCopy(schemes.itrans);
         itrans_dravidian.vowels = ["a", "A", "i", "I", "u", "U", "Ri", "RRI", "LLi", "LLi", "e", "E", "ai", "o", "O", "au"];
         itrans_dravidian.vowel_marks = itrans_dravidian.vowels.slice(1);
-        allAlternates.itrans_dravidian = allAlternates.itrans;
         Sanscript.addRomanScheme("itrans_dravidian", itrans_dravidian);
     }());
 
@@ -167,13 +135,14 @@ function exportSanscriptSingleton (global, schemes) {
      * @param options  scheme options
      */
     const makeMap = function (from, to, options) {
-        const alternates = allAlternates[from] || {};
         const consonants = {};
         const fromScheme = Sanscript.schemes[from];
         const letters = {};
         const tokenLengths = [];
         const marks = {};
         const toScheme = Sanscript.schemes[to];
+
+        const alternates = fromScheme["alternates"] || {};
 
         for (const group in fromScheme) {
             if (!fromScheme.hasOwnProperty(group)) {
