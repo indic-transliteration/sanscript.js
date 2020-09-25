@@ -93,21 +93,14 @@ function exportSanscriptSingleton (global, schemes) {
      * @param scheme  the scheme to copy
      * @return        the copy
      */
-    const cheapCopy = function (scheme) {
-        const copy = {};
-        for (const key in scheme) {
-            if (!scheme.hasOwnProperty(key)) {
-                continue;
-            }
-            copy[key] = scheme[key].slice(0);
-        }
-        return copy;
+    const deepCopy = function (scheme) {
+        return JSON.parse(JSON.stringify(scheme));
     };
 
     // Set up various schemes
     (function () {
         // Set up roman schemes
-        const kolkata = cheapCopy(schemes.iast);
+        const kolkata = deepCopy(schemes.iast);
         schemes.kolkata = kolkata;
         const schemeNames = ["iast", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
         kolkata.vowels = ["a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "e", "ē", "ai", "o", "ō", "au"];
@@ -120,7 +113,7 @@ function exportSanscriptSingleton (global, schemes) {
         }
 
         // ITRANS variant, which supports Dravidian short 'e' and 'o'.
-        const itrans_dravidian = cheapCopy(schemes.itrans);
+        const itrans_dravidian = deepCopy(schemes.itrans);
         itrans_dravidian.vowels = ["a", "A", "i", "I", "u", "U", "Ri", "RRI", "LLi", "LLi", "e", "E", "ai", "o", "O", "au"];
         itrans_dravidian.vowel_marks = itrans_dravidian.vowels.slice(1);
         Sanscript.addRomanScheme("itrans_dravidian", itrans_dravidian);
