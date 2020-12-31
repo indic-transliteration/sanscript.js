@@ -418,6 +418,15 @@ QUnit.test("ITRANS to Devanagari", function () {
     textTests(from, to, f);
 });
 
+QUnit.test("IAST to Devanagari", function () {
+    const from = data.iast;
+    const to = data.devanagari;
+    const f = transHelper("iast", "devanagari");
+    letterTests(from, to, f);
+    textTests(from, to, f);
+    f("pinākadhṛte", "पिनाकधृते");
+});
+
 QUnit.test("WX to Devanagari", function () {
     const from = data.wx;
     const to = data.devanagari;
