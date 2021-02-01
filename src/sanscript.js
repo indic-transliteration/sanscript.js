@@ -45,7 +45,7 @@ function exportSanscriptSingleton (global, schemes) {
      * @return      boolean
      */
     Sanscript.isRomanScheme = function (name) {
-        return romanSchemes.hasOwnProperty(name);
+        return {}.hasOwnProperty.call(romanSchemes, name);
     };
 
     /**
@@ -127,7 +127,7 @@ function exportSanscriptSingleton (global, schemes) {
      * @param to       output scheme
      * @param options  scheme options
      */
-    const makeMap = function (from, to, options) {
+    const makeMap = function (from, to, _options) {
         const consonants = {};
         const fromScheme = Sanscript.schemes[from];
         const letters = {};
@@ -138,7 +138,7 @@ function exportSanscriptSingleton (global, schemes) {
         const alternates = fromScheme["alternates"] || {};
 
         for (const group in fromScheme) {
-            if (!fromScheme.hasOwnProperty(group)) {
+            if (!{}.hasOwnProperty.call(fromScheme, group)) {
                 continue;
             }
             const fromGroup = fromScheme[group];
@@ -303,7 +303,7 @@ function exportSanscriptSingleton (global, schemes) {
      * @param options  transliteration options
      * @return         the finished string
      */
-    const transliterateBrahmic = function (data, map, options) {
+    const transliterateBrahmic = function (data, map, _options) {
         const buf = [];
         const consonants = map.consonants;
         const letters = map.letters;
@@ -382,7 +382,7 @@ function exportSanscriptSingleton (global, schemes) {
         // Here we simultaneously build up an `options` object and compare
         // these options to the options from the last run.
         for (const key in defaults) {
-            if (defaults.hasOwnProperty(key)) {
+            if ({}.hasOwnProperty.call(defaults, key)) {
                 let value = defaults[key];
                 if (key in options) {
                     value = options[key];
