@@ -21,7 +21,7 @@ module.exports = {
         "linebreak-style"             : ["error", "unix"],
         "no-multi-assign"             : ["error"],
         "no-prototype-builtins"       : ["warn"],
-        "no-unused-vars"              : ["warn", { "argsIgnorePattern": "^_" }],
+        "no-unused-vars"              : ["warn", { "argsIgnorePattern" : "^_" }],
         "no-var"                      : ["error"],
         "one-var"                     : ["error", "never"],
         "prefer-const"                : ["error"],
