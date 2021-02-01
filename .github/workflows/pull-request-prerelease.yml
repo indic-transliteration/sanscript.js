@@ -5,8 +5,10 @@ name: Pull Request (Prerelease)
 on:
   push:
     branches:
-      - master # run on pushed commits to the master branch
-  pull_request # run on any pull_requests
+      - master # run on pushed commits to `master`
+  pull_request:
+    branches:
+      - master # run on pull requests to `master`
 
 jobs:
   prerelease:
