@@ -1,0 +1,64 @@
+name: Pull Request (Prerelease)
+
+# to run tasks that would need to run before releasing
+
+on:
+  push:
+    branches:
+      - master # run on pushed commits to the master branch
+  pull_request # run on any pull_requests
+
+jobs:
+  prerelease:
+    runs-on: ubuntu-latest
+
+    name: Run prerelease scripts
+
+    strategy:
+      matrix:
+        node-version:
+          - 10.x
+          - 12.x
+          - 14.x
+
+    steps:
+      - uses : actions/checkout@v2
+
+      - name : Use Node.js version ${{ matrix.node-version }}
+        uses : actions/setup-node@v1
+        with :
+          node-version: ${{ matrix.node-version }}
+
+      - name : Load node-modules cache
+        uses : actions/cache@v2
+        env  :
+          cache-name: cache-node-modules
+        with :
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ matrix.node-version }}-prerelease-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-prerelease-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ matrix.node-version }}-prerelease-
+            ${{ runner.os }}-
+
+      - name : Install dependencies
+        run  : 'npm install'
+
+      # The below steps are basically `npm run prepare`
+      # split out to improve visibility in case we need
+      # to debug.
+
+      - name : Run linting
+        run  : 'npm run lint'
+
+      - name : Run validation
+        run  : 'npm run validate'
+
+      - name : Build dist build
+        run  : 'npm run build'
+
+      - name : Run transpilation
+        run  : 'npm run transpile'
+
+      - name : Run tests
+        run  : 'npm run test'
