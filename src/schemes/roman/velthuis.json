@@ -1,5 +1,5 @@
 {
-	"vowels": ["a", "aa", "i", "ii", "u", "uu", ".r", ".rr", ".li", ".ll", "", "e", "ai", "", "o", "au"],
+	"vowels": ["a", "aa", "i", "ii", "u", "uu", ".r", ".rr", ".li", ".ll", "è", "e", "ai", "ò", "o", "au"],
 	"other_marks": [".m", ".h", ""],
 	"virama": [""],
 	"consonants": ["k", "kh", "g", "gh", "\"n", "c", "ch", "j", "jh", "~n", ".t", ".th", ".d", ".d", ".n", "t", "th", "d", "dh", "n", "p", "ph", "b", "bh", "m", "y", "r", "l", "v", "~s", ".s", "s", "h", "L", "k.s", "j~n"],
