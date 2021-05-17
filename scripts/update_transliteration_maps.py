@@ -26,7 +26,7 @@ def update_maps():
     with codecs.open(devanagari_json_path, "r", "utf-8") as f:
         devanagari_json = f.read()
     for file in files:
-        if "devanagari" in file:
+        if "devanagari" in file or "_" in file:
             continue
         with codecs.open(file, "r", "utf-8") as f:
             prior_json = f.read()
