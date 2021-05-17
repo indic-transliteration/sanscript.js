@@ -94,6 +94,7 @@ Sanscript.addRomanScheme(schemeName, schemeData);
 For help in creating `schemeData`, see the comments on the `addBrahmicScheme` and `addRomanScheme` functions.
 
 ### Testing
+Prior to testing, run `npm install` so that the distribution file sanscript.js is generated at the root folder.
 
 We use `qunit` for testing.
 After installing dependencies, you can either:

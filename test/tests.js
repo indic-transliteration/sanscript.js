@@ -210,7 +210,7 @@ QUnit.test("Scheme definitions", function () {
     for (const name in schemes) {
         for (const key in schemes[name]) {
             // The virama is distinct from other categories.
-            if (key !== "virama") {
+            if (key !== "virama" && key !== "other" ) {
                 QUnit.assert.equal(schemes[name][key].length, lengths[key], name + "." + key);
             }
         }
@@ -597,10 +597,13 @@ QUnit.test("Non-Sanskrit letters", function () {
     ben(".De .Dhe Ye", "ডে ঢে যে");
     dev("qa KA Gi zI .Du .DU fRRi YRRI RLLi", "क़ ख़ा ग़ि ज़ी ड़ु ड़ू फ़ृ य़ॄ ऱॢ");
     dev("ka.cna", "कॅन");
-    kan("fI RI", "ಫೀ ಱೀ");
+    kan("fI RI", "ಫ಼ೀ ಱೀ");
     guj("ka.cna", "કૅન");
     gur("Ko Go zo Jo .Do fo", "ਖੋ ਗੋ ਜੋ ਜੋ ਡੋ ਫੋ");
     mal("RI", "റീ");
     ori(".DU .DhU YU", "ଡୂ ଢୂ ଯୂ");
     tam("RI", "றீ");
+
+    const dev_kan = transHelper("devanagari", "kannada");
+    dev_kan("ऱ ऴ", "ಱ ೞ");
 });

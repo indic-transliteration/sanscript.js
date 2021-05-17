@@ -1,6 +1,6 @@
 {
   "name": "@sanskrit-coders/sanscript",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Sanscript is a transliteration library for Indian languages. It supports the most popular Indian scripts and several different romanization schemes. Although Sanscript focuses on Sanskrit transliteration, it has partial support for other languages and is easy to extend.",
   "main": "sanscript.js",
   "directories": {
