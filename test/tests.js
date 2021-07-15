@@ -97,10 +97,10 @@ const data = {
         marks      : "ka khā gi ghī ṅu cū chṛ jṝ jhḷ ñḹ ṭe ṭhai ḍo ḍhau ṇaṃ taḥ th",
         consonants : "ka kha ga gha ṅa ca cha ja jha ña ṭa ṭha ḍa ḍha ṇa ta tha da dha na pa pha ba bha ma",
         other      : "ya ra la va śa ṣa sa ha l̤a",
-        symbols    : "oṃ । ॥ 0 1 2 3 4 5 6 7 8 9",
+        symbols    : "oṃ | || 0 1 2 3 4 5 6 7 8 9",
         putra      : "putra",
         naraIti    : "nara iti",
-        sentence   : "dharmakṣetre kurukṣetre samavetā yuyutsavaḥ ।",
+        sentence   : "dharmakṣetre kurukṣetre samavetā yuyutsavaḥ |",
     },
     iso : {
         vowels     : "a ā i ī u ū r̥ r̥̄ l̥ l̥̄ ē ai ō au",
@@ -221,7 +221,7 @@ QUnit.test("Scheme definitions", function () {
     for (const name in schemes) {
         for (const key in schemes[name]) {
             // The virama is distinct from other categories.
-            if (key !== "virama" && key !== "other" ) {
+            if (!["virama", "extra_consonants", "accents"].includes(key) ) {
                 QUnit.assert.equal(schemes[name][key].length, lengths[key], name + "." + key);
             }
         }

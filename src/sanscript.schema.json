@@ -64,7 +64,7 @@
         "skip": {
             "description": "Dummy consonant. This is used in ITRANS to prevert certain types of parser ambiguity. Thus 'barau' -> बरौ but  'bara_u' -> बरउ."
         },
-        "accent": {
+        "accents": {
             "description": "Vedic accent. Udatta and anudatta.",
             "type": "array",
             "items": {

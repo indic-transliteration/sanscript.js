@@ -25,7 +25,6 @@ module.exports = {
         "no-var"                      : ["error"],
         "one-var"                     : ["error", "never"],
         "prefer-const"                : ["error"],
-        "quotes"                      : ["error", "double"],
         "semi"                        : ["error", "always"],
         "space-before-function-paren" : ["error", "always"],
 

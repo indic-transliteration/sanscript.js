@@ -176,6 +176,13 @@ function exportSanscriptSingleton (global, schemes) {
                             consonants[alts[j]] = T;
                         }
                     }
+                    if (group === "accents") {
+                        accents[F] = T;
+
+                        for (j = 0; j < numAlts; j++) {
+                            accents[alts[j]] = T;
+                        }
+                    }
                 }
             }
         }
@@ -191,6 +198,8 @@ function exportSanscriptSingleton (global, schemes) {
             virama         : toScheme.virama,
             toSchemeA      : toScheme.vowels[0],
             fromSchemeA    : fromScheme.vowels[0],
+            from           : from,
+            to             : to,
         };
     };
 
@@ -295,9 +304,10 @@ function exportSanscriptSingleton (global, schemes) {
             buf.push(virama);
         }
         let result = buf.join("");
-        if (!toRoman && map.accents.length > 0) {
-            let pattern = new RegExp(`([${map.accents.values().join("")}])([${map.toScheme['yogavaahas'].join("")}])`);
-            result = result.replace(pattern, "$2$1")
+        const toScheme = schemes[map.to];
+        if (!toRoman && Object.keys(map.accents).length > 0) {
+            const pattern = new RegExp(`([${Object.values(map.accents).join("")}])([${toScheme['yogavaahas'].join("")}])`, "g");
+            result = result.replace(pattern, "$2$1");
         }
 
         return result;
@@ -322,10 +332,11 @@ function exportSanscriptSingleton (global, schemes) {
         let hadRomanConsonant = false;
         let temp;
         let skippingTrans = false;
+        const toScheme = schemes[map.to];
 
-        if (toRoman && map.accents.length > 0) {
-            let pattern = new RegExp(`([${map.toScheme['yogavaahas'].join("")}])([${map.accents.values().join("")}])`);
-            data = data.replace(pattern, "$2$1")
+        if (toRoman && Object.keys(map.accents).length > 0) {
+            const pattern = new RegExp(`([${toScheme['yogavaahas'].join("")}])([${Object.values(map.accents).join("")}])`, "g");
+            data = data.replace(pattern, "$2$1");
         }
 
         for (let i = 0, L; (L = data.charAt(i)); i++) {
@@ -443,7 +454,7 @@ function exportSanscriptSingleton (global, schemes) {
         }
         if (to === "tamil_superscripted") {
             const pattern = "([²³⁴])([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)";
-            result = result.replace(new RegExp(pattern, "g"), "$2$1");
+            result = result.replaceAll(new RegExp(pattern, "g"), "$2$1");
         }
         return result;
     };
