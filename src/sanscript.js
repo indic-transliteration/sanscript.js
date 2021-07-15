@@ -296,7 +296,7 @@ function exportSanscriptSingleton (global, schemes) {
         }
         let result = buf.join("");
         if (!toRoman && map.accents.length > 0) {
-            let pattern = new RegExp(`([${map.accents.values().join("")}])([${map.toScheme['other_marks'].join("")}])`);
+            let pattern = new RegExp(`([${map.accents.values().join("")}])([${map.toScheme['yogavaahas'].join("")}])`);
             result = result.replace(pattern, "$2$1")
         }
 
@@ -324,7 +324,7 @@ function exportSanscriptSingleton (global, schemes) {
         let skippingTrans = false;
 
         if (toRoman && map.accents.length > 0) {
-            let pattern = new RegExp(`([${map.toScheme['other_marks'].join("")}])([${map.accents.values().join("")}])`);
+            let pattern = new RegExp(`([${map.toScheme['yogavaahas'].join("")}])([${map.accents.values().join("")}])`);
             data = data.replace(pattern, "$2$1")
         }
 

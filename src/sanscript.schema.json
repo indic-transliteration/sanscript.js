@@ -21,7 +21,7 @@
             },
             "minItems": 15
         },
-        "other_marks": {
+        "yogavaahas": {
             "description": "Miscellaneous marks, all of which are used in Sanskrit.",
             "type": "array",
             "items": {
