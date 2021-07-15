@@ -211,6 +211,20 @@ function exportSanscriptSingleton (global, schemes) {
             }
         }
 
+        if (fromScheme["accented_vowel_alternates"]) {
+            for (const baseAccentedVowel of Object.keys(fromScheme["accented_vowel_alternates"])) {
+                const synonyms = fromScheme.accented_vowel_alternates[baseAccentedVowel];
+                for (const accentedVowel of synonyms) {
+                    const baseVowel = baseAccentedVowel.substring(0, baseAccentedVowel.length - 1);
+                    const sourceAccent = baseAccentedVowel[baseAccentedVowel.length - 1];
+                    const targetAccent = accents[sourceAccent] || sourceAccent;
+                    // Roman a does not map to any brAhmic vowel mark. Hence "" below.
+                    marks[accentedVowel] = (marks[baseVowel] || "") + targetAccent;
+                    letters[accentedVowel] = letters[baseVowel].concat(targetAccent);
+                }
+            }
+        }
+
         return {
             consonants     : consonants,
             accents        : accents,
