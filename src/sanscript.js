@@ -169,7 +169,7 @@ function exportSanscriptSingleton (global, schemes) {
                     for (j = 0; j < numAlts; j++) {
                         letters[alts[j]] = T;
                     }
-                    if (group === "consonants" || group === "other") {
+                    if (group === "consonants" || group === "extra_consonants") {
                         consonants[F] = T;
 
                         for (j = 0; j < numAlts; j++) {
