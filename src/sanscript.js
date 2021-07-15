@@ -454,7 +454,7 @@ function exportSanscriptSingleton (global, schemes) {
         }
         if (to === "tamil_superscripted") {
             const pattern = "([²³⁴])([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)";
-            result = result.replaceAll(new RegExp(pattern, "g"), "$2$1");
+            result = result.replace(new RegExp(pattern, "g"), "$2$1");
         }
         return result;
     };
