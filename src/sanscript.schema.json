@@ -72,14 +72,6 @@
             },
             "minItems": 2
         },
-        "combo_accent": {
-            "description": "Accent combined with anusvara and/or visarga. For compatibility with ITRANS, which allows the reverse of these four.",
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "minItems": 4
-        },
         "candra": {
             "type": "array",
             "items": {

@@ -605,6 +605,9 @@ QUnit.test("Accent", function () {
     f("taM\\' ta.m\\' ta.n\\' taM\\_ ta.m\\_ ta.n\\_ taM\\` ta.m\\` ta.n\\`", "तं॑ तं॑ तं॑ तं॒ तं॒ तं॒ तं॒ तं॒ तं॒", "Anusvara + accent");
     f("ta\\'M ta\\'.m ta\\'.n ta\\_M ta\\_.m ta\\_.n ta\\`M ta\\`.m ta\\`.n", "तं॑ तं॑ तं॑ तं॒ तं॒ तं॒ तं॒ तं॒ तं॒", "Accent + anusvara");
 
+    const h = transHelper("iast", "devanagari");
+    // h("tuvé asuryàṃ vásavo ní r̥ṇvan", "तुवे꣡ असुर्यं᳡ व꣡सवो नि꣡ ऋण्वन्");
+
     const g = transHelper("devanagari", "tamil_superscripted");
     g("अ॒ग्निमी॑ले पु॒रोहि॑तम्", "அ॒க்³நிமீ॑லே பு॒ரோஹி॑தம்");
     g("ग्नि॒ गि॑ जु खा", "க்³நி॒ கி॑³ ஜு கா²");
