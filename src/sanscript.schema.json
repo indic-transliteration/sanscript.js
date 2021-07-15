@@ -72,6 +72,10 @@
             },
             "minItems": 2
         },
+        "accented_vowel_alternates": {
+            "description": "Alternates for accented vowels. Eg. á and é as alternates of á and é",
+            "type": "object"
+        },
         "candra": {
             "type": "array",
             "items": {
