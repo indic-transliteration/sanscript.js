@@ -120,7 +120,7 @@ function exportSanscriptSingleton (global, schemes) {
         addCapitalAlternates(["oṃ"], schemes.iast.alternates);
         const kolkata = deepCopy(schemes.iast);
         schemes.kolkata = kolkata;
-        const schemeNames = ["iast", "iso", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
+        const schemeNames = ["iast", "iso", "itrans", "optitrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
         kolkata.vowels = ["a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "e", "ē", "ai", "o", "ō", "au"];
         addCapitalAlternates(schemes.kolkata.vowels, schemes.kolkata.alternates);
 
@@ -225,6 +225,8 @@ function exportSanscriptSingleton (global, schemes) {
             }
         }
 
+
+
         return {
             consonants     : consonants,
             accents        : accents,
@@ -252,7 +254,7 @@ function exportSanscriptSingleton (global, schemes) {
     const transliterateRoman = function (data, map, options) {
         const buf = [];
         const consonants = map.consonants;
-        const dataLength = data.length;
+        let dataLength = data.length;
         const letters = map.letters;
         const marks = map.marks;
         const maxTokenLength = map.maxTokenLength;
@@ -278,6 +280,13 @@ function exportSanscriptSingleton (global, schemes) {
         let skippingSGML = false;
         let skippingTrans = false;
         let toggledTrans = false;
+
+        if (map.from == "optitrans") {
+            data = data.replace(/n([kKgGx])/g, "~N$1");
+            data = data.replace(/n([cCjJ])/g, "~n$1");
+            data = data.replace(/n([TD])/g, "N$1");
+            dataLength = data.length;
+        }
 
         for (let i = 0, L; (L = data.charAt(i)) || tokenBuffer; i++) {
             // Fill the token buffer, if possible.
@@ -494,6 +503,12 @@ function exportSanscriptSingleton (global, schemes) {
             const pattern = "([²³⁴])([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)";
             result = result.replace(new RegExp(pattern, "g"), "$2$1");
         }
+
+        if (to == "optitrans") {
+            result = result.replace(/~N([kKgGx])/g, "n$1");
+            result = result.replace(/~n([cCjJ])/g, "n$1");
+        }
+
         return result;
     };
 

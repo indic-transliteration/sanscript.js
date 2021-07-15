@@ -221,8 +221,8 @@ QUnit.test("Scheme definitions", function () {
     for (const name in schemes) {
         for (const key in schemes[name]) {
             // The virama is distinct from other categories.
-            if (!["virama", "extra_consonants", "accents"].includes(key) ) {
-                QUnit.assert.equal(schemes[name][key].length, lengths[key], name + "." + key);
+            if (!["virama", "extra_consonants", "accents", "alternates", "accented_vowel_alternates"].includes(key) ) {
+                QUnit.assert.ok(schemes[name][key].length <= lengths[key], name + "." + key);
             }
         }
     }
@@ -589,6 +589,11 @@ QUnit.test("Alternates", function () {
     f(".a | ||", "~ . ..", "punctuation");
     f("za", "Ja", "Devanagari za");
     f("a{\\m+}", "a.h.N", "{\\m+}");
+});
+
+QUnit.test("Optitrans", function () {
+    const f = transHelper("optitrans", "devanagari");
+    f("antapH pashyati shankaraH", "अन्तᳶ पश्यति शङ्करः");
 });
 
 QUnit.test("Backslash escape", function () {
