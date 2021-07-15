@@ -100,10 +100,24 @@ function exportSanscriptSingleton (global, schemes) {
     // Set up various schemes
     (function () {
         // Set up roman schemes
+        const capitalize = function (text) {
+            return text.charAt(0).toUpperCase() + text.substring(1, text.length)
+        }
+        const addCapitalAlternates = function (codeList, alternatesMap) {
+            for (const v of codeList) {
+                let alternatesList = alternatesMap[v] || [];
+                alternatesList = alternatesList.concat(capitalize(v))
+                alternatesMap[v] = alternatesList;
+            }
+        }
+        addCapitalAlternates(schemes.iast.vowels, schemes.iast.alternates);
+        addCapitalAlternates(schemes.iast.consonants, schemes.iast.alternates);
+        addCapitalAlternates(schemes.iast.extra_consonants, schemes.iast.alternates);
         const kolkata = deepCopy(schemes.iast);
         schemes.kolkata = kolkata;
         const schemeNames = ["iast", "iso", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
         kolkata.vowels = ["a", "ā", "i", "ī", "u", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "e", "ē", "ai", "o", "ō", "au"];
+        addCapitalAlternates(schemes.kolkata.vowels, schemes.kolkata.alternates);
 
         // These schemes already belong to Sanscript.schemes. But by adding
         // them again with `addRomanScheme`, we automatically build up

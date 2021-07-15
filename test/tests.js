@@ -445,6 +445,7 @@ QUnit.test("IAST to Devanagari", function () {
     letterTests(from, to, f);
     textTests(from, to, f);
     f("pinākadhṛte", "पिनाकधृते");
+    f("Pinākadhṛte", "पिनाकधृते");
 });
 
 
