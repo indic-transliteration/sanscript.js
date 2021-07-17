@@ -118,10 +118,10 @@ function exportSanscriptSingleton (global, schemes) {
         addCapitalAlternates(schemes.iast.consonants, schemes.iast.alternates);
         addCapitalAlternates(schemes.iast.extra_consonants, schemes.iast.alternates);
         addCapitalAlternates(["oṃ"], schemes.iast.alternates);
-        const schemeNames = ["iast", "iso", "itrans", "optitrans", "hk", "kolkata", "slp1", "velthuis", "wx", "cyrillic"];
-        addCapitalAlternates(schemes.kolkata.vowels, schemes.kolkata.alternates);
-        addCapitalAlternates(schemes.kolkata.consonants, schemes.kolkata.alternates);
-        addCapitalAlternates(schemes.kolkata.extra_consonants, schemes.kolkata.alternates);
+        const schemeNames = ["iast", "iso", "itrans", "optitrans", "hk", "kolkata_v2", "slp1", "velthuis", "wx", "cyrillic"];
+        addCapitalAlternates(schemes.kolkata_v2.vowels, schemes.kolkata_v2.alternates);
+        addCapitalAlternates(schemes.kolkata_v2.consonants, schemes.kolkata_v2.alternates);
+        addCapitalAlternates(schemes.kolkata_v2.extra_consonants, schemes.kolkata_v2.alternates);
 
         addCapitalAlternates(schemes.iso.vowels, schemes.iso.alternates);
         addCapitalAlternates(schemes.iso.consonants, schemes.iso.alternates);

@@ -20,7 +20,7 @@ const names = {
     itrans           : "ITRANS",
     itrans_dravidian : "ITRANS",
     kannada          : "Kannada",
-    kolkata          : "Kolkata",
+    kolkata_v2          : "Kolkata",
     malayalam        : "Malayalam",
     oriya            : "Oriya",
     tamil            : "Tamil",
@@ -96,7 +96,7 @@ const data = {
         vowels     : "a ā i ī u ū ṛ ṝ ḷ ḹ e ai o au",
         marks      : "ka khā gi ghī ṅu cū chṛ jṝ jhḷ ñḹ ṭe ṭhai ḍo ḍhau ṇaṃ taḥ th",
         consonants : "ka kha ga gha ṅa ca cha ja jha ña ṭa ṭha ḍa ḍha ṇa ta tha da dha na pa pha ba bha ma",
-        other      : "ya ra la va śa ṣa sa ha ḻa",
+        other      : "ya ra la va śa ṣa sa ha l̤a",
         symbols    : "oṃ | || 0 1 2 3 4 5 6 7 8 9",
         putra      : "putra",
         naraIti    : "nara iti",
@@ -136,7 +136,7 @@ const data = {
         short_vowels : "e E o O",
         short_marks  : "ke kE ko kO",
     },
-    kolkata : {
+    kolkata_v2 : {
         short_vowels : "e ē o ō",
         short_marks  : "ke kē ko kō",
     },
@@ -233,7 +233,7 @@ QUnit.test("Scheme definitions", function () {
  * Test that Sanscript.isRomanScheme returns true for all roman schemes.
  */
 QUnit.test("Roman scheme membership", function () {
-    const roman = ["iast", "iso", "itrans", "hk", "kolkata", "slp1", "velthuis", "wx"];
+    const roman = ["iast", "iso", "itrans", "hk", "kolkata_v2", "slp1", "velthuis", "wx"];
     const other = ["bengali", "devanagari", "gujarati", "gurmukhi", "kannada",
         "malayalam", "oriya", "tamil", "telugu"];
 
@@ -494,13 +494,13 @@ function dravidianTest (fromScript, toScript) {
     });
 }
 
-dravidianTest("itrans_dravidian", "kolkata");
+dravidianTest("itrans_dravidian", "kolkata_v2");
 dravidianTest("itrans_dravidian", "devanagari");
 dravidianTest("itrans_dravidian", "kannada");
 dravidianTest("itrans_dravidian", "malayalam");
 dravidianTest("itrans_dravidian", "tamil");
 dravidianTest("itrans_dravidian", "telugu");
-dravidianTest("kolkata", "devanagari");
+dravidianTest("kolkata_v2", "devanagari");
 
 // -----------------------------------------------------------------------
 
