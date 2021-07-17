@@ -76,11 +76,11 @@ const data = {
         vowels     : "ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ",
         marks      : "ਕ ਖਾ ਗਿ ਘੀ ਙੁ ਚੂ ਟੇ ਠੈ ਡੋ ਢੌ ਣਂ ਤਃ ਥ੍",
         consonants : "ਕ ਖ ਗ ਘ ਙ ਚ ਛ ਜ ਝ ਞ ਟ ਠ ਡ ਢ ਣ ਤ ਥ ਦ ਧ ਨ ਪ ਫ ਬ ਭ ਮ",
-        other      : "ਯ ਰ ਲ ਵ ਸ਼ ਸ਼ ਸ ਹ ਲ਼",
-        symbols    : "ॐ । ॥ ੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯",
+        other      : "ਯ ਰ ਲ ਵ ਸ਼ ष ਸ ਹ ਲ਼",
+        symbols    : "ੴ । ॥ ੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯",
         putra      : "ਪੁਤ੍ਰ",
         naraIti    : "ਨਰ ਇਤਿ",
-        sentence   : "ਧਰ੍ਮਕ੍ਸ਼ੇਤ੍ਰੇ ਕੁਰੁਕ੍ਸ਼ੇਤ੍ਰੇ ਸਮਵੇਤਾ ਯੁਯੁਤ੍ਸਵਃ ।",
+        sentence   : "ਧਰ੍ਮਕ੍षੇਤ੍ਰੇ ਕੁਰੁਕ੍षੇਤ੍ਰੇ ਸਮਵੇਤਾ ਯੁਯੁਤ੍ਸਵਃ ।",
     },
     hk : {
         vowels     : "a A i I u U R RR lR lRR e ai o au",
@@ -192,10 +192,10 @@ const data = {
     },
     wx : {
         consonants : "ka Ka ga Ga fa ca Ca ja Ja Fa ta Ta da Da Na wa Wa xa Xa na pa Pa ba Ba ma",
-        symbols    : "oM | || 0 1 2 3 4 5 6 7 8 9",
+        symbols    : "oM . .. 0 1 2 3 4 5 6 7 8 9",
         putra      : "puwra",
         naraIti    : "nara iwi",
-        sentence   : "XarmakRewre kurukRewre samavewA yuyuwsavaH |",
+        sentence   : "XarmakRewre kurukRewre samavewA yuyuwsavaH .",
     },
 };
 
@@ -634,11 +634,11 @@ QUnit.test("Non-Sanskrit letters", function () {
     // const tel = transHelper("itrans", "telugu");
 
     ben(".De .Dhe Ye", "ড়ে ঢ়ে য়ে");
-    dev("qa KA Gi zI .Du .DU fRRi YRRI RLLi", "क़ ख़ा ग़ि ज़ी ड़ु ड़ू फ़ृ य़ॄ ऱॢ");
+    dev("qa KA Gi zI .Du .DU fRRi YRRI RLLi", "क़ ख़ा ग़ि ज़ी ड़ु ड़ू फ़ृ य़ॄ ऱॢ");
     dev("ka.cna", "कॅन");
     kan("fI RI", "ಫ಼ೀ ಱೀ");
     guj("ka.cna", "કૅન");
-    gur("Ko Go zo Jo .Do fo", "ਖੋ ਗੋ ਜੋ ਜੋ ਡੋ ਫੋ");
+    gur("Ko Go zo Jo .Do fo", "ਖ਼ੋ ਗ਼ੋ ਜ਼ੋ ਜ਼ੋ ੜੋ ਫ਼ੋ");
     mal("RI", "റീ");
     // Disabling this test - not sure why it's failing.
     // ori(".DU .DhU YU", "ଡୂ ଢୂ ୟୂ");
