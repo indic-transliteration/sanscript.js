@@ -27,7 +27,7 @@
             "items": {
                 "type": "string"
             },
-            "minItems": 3
+            "minItems": 2
         },
         "virama": {
             "description": "In syllabic scripts like Devanagari, consonants have an inherent vowel that must be suppressed explicitly. We do so by putting a virama after the consonant.",
