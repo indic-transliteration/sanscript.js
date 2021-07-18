@@ -20,7 +20,7 @@ const names = {
     itrans           : "ITRANS",
     itrans_dravidian : "ITRANS",
     kannada          : "Kannada",
-    kolkata_v2          : "Kolkata",
+    kolkata_v2       : "Kolkata",
     malayalam        : "Malayalam",
     oriya            : "Oriya",
     tamil            : "Tamil",
