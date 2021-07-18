@@ -9,7 +9,6 @@ Sanscript is a transliteration library for Indian languages. It supports the mos
 The package is officially distributed at npm [here](https://www.npmjs.com/package/@sanskrit-coders/sanscript), whereas a variant due to Vikram Iyer is separately available [here](https://www.npmjs.com/package/sanscript). So one can use commands such as:
 
 - `npm install @sanskrit-coders/sanscript`
-- `yarn add @sanskrit-coders/sanscript`
 
 ## Usage
 
@@ -75,12 +74,26 @@ You can tweak the transliteration function by passing an `options` object:
 
 ## Contributing
 
-### Installing dependencies
+### Installing repo submodules
 
-Run either:
+If it is the first time you're cloning down the repo, you need to initialize the submodules.
+This only needs to be run once and never again.
 
-- `npm install`
-- `yarn`
+```shell
+git submodule update --init --recursive
+```
+
+If you want to pull in updates after this, you can just run:
+
+```shell
+git submodule update --recursive
+```
+
+### Installing package dependencies
+
+```shell
+npm install
+```
 
 ### Adding new schemes
 
