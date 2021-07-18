@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://github.com/sanskrit/sanscript.js/raw/master/src/sanscript.schema.json",
+    "$id": "https://github.com/indic-transliteration/sanscript.js/raw/master/src/sanscript.schema.json",
     "title": "Sanscript Scheme",
     "description": "A representation of a writing system (Brahmic or roman) that can be used for Sanskrit and other Indic languages",
     "type": "object",

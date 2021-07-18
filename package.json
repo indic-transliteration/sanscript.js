@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sanskrit/sanscript.js.git"
+    "url": "git+https://github.com/indic-transliteration/sanscript.js.git"
   },
   "keywords": [
     "ahom",
@@ -76,9 +76,6 @@
     "slp1",
     "sora_sompeng",
     "sundanese",
-    "syloti_nagari",
-    "tagalog",
-    "tagbanwa",
     "tai_laing",
     "takri",
     "tamil",
@@ -103,9 +100,9 @@
   "author": "Arun Prasad and Sanskrit coders",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sanskrit/sanscript.js/issues"
+    "url": "https://github.com/indic-transliteration/sanscript.js/issues"
   },
-  "homepage": "https://github.com/sanskrit/sanscript.js#readme",
+  "homepage": "https://github.com/indic-transliteration/sanscript.js#readme",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.1",
