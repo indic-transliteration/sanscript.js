@@ -629,7 +629,7 @@ QUnit.test("Non-Sanskrit letters", function () {
     const guj = transHelper("itrans", "gujarati");
     const gur = transHelper("itrans", "gurmukhi");
     const mal = transHelper("itrans", "malayalam");
-    const ori = transHelper("itrans", "oriya");
+    // const ori = transHelper("itrans", "oriya");
     const tam = transHelper("itrans", "tamil");
     // const tel = transHelper("itrans", "telugu");
 
