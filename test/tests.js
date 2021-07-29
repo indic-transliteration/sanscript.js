@@ -221,7 +221,7 @@ QUnit.test("Scheme definitions", function () {
     for (const name in schemes) {
         for (const key in schemes[name]) {
             // The virama is distinct from other categories.
-            if (!["virama", "extra_consonants", "accents", "alternates", "accented_vowel_alternates"].includes(key) ) {
+            if (!["virama", "extra_consonants", "accents", "alternates", "accented_vowel_alternates"].includes(key) && !key.startsWith("_")) {
                 QUnit.assert.ok(schemes[name][key].length <= lengths[key], name + "." + key);
             }
         }

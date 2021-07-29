@@ -219,6 +219,9 @@ function exportSanscriptSingleton (global, schemes) {
                     const targetAccent = accents[sourceAccent] || sourceAccent;
                     // Roman a does not map to any brAhmic vowel mark. Hence "" below.
                     marks[accentedVowel] = (marks[baseVowel] || "") + targetAccent;
+                    if (!letters[baseVowel]) {
+                        console.error(baseVowel, targetAccent, letters);
+                    }
                     letters[accentedVowel] = letters[baseVowel].concat(targetAccent);
                 }
             }
