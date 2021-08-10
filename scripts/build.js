@@ -27,7 +27,7 @@ async function main () {
             const schemeName = filename.split(".");
             schemeName.pop();
             let fileContents = await fsp.readFile(filepath);
-            let schemeObj = toml.parse(fileContents);
+            const schemeObj = toml.parse(fileContents);
             if (filepath.includes("roman/")) {
                 schemeObj.isRomanScheme = true;
             }

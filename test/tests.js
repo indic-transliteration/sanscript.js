@@ -213,10 +213,10 @@ QUnit.test("Roman scheme membership", function () {
         "malayalam", "oriya", "tamil", "telugu"];
 
     for (const i in roman) {
-        QUnit.assert.ok(schemes[roman[i]].isRomanScheme, roman[i]);
+        QUnit.assert.ok(Sanscript.schemes[roman[i]].isRomanScheme, roman[i]);
     }
     for (const i in other) {
-        QUnit.assert.ok(!schemes[other[i]].isRomanScheme, other[i]);
+        QUnit.assert.ok(!Sanscript.schemes[other[i]].isRomanScheme, other[i]);
     }
 });
 
