@@ -523,5 +523,6 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
     }
 }
 
+// The below comment avoids jslint failure.
 /* global schemes devanagariVowelToMarks*/
 exportSanscriptSingleton(this, schemes, devanagariVowelToMarks);
