@@ -118,7 +118,7 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
         // `romanSchemes` and define a `vowel_marks` field for each one.
         for (const [schemeName, scheme] of Object.entries(schemes)) {
             if (scheme.isRomanScheme) {
-                Sanscript.addRomanScheme(name, scheme);
+                Sanscript.addRomanScheme(schemeName, scheme);
             }
         }
 
@@ -523,5 +523,5 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
     }
 }
 
-/* global schemes */
+/* global schemes devanagariVowelToMarks*/
 exportSanscriptSingleton(this, schemes, devanagariVowelToMarks);
