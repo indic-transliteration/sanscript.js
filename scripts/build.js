@@ -1,5 +1,6 @@
 const fsp = require("fs").promises;
 const path = require("path");
+const toml = require( 'toml' );
 
 async function main () {
     const rootDir = path.dirname(__dirname);
@@ -25,10 +26,19 @@ async function main () {
         Promise.all(x.map(async ([filename, filepath]) => {
             const schemeName = filename.split(".");
             schemeName.pop();
-            const fileContents = await fsp.readFile(filepath);
+            let fileContents = await fsp.readFile(filepath);
+            let schemeObj = toml.parse(fileContents);
+            if (filepath.includes("roman/")) {
+                schemeObj.isRomanScheme = true;
+            }
+            fileContents = JSON.stringify(schemeObj);
             return [schemeName, fileContents];
         })),
     ));
+
+    let devanagariVowelToMarks = await fsp.readFile(path.join(rootDir, "src", "schemes", "_devanagari_vowel_to_marks.toml"));
+    devanagariVowelToMarks = JSON.stringify(toml.parse(devanagariVowelToMarks));
+
 
     // Get file handle for sanscript.js
     let out;
@@ -43,6 +53,7 @@ async function main () {
         for (const [scheme, contents] of rfiles) {
             out.write(`schemes.${scheme} = ${contents.toString().trim()};\n`);
         }
+        out.write(`const devanagariVowelToMarks = ${devanagariVowelToMarks};`);
         // Write the code to the output file
         out.write(await fsp.readFile(
             path.join(rootDir, "src", "sanscript.js"),

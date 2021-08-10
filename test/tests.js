@@ -203,65 +203,21 @@ const data = {
 
 QUnit.module("Setup");
 
-/* Scheme basics
- * -------------
- * Test that all schemes have the same number of elements for each category,
- * e.g. "vowels" and "consonants".
- */
-QUnit.test("Scheme definitions", function () {
-    // Find the typical lengths of each category. We use Devanagari because it
-    // contains every category, including "marks".
-    const schemes = Sanscript.schemes;
-    const devanagari = schemes.devanagari;
-    const lengths = {};
-    for (const key in devanagari) {
-        lengths[key] = devanagari[key].length;
-    }
-
-    for (const name in schemes) {
-        for (const key in schemes[name]) {
-            // The virama is distinct from other categories.
-            if (!["virama", "extra_consonants", "accents", "alternates", "accented_vowel_alternates"].includes(key) && !key.startsWith("_")) {
-                QUnit.assert.ok(schemes[name][key].length <= lengths[key], name + "." + key);
-            }
-        }
-    }
-});
-
 /* Roman schemes
  * -------------
  * Test that Sanscript.isRomanScheme returns true for all roman schemes.
  */
 QUnit.test("Roman scheme membership", function () {
-    const roman = ["iast", "iso", "itrans", "hk", "kolkata_v2", "slp1", "velthuis", "wx"];
+    const roman = ["iast", "iso", "itrans", "hk", "kolkata_v2", "slp1", "velthuis", "wx", "cyrillic"];
     const other = ["bengali", "devanagari", "gujarati", "gurmukhi", "kannada",
         "malayalam", "oriya", "tamil", "telugu"];
 
     for (const i in roman) {
-        QUnit.assert.ok(Sanscript.isRomanScheme(roman[i]), roman[i]);
+        QUnit.assert.ok(schemes[roman[i]].isRomanScheme, roman[i]);
     }
     for (const i in other) {
-        QUnit.assert.ok(!Sanscript.isRomanScheme(other[i]), other[i]);
+        QUnit.assert.ok(!schemes[other[i]].isRomanScheme, other[i]);
     }
-});
-
-
-QUnit.test("Adding schemes", function () {
-    const sanskritOCR = {
-        vowels     : ["a", "å", "i", "ï", "u", "÷", "Ÿ", "", "", "", "e", "ai", "o", "au"],
-        consonants : ["k", "kh", "g", "gh", "¼",
-            "c", "ch", "j", "jh", "ñ",
-            "¶", "¶h", "·", "·h", "½",
-            "t", "th", "d", "dh", "n",
-            "p", "ph", "b", "bh", "m",
-            "y", "r", "l", "v",
-            "¸", "¹", "s", "h",
-            "", "k¹", "jñ"],
-    };
-    Sanscript.addRomanScheme("sanskritOCR", sanskritOCR);
-    const f = transHelper("sanskritOCR", "devanagari");
-    f("bhïma", "भीम");
-    f("narå½åm", "नराणाम्");
 });
 
 // -----------------------------------------------------------------------

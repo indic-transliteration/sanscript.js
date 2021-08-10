@@ -7,7 +7,7 @@
  * License: MIT
  */
 
-function exportSanscriptSingleton (global, schemes) {
+function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
     "use strict";
 
     const Sanscript = {};
@@ -37,16 +37,6 @@ function exportSanscriptSingleton (global, schemes) {
 
     // object cache
     let cache = {};
-
-    /**
-     * Check whether the given scheme encodes romanized Sanskrit.
-     *
-     * @param name  the scheme name
-     * @return      boolean
-     */
-    Sanscript.isRomanScheme = function (name) {
-        return {}.hasOwnProperty.call(romanSchemes, name);
-    };
 
     /**
      * Add a Brahmic scheme to Sanscript.
@@ -81,21 +71,17 @@ function exportSanscriptSingleton (global, schemes) {
      */
     Sanscript.addRomanScheme = function (name, scheme) {
         if (!("vowel_marks" in scheme)) {
-            scheme.vowel_marks = scheme.vowels.slice(1);
+            scheme.vowel_marks = {};
+            for (const [key, value] of Object.entries(scheme.vowels)) {
+                if (key != "अ") {
+                    scheme.vowel_marks[devanagariVowelToMarks[key]] = value;
+                }
+            }
         }
         Sanscript.schemes[name] = scheme;
         romanSchemes[name] = true;
     };
 
-    /**
-     * Create a deep copy of an object, for certain kinds of objects.
-     *
-     * @param scheme  the scheme to copy
-     * @return        the copy
-     */
-    const deepCopy = function (scheme) {
-        return JSON.parse(JSON.stringify(scheme));
-    };
 
     // Set up various schemes
     (function () {
@@ -114,32 +100,28 @@ function exportSanscriptSingleton (global, schemes) {
                 alternatesMap[v] = alternatesList;
             }
         };
-        addCapitalAlternates(schemes.iast.vowels, schemes.iast.alternates);
-        addCapitalAlternates(schemes.iast.consonants, schemes.iast.alternates);
-        addCapitalAlternates(schemes.iast.extra_consonants, schemes.iast.alternates);
+        addCapitalAlternates(Object.values(schemes.iast.vowels), schemes.iast.alternates);
+        addCapitalAlternates(Object.values(schemes.iast.consonants), schemes.iast.alternates);
+        addCapitalAlternates(Object.values(schemes.iast.extra_consonants), schemes.iast.alternates);
         addCapitalAlternates(["oṃ"], schemes.iast.alternates);
-        const schemeNames = ["iast", "iso", "itrans", "optitrans", "hk", "kolkata_v2", "slp1", "velthuis", "wx", "cyrillic"];
-        addCapitalAlternates(schemes.kolkata_v2.vowels, schemes.kolkata_v2.alternates);
-        addCapitalAlternates(schemes.kolkata_v2.consonants, schemes.kolkata_v2.alternates);
-        addCapitalAlternates(schemes.kolkata_v2.extra_consonants, schemes.kolkata_v2.alternates);
+        addCapitalAlternates(Object.values(schemes.kolkata_v2.vowels), schemes.kolkata_v2.alternates);
+        addCapitalAlternates(Object.values(schemes.kolkata_v2.consonants), schemes.kolkata_v2.alternates);
+        addCapitalAlternates(Object.values(schemes.kolkata_v2.extra_consonants), schemes.kolkata_v2.alternates);
 
-        addCapitalAlternates(schemes.iso.vowels, schemes.iso.alternates);
-        addCapitalAlternates(schemes.iso.consonants, schemes.iso.alternates);
-        addCapitalAlternates(schemes.iso.extra_consonants, schemes.iso.alternates);
+        addCapitalAlternates(Object.values(schemes.iso.vowels), schemes.iso.alternates);
+        addCapitalAlternates(Object.values(schemes.iso.consonants), schemes.iso.alternates);
+        addCapitalAlternates(Object.values(schemes.iso.extra_consonants), schemes.iso.alternates);
         addCapitalAlternates(["ōṁ"], schemes.iso.alternates);
 
         // These schemes already belong to Sanscript.schemes. But by adding
         // them again with `addRomanScheme`, we automatically build up
         // `romanSchemes` and define a `vowel_marks` field for each one.
-        for (let i = 0, name; (name = schemeNames[i]); i++) {
-            Sanscript.addRomanScheme(name, schemes[name]);
+        for (const [schemeName, scheme] of Object.entries(schemes)) {
+            if (scheme.isRomanScheme) {
+                Sanscript.addRomanScheme(name, scheme);
+            }
         }
 
-        // ITRANS variant, which supports Dravidian short 'e' and 'o'.
-        const itrans_dravidian = deepCopy(schemes.itrans);
-        itrans_dravidian.vowels = ["a", "A", "i", "I", "u", "U", "Ri", "RRI", "LLi", "LLi", "e", "E", "ai", "o", "O", "au"];
-        itrans_dravidian.vowel_marks = itrans_dravidian.vowels.slice(1);
-        Sanscript.addRomanScheme("itrans_dravidian", itrans_dravidian);
     }());
 
     /**
@@ -165,14 +147,22 @@ function exportSanscriptSingleton (global, schemes) {
             if (!{}.hasOwnProperty.call(fromScheme, group)) {
                 continue;
             }
+            if (["alternates", "accented_vowel_alternates", "isRomanScheme"].includes(group)) {
+                continue;
+            }
             const fromGroup = fromScheme[group];
             const toGroup = toScheme[group];
             if (toGroup === undefined) {
                 continue;
             }
-            for (let i = 0; i < fromGroup.length; i++) {
-                const F = fromGroup[i];
-                const T = toGroup[i];
+            for (const [key, F] of Object.entries(fromGroup)) {
+                let T = toGroup[key];
+                if (T === undefined) {
+                    continue;
+                }
+                if (T == "" && !["virama", "zwj", "skip"].includes(group)) {
+                    T = F;
+                }
                 const alts = alternates[F] || [];
                 const numAlts = alts.length;
                 let j = 0;
@@ -232,14 +222,14 @@ function exportSanscriptSingleton (global, schemes) {
         return {
             consonants     : consonants,
             accents        : accents,
-            fromRoman      : Sanscript.isRomanScheme(from),
+            fromRoman      : fromScheme.isRomanScheme,
             letters        : letters,
             marks          : marks,
             maxTokenLength : Math.max.apply(Math, tokenLengths),
-            toRoman        : Sanscript.isRomanScheme(to),
-            virama         : toScheme.virama,
-            toSchemeA      : toScheme.vowels[0],
-            fromSchemeA    : fromScheme.vowels[0],
+            toRoman        : toScheme.isRomanScheme,
+            virama         : toScheme.virama["्"],
+            toSchemeA      : toScheme.vowels["अ"],
+            fromSchemeA    : fromScheme.vowels["अ"],
             from           : from,
             to             : to,
         };
@@ -355,7 +345,7 @@ function exportSanscriptSingleton (global, schemes) {
         let result = buf.join("");
         const toScheme = schemes[map.to];
         if (!toRoman && Object.keys(map.accents).length > 0) {
-            const pattern = new RegExp(`([${Object.values(map.accents).join("")}])([${toScheme['yogavaahas'].join("")}])`, "g");
+            const pattern = new RegExp(`([${Object.values(map.accents).join("")}])([${Object.values(toScheme['yogavaahas']).join("")}])`, "g");
             result = result.replace(pattern, "$2$1");
         }
 
@@ -384,7 +374,7 @@ function exportSanscriptSingleton (global, schemes) {
         const toScheme = schemes[map.to];
 
         if (toRoman && Object.keys(map.accents).length > 0) {
-            const pattern = new RegExp(`([${toScheme['yogavaahas'].join("")}])([${Object.values(map.accents).join("")}])`, "g");
+            const pattern = new RegExp(`([${Object.values(toScheme['yogavaahas']).join("")}])([${Object.values(map.accents).join("")}])`, "g");
             data = data.replace(pattern, "$2$1");
         }
 
@@ -490,7 +480,7 @@ function exportSanscriptSingleton (global, schemes) {
             data = data.replace(/\\([^'`_]|$)/g, "##$1##");
         }
         if (from === "tamil_superscripted") {
-            const pattern = "([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)([²³⁴])";
+            const pattern = "([" + Object.values(schemes["tamil_superscripted"]["vowel_marks"]).join("") + schemes["tamil_superscripted"]["virama"]["्"] + "॒॑" + "]+)([²³⁴])";
             data = data.replace(new RegExp(pattern, "g"), "$2$1");
             console.error("transliteration from tamil_superscripted not fully implemented!");
         }
@@ -502,7 +492,7 @@ function exportSanscriptSingleton (global, schemes) {
             result = transliterateBrahmic(data, map, options);
         }
         if (to === "tamil_superscripted") {
-            const pattern = "([²³⁴])([" + schemes["tamil_superscripted"]["vowel_marks"].join("") + schemes["tamil_superscripted"]["virama"] + "॒॑" + "]+)";
+            const pattern = "([²³⁴])([" + Object.values(schemes["tamil_superscripted"]["vowel_marks"]).join("") + schemes["tamil_superscripted"]["virama"]["्"] + "॒॑" + "]+)";
             result = result.replace(new RegExp(pattern, "g"), "$2$1");
         }
 
@@ -534,4 +524,4 @@ function exportSanscriptSingleton (global, schemes) {
 }
 
 /* global schemes */
-exportSanscriptSingleton(this, schemes);
+exportSanscriptSingleton(this, schemes, devanagariVowelToMarks);
