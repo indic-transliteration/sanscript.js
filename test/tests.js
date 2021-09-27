@@ -562,6 +562,7 @@ QUnit.test("Backslash escape", function () {
 QUnit.test("Accent", function () {
     const f = transHelper("itrans", "devanagari");
     f("a\\_gnimI\\'le pu\\_rohi\\'tam", "अ॒ग्निमी॑ले पु॒रोहि॑तम्");
+    f("tasyA\\'\\'", "तस्या᳚");
     f("naH\\' naH\\_ naH\\`", "नः॑ नः॒ नः॒", "Visarga + accent");
     f("na\\'H na\\_H na\\`H", "नः॑ नः॒ नः॒", "Accent + visarga");
     f("taM\\' ta.m\\' ta.n\\' taM\\_ ta.m\\_ ta.n\\_ taM\\` ta.m\\` ta.n\\`", "तं॑ तं॑ तं॑ तं॒ तं॒ तं॒ तं॒ तं॒ तं॒", "Anusvara + accent");
