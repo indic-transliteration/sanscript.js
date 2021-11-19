@@ -23,7 +23,7 @@ Here, `from` and `to` are the names of different **schemes**. In Sanscript, the 
 1. **Brahmic** schemes, which are *abugidas*. All Indian scripts are Brahmic schemes.
 2. **Roman** schemes, which are *alphabets*. All romanizations are Roman schemes.
 
-By default, Sanscript supports the following Brahmic schemes:
+For a full list of schemes, see `schemes` in https://github.com/indic-transliteration/sanscript.js/tree/master/src . A possibly outdated listing of supported schemes:
 
 ahom, assamese, avestan, balinese, bengali, bhaisuki, brahmi, brahmi_tamil, burmese, chakma, cham, cyrillic, devanagari, dogra, gondi_gunjala, gondi_masaram, grantha, grantha_pandya, gujarati, gurmukhi, hk, iast, itrans, itrans_dravidian, javanese, kannada, khamti_shan, kharoshti, khmer, khom_thai, khudawadi, kolkata, lao, lao_pali, lepcha, limbu, mahajani, malayalam, manipuri, marchen, modi, mon, mro, multani, newa, ol_chiki, oriya, persian_old, phags_pa, ranjana, rejang, rohingya, sanskritOCR, shan, sharada, siddham, sinhala, slp1, sora_sompeng, sundanese, syloti_nagari, tagalog, tagbanwa, tai_laing, takri, tamil, tamil_extended, tamil_superscripted, telugu, thai, tibetan, tirhuta_maithili, urdu, vattelutu, velthuis, wancho, warang_citi, wx, zanbazar_square
 
@@ -31,6 +31,7 @@ of which the following are Roman schemes:
 
 * `hk` (Harvard-Kyoto)
 * `iast` (International Alphabet of Sanskrit Transliteration)
+* `iso`
 * `itrans` (ITRANS)
 * `itrans_dravidian` (ITRANS with support for Dravidian short "e" and "o")
 * `kolkata` (National Library at Kolkata)
