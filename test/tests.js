@@ -602,4 +602,8 @@ QUnit.test("Non-Sanskrit letters", function () {
 
     const dev_kan = transHelper("devanagari", "kannada");
     dev_kan("ऱ ऴ", "ಱ ೞ");
+
+    // The below fails.
+    // const dev_iso = transHelper("devanagari", "iso");
+    // dev_iso("फ़ोन सड़क ज़्यादा", "fōna saṛaka zyaada");
 });
