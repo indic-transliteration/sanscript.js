@@ -246,7 +246,7 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
     const transliterateRoman = function (data, map, options) {
         const buf = [];
         const consonants = map.consonants;
-        let dataLength = data.length;
+        const dataLength = data.length;
         const letters = map.letters;
         const marks = map.marks;
         const maxTokenLength = map.maxTokenLength;
@@ -272,13 +272,6 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
         let skippingSGML = false;
         let skippingTrans = false;
         let toggledTrans = false;
-
-        if (map.from == "optitrans") {
-            data = data.replace(/n([kKgGx])/g, "~N$1");
-            data = data.replace(/n([cCjJ])/g, "~n$1");
-            data = data.replace(/n([TD])/g, "N$1");
-            dataLength = data.length;
-        }
 
         for (let i = 0, L; (L = data.charAt(i)) || tokenBuffer; i++) {
             // Fill the token buffer, if possible.
@@ -485,20 +478,40 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
             console.error("transliteration from tamil_superscripted not fully implemented!");
         }
 
+        const fromShortcuts = schemes[from]["shortcuts"];
+        // console.log(fromShortcuts);
+        if (fromShortcuts) {
+            for (const key in fromShortcuts) {
+                const shortcut = fromShortcuts[key];
+                if (key.includes(shortcut)) {
+                    // An actually long "key" may already exist in the string
+                    data = data.replace(key, shortcut);
+                }
+                data = data.replace(shortcut, key);
+            }
+        }
+
         let result = "";
         if (map.fromRoman) {
             result = transliterateRoman(data, map, options);
         } else {
             result = transliterateBrahmic(data, map, options);
         }
+        // Apply shortcuts
+        const toShortcuts = schemes[to]["shortcuts"];
+        if (toShortcuts) {
+            for (const key in toShortcuts) {
+                const shortcut = toShortcuts[key];
+                if (shortcut.includes(key)) {
+                    // An actually long "shortcut" may already exist in the string
+                    result = result.replace(shortcut, key);
+                }
+                result = result.replace(key, shortcut);
+            }
+        }
         if (to === "tamil_superscripted") {
             const pattern = "([²³⁴])([" + Object.values(schemes["tamil_superscripted"]["vowel_marks"]).join("") + schemes["tamil_superscripted"]["virama"]["्"] + "॒॑" + "]+)";
             result = result.replace(new RegExp(pattern, "g"), "$2$1");
-        }
-
-        if (to == "optitrans") {
-            result = result.replace(/~N([kKgGx])/g, "n$1");
-            result = result.replace(/~n([cCjJ])/g, "n$1");
         }
 
         return result;
