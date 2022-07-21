@@ -523,6 +523,19 @@ QUnit.test("Skipping SGML", function () {
     f3("##<p>nara iti</p>", "<p>nara iti</p>");
 });
 
+
+QUnit.test("Preferred alternates", function () {
+    const preferredAlternates = {itrans: {"A": "aa", "I": "ii", "U": "uu", "j~n": "GY"}};
+    const f1 = transHelper("iast", "itrans", {preferred_alternates : {}});
+    f1("āīūjñ", "AIUj~n");
+    const f2 = transHelper("iast", "itrans", {preferred_alternates : preferredAlternates});
+    f2("āīūjñ", "aaiiuuGY");
+    Sanscript.defaults.preferred_alternates = preferredAlternates;
+    const f3 = transHelper("iast", "itrans");
+    f3("āīūjñ", "aaiiuuGY");
+});
+
+
 // -----------------------------------------------------------------------
 
 QUnit.module("ITRANS");
