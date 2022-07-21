@@ -28,7 +28,8 @@ async function main () {
             schemeName.pop();
             let fileContents = await fsp.readFile(filepath);
             const schemeObj = toml.parse(fileContents);
-            if (filepath.includes("roman/")) {
+            
+            if (filepath.match(/\broman\b/)) {
                 schemeObj.isRomanScheme = true;
             }
             fileContents = JSON.stringify(schemeObj);
