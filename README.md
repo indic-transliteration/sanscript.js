@@ -72,7 +72,10 @@ You can tweak the transliteration function by passing an `options` object:
 
 * `skip_sgml` - If true, transliterate SGML tags as if they were ordinary words (`<b>iti</b>` → `<ब्>इति</ब्>`). Defaults to `false`.
 * `syncope` - If true, use Hindi-style transliteration (`ajay` → `अजय`). In linguistics, this behavior is known as [schwa syncope](http://en.wikipedia.org/wiki/Schwa_deletion_in_Indo-Aryan_languages). Defaults to `false`.
-
+* `preferred_alternates` - This `object` map can define which alternates should be used during transliteration. I.e. in case you transliterate **to** itrans and you prefer `aa` instead of `A`, `i` instead of `I`, you can set a map like this:
+```js
+{ itrans : { "A" : "aa", "I" : "ii", "U" : "uu", "j~n" : "GY" } };
+```
 ## Contributing
 
 ### Installing repo submodules
