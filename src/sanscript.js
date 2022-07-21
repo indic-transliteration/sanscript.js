@@ -13,9 +13,9 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
     const Sanscript = {};
     // First, we define the Sanscript singleton, with its variables and methods.
     Sanscript.defaults = {
-        "skip_sgml" : false,
-        "syncope"   : false,
-        "preferred_alternates": {}
+        "skip_sgml"            : false,
+        "syncope"              : false,
+        "preferred_alternates" : {},
     };
 
     /* Schemes
@@ -516,7 +516,7 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
         }
 
         if(typeof options.preferred_alternates[to] == "object") {
-            let keys = Object.keys(options.preferred_alternates[to]);
+            const keys = Object.keys(options.preferred_alternates[to]);
             for (let i = 0; i< keys.length; i++)
             {
                 result = result.replaceAll(keys[i], options.preferred_alternates[to][keys[i]]);

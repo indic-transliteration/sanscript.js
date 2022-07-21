@@ -525,7 +525,8 @@ QUnit.test("Skipping SGML", function () {
 
 
 QUnit.test("Preferred alternates", function () {
-    const preferredAlternates = {itrans: {"A": "aa", "I": "ii", "U": "uu", "j~n": "GY"}};
+    const preferredAlternates = { itrans : { "A" : "aa", "I" : "ii", "U" : "uu", "j~n" : "GY" } };
+
     const f1 = transHelper("iast", "itrans", {preferred_alternates : {}});
     f1("āīūjñ", "AIUj~n");
     const f2 = transHelper("iast", "itrans", {preferred_alternates : preferredAlternates});
