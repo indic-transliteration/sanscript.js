@@ -19,6 +19,7 @@ const names = {
     iso              : "ISO",
     itrans           : "ITRANS",
     itrans_dravidian : "ITRANS",
+    itrans_lowercase : "ITRANS lowercase",
     kannada          : "Kannada",
     kolkata_v2       : "Kolkata",
     malayalam        : "Malayalam",
@@ -135,6 +136,16 @@ const data = {
     itrans_dravidian : {
         short_vowels : "e E o O",
         short_marks  : "ke kE ko kO",
+    },
+    itrans_lowercase : {
+        vowels     : "a aa i ii u uu RRi RRI LLi LLI e ai o au",
+        marks      : "ka khaa gi ghii ~Nu chuu ChRRi jRRI jhLLi ~nLLI Te Thai Do Dhau NaM taH th",
+        consonants : "ka kha ga gha ~Na cha Cha ja jha ~na Ta Tha Da Dha Na ta tha da dha na pa pha ba bha ma",
+        other      : "ya ra la va sha Sha sa ha La",
+        symbols    : "OM | || 0 1 2 3 4 5 6 7 8 9",
+        putra      : "putra",
+        naraIti    : "nara iti",
+        sentence   : "dharmakShetre kurukShetre samavetaa yuyutsavaH |",
     },
     kolkata_v2 : {
         short_vowels : "e ē o ō",
@@ -390,6 +401,14 @@ QUnit.test("ITRANS to Devanagari", function () {
     const from = data.itrans;
     const to = data.devanagari;
     const f = transHelper("itrans", "devanagari");
+    letterTests(from, to, f);
+    textTests(from, to, f);
+});
+
+QUnit.test("IAST to ITRANS_LOWERCASE", function () {
+    const from = data.iast;
+    const to = data.itrans_lowercase;
+    const f = transHelper("iast", "itrans_lowercase");
     letterTests(from, to, f);
     textTests(from, to, f);
 });

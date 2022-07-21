@@ -9,11 +9,11 @@
   "scripts": {
     "build": "node scripts/build.js",
     "dist": "npm run build && npm run transpile",
-    "lint": "node ./node_modules/.bin/eslint '**/*.js'",
+    "lint": "eslint \"**/*.js\"",
     "prepare": "npm run lint && npm run validate && npm run dist && npm run test",
     "test": "qunit",
-    "transpile": "node ./node_modules/.bin/babel sanscript.es6.js --out-file sanscript.js",
-    "validate": "node ./node_modules/.bin/ajv validate -s src/sanscript.schema.json -d 'src/schemes/*/*.json'"
+    "transpile": "babel sanscript.es6.js --out-file sanscript.js",
+    "validate": "ajv validate -s src/sanscript.schema.json -d 'src/schemes/*/*.json'"
   },
   "repository": {
     "type": "git",
@@ -104,12 +104,12 @@
   },
   "homepage": "https://github.com/indic-transliteration/sanscript.js#readme",
   "devDependencies": {
-    "@babel/cli": "^7.14.5",
-    "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.7",
+    "@babel/cli": "^7.18.9",
+    "@babel/core": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
     "ajv-cli": "^5.0.0",
     "eslint": "^7.31.0",
-    "qunit": "^2.16.0"
+    "qunit": "^2.19.1"
   },
   "dependencies": {
     "toml": "^2.3.6"
