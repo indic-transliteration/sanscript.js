@@ -1,0 +1,112 @@
+name: Check and Release
+
+# to run tasks that would need to run before releasing
+
+on:
+  push:
+    branches:
+      - master # run on pushed commits to `master`
+  pull_request:
+    branches:
+      - master # run on pull requests to `master`
+
+jobs:
+  prerelease:
+    runs-on: ubuntu-latest
+
+    name: Run prerelease scripts
+
+    strategy:
+      matrix:
+        node-version:
+          - 10.x
+          - 12.x
+          - 14.x
+
+    steps:
+      - uses : actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 1
+      - name : Use Node.js version ${{ matrix.node-version }}
+        uses : actions/setup-node@v3
+        with :
+          node-version: ${{ matrix.node-version }}
+
+      - name : Load node-modules cache
+        uses : actions/cache@v2
+        env  :
+          cache-name: cache-node-modules
+        with :
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ matrix.node-version }}-prerelease-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-prerelease-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ matrix.node-version }}-prerelease-
+            ${{ runner.os }}-
+
+      - name : Install dependencies
+        run  : 'npm install'
+
+      # The below steps are basically `npm run prepare`
+      # split out to improve visibility in case we need
+      # to debug.
+
+      - name : Run linting
+        run  : 'npm run lint'
+
+      - name : Run validation
+        run  : 'npm run validate'
+
+      - name : Build dist build
+        run  : 'npm run build'
+
+      - name : Run transpilation
+        run  : 'npm run transpile'
+
+      - name : Run tests
+        run  : 'npm run test'
+
+
+  release:
+    runs-on: ubuntu-latest
+    name: Run release scripts
+    needs: prerelease
+    steps:
+      - uses : actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 1
+      - name : Use Node.js version ${{ matrix.node-version }}
+        uses : actions/setup-node@v3
+        with :
+          registry-url: https://registry.npmjs.org/
+      - name : Load node-modules cache
+        uses : actions/cache@v2
+        env  :
+          cache-name: cache-node-modules
+        with :
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ matrix.node-version }}-prerelease-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-prerelease-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ matrix.node-version }}-prerelease-
+            ${{ runner.os }}-
+
+      - name : Install dependencies
+        run  : 'npm install'
+
+      - name: Check if version has been updated
+        id: check
+        uses: EndBug/version-check@v1
+        with:
+          file-url: https://unpkg.com/@sanskrit-coders/sanscript/package.json
+          static-checking: localIsNew
+      - name: Log when changed
+        if: steps.check.outputs.changed == 'true'
+        run: 'echo "Version change found in commit ${{ steps.check.outputs.commit }}! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
+
+      - run: npm publish --access public
+        if: ${{ steps.check.outputs.changed == 'true' && github.event_name != 'pull_request'}}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
