@@ -3,9 +3,9 @@ export type PreferredAlternates = {[key:string]:{[key:string]:string}};
 export type Scheme = {[key:string]:{[key:string]:string}};
 
 export type Options = {
-    skip_sgml: boolean;
-    syncope: boolean;
-    preferred_alternates: PreferredAlternates;
+    skip_sgml?: boolean;
+    syncope?: boolean;
+    preferred_alternates?: PreferredAlternates;
 }
 
 
@@ -29,7 +29,7 @@ declare namespace Sanscript {
      * @param options  transliteration options
      * @return         the finished string
      */
-    function t(data: string, from: string, to: string, options: Options): string;
+    function t(data: string, from: string, to: string, options?: Options): string;
 
     /**
      * Add a roman scheme to Sanscript.
