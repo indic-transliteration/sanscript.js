@@ -11,7 +11,7 @@ on:
       - master # run on pull requests to `master`
 
 jobs:
-  check_and_release:
+  prerelease:
     runs-on: ubuntu-latest
 
     name: Run prerelease scripts
@@ -70,6 +70,39 @@ jobs:
       - name: Check if version has been updated
         id: check
         uses: EndBug/version-check@v1
+
+  release:
+    runs-on: ubuntu-latest
+    name: Run release scripts
+    needs: prerelease
+    steps:
+      - uses : actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 1
+      - name : Use Node.js version ${{ matrix.node-version }}
+        uses : actions/setup-node@v3
+        with :
+          node-version: ${{ matrix.node-version }}
+
+      - name : Load node-modules cache
+        uses : actions/cache@v2
+        env  :
+          cache-name: cache-node-modules
+        with :
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ matrix.node-version }}-prerelease-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-prerelease-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ matrix.node-version }}-prerelease-
+            ${{ runner.os }}-
+
+      - name : Install dependencies
+        run  : 'npm install'
+
+      - name: Log when changed
+        if: steps.check.outputs.changed == 'true'
+        run: 'echo "Version change found in commit ${{ steps.check.outputs.commit }}! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
 
       - run: npm publish --access public
         if: ${{ steps.check.outputs.changed == 'true' && github.event_name != 'pull_request'}}
