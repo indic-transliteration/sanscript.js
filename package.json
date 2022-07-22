@@ -114,7 +114,7 @@
     "qunit": "^2.19.1"
   },
   "dependencies": {
-    "common_maps": "github:grosmar/common_maps#package-json",
+    "@sanskrit-coders/common_maps": "@sanskrit-coders/common_maps",
     "toml": "^2.3.6"
   }
 }

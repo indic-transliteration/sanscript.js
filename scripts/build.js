@@ -10,7 +10,7 @@ async function main () {
     // the form [filename, filepath]
     const [bschemes, rschemes] = await Promise.all(
         ["brahmic", "roman"].map(async (x) => {
-            const dirpath = path.join(rootDir, "node_modules", "common_maps", x);
+            const dirpath = path.join(rootDir, "node_modules", "@sanskrit-coders", "common_maps", x);
             const paths = [];
             for (const filename of await fsp.readdir(dirpath)) {
                 paths.push([filename, path.join(dirpath, filename)]);
@@ -37,7 +37,7 @@ async function main () {
         })),
     ));
 
-    let devanagariVowelToMarks = await fsp.readFile(path.join(rootDir, "node_modules", "common_maps", "_devanagari_vowel_to_marks.toml"));
+    let devanagariVowelToMarks = await fsp.readFile(path.join(rootDir, "node_modules", "@sanskrit-coders", "common_maps", "_devanagari_vowel_to_marks.toml"));
     devanagariVowelToMarks = JSON.stringify(toml.parse(devanagariVowelToMarks));
 
 
