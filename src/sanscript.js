@@ -13,8 +13,9 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
     const Sanscript = {};
     // First, we define the Sanscript singleton, with its variables and methods.
     Sanscript.defaults = {
-        "skip_sgml" : false,
-        "syncope"   : false,
+        "skip_sgml"            : false,
+        "syncope"              : false,
+        "preferred_alternates" : {},
     };
 
     /* Schemes
@@ -512,6 +513,14 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
         if (to === "tamil_superscripted") {
             const pattern = "([²³⁴])([" + Object.values(schemes["tamil_superscripted"]["vowel_marks"]).join("") + schemes["tamil_superscripted"]["virama"]["्"] + "॒॑" + "]+)";
             result = result.replace(new RegExp(pattern, "g"), "$2$1");
+        }
+
+        if(typeof options.preferred_alternates[to] == "object") {
+            const keys = Object.keys(options.preferred_alternates[to]);
+            for (let i = 0; i< keys.length; i++)
+            {
+                result = result.split(keys[i]).join(options.preferred_alternates[to][keys[i]]);
+            }
         }
 
         return result;
