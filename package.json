@@ -114,6 +114,7 @@
     "qunit": "^2.19.1"
   },
   "dependencies": {
+    "common_maps": "github:grosmar/common_maps#package-json",
     "toml": "^2.3.6"
   }
 }
