@@ -11,7 +11,8 @@
     "build": "node scripts/build.js",
     "dist": "npm run build && npm run transpile",
     "lint": "eslint \"**/*.js\"",
-    "prepare": "git submodule update --init --recursive && npm run lint && npm run validate && npm run dist && npm run test",
+    "preinstall": "git submodule update --init --recursive",
+    "prepare": "npm run lint && npm run validate && npm run dist && npm run test",
     "test": "qunit",
     "transpile": "babel sanscript.es6.js --out-file sanscript.js",
     "validate": "ajv validate -s src/sanscript.schema.json -d 'src/schemes/*/*.json'"
