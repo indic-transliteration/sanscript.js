@@ -1,7 +1,7 @@
 export namespace defaults {
-    const skip_sgml: boolean;
-    const syncope: boolean;
-    const preferred_alternates: {[key:string]:{[key:string]:string}};
+    var skip_sgml: boolean;
+    var syncope: boolean;
+    var preferred_alternates: {[key:string]:{[key:string]:string}};
 }
 
 export type Options = {
