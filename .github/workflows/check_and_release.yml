@@ -1,4 +1,4 @@
-name: Pull Request (Prerelease)
+name: Check and Release
 
 # to run tasks that would need to run before releasing
 
@@ -67,9 +67,6 @@ jobs:
       - name : Run tests
         run  : 'npm run test'
 
-      - name: Check if version has been updated
-        id: check
-        uses: EndBug/version-check@v1
 
   release:
     runs-on: ubuntu-latest
@@ -99,6 +96,10 @@ jobs:
 
       - name : Install dependencies
         run  : 'npm install'
+
+      - name: Check if version has been updated
+        id: check
+        uses: EndBug/version-check@v1
 
       - name: Log when changed
         if: steps.check.outputs.changed == 'true'
