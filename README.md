@@ -88,11 +88,11 @@ In a nutshell, the steps:
 1. Check out in a separate folder the [common_maps](https://github.com/indic-transliteration/common_maps) repo.
 2. Navigate into the folder where you checked out the common_maps
 3. Type `npm link` in the shell
-4. Navigate to the `sanscript.js` repo and type `npm link @sanskrit-coders/common_maps`
+4. Navigate to the `sanscript.js` repo and type `npm link @indic-transliteration/common_maps`
 
-This way the `node_modules/@sanskrit-coders/common_maps` folder will become a link, pointing to your local checked out folder. So you can simply make there your changes.
+This way the `node_modules/@indic-transliteration/common_maps` folder will become a link, pointing to your local checked out folder. So you can simply make there your changes.
 
-When you want to revert to the real downloaded package simply type `npm unlink @sanskrit-coders/common_maps`
+When you want to revert to the real downloaded package simply type `npm unlink @indic-transliteration/common_maps`
 
 ### Adding new schemes
 
