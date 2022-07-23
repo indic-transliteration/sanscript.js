@@ -1,3 +1,0 @@
-[submodule "src/schemes"]
-	path = src/schemes
-	url = https://github.com/indic-transliteration/common_maps.git

@@ -11,6 +11,7 @@
     "build": "node scripts/build.js",
     "dist": "npm run build && npm run transpile",
     "lint": "eslint \"**/*.js\"",
+    "preinstall": "git submodule update --init --recursive",
     "prepare": "npm run lint && npm run validate && npm run dist && npm run test",
     "test": "qunit",
     "transpile": "babel sanscript.es6.js --out-file sanscript.js",
@@ -113,6 +114,7 @@
     "qunit": "^2.19.1"
   },
   "dependencies": {
+    "@sanskrit-coders/common_maps": "^1.0.0",
     "toml": "^2.3.6"
   }
 }

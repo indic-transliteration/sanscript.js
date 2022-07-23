@@ -78,26 +78,21 @@ You can tweak the transliteration function by passing an `options` object:
 ```
 ## Contributing
 
-### Installing repo submodules
+1. Check out repo from github.
+2. Install package dependencies with `npm install`
 
-If it is the first time you're cloning down the repo, you need to initialize the submodules.
-This only needs to be run once and never again.
+Please note that schemes are in a different repo as a separate package dependency, which you can find in [common_maps](https://github.com/indic-transliteration/common_maps) repo.
 
-```shell
-git submodule update --init --recursive
-```
+If you want to efficiently work locally editing schemes try out `npm link`. Check out usage [here](https://docs.npmjs.com/cli/v8/commands/npm-link).
+In a nutshell, the steps:
+1. Check out in a separate folder the [common_maps](https://github.com/indic-transliteration/common_maps) repo.
+2. Navigate into the folder where you checked out the common_maps
+3. Type `npm link` in the shell
+4. Navigate to the `sanscript.js` repo and type `npm link @indic-transliteration/common_maps`
 
-If you want to pull in updates after this, you can just run:
+This way the `node_modules/@indic-transliteration/common_maps` folder will become a link, pointing to your local checked out folder. So you can simply make there your changes.
 
-```shell
-git submodule update --recursive
-```
-
-### Installing package dependencies
-
-```shell
-npm install
-```
+When you want to revert to the real downloaded package simply type `npm unlink @indic-transliteration/common_maps`
 
 ### Adding new schemes
 
