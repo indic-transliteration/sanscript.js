@@ -6,9 +6,9 @@ Sanscript.js
 Sanscript is a transliteration library for Indian languages. It supports the most popular Indian scripts and several different romanization schemes. Although Sanscript focuses on Sanskrit transliteration, it has partial support for other languages and is easy to extend.
 
 ## Setup
-The package is officially distributed at npm [here](https://www.npmjs.com/package/@sanskrit-coders/sanscript), whereas a variant due to Vikram Iyer is separately available [here](https://www.npmjs.com/package/sanscript). So one can use commands such as:
+The package is officially distributed at npm [here](https://www.npmjs.com/package/@indic-transliteration/sanscript), whereas a variant due to Vikram Iyer is separately available [here](https://www.npmjs.com/package/sanscript). So one can use commands such as:
 
-- `npm install @sanskrit-coders/sanscript`
+- `npm install @indic-transliteration/sanscript`
 
 ## Usage
 
@@ -62,7 +62,7 @@ A **lossy** scheme does not have the letters needed to support lossless translat
 You can tweak the transliteration function by passing an `options` object:
 
 ```html
-<script src="node_modules/@sanskrit-coders/sanscript/sanscript.js"></script>
+<script src="node_modules/@indic-transliteration/sanscript/sanscript.js"></script>
 <script>
   var output = Sanscript.t(input, from, to, options);
 </script>
@@ -87,7 +87,7 @@ If you want to efficiently work locally editing schemes try out `npm link`. Chec
 In a nutshell, the steps:
 1. Check out in a separate folder the [common_maps](https://github.com/indic-transliteration/common_maps) repo.
 2. Navigate into the folder where you checked out the common_maps
-3. Type `npm link` in the shell
+3. Type (sudo) `npm link` in the shell
 4. Navigate to the `sanscript.js` repo and type `npm link @indic-transliteration/common_maps`
 
 This way the `node_modules/@indic-transliteration/common_maps` folder will become a link, pointing to your local checked out folder. So you can simply make there your changes.
