@@ -1,6 +1,6 @@
 {
   "name": "@indic-transliteration/sanscript",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Sanscript is a transliteration library for Indian languages. It supports the most popular Indian scripts and several different romanization schemes. Although Sanscript focuses on Sanskrit transliteration, it has partial support for other languages and is easy to extend.",
   "main": "sanscript.js",
   "types": "./types/sanscript.d.ts",
@@ -95,7 +95,8 @@
     "wx",
     "zanbazar_square",
     "Harvard-Kyoto",
-    "International Alphabet of Sanskrit Transliteration",
+    "International Alphabet of Sanskrit Transliteration IAST",
+    "ISO 15919",
     "National Library at Kolkata",
     "Sanskrit Library Phonetic"
   ],
@@ -106,15 +107,15 @@
   },
   "homepage": "https://github.com/indic-transliteration/sanscript.js#readme",
   "devDependencies": {
-    "@babel/cli": "^7.18.9",
-    "@babel/core": "^7.18.9",
-    "@babel/preset-env": "^7.18.9",
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
     "ajv-cli": "^5.0.0",
-    "eslint": "^7.31.0",
-    "qunit": "^2.19.1"
+    "eslint": "^7.32.0",
+    "qunit": "^2.19.4"
   },
   "dependencies": {
-    "@indic-transliteration/common_maps": "^1.0.0",
+    "@indic-transliteration/common_maps": "^1.0.2",
     "toml": "^2.3.6"
   }
 }
