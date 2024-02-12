@@ -526,6 +526,24 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
         return result;
     };
 
+    /**
+     * A function to transliterate each word, for the benefit of script learners.
+     *
+     * @param data
+     * @param from
+     * @param to
+     * @param options
+     */
+    Sanscript.transliterateWordwise = function (data, from, to, options) {
+        options = options || {};
+        const words = data.split(/\s+/);
+        const word_tuples = words.map(function (word) {
+            const result = Sanscript.t(word, from, to, options);
+            return [word, result];
+        });
+        return word_tuples;
+    };
+
     // Now that Sanscript is fully defined, we now safely export it for use elsewhere.
     // The below block was copied from https://www.npmjs.com/package/sanscript .
     // define seems to be a requirejs thing https://requirejs.org/docs/whyamd.html#amd .

@@ -640,3 +640,7 @@ QUnit.test("Non-Sanskrit letters", function () {
     // const dev_iso = transHelper("devanagari", "iso");
     // dev_iso("फ़ोन सड़क ज़्यादा", "fōna saṛaka zyaada");
 });
+
+QUnit.test("Transliterate wordwise", function () {
+    QUnit.assert.equal(Sanscript.transliterateWordwise("रामो दाशरथिर् यदि", "devanagari", "iso").toString(), [["रामो", "rāmō"], ["दाशरथिर्", "dāśarathir"], ["यदि", "yadi"]].toString(), "wordwise");
+});
