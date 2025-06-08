@@ -18,6 +18,114 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
         "preferred_alternates" : {},
     };
 
+    const DETECTION_PATTERNS = {
+        SCHEMES : [
+            ['Bengali', 0x0980],
+            ['Devanagari', 0x0900],
+            ['Gujarati', 0x0a80],
+            ['Gurmukhi', 0x0a00],
+            ['Kannada', 0x0c80],
+            ['Malayalam', 0x0d00],
+            ['Oriya', 0x0b00],
+            ['Tamil', 0x0b80],
+            ['Telugu', 0x0c00],
+            ['HK', null],
+            ['IAST', null],
+            ['ITRANS', null],
+            ['Kolkata', null],
+            ['SLP1', null],
+            ['Velthuis', null],
+        ],
+        // Start of the Devanagari block.
+        BRAHMIC_FIRST_CODE_POINT : 0x0900,
+
+        // End of the Malayalam block.
+        BRAHMIC_LAST_CODE_POINT : 0x0d7f,
+
+        // Match on special Roman characters
+        RE_IAST_OR_KOLKATA_ONLY : /[āīūṛṝḷḹēōṃḥṅñṭḍṇśṣḻ]/,
+
+        // Match on chars shared by ITRANS and Velthuis
+        RE_ITRANS_OR_VELTHUIS_ONLY : /aa|ii|uu|~n/,
+
+        // Match on ITRANS-only
+        RE_ITRANS_ONLY : /ee|oo|\^[iI]|RR[iI]|L[iI]|~N|N\^|Ch|chh|JN|sh|Sh|\.a/,
+
+        // Match on Kolkata-specific Roman characters
+        RE_KOLKATA_ONLY : /[ēō]/,
+
+        // Match on SLP1-only characters and bigrams
+        RE_SLP1_ONLY : RegExp(['[fFxXEOCYwWqQPB]|kz|Nk|Ng|tT|dD|Sc|Sn|',
+            '[aAiIuUfFxXeEoO]R|',
+            'G[yr]|(\\W|^)G'].join('')),
+
+        // Match on Velthuis-only characters
+        RE_VELTHUIS_ONLY : /\.[mhnrlntds]|"n|~s/,
+
+    };
+
+    /**
+     * Detect the transliteration scheme of the given text
+     * @param {string} text - Input text to analyze
+     * @returns {string} - Detected scheme name or 'Unknown'
+     */
+    Sanscript.detect = function (text) {
+        const Scheme = {};
+        for (let i = 0; i < DETECTION_PATTERNS.SCHEMES.length; i++) {
+            const value = DETECTION_PATTERNS.SCHEMES[i][0];
+            Scheme[value] = value;
+        }
+        // Schemes sorted by Unicode code point. Ignore schemes with none defined.
+        const BLOCKS = DETECTION_PATTERNS.SCHEMES
+            .filter(function (x) {
+                return x[1];
+            })  // keep non-null
+            .sort(function (x, y) {
+                return y[1] - x[1];
+            });  // sort by code point
+        // Brahmic schemes are all within a specific range of code points.
+        for (let i = 0; i < text.length; i++) {
+            const L = text[i];
+            const code = L.charCodeAt(L);
+            if (code >= DETECTION_PATTERNS.BRAHMIC_FIRST_CODE_POINT && code <= DETECTION_PATTERNS.BRAHMIC_LAST_CODE_POINT) {
+                for (let j = 0; j < BLOCKS.length; j++) {
+                    const block = BLOCKS[j];
+                    if (code >= block[1]) {
+                        return block[0];
+                    }
+                }
+            }
+        }
+
+        // Romanizations
+        if (DETECTION_PATTERNS.RE_IAST_OR_KOLKATA_ONLY.test(text)) {
+            if (DETECTION_PATTERNS.RE_KOLKATA_ONLY.test(text)) {
+                return Scheme.Kolkata;
+            }
+            return Scheme.IAST;
+        }
+
+        if (DETECTION_PATTERNS.RE_ITRANS_ONLY.test(text)) {
+            return Scheme.ITRANS;
+        }
+
+        if (DETECTION_PATTERNS.RE_SLP1_ONLY.test(text)) {
+            return Scheme.SLP1;
+        }
+
+        if (DETECTION_PATTERNS.RE_VELTHUIS_ONLY.test(text)) {
+            return Scheme.Velthuis;
+        }
+
+        if (DETECTION_PATTERNS.RE_ITRANS_OR_VELTHUIS_ONLY.test(text)) {
+            return Scheme.ITRANS;
+        }
+
+        return Scheme.HK;
+
+    };
+
+
     /* Schemes
      * =======
      * Schemes are of two kinds: "Brahmic" and "roman." "Brahmic" schemes
@@ -430,6 +538,9 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
      * @return         the finished string
      */
     Sanscript.t = function (data, from, to, options) {
+        if (!from) {
+            from = Sanscript.detect(data).toLowerCase();
+        }
         options = options || {};
         const cachedOptions = cache.options || {};
         const defaults = Sanscript.defaults;
@@ -543,6 +654,8 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
         });
         return word_tuples;
     };
+
+
 
     // Now that Sanscript is fully defined, we now safely export it for use elsewhere.
     // The below block was copied from https://www.npmjs.com/package/sanscript .

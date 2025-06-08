@@ -84,7 +84,9 @@ You can tweak the transliteration function by passing an `options` object:
 Please note that schemes are in a different repo as a separate package dependency, which you can find in [common_maps](https://github.com/indic-transliteration/common_maps) repo.
 
 If you want to efficiently work locally editing schemes try out `npm link`. Check out usage [here](https://docs.npmjs.com/cli/v8/commands/npm-link).
+
 In a nutshell, the steps:
+
 1. Check out in a separate folder the [common_maps](https://github.com/indic-transliteration/common_maps) repo.
 2. Navigate into the folder where you checked out the common_maps
 3. Type (sudo) `npm link` in the shell
