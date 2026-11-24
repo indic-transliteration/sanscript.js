@@ -81,7 +81,7 @@ const data = {
         symbols    : "ੴ । ॥ ੦ ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯",
         putra      : "ਪੁਤ੍ਰ",
         naraIti    : "ਨਰ ਇਤਿ",
-        sentence   : "ਧਰ੍ਮਕ੍षੇਤ੍ਰੇ ਕੁਰੁਕ੍षੇਤ੍ਰੇ ਸਮਵੇਤਾ ਯੁਯੁਤ੍ਸਵਃ ।",
+        sentence   : "ਧਰ੍ਮਕ੍ਸ਼ੇਤ੍ਰੇ ਕੁਰੁਕ੍ਸ਼ੇਤ੍ਰੇ ਸਮਵੇਤਾ ਯੁਯੁਤ੍ਸਵਃ ।",
     },
     hk : {
         vowels     : "a A i I u U R RR lR lRR e ai o au",
@@ -639,6 +639,21 @@ QUnit.test("Non-Sanskrit letters", function () {
     // The below fails.
     // const dev_iso = transHelper("devanagari", "iso");
     // dev_iso("फ़ोन सड़क ज़्यादा", "fōna saṛaka zyaada");
+});
+
+QUnit.test("Brahmic letters longer than one code unit", function () {
+    const word = "धर्मक्षेत्रे";
+    ["grantha", "sharada", "newa", "siddham", "javanese", "tamil_extended", "tamil_superscripted"].forEach(function (scheme) {
+        const f = transHelper(scheme, "devanagari");
+        f(Sanscript.t(word, "devanagari", scheme), word, scheme);
+    });
+    const sharada = transHelper("sharada", "iast");
+    sharada("𑆓𑆼𑆖𑇀𑆗𑆠𑆴", "gecchati", "Sharada");
+    sharada("𑆓##𑆓##𑆓", "ga𑆓ga", "Toggled transliteration");
+    const superscripted = transHelper("tamil_superscripted", "devanagari");
+    superscripted("க³", "ग", "Superscript digit");
+    const nukta = transHelper("devanagari", "iso");
+    nukta("ड़", "ṛa", "nukta");
 });
 
 QUnit.test("Transliterate wordwise", function () {

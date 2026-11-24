@@ -467,6 +467,7 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
         const consonants = map.consonants;
         const letters = map.letters;
         const marks = map.marks;
+        const maxTokenLength = map.maxTokenLength;
         const toRoman = map.toRoman;
 
         let danglingHash = false;
@@ -480,7 +481,16 @@ function exportSanscriptSingleton (global, schemes, devanagariVowelToMarks) {
             data = data.replace(pattern, "$2$1");
         }
 
-        for (let i = 0, L; (L = data.charAt(i)); i++) {
+        for (let i = 0, L; i < data.length; i += L.length) {
+            // Find the longest token in our map. A letter may be longer than one
+            // UTF-16 code unit (e.g. Grantha) or one code point (e.g. nukta).
+            for (let j = maxTokenLength; j > 0; j--) {
+                L = data.substr(i, j);
+                if (marks[L] !== undefined || letters[L] !== undefined) {
+                    break;
+                }
+            }
+
             // Toggle transliteration state
             if (L === "#") {
                 if (danglingHash) {
